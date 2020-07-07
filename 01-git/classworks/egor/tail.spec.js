@@ -8,9 +8,9 @@ function test() {
   const arr4 = [];
 
   // success
-  assert.equal(tail(arr1), 5);
-  assert.equal(tail(arr2), 50);
-  assert.equal(tail(arr3), 500);
+  assert.equal(tail(arr1), [2, 3, 4, 5]);
+  assert.equal(tail(arr2), [20, 30, 40, 50]);
+  assert.equal(tail(arr3), [200, 300, 400, 500]);
 
   // bad arguments
   assert.equal(tail(arr4), undefined);
