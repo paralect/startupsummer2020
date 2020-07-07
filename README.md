@@ -1,1 +1,1 @@
-# Startups Summer 2020
+# Startup Summer 2020
