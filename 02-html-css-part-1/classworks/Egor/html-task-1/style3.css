@@ -1,0 +1,235 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+body {
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+aside {
+  padding-top: 82px;
+}
+
+.logo {
+  position: relative;
+  width: 171px;
+  height: 111px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 30px;
+}
+
+.logo h1 {
+  position: absolute;
+  left: 30px;
+  top: 28px;
+  font-size: 30px;
+}
+
+.logo svg {
+  margin-left: 26px;
+}
+
+.nav_elem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.nav_elem p:hover {
+  cursor: pointer;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+nav {
+  margin-top: 184px;
+}
+
+.nav_elem svg {
+  margin-right: 12px;
+}
+
+.active-elem {
+  color: #FF3C5A;
+}
+
+main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 87px 50px 20px;
+  margin-left: 271px;
+  width: 1053px;
+  height: 931px;
+  background: #EDEDED;
+  border-radius: 50px;
+}
+
+.flex-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+main h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  margin-bottom: 56px;
+}
+
+aside {
+  position: fixed;
+}
+
+main svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+form {
+  font-family: 'Roboto', sans-serif;
+}
+
+.contact-form input,
+textarea {
+  border: 0;
+  color: currentColor;
+  background: none;
+  display: block;
+  font-size: 16px;
+  line-height: 24px;
+  width: 330px;
+  margin-top: 67px;
+}
+
+.contact-form_input_underline {
+  width: 330px;
+  border: 1px solid #B9B9B9;
+  margin-top: 6.5px;
+}
+
+.contact-form_input_underline_active {
+  box-sizing: border-box;
+  position: relative;
+  width: 0px;
+  height: 0px;
+}
+
+.contact-form input:focus ~ .contact-form_input_underline .contact-form_input_underline_active,
+.contact-form textarea:focus ~ .contact-form_input_underline .contact-form_input_underline_active  {
+  animation: customUnderline 2.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.contact-form input:focus ~ label,
+.contact-form textarea:focus ~ label {
+  display: block;
+  top: -15px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #B9B9B9;
+}
+
+.contact-form_input {
+  position: relative;
+}
+
+.contact-form_input label {
+  display: none;
+  position: absolute;
+  cursor: text;
+  top: 0;
+}
+
+textarea {
+  height: 80px;
+}
+
+input[type="submit"] {
+  width: 94px;
+  height: 36px;
+  margin-left: 236px;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  background: #FF3C5A;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24), 0px 0px 2px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+}
+
+.textarea_max-length {
+	color: #B9B9B9;
+	margin-left: 296px;
+	font-size: 12px;
+}
+
+
+@keyframes customUnderline {
+ from {
+   width: 10px; height: 2px;
+ }
+ to {
+   width: 330px; background: #FF3C5A; height: 2px;
+  }
+}
