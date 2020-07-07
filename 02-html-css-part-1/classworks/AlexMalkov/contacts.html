@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./src/contacts.style.css">
+		<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"> 
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
+    <title>Contacts</title>
+</head>
+<body>
+
+	<aside class="sidebar">
+		<div class="container__logo">
+			<img class="logo" src="./src/img/paralect-logo.svg" alt="Paralect"> Startup Summer</div>
+		<nav class="nav">
+			<ul class="nav__container">
+				<li class="link"><a href="./index.html">Home</a></li>
+				<li class="link"><a href="./courses.html">Courses</a></li>
+				<li class="link active"><a href="./contacts.html">Contacts</a></li>
+			</ul>
+		</nav>
+	</aside>
+
+	<main class="main">
+		<header class="main__header">
+			<h3>Contacts</h3>
+		</header>
+		<form class="form" action="" onsubmit="return false">
+			<label class="label" for="name">Full name<br>
+				<input id="name" class="input name" type="text" placeholder="Full name">
+			</label>
+			
+			<label class="label" for="email">Email<br>
+				<input id="email" class="input email" type="email" placeholder="Email">
+			</label>
+			
+			<label class="label" for="message">Message<br>
+				<textarea id="message" class="input message" type="text" placeholder="Message" rows="3"></textarea>
+			</label>
+			<span class="message__counter">110/250</span>
+
+			<input class="input input__btn" type="submit" value="SEND">
+		</form>
+	</main>
+</body>
+</html>
