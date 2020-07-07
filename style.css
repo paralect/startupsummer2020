@@ -1,0 +1,173 @@
+nav li {
+  list-style-type: none;
+}
+
+ul li a {
+  text-decoration: none;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
+
+.navigate_home {
+  position: static;
+  width: 111px;
+  height: 23px;
+  left: 29.55px;
+  top: calc(50% - 23px / 2);
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  /* identical to box height */
+
+  /* Grey */
+
+  color: #b9b9b9;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 1;
+  align-self: center;
+  margin: 12px 0px;
+}
+
+.navigate_courses {
+  position: static;
+  width: 106px;
+  height: 23px;
+  left: 32px;
+  top: 0px;
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  /* identical to box height */
+
+  color: #fd3654;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 1;
+  align-self: center;
+  margin: 12px 0px;
+}
+
+.navigate_contacts {
+  /* Contacts */
+
+  position: static;
+  width: 106px;
+  height: 23px;
+  left: 34.88px;
+  top: 0.5px;
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  /* identical to box height */
+
+  /* Grey */
+
+  color: #b9b9b9;
+
+  /* Inside Auto Layout */
+
+  flex: none;
+  order: 1;
+  align-self: center;
+  margin: 12px 0px;
+}
+
+.body_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.block_wrapper_title,
+.block_wrapper_float,
+.block_wrapper_flex,
+.block_wrapper_grid {
+  padding: 0px 80px;
+}
+
+.block_wrapper_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.block_wrapper_float {
+  padding: 0px 80px 0px 80px;
+}
+.block_wrapper_flex {
+  display: flex;
+  justify-content: space-between;
+}
+.block_wrapper_grid {
+  display: inline-grid;
+  grid-template-columns: 202px 28.5px 202px 28.5px 201.5px 28px 202.5px;
+  grid-template-rows: auto;
+  height: 202px;
+}
+.temp_block {
+  background: yellow;
+}
+
+.float_first,
+.float_second,
+.float_third,
+.float_fourth,
+.flex_first,
+.flex_second,
+.flex_third,
+.flex_fourth {
+  height: 202px;
+  width: 202px;
+  background: black;
+}
+
+.float_fourth {
+  float: left;
+}
+
+.float_first,
+.float_second,
+.float_third {
+  float: left;
+  margin-right: 28px;
+}
+
+.body_wrapper {
+  position: absolute;
+  width: 1053px;
+  height: 1146px;
+  left: 367px;
+  top: 20px;
+  display: flex;
+  justify-content: space-around;
+  background: #ededed;
+  border-radius: 50px;
+}
+
+.grid_first,
+.grid_second,
+.grid_third,
+.grid_fourth {
+  background: black;
+}
+.text_block {
+  padding-left: 80px;
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+}
