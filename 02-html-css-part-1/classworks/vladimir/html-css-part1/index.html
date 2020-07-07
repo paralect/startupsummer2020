@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Startup Summer</title>
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo-container">
+      <img class="logo-icon" width="75px" height="77px" src="assets/icons/logo.svg">
+      <h1 class="logo-header">Paralect</h1>
+      <h4 class="logo-subheader">Startup Summer</h4>
+    </div>
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-link" href="#home">home</a>
+      <a class="sidebar-nav-link" href="#courses">courses</a>
+      <a class="sidebar-nav-link" href="#contacts">contacts</a>
+    </nav>
+  </div>
+  <div class="content">
+    <div class="home" id="home">
+      <header class="home-header">
+        <h1>Hello Startup Summer!</h1>
+        <h3 class="home-subheader">This is your task.</h3>
+        <h3 class="home-subheader">Please transform this template into HTML and CSS</h4=>
+      </header>
+      <div class="float-row clearfix">
+        <h6 class="row-header">Horizontal row using <strong>float</strong></h6>
+        <div class="float-row-content"></div>
+        <div class="float-row-content"></div>
+        <div class="float-row-content"></div>
+        <div class="float-row-content"></div>
+      </div>
+      <h6 class="row-header">Horizontal row using <strong>Flexbox</strong></h6>
+      <div class="flex-row">
+        <div class="flex-row-content"></div>
+        <div class="flex-row-content"></div>
+        <div class="flex-row-content"></div>
+        <div class="flex-row-content"></div>
+      </div>
+      <h6 class="row-header">Horizontal row using <strong>Grid layout</strong></h6>
+      <div class="grid-row">
+        <div class="row-content"></div>
+        <div class="row-content"></div>
+        <div class="row-content"></div>
+        <div class="row-content"></div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="coursers" id="courses">
+      <h4>Coursers</h4>
+      <div class="coursers-cards">
+        <div class="coursers-card"><span class="card-text">Git</span></div>
+        <div class="coursers-card"><span class="card-text">HTML/CSS part1</span></div>
+        <div class="coursers-card"><span class="card-text">HTML/CSS part2</span></div>
+        <div class="coursers-card"><span class="card-text">Javascript part1</span></div>
+        <div class="coursers-card"><span class="card-text">Javascript part2</span></div>
+        <div class="coursers-card"><span class="card-text">Bundling</span></div>
+        <div class="coursers-card"><span class="card-text">React part1</span></div>
+        <div class="coursers-card"><span class="card-text">React part2</span></div>
+        <div class="coursers-card"><span class="card-text">Redux</span></div>
+        <div class="coursers-card"><span class="card-text">Node.js</span></div>
+        <div class="coursers-card"><span class="card-text">Node frameworks</span></div>
+        <div class="coursers-card"><span class="card-text">RESTful API</span></div>
+        <div class="coursers-card"><span class="card-text">Databases part1</span></div>
+        <div class="coursers-card"><span class="card-text">Databases part2</span></div>
+        <div class="coursers-card"><span class="card-text">Docker</span></div>
+        <div class="coursers-card"><span class="card-text">SHIP</span></div>
+        <div class="coursers-card"><span class="card-text">React Native</span></div>
+        <div class="coursers-card"><span class="card-text">Websockets</span></div>
+        <div class="coursers-card"><span class="card-text">Testing</span></div>
+        <div class="coursers-card"><span class="card-text">Kubernetes</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="contacts-wrapper" id="contacts">
+      <h4>Contacts</h4>
+      <form class="contacts-form" action="#">
+        <div class="input-wrapper">
+          <label class="form-label" for="input-name">Full name</label>
+          <input class="form-text-input" id="input-name" type="text">
+          <span class="bottom-effect"></span>
+        </div>
+        <div class="input-wrapper">
+          <label class="form-label" for="input-email">Email</label>
+          <input class="form-text-input" id="input-email" type="email">
+          <span class="bottom-effect"></span>
+        </div>
+        <div class="input-wrapper">
+          <label class="form-label" for="input-message">Message</label>
+          <textarea class="form-text-input" name="message" id="input-message" maxlength="250" cols="30" rows="3"></textarea>
+          <span class="bottom-effect"></span>
+        </div>
+        <button class="button-primary" type="submit">send</button>
+      </form>
+      <img class="contacts-logo" src="assets/icons/logo-large.svg" alt="large-logo">
+    </div>
+  </div>
+
+</body>
+
+</html>
