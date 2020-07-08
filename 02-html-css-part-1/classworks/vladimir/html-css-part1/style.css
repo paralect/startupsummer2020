@@ -94,14 +94,14 @@ button {
   height: 100vh;
 }
 
-.logo-container {
+.logo {
   position: relative;
   margin: 40px 0 0 0;
   width: 171px;
   height: 141px;
 }
 
-.logo-header {
+.logo__header {
   position: absolute;
   top: 20px;
   left: 8px;
@@ -110,7 +110,7 @@ button {
   font-size: 30px;
 }
 
-.logo-subheader {
+.logo__subheader {
   position: relative;
   font-family: var(--font-title);
   font-style: normal;
@@ -119,13 +119,13 @@ button {
   line-height: 30px;
 }
 
-.sidebar-nav {
+.nav {
   margin-top: 25%;
   display: flex;
   flex-direction: column;
 }
 
-.sidebar-nav-link {
+.nav__link {
   margin: 16px 0;
   text-transform: capitalize;
   text-decoration: none;
@@ -135,7 +135,7 @@ button {
   color: var(--color-secondary);
 }
 
-.sidebar-nav__icon {
+.nav__icon {
   width: 16px;
   height: 16px;
   margin-right: 5px;
@@ -162,13 +162,13 @@ button {
   padding: 20px;
 }
 
-.home-header {
+.home__header {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.home-subheader {
+.home__subheader {
   font-size: 24px;
   font-weight: 400;
   line-height: 30px;
@@ -188,9 +188,9 @@ button {
   width: 100%;
 }
 
-.row-content,
-.float-row-content,
-.flex-row-content {
+.grid-row__content,
+.float-row__content,
+.flex-row__content {
   width: 202px;
   height: 202px;
   background-color: var(--color-bg-primary);
@@ -198,7 +198,7 @@ button {
   border-radius: 6px;
 }
 
-.float-row-content {
+.float-row__content {
   float: left;
   margin: 0 20px 0 0;
 }
@@ -215,11 +215,7 @@ button {
   flex-wrap: nowrap;
 }
 
-.flex-row-header {
-  flex-wrap: wrap;
-}
-
-.flex-row-content {
+.flex-row__content {
   margin: 0 20px 0 0;
 }
 
