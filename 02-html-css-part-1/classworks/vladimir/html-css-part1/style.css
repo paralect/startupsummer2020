@@ -242,6 +242,7 @@ button {
 }
 
 .coursers__card {
+  cursor: pointer;
   padding: 20px;
   background-color: var(--color-bg-primary);
   background-image: url(assets/icons/card-logo.svg);
@@ -249,6 +250,10 @@ button {
   background-size: 210px 218px;
   background-position: -10px -50px;
   box-shadow: var(--shadow-card);
+}
+
+.coursers__card:hover {
+  background-image: url(assets/icons//card-logo-hover.svg);
 }
 
 .coursers__card-text {
