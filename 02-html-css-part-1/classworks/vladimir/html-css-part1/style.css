@@ -145,7 +145,8 @@ button {
   color: var(--color-secondary);
 }
 
-.sidebar-nav-link:active {
+.sidebar-nav-link:active,
+.sidebar-nav-link:hover {
   color: var(--color-primary);
 }
 
@@ -230,13 +231,13 @@ button {
   gap: 20px;
 }
 
-.coursers {
+.courses {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.coursers__cards {
+.courses__cards {
   --gap: 20px;
   --min-card-width: 175px;
   --cols: 4;
@@ -247,9 +248,12 @@ button {
   gap: var(--gap);
 }
 
-.coursers__card {
+.courses__card {
   cursor: pointer;
   padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
   background-color: var(--color-bg-primary);
   background-image: url(assets/icons/card-logo.svg);
   background-repeat: no-repeat;
@@ -258,16 +262,12 @@ button {
   box-shadow: var(--shadow-card);
 }
 
-.coursers__card:hover {
+.courses__card:hover {
   background-image: url(assets/icons//card-logo-hover.svg);
 }
 
-.coursers__card-text {
+.courses__card-text {
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
   font-family: var(--font-title);
   font-weight: 600;
   font-size: 18px;
@@ -275,7 +275,7 @@ button {
 }
 
 @media only screen and (max-width: 1440px) {
-  .coursers__cards {
+  .courses__cards {
     --cols: 5;
     --rows: 4;
   }
@@ -291,28 +291,28 @@ button {
     width: 100%;
   }
 
-  .coursers__cards {
+  .courses__cards {
     --cols: 4;
     --rows: 5;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .coursers__cards {
+  .courses__cards {
     --cols: 3;
     --rows: 7;
   }
 }
 
 @media only screen and (max-width: 600px) {
-  .coursers__cards {
+  .courses__cards {
     --cols: 2;
     --rows: 10;
   }
 }
 
 @media only screen and (max-width: 425px) {
-  .coursers__cards {
+  .courses__cards {
     --cols: 1;
     --rows: 20;
   }
