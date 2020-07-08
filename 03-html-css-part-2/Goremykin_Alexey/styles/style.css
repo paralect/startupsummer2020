@@ -1,0 +1,135 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    font-family: Roboto;
+}
+
+
+main {
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-panel {
+    position: fixed;
+    width: 367px;
+    height: 100%;
+}
+
+
+.nav-panel_logo{
+    position: relative;
+    top: 90px;
+    left: 40%;
+}
+
+.nav-panel-logo__img{
+    position: absolute;
+    z-index: -2;
+    top:-40px;
+    left: -10px;
+}
+
+.nav-menu{
+    padding-left: 40%;
+    padding-top: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-menu-item{
+    color: #B9B9B9;
+}
+
+.nav-menu-item--active{
+    color: #FF3C5A;
+}
+
+.nav-menu-item{
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    text-decoration: none;
+}
+
+.nav-menu-item:hover{
+    color: #FF3C5A;
+}
+
+.nav-menu-item__icon{
+    flex: none;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+section {
+    width: calc(100% / 1.6);
+    height: max-content;
+    background-color: #ededed;
+    margin: 20px;
+    border-radius: 50px;
+    margin-left: 400px;
+    padding: 20px;
+}
+
+.main-title {
+    font-size: 18px;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.main-content{
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    grid-auto-rows: 180px;
+    grid-gap: 20px;
+    padding: 20px;
+}
+
+.main-content__block{
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
+}
+
+.main-content__block:hover  .main-content-block-logo__path{
+    fill:#FF3C5A;
+}
+
+.main-content-block__logo{
+    position: absolute;
+    right: 0;
+}
+
+.main-content-block-logo__path{
+    fill:#B9B9B9;
+}
+
+.main-content-block__name {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 5px;
+    color: #333333;
+    position: absolute;
+    bottom: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        min-width: 350px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    section {
+        margin: auto;
+    }
+}
