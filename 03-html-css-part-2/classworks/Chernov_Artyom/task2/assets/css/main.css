@@ -1,0 +1,169 @@
+@import 'reset.css';
+@import 'sidebar.css';
+
+body{
+    font-family: 'Source Sans Pro', 'Roboto', sans-serif;
+    width: calc(100vw - 20px);
+    height: auto;
+
+    background: #FFFFFF;
+}
+
+.wrapper_body{
+    display: flex;
+    justify-content: flex-end;
+    height: auto;
+}
+
+.main{
+    background: #EDEDED;
+    border-radius: 50px;
+    width: calc(100% / 1.4);
+    margin: 20px;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*align-self: center;*/
+    /*align-items: center;*/
+
+}
+
+.main__header{
+    text-align: center;
+
+}
+
+.main__header h1{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 60px;
+    color: #333333;
+}
+
+.rows{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-end;
+    padding: 20px;
+    /*justify-content: center;*/
+}
+
+.float {
+    float: left;
+
+    margin: 5px;
+}
+
+.float__item{
+    display: block;
+    float: left;
+    width: 202px;
+    height: 202px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    align-self: center;
+    margin: 20px ;
+}
+
+.float__item:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.float__item:first-child:before{
+    content: "Horizontal row using Float";
+    position: relative;
+    top: -22px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 23px;
+    color: #333333;
+    white-space: nowrap;
+
+}
+
+.flexbox{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.flexbox__item{
+    margin: 20px;
+    width: 202px;
+    height: 202px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+}
+
+
+
+.flexbox__item:first-child:before{
+    content: "Horizontal row using Flexbox";
+    position: relative;
+    top: -22px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 23px;
+    color: #333333;
+    white-space: nowrap;
+
+
+}
+
+.grid{
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    margin-top: 40px;
+    grid-template-columns:
+
+    repeat(
+      auto-fit,
+      minmax(
+              200px,
+          200px
+      )
+    );
+    gap: 40px;
+}
+
+.grid__item{
+    height: 202px;
+    background: #FFFFFF;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+}
+
+
+.grid__item:first-child:before{
+    content: "Horizontal row using Grid";
+    position: relative;
+    top: -22px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 23px;
+    color: #333333;
+    white-space: nowrap;
+}
+
+@media  (max-width: 768px){
+    body{
+        width: 100%;
+    }
+    .sidebar{
+        display: none;
+    }
+    .main{
+        width: 100%;
+    }
+}
+
+
