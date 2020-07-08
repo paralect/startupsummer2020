@@ -32,37 +32,42 @@ body {
     font-size: 16px;
     display: flex;
     flex-direction: row;
-    padding: 27px 1.39vw 13px 0;
+}
+
+.wrapper {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1440px;
+    overflow: hidden;
 }
 
 a {
     text-decoration: none;
 }
 
-.left_side {
+.left-side {
     position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 96px;
     margin-right: 77px;
-    padding-top: 55px;
+    padding-top: 125px;
 }
 
-.left_side--logo {
+.logo {
     display: flex;
     flex-direction: column;
     margin-bottom: 184px;
     align-items: center;
 }
 
-.left_side--logo > a {
+.logo > a {
     background-image: url(assets/images/logo.svg);
     width: 116px;
     height: 77px;
 }
 
-.left_side--logo > span {
+.logo > span {
     font-family: "Source Sans Pro Semibold";
     font-size: 1.5em;
     margin-top: 10px;
@@ -73,32 +78,32 @@ ul {
     padding: 0;
 }
 
-.left_side nav {
+.left-side nav {
     align-self: flex-start;
 }
 
-.left_side nav li {
+.left-side nav li {
     margin-bottom: 32px;
     display: flex;
 }
 
-.left_side nav li:last-child {
+.left-side nav li:last-child {
     margin-bottom: 0;
 }
 
-.left_side nav img {
+.left-side nav img {
     filter: var(--grey-color-filter);
     width: 20px;
     height: 20px;
     margin-right: 12px;
 }
 
-.left_side nav li:hover {
+.left-side nav li:hover {
     filter: var(--primary-color-filter);
     cursor: pointer;
 }
 
-.left_side nav a {
+.left-side nav a {
     color: var(--grey-color);
     font-family: "Source Sans Pro Regular";
 }
@@ -115,25 +120,26 @@ ul {
     width: calc(100% / 1.6);
     background-color: #EDEDED;
     border-radius: 50px;
-    margin-left: 30.50vw;
+    margin: 27px 0 13px auto;
+    padding: 0 92px;
 }
 
-.content_wrapper {
+.content-wrapper {
     display: flex;
     flex-direction: row;
     justify-content: center;
     position: relative;
 }
 
-.content--title {
+.content__title {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 10px;
-    margin-top: 3.82vw;
+    padding-top: 55px;
 }
 
-.content--title h1 {
+.content__title h1 {
     font-size: 3em;
     font-family: "Source Sans Pro Semibold";
     color: var(--dark-color);
@@ -141,7 +147,7 @@ ul {
     margin-bottom: 15px;
 }
 
-.content--title h4 {
+.content__title h4 {
     font-size: 1.5em;
     font-family: "Source Sans Pro Light";
     color: var(--dark-color);
@@ -149,7 +155,7 @@ ul {
     line-height: 30px;
     margin: 0;
 }
-
+ /* ================= */
 .content--layout {
     width: 100%;
     display: flex;
@@ -157,20 +163,25 @@ ul {
     align-items: center;
     margin-bottom: 6.875vw;
 }
+ /* ================= */
 
-.content--layout--row {
+.row {
     color: var(--dark-color);
     margin-top: 70px;
     font-family: "Source Sans Pro Regular";
 }
 
-.content--layout--row--flexbox {
+.row:last-child {
+    padding-bottom: 10px;
+}
+
+.row--flexbox {
     display: flex;
     flex-direction: row;
     margin-top: 35px;
 }
 
-.content--layout--row--flexbox--item {
+.item--flexbox {
     width: 202px;
     height: 202px;
     background-color: #ffffff;
@@ -179,18 +190,19 @@ ul {
     margin-right: 20px;
 }
 
-.content--layout--row--flexbox--item:last-child {
+.item--flexbox:last-child {
     margin-right: 0;
 }
 
-.content--layout--row--grid {
+.row--grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     margin-top: 35px;
     grid-gap: 20px;
+    margin-bottom: 3.82vw;
 }
 
-.content--layout--row--grid--item {
+.item--grid {
     width: 202px;
     height: 202px;
     background-color: #ffffff;
@@ -198,15 +210,15 @@ ul {
     border-radius: 6px;
 }
 
-.content--layout--row--item:last-child {
+.row--item:last-child {
     margin-right: 0;
 }
 
-.content--layout--row--float {
+.row--float {
     margin-top: 35px;
 }
 
-.content--layout--row--float--item {
+.item--float {
     width: 202px;
     height: 202px;
     background-color: #ffffff;
@@ -215,19 +227,23 @@ ul {
     margin-right: 20px;
 }
 
-.content--layout--row--float--item:last-child {
+.item--float:last-child {
     margin-right: 0;
 }
 
-.content--layout--row--float .content--layout--row--float--item:not(:last-child) {
+.clearfix {
+    clear: both;
+}
+
+.row--float .item--float:not(:last-child) {
     float: left;
 }
 
-.content--layout--row--float .content--layout--row--float--item:last-child {
+.row--float .item--float:last-child {
     float: right;
 }
 
-.content--courses {
+.courses {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -235,13 +251,13 @@ ul {
     margin-bottom: 6.875vw;
 }
 
-.content--courses h1 {
+.courses h1 {
     font-family: "Source Sans Pro Semibold";
     font-size: 1.5em;
     align-self: flex-start;
 }
 
-.content--courses--layout {
+.layout {
     margin-top: 14px;
     display: grid;
     grid-template-rows: repeat(4, 175px);
@@ -249,7 +265,7 @@ ul {
     grid-gap: 20px;
 }
 
-.content--courses--layout--row--item {
+.layout-item {
     width: 175px;
     height: 175px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -258,11 +274,11 @@ ul {
     overflow: hidden;
 }
 
-.content--courses--layout--row--item:hover {
+.layout-item:hover {
     box-shadow: 0px 9px 18px rgba(0, 0, 0, 0.25);
 }
 
-.content--courses--layout--row--item svg {
+.layout-item svg {
     position: absolute;
     width: 210px;
     height: 218px;
@@ -270,11 +286,11 @@ ul {
     right: -18px;
 }
 
-.content--courses--layout--row--item:hover svg path {
+.layout-item:hover svg path {
     animation: pulse 1.2s forwards;
 }
 
-.content--courses--layout--row--item > span {
+.layout-item > span {
     position: absolute;
     color: var(--dark-color);
     font-family: "Source Sans Pro Semibold";
@@ -283,7 +299,7 @@ ul {
     left: 20px;
 }
 
-.content--courses--layout--row--item > span i {
+.layout-item > span i {
     font-family: "Source Sans Pro Light";
 }
 
@@ -293,35 +309,35 @@ ul {
     }
 }
 
-.content--contacts {
+.contacts {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 3.82vw;
-    margin-left: 50px;
 }
 
-.content--contacts h1 {
+.contacts h1 {
     font-family: "Source Sans Pro Semibold";
     font-size: 1.5em;
     align-self: flex-start;
 }
 
-.content--contacts--big_logo {
+.contacts__big-logo {
     height: 931px;
     margin-left: auto;
+    margin-right: -92px;
 }
 
-.content--contacts form {
+.contacts form {
     display: flex;
     flex-direction: column;
 }
 
-.content--contacts form > div {
+.contacts form > div {
     position: relative;
 }
 
-.content--contacts form > div input {
+.contacts form > div input {
     border: none;
     background-color: transparent;
     border-bottom: 1px solid var(--grey-color);
@@ -349,33 +365,33 @@ ul {
     resize: none;
 }
 
-.content--contacts form > div:last-of-type label {
+.contacts form > div:last-of-type label {
     top: 32px;
 }
 
-.content--contacts form > div label {
+.contacts form > div label {
     position: absolute;
     top: 0;
     left: 0;
 }
 
-.content--contacts form label {
+.contacts form label {
     color: var(--grey-color);
     font-size: 0.75em;
     font-family: "Roboto";
 }
 
-.content--contacts form input:focus {
+.contacts form input:focus {
     top: 0px;
 }
 
-.content--contacts form label {
+.contacts form label {
     margin-top: 44px;
     position: relative;
     top: 16px;
 }
 
-.content--contacts form input:focus, .content--contacts form input:valid, #message:focus, #message:valid{
+.contacts form input:focus, .contacts form input:valid, #message:focus, #message:valid{
     border-bottom: 2px solid var(--primary-color);
 }
 
@@ -385,11 +401,11 @@ ul {
     }
 }
 
-.content--contacts form input:focus + label, .content--contacts form input:valid + label, #message:focus + label, #message:valid + label {
+.contacts form input:focus + label, .contacts form input:valid + label, #message:focus + label, #message:valid + label {
     animation: above 0.3s linear forwards;
 }
 
-.content--contacts form button {
+.contacts form button {
     width: 94px;
     height: 36px;
     background-color: var(--primary-color);
@@ -402,7 +418,7 @@ ul {
     border-radius: 2px;
 }
 
-.content--contacts form button:hover {
+.contacts form button:hover {
     cursor: pointer;
 }
 
