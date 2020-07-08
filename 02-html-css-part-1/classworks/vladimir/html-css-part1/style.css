@@ -144,8 +144,8 @@ button {
 }
 
 .content {
-  margin: 20px 20px 0 367px;
-  width: calc(100% / 1.6);
+  margin: 20px 0 0 367px;
+  width: calc(100% - 367px);
   background-color: var(--color-bg-secondary);
   padding: 20px;
   border-radius: 50px;
@@ -225,26 +225,23 @@ button {
 }
 
 .coursers {
-  width: calc(100% / 1.6);
-  background-color: var(--color-bg-secondary);
-  border-radius: 50px;
-  padding: 40px;
-  margin: 20px 0 0 367px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .coursers__cards {
   --gap: 20px;
   --min-card-width: 175px;
   --cols: 5;
+  --rows: 4;
   display: grid;
   grid-template-columns: repeat(var(--cols), var(--min-card-width));
-  grid-template-rows: repeat(auto-fit, var(--min-card-width));
+  grid-template-rows: repeat(var(--rows), var(--min-card-width));
   gap: var(--gap);
 }
 
 .coursers__card {
-  width: 175px;
-  height: 175px;
   padding: 20px;
   background-color: var(--color-bg-primary);
   background-image: url(assets/icons/card-logo.svg);
@@ -264,6 +261,36 @@ button {
   font-weight: 600;
   font-size: 18px;
   line-height: 23px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    margin: 20px 0 0 0;
+    width: 100%;
+  }
+
+  .coursers__cards {
+    --cols: 4;
+    --rows: 5;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .coursers__cards {
+    --cols: 3;
+    --rows: 7;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .coursers__cards {
+    --cols: 1;
+    --rows: 20;
+  }
 }
 
 .contacts-form {
