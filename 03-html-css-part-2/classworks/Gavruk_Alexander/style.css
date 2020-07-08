@@ -433,9 +433,13 @@ ul {
     .left-side {
         display: none;
     }
+
+    .content {
+        margin-right: auto;
+    }
 }
 
-@media(max-width: 1440px) {
+@media(max-width: 1440px) and (min-width: 769px) {
     .left-side {
         margin-left: 6.67vw;    
     }
