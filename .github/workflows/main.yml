@@ -11,3 +11,5 @@ jobs:
 
     steps:
       - uses: actions-hub/stylelint@master
+        env:
+          PATTERN: "**/*.css"
