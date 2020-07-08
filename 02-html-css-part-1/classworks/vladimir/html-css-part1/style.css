@@ -135,6 +135,12 @@ button {
   color: var(--color-secondary);
 }
 
+.sidebar-nav__icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
 .sidebar-nav-link:visited {
   color: var(--color-secondary);
 }
