@@ -259,7 +259,7 @@ button {
 }
 
 .courses__card:hover {
-  background-image: url(assets/icons//card-logo-hover.svg);
+  background-image: url(assets/icons/card-logo-hover.svg);
 }
 
 .courses__card-text {
