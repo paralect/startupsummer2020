@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8">
+    <link rel='stylesheet' href='./style.css'>
+    <title>Contacts</title>
+</head>
+
+<body>
+    <aside class="left_side">
+        <div class="left_side--logo">
+            <a href="index.html" src="./assets/images/logo.svg" alt="Paralect"></a>
+            <span>Startup Summer</span>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <img src="./assets/images/home.svg" alt="Home">
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <img src="./assets/images/book-open.svg" alt="Courses">
+                    <a href="courses.html">Courses</a>
+                </li>
+                <li>
+                    <img src="./assets/images/help-circle.svg" alt="Contacts" id="primary_svg">
+                    <a href="#" id="primary_color">Contacts</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="content">
+        <div class="content_wrapper">
+            <div class="content--contacts">
+                <h1>Contacts</h1>
+                <form action="#">
+                    <div>
+                        <input type="text" id="fullname" name="fullname" required>
+                        <label for="fullname">Full name</label>
+                    </div>
+                    <div>
+                        <input type="text" id="email" name="email" required>
+                        <label for="email">Email</label>
+                    </div>
+                    <div>
+                        <textarea id="message" name="message" rows="3" required wrap></textarea>
+                        <label for="message">Message</label>
+                    </div>
+                    <span class="symbol_count">110 / 250</span>
+                    <button type="submit">SEND</button>
+                </form>
+            </div>
+            <img src="./assets/images/big-logo.svg" alt="Paralect" class="content--contacts--big_logo">
+        </div>
+    </main>
+</body>
+
+</html>
