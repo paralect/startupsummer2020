@@ -1,0 +1,293 @@
+@font-face {
+    font-family: Source Sans Pro;
+    src: url(fonts/SourceSansPro-Light.ttf);
+}
+
+@font-face {
+    font-family:Roboto;
+    src: url(fonts/Roboto-Light.ttf);
+}
+
+body {
+    flex: display;
+    flex-direction: row;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    justify-content: space-between;
+}
+
+nav {
+    margin-left: 40px;
+    height: 100%;
+    position: fixed;
+    background-color: #FFFFFF;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.navLogo {
+    position: absolute;
+    width: 171px;
+    height: 111px;
+    left: 96px;
+    top: 82px;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+.navMenu {
+    display: flex;
+    flex-direction: column;
+    padding: 0px;
+    position: absolute;
+    width: 200px;
+    height: 134px;
+    left: 96px;
+    top: 377px;
+}
+
+.navMenuItem a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.navMenuItem img {
+    padding-right: 10px;
+}
+
+.navMenuItem a {
+    text-decoration: none;
+    color: #B9B9B9;
+}
+
+.navMenuItem svg {
+    stroke: #B9B9B9;
+    padding-right: 10px;
+}
+
+.navMenuItem:hover svg, .navMenuItem:hover a, #activeMenuItem svg, #activeMenuItem a {
+    color: #FF3C5A;
+    stroke: #FF3C5A;
+}
+
+
+.content {
+    height: 100%;
+    width: 100% - 400px;
+    margin-left: 400px;
+    color: #333333;
+}
+
+.contentRectangle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    left: 367px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-right: 44px;
+    padding-bottom: 44px;
+    padding-left: 44px;
+    margin-right: 57px;
+    margin-left: 230px;
+    background: #EDEDED;
+    border-radius: 50px;
+}
+
+.hello {
+    text-align: center;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 60px;
+    margin-bottom: 0;
+}
+
+.task {
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-family: Source Sans Pro;
+    margin-top: 0;
+}
+
+.differentRows {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 23px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pinkColor {
+    color: #FF3C5A;
+    font-weight: bold;
+    font-family: Source Sans Pro;
+}
+
+.row {
+    margin-bottom: 60px;
+}
+
+.rowName {
+    margin-bottom: 15px;
+}
+
+.row1Float {
+    float: left;
+}
+
+.row2Flexbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+}
+
+.row3GridLayout {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}
+
+.contentCourses {
+    margin-left: 45px;
+    margin-top: 75px;
+}
+
+.contentCourses h1 {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    color: #333333;
+}
+
+.coursesRectangleName {
+    margin-left: 20px;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.coursesRectangle a {
+    text-decoration: none;
+    color: #333333;
+    margin: 2px;
+}
+
+.coursesRectangle {
+    background-color: white;
+    margin: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.coursesRectangle svg {
+    fill: #B9B9B9;
+}
+
+.coursesRectangle:hover {
+    box-shadow: 0px 9px 18px rgba(0, 0, 0, 0.25);
+}
+
+.coursesRectangle:hover svg {
+    fill: #FF3C5A;
+}
+
+.coursesRectangles {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.contactsForm {
+    display: flex;
+    flex-direction: column;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.contactsForm input {
+    margin-top: 50px;
+    font: caption;
+    border: none;
+    border-bottom: 1px solid #B9B9B9;
+    font-family: Roboto;
+    font-weight: normal;
+    background-color: inherit;
+    text-decoration: none;
+    outline: none;
+}
+
+
+.contactsBackground {
+    display: flex;
+    justify-content: space-between;
+    left: 367px;
+    margin-top: 30px;
+    padding-left: 68px;
+    margin-right: 170px;
+    margin-left: 230px;
+    background: #EDEDED;
+    border-radius: 50px;
+}
+
+.contactsButton {
+    border: none;
+    background-color: #FF3C5A;
+    height: 40px;
+    width: 90px;
+    color: white;
+    margin-left: 170px;
+    margin-top: 50px;
+    font-family: Roboto;
+}
+
+input:focus {
+    border-bottom: 2px solid #FF3C5A;
+    transition: 1s ease-out;
+}
+
+.contactsForm textarea {
+    height: 70px;
+    resize: none;
+    margin-top: 50px;
+    font: caption;
+    font-family: Roboto;
+    font-weight: normal;
+    border: none;
+    background-color: inherit;
+    text-decoration: none;
+    outline: none;
+    border-bottom: 1px solid #B9B9B9;
+}
+
+.contactsForm textarea:focus {
+    border-bottom: 2px solid #FF3C5A;    
+}
+
+.row1FloatRactangle {
+    float: left;
+}
+
+.contactsForm button:focus {
+    outline: none;
+}
