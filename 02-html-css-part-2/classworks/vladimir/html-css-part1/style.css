@@ -238,6 +238,7 @@ button {
   --min-card-width: 175px;
   --cols: 4;
   --rows: 5;
+
   display: grid;
   grid-template-columns: repeat(var(--cols), var(--min-card-width));
   grid-template-rows: repeat(var(--rows), var(--min-card-width));
