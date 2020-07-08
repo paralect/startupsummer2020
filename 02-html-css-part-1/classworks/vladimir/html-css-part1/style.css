@@ -321,12 +321,12 @@ button {
   font-family: var(--font-controls);
 }
 
-.input-wrapper {
+.contacts__input {
   position: relative;
   width: 100%;
 }
 
-.contacts-wrapper {
+.contacts {
   position: relative;
   width: 100%;
   padding: 50px;
@@ -334,13 +334,13 @@ button {
   overflow: hidden;
 }
 
-.contacts-logo {
+.contacts__logo {
   position: absolute;
   right: -100px;
   top: 0;
 }
 
-.form-label {
+.contacts__label {
   margin: 6px 0;
   font-family: var(--font-controls);
   font-style: normal;
