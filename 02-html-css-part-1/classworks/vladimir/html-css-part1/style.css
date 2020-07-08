@@ -233,8 +233,8 @@ button {
 .coursers__cards {
   --gap: 20px;
   --min-card-width: 175px;
-  --cols: 5;
-  --rows: 4;
+  --cols: 4;
+  --rows: 5;
   display: grid;
   grid-template-columns: repeat(var(--cols), var(--min-card-width));
   grid-template-rows: repeat(var(--rows), var(--min-card-width));
@@ -263,6 +263,13 @@ button {
   line-height: 23px;
 }
 
+@media only screen and (max-width: 1440px) {
+  .coursers__cards {
+    --cols: 5;
+    --rows: 4;
+  }
+}
+
 @media only screen and (max-width: 1024px) {
   .sidebar {
     display: none;
@@ -286,7 +293,14 @@ button {
   }
 }
 
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 600px) {
+  .coursers__cards {
+    --cols: 2;
+    --rows: 10;
+  }
+}
+
+@media only screen and (max-width: 425px) {
   .coursers__cards {
     --cols: 1;
     --rows: 20;
