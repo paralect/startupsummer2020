@@ -1,0 +1,113 @@
+@import 'reset.css';
+@import 'sidebar.css';
+
+body{
+    font-family: 'Roboto', 'Source Sans Pro' , sans-serif;
+    height: 100%;
+    background: #FFFFFF;
+}
+
+.wrapper_body{
+    display: flex;
+    justify-content: flex-end;
+    height: 971px;
+}
+
+.main{
+    position: relative;
+    background: #EDEDED;
+    border-radius: 50px;
+    width: calc(100% / 1.4);
+    margin: 20px;
+}
+
+.main svg{
+    position: absolute;
+    height: auto;
+    right: 0;
+    bottom: 0;
+    top:0;
+}
+
+.main h3{
+    margin-top: 30px;
+    margin-left: 120px;
+}
+
+form {
+    margin: 100px;
+}
+.input-field {
+    position: relative;
+    width: 250px;
+    height: 44px;
+    margin: 20px;
+    line-height: 44px;
+}
+.input-field label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #d3d3d3;
+    transition: 0.2s all;
+    cursor: text;
+}
+.input-field input,
+.input-field textarea
+{
+    width: 100%;
+    border: 0;
+    outline: 0;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid #d3d3d3;
+    box-shadow: none;
+    color: #111;
+    background: #EDEDED;
+    display: block;
+}
+
+.input-field input:invalid {
+    outline: 0;
+}
+
+.input-field input:focus,
+.input-field input:valid,
+.input-field input:hover,
+.input-field textarea:focus,
+.input-field textarea:hover{
+    border-color: #FF3C5A;
+}
+
+.input-field input:focus~label,
+.input-field input:valid~label,
+.input-field textarea:focus~label,
+.input-field textarea:valid~label
+{
+    font-size: 14px;
+    top: -24px;
+    color: #ff3c5a;
+}
+
+.input-field button{
+    display: block;
+    position: absolute;
+    width: 40%;
+    height: 65%;
+    margin: 0 auto;
+    top: 125px;
+    background: #FF3C5A;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24), 0 0 2px rgba(0, 0, 0, 0.12);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.0357143em;
+    color: #FFFFFF;
+    right: 0;
+}
+
+
