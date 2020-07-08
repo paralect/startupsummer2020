@@ -1,0 +1,212 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+body {
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.content-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+aside {
+  padding-top: 82px;
+}
+
+.logo {
+  position: relative;
+  width: 171px;
+  height: 111px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 30px;
+}
+
+.logo h1 {
+  position: absolute;
+  left: 30px;
+  top: 28px;
+  font-size: 30px;
+}
+
+.logo svg {
+  margin-left: 26px;
+}
+
+.nav_elem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.nav_elem p:hover {
+  cursor: pointer;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+nav {
+  margin-top: 184px;
+}
+
+.nav_elem svg {
+  margin-right: 12px;
+}
+
+.active {
+  color: #FF3C5A;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 87px 50px 20px;
+  margin-left: 271px;
+  width: 73.125%;
+  background: #EDEDED;
+  border-radius: 50px;
+}
+
+.flex-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+main h3 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.courses {
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 175px);
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	grid-gap: 20px;
+}
+
+.courses_item {
+	position: relative;
+  height: 175px;
+  background: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+.courses_item svg {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.courses_item p {
+	position: absolute;
+	bottom: 19px;
+	left: 20px;
+}
+
+.courses_item:hover {
+  box-shadow: 0px 9px 18px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+aside {
+  position: fixed;
+}
+
+.courses_svg {
+  fill: #B9B9B9;
+}
+
+.courses_svg:hover {
+	animation: changeSVGColor 2s ease;
+	animation-fill-mode: forwards;
+}
+
+.courses_item p {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.courses_item-part {
+  font-style: italic;
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+@media (max-width: 768px) {
+	aside {
+		display: none;
+	}
+	main {
+		margin-left: 0px;
+		margin: 0 auto;
+	}
+}
+
+@media (max-width: 430px) {
+ main {
+	 padding: 40px 20px;
+ }
+}
+
+@keyframes changeSVGColor {
+ to {
+   fill: #FF3C5A;
+  }
+}
