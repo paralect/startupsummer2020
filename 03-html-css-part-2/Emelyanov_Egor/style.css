@@ -44,10 +44,7 @@ table {
 
 
 body {
-<<<<<<< HEAD
 	font-size: 16px;
-=======
->>>>>>> feat: add html-css-part-2 task solution
   padding: 20px;
   box-sizing: border-box;
   font-family: 'Source Sans Pro', sans-serif;
@@ -69,11 +66,9 @@ aside {
   height: 111px;
   font-style: normal;
   font-weight: 600;
-<<<<<<< HEAD
-  font-size: 1.4375rem;
-=======
+
   font-size: 23px;
->>>>>>> feat: add html-css-part-2 task solution
+  font-size: 1.4375rem;
   line-height: 30px;
 }
 
@@ -81,11 +76,8 @@ aside {
   position: absolute;
   left: 30px;
   top: 28px;
-<<<<<<< HEAD
-  font-size: 1.875rem;
-=======
   font-size: 30px;
->>>>>>> feat: add html-css-part-2 task solution
+  font-size: 1.875rem;
 }
 
 .logo svg {
@@ -98,11 +90,8 @@ aside {
   margin-bottom: 32px;
   font-style: normal;
   font-weight: 600;
-<<<<<<< HEAD
-  font-size: 1.125rem;
-=======
   font-size: 18px;
->>>>>>> feat: add html-css-part-2 task solution
+  font-size: 1.125rem;
   line-height: 23px;
 }
 
@@ -142,11 +131,7 @@ main {
 main h3 {
   font-style: normal;
   font-weight: 600;
-<<<<<<< HEAD
   font-size: 1.5rem;
-=======
-  font-size: 24px;
->>>>>>> feat: add html-css-part-2 task solution
   line-height: 30px;
 }
 
@@ -198,27 +183,19 @@ aside {
 .courses_item p {
   font-style: normal;
   font-weight: 600;
-<<<<<<< HEAD
   font-size: 1.125rem;
-=======
-  font-size: 18px;
->>>>>>> feat: add html-css-part-2 task solution
+  font-size: 1.125rem;
   line-height: 23px;
 }
 
 .courses_item-part {
   font-style: italic;
   font-weight: 200;
-<<<<<<< HEAD
   font-size: 1.125rem;
-=======
-  font-size: 18px;
->>>>>>> feat: add html-css-part-2 task solution
   line-height: 23px;
 }
 
 @media (max-width: 768px) {
-<<<<<<< HEAD
 	body {
 		padding: 0;
 	}
@@ -242,19 +219,7 @@ aside {
 	}
 	.nav_elem {
 		margin: 0 4px;
-=======
-	aside {
-		display: none;
->>>>>>> feat: add html-css-part-2 task solution
-	}
-	main {
-		margin-left: 0px;
-		margin: 0 auto;
-<<<<<<< HEAD
-		margin-top: 150px;
-=======
->>>>>>> feat: add html-css-part-2 task solution
-	}
+  }
 }
 
 @media (max-width: 430px) {
