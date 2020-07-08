@@ -1,0 +1,415 @@
+@font-face {
+    font-family: "Source Sans Pro Semibold";
+    src: url("assets/fonts/SourceSansPro-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Source Sans Pro Regular";
+    src: url("assets/fonts/SourceSansPro-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Source Sans Pro Light";
+    src: url("assets/fonts/SourceSansPro-Light.ttf");
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("assets/fonts/Roboto-Regular.ttf");
+}
+
+:root {
+    --primary-color: #FF3C5A;
+    --grey-color: #B9B9B9;
+    --dark-color: #333333;
+    --primary-color-filter: invert(43%) sepia(96%) saturate(3606%) hue-rotate(328deg) brightness(104%) contrast(112%);
+    --grey-color-filter: invert(92%) sepia(0%) saturate(3660%) hue-rotate(141deg) brightness(88%) contrast(71%);
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    padding: 27px 1.39vw 13px 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.left_side {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 96px;
+    margin-right: 77px;
+    padding-top: 55px;
+}
+
+.left_side--logo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 184px;
+    align-items: center;
+}
+
+.left_side--logo > a {
+    background-image: url(assets/images/logo.svg);
+    width: 116px;
+    height: 77px;
+}
+
+.left_side--logo > span {
+    font-family: "Source Sans Pro Semibold";
+    font-size: 1.5em;
+    margin-top: 10px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.left_side nav {
+    align-self: flex-start;
+}
+
+.left_side nav li {
+    margin-bottom: 32px;
+    display: flex;
+}
+
+.left_side nav li:last-child {
+    margin-bottom: 0;
+}
+
+.left_side nav img {
+    filter: var(--grey-color-filter);
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+}
+
+.left_side nav li:hover {
+    filter: var(--primary-color-filter);
+    cursor: pointer;
+}
+
+.left_side nav a {
+    color: var(--grey-color);
+    font-family: "Source Sans Pro Regular";
+}
+
+#primary_svg {
+    filter: var(--primary-color-filter);
+}
+
+#primary_color {
+    color: var(--primary-color);
+}
+
+.content {
+    width: calc(100% / 1.6);
+    background-color: #EDEDED;
+    border-radius: 50px;
+    margin-left: 30.50vw;
+}
+
+.content_wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+}
+
+.content--title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 3.82vw;
+}
+
+.content--title h1 {
+    font-size: 3em;
+    font-family: "Source Sans Pro Semibold";
+    color: var(--dark-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.content--title h4 {
+    font-size: 1.5em;
+    font-family: "Source Sans Pro Light";
+    color: var(--dark-color);
+    text-align: center;
+    line-height: 30px;
+    margin: 0;
+}
+
+.content--layout {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 6.875vw;
+}
+
+.content--layout--row {
+    color: var(--dark-color);
+    margin-top: 70px;
+    font-family: "Source Sans Pro Regular";
+}
+
+.content--layout--row--flexbox {
+    display: flex;
+    flex-direction: row;
+    margin-top: 35px;
+}
+
+.content--layout--row--flexbox--item {
+    width: 202px;
+    height: 202px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    margin-right: 20px;
+}
+
+.content--layout--row--flexbox--item:last-child {
+    margin-right: 0;
+}
+
+.content--layout--row--grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 35px;
+    grid-gap: 20px;
+}
+
+.content--layout--row--grid--item {
+    width: 202px;
+    height: 202px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+}
+
+.content--layout--row--item:last-child {
+    margin-right: 0;
+}
+
+.content--layout--row--float {
+    margin-top: 35px;
+}
+
+.content--layout--row--float--item {
+    width: 202px;
+    height: 202px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    margin-right: 20px;
+}
+
+.content--layout--row--float--item:last-child {
+    margin-right: 0;
+}
+
+.content--layout--row--float .content--layout--row--float--item:not(:last-child) {
+    float: left;
+}
+
+.content--layout--row--float .content--layout--row--float--item:last-child {
+    float: right;
+}
+
+.content--courses {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3.82vw;
+    margin-bottom: 6.875vw;
+}
+
+.content--courses h1 {
+    font-family: "Source Sans Pro Semibold";
+    font-size: 1.5em;
+    align-self: flex-start;
+}
+
+.content--courses--layout {
+    margin-top: 14px;
+    display: grid;
+    grid-template-rows: repeat(4, 175px);
+    grid-template-columns: repeat(5, 175px);
+    grid-gap: 20px;
+}
+
+.content--courses--layout--row--item {
+    width: 175px;
+    height: 175px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.content--courses--layout--row--item:hover {
+    box-shadow: 0px 9px 18px rgba(0, 0, 0, 0.25);
+}
+
+.content--courses--layout--row--item svg {
+    position: absolute;
+    width: 210px;
+    height: 218px;
+    bottom: 18px;
+    right: -18px;
+}
+
+.content--courses--layout--row--item:hover svg path {
+    animation: pulse 1.2s forwards;
+}
+
+.content--courses--layout--row--item > span {
+    position: absolute;
+    color: var(--dark-color);
+    font-family: "Source Sans Pro Semibold";
+    font-size: 1.125em;
+    bottom: 19px;
+    left: 20px;
+}
+
+.content--courses--layout--row--item > span i {
+    font-family: "Source Sans Pro Light";
+}
+
+@keyframes pulse {
+    100% {
+      fill: var(--primary-color);
+    }
+}
+
+.content--contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3.82vw;
+    margin-left: 50px;
+}
+
+.content--contacts h1 {
+    font-family: "Source Sans Pro Semibold";
+    font-size: 1.5em;
+    align-self: flex-start;
+}
+
+.content--contacts--big_logo {
+    height: 931px;
+    margin-left: auto;
+}
+
+.content--contacts form {
+    display: flex;
+    flex-direction: column;
+}
+
+.content--contacts form > div {
+    position: relative;
+}
+
+.content--contacts form > div input {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid var(--grey-color);
+    outline: none;
+    width: 330px;
+    padding-bottom: 7px;
+    padding-left: 1px;
+    color: var(--dark-color);
+    font-family: "Roboto";
+    margin-top: 42px;
+}
+
+#message {
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px solid var(--grey-color);
+    outline: none;
+    width: 330px;
+    padding-bottom: 7px;
+    padding-left: 1px;
+    color: var(--dark-color);
+    font-family: "Roboto";
+    margin-top: 42px;
+    vertical-align: text-bottom;
+    resize: none;
+}
+
+.content--contacts form > div:last-of-type label {
+    top: 32px;
+}
+
+.content--contacts form > div label {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.content--contacts form label {
+    color: var(--grey-color);
+    font-size: 0.75em;
+    font-family: "Roboto";
+}
+
+.content--contacts form input:focus {
+    top: 0px;
+}
+
+.content--contacts form label {
+    margin-top: 44px;
+    position: relative;
+    top: 16px;
+}
+
+.content--contacts form input:focus, .content--contacts form input:valid, #message:focus, #message:valid{
+    border-bottom: 2px solid var(--primary-color);
+}
+
+@keyframes above {
+    100% {
+        top: -26px;
+    }
+}
+
+.content--contacts form input:focus + label, .content--contacts form input:valid + label, #message:focus + label, #message:valid + label {
+    animation: above 0.3s linear forwards;
+}
+
+.content--contacts form button {
+    width: 94px;
+    height: 36px;
+    background-color: var(--primary-color);
+    border: none;
+    color: #ffffff;
+    font-family: "Roboto";
+    outline: none;
+    align-self: flex-end;
+    margin-top: 24px;
+    border-radius: 2px;
+}
+
+.content--contacts form button:hover {
+    cursor: pointer;
+}
+
+.symbol_count {
+    font-size: 0.75em;
+    font-family: "Roboto";
+    color: var(--grey-color);
+    align-self: flex-end;
+    margin-top: 16px;
+}
