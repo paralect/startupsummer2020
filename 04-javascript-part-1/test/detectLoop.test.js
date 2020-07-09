@@ -9,7 +9,10 @@ function test() {
     .append('data3');
   loopList.append(loopList);
 
+  const list = new LinkedList('item1');
+
   assert.deepStrictEqual(detectLoop(loopList), 3);
+  assert.deepStrictEqual(detectLoop(list), 0);
 
   console.log('detect loop tests passed!');
 }

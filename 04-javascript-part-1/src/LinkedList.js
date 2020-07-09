@@ -12,7 +12,7 @@ class LinkedList {
     }
 
     if (this.tail !== null) {
-      this.tail.add(node);
+      this.tail.append(node);
     } else {
       this.tail = node;
     }

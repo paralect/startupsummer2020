@@ -10,6 +10,7 @@ const detectLoop = (node) => {
       nodeSet.add(curNode);
     }
     curNode = curNode.next();
+    if (curNode === null) break;
   }
   return loopSet.size;
 };
