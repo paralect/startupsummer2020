@@ -60,7 +60,6 @@ body {
   margin: 10px;
   border-radius: 50px;
   background-color: #ededed;
-  font-family: Source Sans Pro;
   width: calc(100% / 1.6);
   overflow: hidden;
   overflow-y: auto;

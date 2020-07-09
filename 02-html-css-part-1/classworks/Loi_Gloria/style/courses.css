@@ -52,7 +52,6 @@
   margin: 10px;
   border-radius: 50px;
   background-color: #ededed;
-  font-family: Source Sans Pro;
   overflow: hidden;
   overflow-y: auto;
 }
@@ -60,7 +59,7 @@
 .main-block__title {
   display: flex;
   font-size: 1.5em;
-  color: #333333;
+  color: #333;
   margin: 50px 70px;
   margin-bottom: 10px;
 }
@@ -106,7 +105,6 @@
   .sidebar {
     animation-duration: 0.5s;
     animation-name: slideout;
-
     animation-iteration-count: 1;
     width: 0;
   }
@@ -124,7 +122,6 @@
   .sidebar {
     animation-duration: 0.5s;
     animation-name: slidein;
-
     animation-iteration-count: 1;
     width: calc(100% - (100% / 1.6));
   }
@@ -149,6 +146,7 @@
     width: 0%;
     display: none;
   }
+
   to {
     width: calc(100% - (100% / 1.6));
   }
@@ -158,6 +156,7 @@
   from {
     width: calc(100% - (100% / 1.6));
   }
+
   to {
     width: 0;
     display: none;
