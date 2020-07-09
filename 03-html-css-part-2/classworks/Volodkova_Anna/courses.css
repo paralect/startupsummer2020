@@ -4,7 +4,7 @@ body {
     background: #FFFFFF;
     background: #fff;
     color: #222;
-    font-family: Source Sans Pro;
+    font-family: Source Sans Pro, san-serif;
 }
 
 .sidebar {
@@ -17,18 +17,18 @@ body {
     background-color: #FFFFFF;
 }
 
-.sidebar-content__logo{
+.sidebar-content__logo {
     margin: 20px 0 50px 0;
     position: relative;
     top: 50px;
 }
+
 .sidebar-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
     height: 50%;
 }
-
 
 
 .sidebar-content__aside-nav {
@@ -58,7 +58,6 @@ body {
 .sidebar-content__aside-nav__vertical-middle-position {
     vertical-align: middle;
 }
-
 
 .nav {
     list-style-type: none;
@@ -100,8 +99,6 @@ body {
     position: relative;
 }
 
-
-
 .main-container {
     display: flex;
     flex-direction: column;
@@ -126,11 +123,10 @@ body {
     margin-top: 20px;
 }
 
-.rect__explain-card{
+.rect__explain-card {
     padding-left: 10px;
 
 }
-
 
 
 @media screen and (max-width: 768px) {
