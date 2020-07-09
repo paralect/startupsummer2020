@@ -1,4 +1,4 @@
-const detectLoop = (node) => {
+const loopSize = (node) => {
   const nodeSet = new Set();
   const loopSet = new Set();
 
@@ -10,9 +10,9 @@ const detectLoop = (node) => {
       nodeSet.add(curNode);
     }
     curNode = curNode.next();
-    if (curNode === null) break;
+    if (!curNode) break;
   }
   return loopSet.size;
 };
 
-module.exports = detectLoop;
+module.exports = loopSize;

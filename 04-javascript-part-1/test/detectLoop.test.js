@@ -1,20 +1,15 @@
 const assert = require('assert');
 const LinkedList = require('../src/LinkedList');
-const detectLoop = require('../src/detectLinkedListLoop');
+const detectLoop = require('../src/detectLoop');
 
 function test() {
-  const loopList = new LinkedList('data1');
-  loopList
-    .append('data2')
-    .append('data3');
+  const loopList = new LinkedList('data1', 'data2', 'data3');
   loopList.append(loopList);
-
   const list = new LinkedList('item1');
+  assert.equal(detectLoop(loopList), true);
+  assert.equal(detectLoop(list), false);
 
-  assert.deepStrictEqual(detectLoop(loopList), 3);
-  assert.deepStrictEqual(detectLoop(list), 0);
-
-  console.log('detect loop tests passed!');
+  console.log('detect loop list tests passed!');
 }
 
 test();
