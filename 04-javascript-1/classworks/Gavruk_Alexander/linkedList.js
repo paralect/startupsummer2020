@@ -52,7 +52,7 @@ class LinkedList {
     while (currentNode !== null) {
       checkedNodes.push(currentNode);
       currentNode = currentNode.next;
-      if (checkedNodes.indexOf(currentNode) !== -1) {
+      if (checkedNodes.includes(currentNode)) {
         return true;
       }
     }
@@ -80,6 +80,26 @@ class LinkedList {
 
     return this;
   }
+
+  addNodeToMakeLoop(data) {
+    const node = new Node(data);
+    node.next = this.head;
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
+    }
+    current.next = node;
+  }
 }
+
+const example = () => {
+  const list = new LinkedList();
+  list.addNode(1);
+  list.addNode(2);
+  list.addNode(3);
+  list.addNodeToMakeLoop(4);
+  // console.log(list.detectLoopUsingLength());
+};
+example();
 
 module.exports = LinkedList;
