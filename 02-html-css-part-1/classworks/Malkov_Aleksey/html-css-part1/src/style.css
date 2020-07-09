@@ -1,190 +1,205 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body,
 html {
-    margin: 0;
+  margin: 0;
 }
 
 body {
-    font-family: 'Source Sans Pro', sans-serif;
-    max-width: 1440px;
-    margin: 0 auto;
+  display: flex;
+  position: relative;
+  padding: 20px 0;
+  font-family: 'Source Sans Pro', sans-serif;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 :root {
-    --bgColor: #EDEDED;
-    --activeColor: #FF3C5A;
-    --fadedColor: #B9B9B9;
-    --textColor: #333333;
-}
-
-body {
-    display: flex;
-    position: relative;
-    padding: 20px 0;
+  --bgColor: #ededed;
+  --activeColor: #ff3c5a;
+  --fadedColor: #b9b9b9;
+  --textColor: #333;
 }
 
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 20%;
-    position: fixed;
-    top: 0;
-    padding: 70px 0 0;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 20%;
+  position: fixed;
+  top: 0;
+  padding: 70px 0 0;
 }
 
 .container__logo {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin: 0 auto 165px;
-    max-width: 171px;
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--textColor);
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto 165px;
+  max-width: 171px;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--textColor);
+  cursor: pointer;
 }
 
 .nav {
-    margin: 0 auto;
-    width: 171px;
+  margin: 0 auto;
+  width: 171px;
 }
+
 .nav__container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
 }
 
 .link {
-    list-style: none;
-    position: relative;
-    width: 100%;
-    padding: 0 0 30px;
-    cursor: pointer;
+  list-style: none;
+  position: relative;
+  width: 100%;
+  padding: 0 0 30px;
+  cursor: pointer;
 }
 
-.nav a {
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    color: var(--fadedColor);
-    font-size: 18px;
-    font-weight: 600;
-    text-decoration: none;
-    width: 100%;
-}
-.link a:visited,
-.link a:focus,
-.link a:active {
-    text-decoration: none;
-}
-.active a,
-.link:hover a {
-    color: var(--activeColor);
-    transition: .2s;
-}
-.link a::before {
-    content: "";
-    position: relative;
-    width: 18px;
-    height: 20px;
-    padding-right: 10px;
-    background: var(--fadedColor);
-    mask-repeat: no-repeat;
-    mask-size: 18px 20px;
-    transition: .2s;
-}
-.link:nth-child(1) a::before {
-    top: 4px;
-    mask-image: url(./img/home.svg); 
-}
-.link:nth-child(2) a::before {
-    top: 3px;
-    mask-image: url(./img/book-open.svg);
-}
-.link:nth-child(3) a::before {
-    top: 2px;
-    mask-image: url(./img/help-circle.svg);
+.link_a {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  color: var(--fadedColor);
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  width: 100%;
 }
 
-.active a::before,
-.link:hover a::before,
-.link:focus a::before {
-    background: var(--activeColor);
+.link_a:visited,
+.link_a:focus,
+.link_a:active {
+  text-decoration: none;
 }
+
+.link_a--active,
+.link:hover .link_a {
+  color: var(--activeColor);
+  transition: 0.2s;
+}
+
+.link_a::before {
+  content: "";
+  position: relative;
+  width: 18px;
+  height: 20px;
+  padding-right: 10px;
+  background: var(--fadedColor);
+  mask-repeat: no-repeat;
+  mask-size: 18px 20px;
+  transition: 0.2s;
+}
+
+.link:nth-child(1) .link_a::before {
+  top: 4px;
+  mask-image: url(./img/home.svg);
+}
+
+.link:nth-child(2) .link_a::before {
+  top: 3px;
+  mask-image: url(./img/book-open.svg);
+}
+
+.link:nth-child(3) .link_a::before {
+  top: 2px;
+  mask-image: url(./img/help-circle.svg);
+}
+
+.link_a--active,
+.link:hover .link_a::before,
+.link:focus .link_a::before {
+  background: var(--activeColor);
+}
+
 .text_selected {
-    color: var(--activeColor);
-    font-weight: 600;
+  color: var(--activeColor);
+  font-weight: 600;
 }
+
 /*
 section
 */
 .main {
-    margin: 0 0 0 20%;
-    border-radius: 50px;
-    padding: 64px 100px;
-    max-width: 1053px;
-    font-size: 18px;
-    background-color: var(--bgColor);
+  margin: 0 0 0 20%;
+  border-radius: 50px;
+  padding: 64px 100px;
+  max-width: 1053px;
+  font-size: 18px;
+  background-color: var(--bgColor);
 }
+
 .section-name {
-    margin: 40px 0 0;
+  margin: 40px 0 0;
 }
+
 .main-header {
-    font-size: 48px;
-    margin: 0 0 4px 0;
-    text-align: center;
+  font-size: 48px;
+  margin: 0 0 4px 0;
+  text-align: center;
 }
+
 .main-description {
-    font-size: 24px;
-    margin: 0 0 15px 0;
-    text-align: center;
+  font-size: 24px;
+  margin: 0 0 15px 0;
+  text-align: center;
 }
+
 .container {
-    width: 869px;
-    margin-top: 15px;
+  width: 869px;
+  margin-top: 15px;
 }
+
 .square {
-    width: calc(25% - 15.25px);
-    height: 202px;
-    background-color: #ffffff;
-    border-radius: 6px;
-    box-shadow: 0 4px 2px 1px #B9B9B9;
+  width: calc(25% - 15.25px);
+  height: 202px;
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 2px 1px #b9b9b9;
 }
+
 .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
+  content: "";
+  clear: both;
+  display: table;
 }
+
 .container_floated .square {
-    float: left;
-    margin: 0 20px 0 0;
-}
-.container .square:last-child {
-    margin: 0;
+  float: left;
+  margin: 0 20px 0 0;
 }
 
 .container_flexed {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
 }
+
 .container_flexed .square {
-    flex: 0 0 calc(25% - 2px);
-    max-width: 202px;
-    margin: 0;
+  flex: 0 0 calc(25% - 2px);
+  max-width: 202px;
+  margin: 0;
 }
 
 .container_grided {
-    display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
-    gap: 5px;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  gap: 5px;
 }
 
 .container_grided .square {
-    width: 100%;
-    max-width: 202px; 
+  width: 100%;
+  max-width: 202px;
+}
+
+.container .square:last-child {
+  margin: 0;
 }
