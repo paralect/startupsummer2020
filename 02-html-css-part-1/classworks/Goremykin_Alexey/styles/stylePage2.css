@@ -1,144 +1,143 @@
 body {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    font-family: Roboto;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
 }
-
 
 main {
-    height: 50%;
-    display: flex;
-    flex-direction: row;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
 }
+
 /* //////////////////////////////////////////////////////// */
 nav {
-    position: fixed;
-    width: 367px;
-    height: 100%;
+  position: fixed;
+  width: 367px;
+  height: 100%;
 }
 
-
-.logo{
-    position: relative;
-    top: 90px;
-    left: 40%;
+.logo {
+  position: relative;
+  top: 90px;
+  left: 40%;
 }
 
-.logoPar{
-    position: absolute;
-    z-index: -2;
-    top:-40px;
-    left: -10px;
+.logoPar {
+  position: absolute;
+  z-index: -2;
+  top: -40px;
+  left: -10px;
 }
 
-.navMenu{
-    padding-left: 40%;
-    padding-top: 40%;
-    display: flex;
-    flex-direction: column;
+.navMenu {
+  padding-left: 40%;
+  padding-top: 40%;
+  display: flex;
+  flex-direction: column;
 }
 
 .navMenu a {
-    color: #B9B9B9;
+  color: #b9b9b9;
 }
 
-.iconWrapper{
-    display: flex;
-    flex-direction: row;
-    padding: 0px;
-    text-decoration: none;
+.iconWrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  text-decoration: none;
 }
 
-.iconWrapper:hover{
-    color: #FF3C5A;
+.iconWrapper:hover {
+  color: #ff3c5a;
 }
 
-.icon{
-    flex: none;
-    margin-right: 10px;
-    margin-bottom: 20px;
+.icon {
+  flex: none;
+  margin-right: 10px;
+  margin-bottom: 20px;
 }
 
 /* //////////////////////////////////////////////////////// */
 
 section {
-    width: calc(100% / 1.6);
-    height: max-content;
-    background-color: #ededed;
-    margin: 20px;
-    border-radius: 50px;
-    margin-left: 400px;
-    padding: 20px;
+  width: calc(100% / 1.6);
+  height: max-content;
+  background-color: #ededed;
+  margin: 20px;
+  border-radius: 50px;
+  margin-left: 400px;
+  padding: 20px;
 }
 
 .main-title {
-    font-size: 18px;
-    padding-left: 20px;
-    padding-top: 10px;
+  font-size: 18px;
+  padding-left: 20px;
+  padding-top: 10px;
 }
 
-.main-content{
-    min-height: 100%;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    grid-auto-rows: 180px;
-    grid-gap: 20px;
-    padding: 20px;
+.main-content {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-auto-rows: 180px;
+  grid-gap: 20px;
+  padding: 20px;
 }
 
-.main-content__block{
-    background-color: #fff;
-    border-radius: 6px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    position: relative;
+.main-content__block {
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
 }
 
-.main-content__block:hover  .main-content__block__logo__path{
-    fill:#FF3C5A;
+.main-content__block__logo__path {
+  fill: #b9b9b9;
 }
 
-.main-content-block__logo{
-    position: absolute;
-    right: 0;
+.main-content__block:hover .main-content__block__logo__path {
+  fill: #ff3c5a;
 }
 
-.main-content__block__logo__path{
-    fill:#B9B9B9;
+.main-content-block__logo {
+  position: absolute;
+  right: 0;
 }
 
 .main-content__block__name {
-    font-family: Source Sans Pro;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 5px;
-    color: #333333;
-    position: absolute;
-    bottom: 10px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 5px;
+  color: #333;
+  position: absolute;
+  bottom: 10px;
 }
 
-.square:hover .logoInSquare, .square:hover{
-    transition: 0.5s ease;
-    fill:#FF3C5A;
-    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+.square:hover .logoInSquare,
+.square:hover {
+  transition: 0.5s ease;
+  fill: #ff3c5a;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.25);
 }
 
-.navMenu .active{
-    color: #FF3C5A;
+.navMenu .active {
+  color: #ff3c5a;
 }
-
 
 @media screen and (max-width: 768px) {
-    body {
-        min-width: 350px;
-    }
+  body {
+    min-width: 350px;
+  }
 
-    nav {
-        display: none;
-    }
+  nav {
+    display: none;
+  }
 
-    section {
-        margin: auto;
-    }
+  section {
+    margin: auto;
+  }
 }
