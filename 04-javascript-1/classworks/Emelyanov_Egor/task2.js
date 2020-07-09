@@ -1,11 +1,11 @@
-function Node(data, prev = null) {
+function Node(data, next = null) {
   this.data = data;
-  this.prev = prev;
+  this.next = next;
 }
 
 class LinkedList {
   constructor() {
-    this.tail = null;
+    this.head = null;
     this.length = 0;
   }
 
@@ -13,49 +13,47 @@ class LinkedList {
     const newElement = new Node(data);
 
     if (this.length) {
-      let currentNode = this.tail;
-      while (currentNode.prev !== null) {
-        currentNode = currentNode.prev;
+      let currentNode = this.head;
+      while (currentNode.next !== null) {
+        currentNode = currentNode.next;
       }
-      currentNode.prev = newElement;
-      this.length += 1;
+      currentNode.next = newElement;
     } else {
-      this.tail = newElement;
-      this.length += 1;
+      this.head = newElement;
     }
-
-    return this.tail;
+    this.length += 1;
+    return this.head;
   }
 
   detectloop() {
     let i = 0;
-    let currentElem = this.tail;
+    let currentElem = this.head;
     while (currentElem !== null && i <= this.length) {
-      currentElem = currentElem.prev;
+      currentElem = currentElem.next;
       i += 1;
     }
     return i > this.length;
   }
 
   detectloopAlt() {
-    let currentElem = this.tail;
+    let currentElem = this.head;
     const arr = [];
     for (let i = 0; i < this.length; i += 1) {
-      if (arr.includes(currentElem.prev)) return true;
+      if (arr.includes(currentElem.next)) return true;
       arr.push(currentElem);
-      currentElem = currentElem.prev;
+      currentElem = currentElem.next;
     }
     return false;
   }
 
   addLastNodeToMakeLoop(value) {
     const newNode = new Node(value);
-    newNode.prev = this.tail;
-    let current = this.tail;
-    while (current.prev) {
-      current = current.prev;
+    newNode.next = this.head;
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
     }
-    current.prev = newNode;
+    current.next = newNode;
     this.length += 1;
   }
 }
