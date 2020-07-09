@@ -1,4 +1,4 @@
-name: Lint
+name: Test
 
 on:
   pull_request:
@@ -12,6 +12,5 @@ jobs:
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '12'
-      - uses: xt0rted/stylelint-problem-matcher@v1
       - run: npm ci
       - run: npm test
