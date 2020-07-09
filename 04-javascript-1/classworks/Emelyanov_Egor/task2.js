@@ -85,6 +85,7 @@ const list4 = new LinkedList();
 list4.append(1);
 list4.append(2);
 list4.append(3);
-console.log(list2.detectloop());
+list4.addLastNodeToMakeLoop(4);
+console.log(list4.detectloop());
 
 module.exports = LinkedList;
