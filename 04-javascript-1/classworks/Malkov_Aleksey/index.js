@@ -7,11 +7,11 @@ const check = () => {
   xxx.insertToEnd('bibip');
   xxx.insertToEnd('bibbop');
   xxx.insertToEnd('b');
-  console.log(xxx.isLoopExist());
-  // make loop
-  // xxx.getAt(2).next = xxx.head;
-  console.log(xxx.isLoopExist());
+  xxx.isLoopExist(); // false
   xxx.print();
+  // make loop
+  xxx.getAt(2).next = xxx.head;
+  xxx.isLoopExist(); // true
 };
 
 check();
