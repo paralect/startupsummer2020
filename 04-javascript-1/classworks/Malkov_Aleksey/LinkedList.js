@@ -33,25 +33,23 @@ class LinkedList {
     let counter = 0;
     let node = this.head;
     while (node) {
-      if (counter === index) {
-        return node;
-      }
+      if (counter === index) break;
       counter += 1;
       node = node.next;
     }
-    return null;
+    return counter === index ? node : null;
   }
 
   print() {
     if (this.isLoopExist()) return;
     let index = 0;
-    let nd = this.head;
-    console.log(index, nd.data);
+    let node = this.head;
+    console.log(index, node.data);
     do {
       index += 1;
-      console.log(index, nd.next.data);
-      nd = nd.next;
-    } while (nd.next !== null);
+      console.log(index, node.next.data);
+      node = node.next;
+    } while (node.next !== null);
   }
 
   length() {
@@ -59,15 +57,12 @@ class LinkedList {
   }
 
   isLoopExist() {
-    const arr = [];
-    let temp = this.head;
-    while (temp) {
-      if (arr.includes(temp)) {
-        return true;
-      }
-      arr.push(temp);
-
-      temp = temp.next;
+    const arrayOfLinks = [];
+    let currentLink = this.head;
+    while (currentLink) {
+      if (arrayOfLinks.includes(currentLink)) return true;
+      arrayOfLinks.push(currentLink);
+      currentLink = currentLink.next;
     }
     return false;
   }
