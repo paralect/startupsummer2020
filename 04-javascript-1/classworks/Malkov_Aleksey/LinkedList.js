@@ -3,16 +3,18 @@ const Node = require('./Node');
 class LinkedList {
   constructor() {
     this.head = null;
+    this.length = 0;
   }
 
-  insertAtBeginning(data) {
+  insertToStart(data) {
     const newNode = new Node(data);
     newNode.next = this.head;
     this.head = newNode;
+    this.length += 1;
     return this.head;
   }
 
-  insertAtEnd(data) {
+  insertToEnd(data) {
     const newNode = new Node(data);
     if (!this.head) {
       this.head = newNode;
@@ -23,6 +25,7 @@ class LinkedList {
       tail = tail.next;
     }
     tail.next = newNode;
+    this.length += 1;
     return this.head;
   }
 
@@ -39,7 +42,23 @@ class LinkedList {
     return null;
   }
 
-  loopExist() {
+  print() {
+    if (this.isLoopExist()) return;
+    let index = 0;
+    let nd = this.head;
+    console.log(index, nd.data);
+    do {
+      index += 1;
+      console.log(index, nd.next.data);
+      nd = nd.next;
+    } while (nd.next !== null);
+  }
+
+  length() {
+    return this.length;
+  }
+
+  isLoopExist() {
     const arr = [];
     let temp = this.head;
     while (temp) {

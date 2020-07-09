@@ -1,25 +1,17 @@
 const LinkedList = require('./LinkedList');
 
-const xxx = new LinkedList();
-xxx.insertAtBeginning('hihi');
+const check = () => {
+  const xxx = new LinkedList();
+  xxx.insertToStart('hihi');
+  xxx.insertToStart('hehe');
+  xxx.insertToEnd('bibip');
+  xxx.insertToEnd('bibbop');
+  xxx.insertToEnd('b');
+  console.log(xxx.isLoopExist());
+  // make loop
+  // xxx.getAt(2).next = xxx.head;
+  console.log(xxx.isLoopExist());
+  xxx.print();
+};
 
-console.log(xxx);
-xxx.insertAtBeginning('hehe');
-
-console.log(xxx);
-xxx.insertAtEnd('END_my_suffer');
-
-console.log(xxx);
-
-xxx.insertAtEnd('END_my_suffer_Again');
-
-console.log(xxx);
-console.log(xxx.getAt(0));
-console.log(xxx.getAt(1));
-
-console.log(xxx.loopExist());
-
-xxx.insertAtEnd('b');
-xxx.getAt(2).next = xxx.head;
-
-console.log(xxx.loopExist());
+check();
