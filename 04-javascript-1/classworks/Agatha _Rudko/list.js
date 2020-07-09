@@ -42,12 +42,12 @@ LinkedList.prototype.getAt = function (index) {
 LinkedList.prototype.deleteAt = function (index) {
   if (index === 0) {
     this.head = this.head.next;
-    return 0;
+    return null;
   }
   const previous = this.getAt(index - 1);
 
   if (!previous || !previous.next) {
-    return 0;
+    return null;
   }
   previous.next = previous.next.next;
   this.length -= 1;
@@ -77,5 +77,4 @@ list.insertAtEnd('f');
 // list.deleteAt(5);
 list.getAt(5).next = list.getAt(0);
 // console.log(list.length);
-
 console.log(isLooped(list));
