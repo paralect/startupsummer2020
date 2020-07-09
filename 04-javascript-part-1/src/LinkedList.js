@@ -19,14 +19,32 @@ class LinkedList {
     return this;
   }
 
-  remove(node) {
-    while (this.next() !== null) {
-      if (this.next() === node) {
-        this.tail = node.tail;
-      }
+  remove(index) {
+    if (index === 0) {
+      return this.tail;
     }
 
+    if (index >= this.size()) {
+      return this;
+    }
+
+    let current = this;
+    for (let i = 0; i < index - 1; i += 1) {
+      current = current.next();
+    }
+    current.tail = current.next().tail;
     return this;
+  }
+
+  get(index) {
+    if (index === 0 || index >= this.size()) {
+      return this;
+    }
+    let current = this;
+    for (let i = 0; i < index; i += 1) {
+      current = current.next();
+    }
+    return current;
   }
 
   next() {
