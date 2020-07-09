@@ -1,0 +1,43 @@
+.form-container {
+  margin: 100px;
+  width: calc(50% - 200px);
+}
+
+input,
+textarea {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.form-container textarea,
+.form-container input[type="text"] {
+  width: 100%;
+  padding: 5px 0;
+  border: none;
+  border-bottom: 2px solid #b9b9b9;
+  background-color: inherit;
+  margin-bottom: 15px;
+  transition: border-bottom-color 0.3s ease-in;
+}
+
+.form-container textarea:focus,
+.form-container input[type="text"]:focus {
+  width: 100%;
+  padding: 5px 0;
+  border: none;
+  border-bottom: 2px solid #ff3c5a;
+  background-color: inherit;
+  margin-bottom: 20px;
+}
+
+.form-container input[type="submit"] {
+  float: right;
+  background-color: #ff3c5a;
+  color: #fff;
+  padding: 5px 7px;
+}
+
+.form-container label {
+  color: #b9b9b9;
+}
