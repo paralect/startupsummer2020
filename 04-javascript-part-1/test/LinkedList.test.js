@@ -4,11 +4,11 @@ const LinkedList = require('../src/LinkedList');
 function test() {
   const list = new LinkedList('item1');
   list
-    .add('item2')
-    .add('item3')
-    .add('item4')
-    .add('item5')
-    .add('item6');
+    .append('item2')
+    .append('item3')
+    .append('item4')
+    .append('item5')
+    .append('item6');
   const expectedHeadData = 'item1';
   const expectedTailHeadData = 'item2';
 

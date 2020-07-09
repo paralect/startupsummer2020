@@ -5,9 +5,9 @@ const detectLoop = require('../src/detectLinkedListLoop');
 function test() {
   const loopList = new LinkedList('data1');
   loopList
-    .add('data2')
-    .add('data3');
-  loopList.add(loopList);
+    .append('data2')
+    .append('data3');
+  loopList.append(loopList);
 
   assert.deepStrictEqual(detectLoop(loopList), 3);
 

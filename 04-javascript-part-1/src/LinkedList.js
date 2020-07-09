@@ -5,7 +5,7 @@ class LinkedList {
     this.data = data;
   }
 
-  add(data) {
+  append(data) {
     let node = data;
     if (!(data instanceof LinkedList)) {
       node = new LinkedList(data);
