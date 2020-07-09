@@ -1,77 +1,74 @@
 @import 'reset.css';
 @import 'sidebar.css';
 
-body{
-    font-family: 'Source Sans Pro', 'Roboto', sans-serif;
-    position: relative;
-    height: 100%;
-    background: #FFFFFF;
+body {
+  font-family: 'Source Sans Pro', 'Roboto', sans-serif;
+  position: relative;
+  height: 100%;
+  background: #fff;
 }
 
-.wrapper_body{
-    display: flex;
-    justify-content: flex-end;
+.wrapper_body {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.main{
-    background: #EDEDED;
-    border-radius: 50px;
-    width: calc(100% / 1.4);
-    margin: 20px;
+.main {
+  background: #ededed;
+  border-radius: 50px;
+  width: calc(100% / 1.4);
+  margin: 20px;
 }
 
-.main h2{
-    margin-top: 20px;
-    margin-left: 8%;
+.main h2 {
+  margin-top: 20px;
+  margin-left: 8%;
+  height: 30px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  color: #333;
 }
 
-
-.main__container{
-    display: grid;
-    padding: 20px;
-    justify-content: center;
-    grid-template-columns:
+.main__container {
+  display: grid;
+  padding: 20px;
+  justify-content: center;
+  grid-template-columns:
     repeat(
       auto-fit,
       minmax(
-              175px,
-              175px
+        175px,
+        175px
       )
     );
-    gap: 40px;
+  gap: 40px;
 }
 
-.main__container__item{
-    background: #FFFFFF;
-    border-radius: 6px;
-
+.main__container__item {
+  background: #fff;
+  border-radius: 6px;
 }
 
-.main__container__item span{
-    margin-left: 10px;
+.main__container__item span {
+  margin-left: 10px;
 }
 
-.main h2{
-    height: 30px;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 30px;
-    color: #333333
+@media (max-width: 768px) {
+  body {
+    width: 100%;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    width: 100%;
+  }
 }
 
-@media (max-width: 768px){
-    body{
-        width: 100%;
-    }
-    .sidebar{
-        display: none;
-    }
-    .main{
-        width: 100%;
-    }
-}
-
-.menu__item_home{
-    fill: #3640ff
+.menu__item_home {
+  fill: #3640ff;
 }
