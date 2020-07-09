@@ -1,98 +1,91 @@
-class Item {
-    constructor(data, next = null){
-        this.data = data;
-        this.next = next;
-    }
-}
+const Item = require('./item.js');
 
 class LinkedList {
-    constructor() {
-        this.first = null;
-        this.length = 0;
+  constructor() {
+    this.first = null;
+    this.length = 0;
+  }
+
+  addItem(data) {
+    const newItem = new Item(data);
+    if (!this.first) {
+      this.first = newItem;
+      return newItem;
     }
-    
-    addItem(data){
-        let newItem = new Item(data);
-        if (!this.first) { 
-            this.first = newItem;
-            return newItem;
-        }
-        let last = this.first;
-
-        while (last.next !== null) {
-            last = last.next;
-        }
-        last.next = newItem; 
-        this.length=this.length+1;  
-        return this.first;
+    let last = this.first;
+    while (last.next !== null) {
+      last = last.next;
     }
+    last.next = newItem;
+    this.length += 1;
+    return this.first;
+  }
 
-    printList() { 
-        let last = this.first;
-        console.log(last.data)
-        while(last.next !== null){
-            last = last.next;
-            console.log(last.data)
-        } 
+  printList() {
+    let last = this.first;
+    console.log(last.data);
+    while (last.next !== null) {
+      last = last.next;
+      console.log(last.data);
     }
+  }
 
-    removeLast() {
-        if (!this.first){
-            console.log("the list is empty")
-            return null;
-        }
-        let last = this.first;
-        let prev=null;
-
-        while (last.next !== null) {
-            prev = last;
-            last = last.next;
-        } 
-
-        prev.next=null;
-        this.length=this.length-1;
-
-        return null;
+  removeLast() {
+    if (!this.first) {
+      console.log('the list is empty');
+      return null;
+    }
+    let last = this.first;
+    let prev = null;
+    while (last.next !== null) {
+      prev = last;
+      last = last.next;
     }
 
-    isLoop() {
-        if (!this.first){
-            console.log("the list is empty")
-            return null;
-        }
+    prev.next = null;
+    this.length -= 1;
 
-        let current = this.first;
-        let hash = [];
+    return null;
+  }
 
-        while(current.next !== null){
-            if(hash.includes(current.next)){
-                return true;
-            }
-            hash.push(current);
-            current = current.next;
-        }
-
-        return false;
+  isLoop() {
+    if (!this.first) {
+      console.log('the list is empty');
+      return null;
     }
 
-    addLastItemForLoop(value) {
-        const newItem = new Item(value);
-        newItem.next = this.first;  
-        let current = this.first;
-        while (current.next) {
-            current = current.next;
-        }
-        current.next = newItem;
-    };
+    let current = this.first;
+    const hash = [];
 
-    isEmpty(){
-        return !this.first;
+    while (current.next !== null) {
+      if (hash.includes(current.next)) {
+        return true;
+      }
+      hash.push(current);
+      current = current.next;
     }
+
+    return false;
+  }
+
+  addLastItemForLoop(value) {
+    const newItem = new Item(value);
+    newItem.next = this.first;
+    let current = this.first;
+    while (current.next) {
+      current = current.next;
+    }
+    current.next = newItem;
+  }
+
+  isEmpty() {
+    return !this.first;
+  }
 }
- 
-let list = new LinkedList();
 
-console.log(list.isEmpty())
+const list = new LinkedList();
+
+console.log(list.isEmpty());
 
 list.addItem(1);
 list.addItem(2);
@@ -103,7 +96,6 @@ list.printList();
 
 console.log(list.isLoop());
 
-list.addLastItemForLoop(6)
+list.addLastItemForLoop(6);
 
 console.log(list.isLoop());
-
