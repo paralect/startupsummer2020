@@ -1,6 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic');
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic");
+
 nav li {
   list-style-type: none;
 }
+
 .navbar {
   position: absolute;
 }
@@ -17,25 +21,25 @@ nav li {
   position: fixed;
 }
 
-.courses_href,.home_href,
+.courses_href,
+.home_href,
 .contacts_href {
   text-decoration: none;
   color: #ff3c5a;
-  font-family: Source Sans Pro;
+  font-family: 'Source Sans Pro', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   line-height: 3em;
   margin: 1em;
-  line-height: 4em;
 }
 
-.courses_href{
+.courses_href {
   color: #ff3c5a;
 }
- 
+
 .home_href,
-.contacts_href{
+.contacts_href {
   color: #b9b9b9;
 }
 
@@ -52,8 +56,8 @@ li a:hover {
 .grid_third,
 .grid_fourth,
 .grid_five {
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 0.5em;
 }
 
@@ -77,35 +81,30 @@ li a:hover {
   grid-row-gap: 1em;
   grid-column-gap: 1em;
   padding-bottom: -22em;
-  padding: 1.5em 0em;
   background: #ededed;
   border-radius: 3em;
   width: 100%;
 }
 
-.width_nav {
-  width: 34em;
-}
-
 .body_wrapper_top {
-  font-family: Source Sans Pro;
+  font-family: 'Source Sans Pro', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 30px;
-  color: #333333;
+  color: #333;
   margin-left: 2em;
   padding-top: 2em;
 }
 
 .text_block {
   padding-left: 2em;
-  font-family: Source Sans Pro;
+  font-family: 'Source Sans Pro', sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 30px;
-  color: #333333;
+  color: #333;
 }
 
 .text_div {
@@ -123,6 +122,7 @@ a.rollover {
   width: 175px;
   height: 133px;
 }
+
 a.rollover:hover {
   background: url(svg/red_lake.svg);
 }

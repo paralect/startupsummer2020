@@ -1,19 +1,23 @@
-/*------navbar-------*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic');
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic");
+
+/* ------navbar------- */
 nav li {
   list-style-type: none;
 }
 
-.home_href,.courses_href,
+.home_href,
+.courses_href,
 .contacts_href {
   text-decoration: none;
-  font-family: Source Sans Pro;
+  font-family: 'Source Sans Pro', serif;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   line-height: 23px;
 }
 
-.home_href{
+.home_href {
   color: #ff3c5a;
 }
 
@@ -26,9 +30,10 @@ li a:hover {
   text-decoration: underline;
 }
 
-
-.navigate_courses,.navigate_contacts,.navigate_home {
-  font-family: Source Sans Pro;
+.navigate_courses,
+.navigate_contacts,
+.navigate_home {
+  font-family: 'Source Sans Pro', serif;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -36,12 +41,15 @@ li a:hover {
   padding-bottom: 30px;
 }
 
-.navigate_contacts,.navigate_home  {
+.navigate_contacts,
+.navigate_home {
   color: #b9b9b9;
 }
-.navigate_courses{
+
+.navigate_courses {
   color: #ff3c5a;
 }
+
 .body_wrapper {
   position: absolute;
   width: 1053px;
@@ -59,24 +67,23 @@ li a:hover {
 .contacts_href {
   text-decoration: none;
   color: #ff3c5a;
-  font-family: Source Sans Pro;
+  font-family: 'Source Sans Pro', serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 3em;
   margin: 0.7em;
-  line-height: 4em;
 }
 
 .home_fix {
-  padding: 1em 1em 1em 0em;
+  padding: 1em 1em 1em 0;
 }
 
 .home_href,
 .courses_href {
   text-decoration: none;
   color: #b9b9b9;
-  font-family: Source Sans Pro;
+  font-family: 'Source Sans Pro', serif;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -95,21 +102,23 @@ li a:hover {
 .position_text {
   padding-top: 8em;
 }
-/*--------text-----------*/
+
+/* --------text----------- */
 .contacts {
   position: absolute;
   width: 649px;
   height: 30px;
   right: 330px;
   top: 93px;
-  font-family: Source Sans Pro;
+  font-family: 'Source Sans Pro', serif;
   font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 30px;
-  color: #333333;
+  color: #333;
 }
-/*---------------------INPUT-----------------*/
+
+/* ---------------------INPUT----------------- */
 input {
   border: none;
   outline: none;
@@ -133,7 +142,7 @@ input {
 .form-item {
   position: relative;
   display: block;
-  margin: 1em 1em 1em 0em;
+  margin: 1em 1em 1em 0;
   inline-size: 18em;
 }
 
@@ -152,7 +161,8 @@ input {
   top: 0;
   line-height: 40px;
   transition: 0.3s;
-  font-family: Roboto;
+  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: normal;
   color: #b9b9b9;
