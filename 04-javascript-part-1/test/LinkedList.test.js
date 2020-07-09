@@ -17,6 +17,8 @@ function test() {
 
   assert.equal(list.map(() => 'data').head.data, 'data');
 
+  assert.equal(list.size(), 6);
+
   console.log('Linked List tests passed!');
 }
 

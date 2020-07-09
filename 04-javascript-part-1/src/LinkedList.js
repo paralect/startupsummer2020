@@ -6,7 +6,10 @@ class LinkedList {
   }
 
   add(data) {
-    const node = new LinkedList(data);
+    let node = data;
+    if (!(data instanceof LinkedList)) {
+      node = new LinkedList(data);
+    }
 
     if (this.tail !== null) {
       this.tail.add(node);
@@ -40,6 +43,14 @@ class LinkedList {
       next.map(func);
     }
     return this;
+  }
+
+  size() {
+    if (this.tail === null) {
+      return 1;
+    }
+
+    return 1 + this.tail.size();
   }
 }
 
