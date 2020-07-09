@@ -1,0 +1,181 @@
+/*-----------BODY-----------*/
+
+.body_wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 1053px;
+  height: 1146px;
+  left: 367px;
+  top: 20px;
+  display: flex;
+  padding: 90px 0px;
+  justify-content: space-around;
+  background: #ededed;
+  border-radius: 50px;
+}
+
+
+.block_wrapper_title,
+.block_wrapper_float,
+.block_wrapper_flex,
+.block_wrapper_grid {
+  padding: 0px 80px;
+}
+
+.block_wrapper_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hello_text {
+  width: 475px;
+  height: 60px;
+  left: 657px;
+  top: 82px;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 60px;
+  color: #333333;
+}
+
+.block_wrapper_float {
+  padding: 0px 80px 0px 80px;
+}
+.block_wrapper_flex {
+  display: flex;
+  justify-content: space-between;
+}
+.block_wrapper_grid {
+  display: inline-grid;
+  grid-template-columns: 202px 28.5px 202px 28.5px 201.5px 28px 202.5px;
+  grid-template-rows: auto;
+  height: 202px;
+}
+
+.float_first,
+.float_second,
+.float_third,
+.float_fourth,
+.flex_first,
+.flex_second,
+.flex_third,
+.flex_fourth,
+.grid_first,
+.grid_second,
+.grid_third,
+.grid_fourth {
+  height: 202px;
+  width: 202px;
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+.float_fourth {
+  float: left;
+}
+
+.float_first,
+.float_second,
+.float_third {
+  float: left;
+  margin-right: 28px;
+}
+
+.text_block {
+  padding-left: 80px;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+}
+
+.text_div {
+  font-size: 24px;
+  line-height: 30px;
+}
+/*--------NAVBAR--------*/
+
+.fix_navbar {
+  position: fixed;
+}
+
+.position_text {
+  padding-top: 120px;
+}
+
+.navigate_home,
+.navigate_courses,
+.navigate_contacts {
+  padding-bottom: 1em;
+}
+
+nav li {
+  list-style-type: none;
+}
+
+.home_href {
+  text-decoration: none;
+  color: #ff3c5a;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  margin: 0.7em;
+}
+
+.courses_href,
+.contacts_href {
+  text-decoration: none;
+  color: #b9b9b9;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  margin: 0.7em;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
+
+.navigate_home {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  color: #ff3c5a;
+}
+
+.navigate_courses,.navigate_contacts {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  color: #b9b9b9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
