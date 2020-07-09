@@ -1,17 +1,17 @@
-function Node(data, prev = null) {
+function Node(data, next = null) {
   this.data = data;
-  this.prev = prev;
+  this.next = next;
 }
 
 class LinkedList {
   constructor() {
-    this.tail = null;
+    this.head = null;
     this.length = 0;
   }
 
   append(data) {
-    const newElement = new Node(data, this.tail);
-    this.tail = newElement;
+    const newElement = new Node(data, this.head);
+    this.head = newElement;
     this.length += 1;
   }
 }
