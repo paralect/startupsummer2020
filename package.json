@@ -1,7 +1,7 @@
 {
   "scripts": {
     "test": "run-s test:**",
-    "test:eslint": "eslint .",
+    "test:eslint": "eslint --no-error-on-unmatched-pattern .",
     "test:stylelint": "stylelint --allow-empty-input \"**/*.css\""
   },
   "devDependencies": {
