@@ -1,0 +1,250 @@
+.allContent {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.aboutContainer {
+  width: 10%;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+  position: fixed;
+  top: 5%;
+  left: 15%;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10rem;
+}
+
+nav a {
+  color: #b9b9b9;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 23px;
+  margin-bottom: 2rem;
+}
+
+.logo svg {
+  position: relative;
+  top: 5rem;
+  z-index: -2;
+}
+
+.headerLogo {
+  margin: 5%;
+}
+
+.rectangle {
+  width: calc(100% / 1.6);
+  background: #ededed;
+  border-radius: 50px;
+  min-height: 931px;
+}
+
+.headerRec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headerRec h1 {
+  margin: 6rem 2rem 0.5rem;
+  font-size: 2rem;
+}
+
+.infoTask {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24px;
+}
+
+.square {
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  margin-left: 1.5rem;
+}
+
+.float {
+  float: right;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  margin-bottom: 2rem;
+}
+
+.nameResTask {
+  font-size: 18px;
+  line-height: 23px;
+  margin: 2rem 1rem 1rem;
+}
+
+.nameResTask span,
+#selectedPage {
+  color: #ff3c5a;
+  font-weight: bold;
+}
+
+.square:hover {
+  border: 3px solid lightblue;
+}
+
+.icons {
+  color: #b9b9b9;
+}
+
+.aContainer {
+  display: flex;
+}
+
+.aContainer a:hover {
+  border-bottom: 3px solid  lightblue;
+}
+
+.courseName {
+  margin: 9rem 0.5rem;
+  font-weight: 600;
+}
+
+.courseName span {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.square2 {
+  background: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  position: relative;
+  max-height: 175px;
+}
+
+.square2 svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.coursesContainer {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 7rem 3rem 1rem;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  grid-template-rows: repeat(4, minmax(175px, 175px));
+  grid-gap: 1.5rem;
+  margin: 1.5rem 3rem;
+}
+
+.containerContacts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.containerContacts h3 {
+  margin: 6rem 3rem 3rem;
+}
+
+form {
+  color: #b9b9b9;
+  margin-left: 50px;
+  font-size: 12px;
+  line-height: 16px;
+  position: relative;
+}
+
+input {
+  background-color: #ededed;
+  border-style: none;
+  border-bottom: 2px solid #b9b9b9;
+  width: 330px;
+  margin-bottom: 30px;
+  outline: none;
+}
+
+textarea {
+  width: 330px;
+  background-color: #ededed;
+  border-style: none;
+  border-bottom: 2px solid #b9b9b9;
+  display: block;
+  outline: none;
+}
+
+input[type=submit] {
+  background: #ff3c5a;
+  width: 94px;
+  height: 36px;
+  margin: 20px 240px;
+  color: #fff;
+  border-style: none;
+  border-radius: 2px;
+}
+
+input[type=submit]:hover,
+input:hover {
+  cursor: pointer;
+}
+
+input:focus,
+textarea:focus {
+  border-style: none;
+  border-bottom: 2px solid #ff3c5a;
+}
+
+#logotypeSvg {
+  float: right;
+  position: absolute;
+  right: 0.5rem;
+}
+
+.square2 svg path:hover {
+  fill: #ff3c5a;
+  opacity: 1;
+  transition: fill 0.5s linear;
+}
+
+.inputName {
+  position: absolute;
+}
+
+.inputLabel .label {
+  position: relative;
+}
+
+::-webkit-input-placeholder {
+  font-family: 'Roboto', sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutContainer {
+    display: none;
+  }
+
+  .rectangle {
+    width: 100%;
+  }
+}
