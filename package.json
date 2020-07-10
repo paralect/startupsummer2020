@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "ffmpeg": "0.0.4",
-    "ffmpeg-extract-frames": "^2.0.2"
+    "ffmpeg-extract-frames": "^2.0.2",
+    "ffmpeg-fork": "0.0.6"
   }
 }
