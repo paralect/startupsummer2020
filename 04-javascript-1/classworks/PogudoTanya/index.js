@@ -1,4 +1,7 @@
-const Node = require('./node');
+const defaultNode = {
+  value: null,
+  next: null,
+};
 
 class LinkedList {
   constructor() {
@@ -8,7 +11,7 @@ class LinkedList {
   }
 
   addPrintlist(value) {
-    const node = new Node(value);
+    const node = Object.assign(defaultNode, { value });
 
     if (this.length === 0) {
       this.elements = node;
@@ -81,14 +84,9 @@ class LinkedList {
 }
 
 const list = new LinkedList();
-list.addPrintlist(33);
+list.addPrintlist(3);
 list.addPrintlist(5);
 list.addPrintlist(7);
 list.addPrintlist(8);
 list.addPrintlist(9);
 list.makelist();
-
-console.log(list.getIndexOf(5));
-console.log(list.getIndexOf(9));
-console.log(`Removed element: ${list.removeFrom(3)}`);
-// console.log(`Loop existed ${list.ifLoopExists()}`)
