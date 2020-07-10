@@ -35,11 +35,9 @@ async function makeScreenshot(path, sec) {
   }
 }
 
-(() => {
-  const mpeg = new Ffmpeg(videoPath);
-  mpeg.then(async (video) => {
-    await downloadVideo(videoUrl, videoPath);
-    const sec = Math.floor(Math.random() * video.metadata.duration.seconds);
-    await makeScreenshot(videoPath, sec);
-  });
+(async () => {
+  const video = await new Ffmpeg(videoPath);
+  await downloadVideo(videoUrl, videoPath);
+  const sec = Math.floor(Math.random() * video.metadata.duration.seconds);
+  await makeScreenshot(videoPath, sec);
 })();
