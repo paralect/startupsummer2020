@@ -1,4 +1,4 @@
-const Node = require('./node');
+const Node = require("./node");
 
 class LinkedList {
   constructor() {
@@ -81,7 +81,7 @@ class LinkedList {
 }
 
 const list = new LinkedList();
-list.addPrintlist(3);
+list.addPrintlist(33);
 list.addPrintlist(5);
 list.addPrintlist(7);
 list.addPrintlist(8);
