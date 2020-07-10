@@ -4,14 +4,20 @@ const ffmpeg = require('ffmpeg');
 const extractFrames = require('ffmpeg-extract-frames');
 
 async function saveVideo(url) {
-  axios({
-    method: 'get',
-    url,
-    responseType: 'stream',
-  })
-    .then((response) => {
-      response.data.pipe(fs.createWriteStream('file.mp4'));
+  const stream = fs.createWriteStream('file.mp4');
+  return new Promise((resolve, reject) => {
+    axios({
+      method: 'get',
+      url,
+      responseType: 'stream',
+    })
+      .then((response) => {
+        response.data.pipe(stream);
+      });
+    stream.on('finish', () => {
+      resolve('solved');
     });
+  });
 }
 
 async function makeScreenshot(path) {
