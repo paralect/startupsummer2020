@@ -1,11 +1,11 @@
 const fs = require('fs');
 const axios = require('axios').default;
-const ffmpeg = require('ffmpeg');
+const Ffmpeg = require('ffmpeg');
 const extractFrames = require('ffmpeg-extract-frames');
 
 async function saveVideo(url, path) {
   const stream = fs.createWriteStream(path);
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     axios({
       method: 'get',
       url,
@@ -22,7 +22,7 @@ async function saveVideo(url, path) {
 
 async function makeScreenshot(path) {
   try {
-    const process = new ffmpeg(path);
+    const process = new Ffmpeg(path);
     process.then(async (video) => {
       const duration = video.metadata.duration.seconds;
       const randomSec = Math.random() * duration;
