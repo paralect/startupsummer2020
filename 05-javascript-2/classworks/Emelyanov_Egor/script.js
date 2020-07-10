@@ -1,7 +1,6 @@
 const fs = require('fs');
 const axios = require('axios').default;
 const Ffmpeg = require('ffmpeg');
-const extractFrames = require('ffmpeg-extract-frames');
 
 async function saveVideo(url, path) {
   const stream = fs.createWriteStream(path);
@@ -26,12 +25,12 @@ async function makeScreenshot(path) {
     process.then(async (video) => {
       const duration = video.metadata.duration.seconds;
       const randomSec = Math.random() * duration;
-      await extractFrames({
-        input: path,
-        output: './screenshot.jpg',
-        offsets: [
-          randomSec * 1000,
-        ],
+      video.fnExtractFrameToJPG('./yo', {
+        start_time: randomSec,
+        number: 1,
+        file_name: 'screenshot.jpg',
+      }, (error, files) => {
+        if (!error) console.log(`Frames: ${files}`);
       });
     }, (err) => {
       console.log(`Error: ${err}`);
