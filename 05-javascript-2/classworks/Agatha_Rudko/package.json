@@ -1,0 +1,18 @@
+{
+  "name": "agatha_rudko",
+  "version": "1.0.0",
+  "description": "",
+  "main": "youtube.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "ffmpeg-extract-frames": "^2.0.2",
+    "ffmpeg": "^0.0.4",
+    "progress": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
