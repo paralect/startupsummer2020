@@ -7,7 +7,7 @@ async function saveVideo(url) {
   axios({
     method: 'get',
     url,
-    responseType: 'stream'
+    responseType: 'stream',
   })
     .then((response) => {
       response.data.pipe(fs.createWriteStream('file.mp4'));
