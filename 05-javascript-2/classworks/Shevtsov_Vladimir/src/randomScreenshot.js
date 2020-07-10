@@ -25,11 +25,10 @@ const getRandomFrameFFMPEG = async (fileName) => {
   await exec(`ffmpeg ${ffmpegParams}`);
 };
 
-const res = download(
+download(
   'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
   './movie.mp4',
   () => {
     getRandomFrameFFMPEG('movie.mp4');
   },
 );
-console.log(res);
