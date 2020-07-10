@@ -17,5 +17,6 @@
     "axios": "^0.19.2",
     "ffmpeg": "0.0.4",
     "ffmpeg-fork": "0.0.6"
+    "ffmpeg-extract-frames": "^2.0.2"
   }
 }
