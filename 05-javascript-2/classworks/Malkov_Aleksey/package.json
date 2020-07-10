@@ -1,0 +1,15 @@
+{
+  "name": "malkov-js-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dzinrai",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "ffmpeg-fork": "0.0.6"
+  }
+}
