@@ -3,8 +3,8 @@ const axios = require('axios').default;
 const ffmpeg = require('ffmpeg');
 const extractFrames = require('ffmpeg-extract-frames');
 
-async function saveVideo(url) {
-  const stream = fs.createWriteStream('file.mp4');
+async function saveVideo(url, path) {
+  const stream = fs.createWriteStream(path);
   return new Promise((resolve, reject) => {
     axios({
       method: 'get',
@@ -43,6 +43,6 @@ async function makeScreenshot(path) {
 }
 
 (async () => {
-  await saveVideo('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4');
+  await saveVideo('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', 'file.mp4');
   await makeScreenshot('file.mp4');
 })();
