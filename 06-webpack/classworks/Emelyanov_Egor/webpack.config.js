@@ -7,7 +7,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: {
     main: './src/index.js'
   },
@@ -32,11 +32,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
-      },
-      {
-        test: /\.pcss$/,
+        test: /\.p?css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
