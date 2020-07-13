@@ -5,7 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const webpack = require('webpack');
-
+const ImageminWebpWebpackPlugin= require("imagemin-webp-webpack-plugin");
 
 module.exports = (env, options) => {
   const debug = options.mode === 'development';
@@ -45,8 +45,15 @@ module.exports = (env, options) => {
           }
         },
         {
-          test: /\.(jpe?g|png|ttf)$/,
+          test: /\.ttf$/,
           loader: 'file-loader',
+        },
+        {
+          test: /\.(jpe?g|png)$/,
+          loader: 'file-loader',
+          options: {
+            name: '[contenthash].webp'
+          }
         },
         {
           test: /\.txt$/,
@@ -57,6 +64,7 @@ module.exports = (env, options) => {
 
     plugins: [
       new CleanWebpackPlugin(),
+      new ImageminWebpWebpackPlugin(),
       new MiniCssExtractPlugin(),
       new HtmlWebpackPlugin({
         filename: 'index.html',
