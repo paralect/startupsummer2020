@@ -1,0 +1,63 @@
+@import "~normalize.css";
+@import "./fonts.css";
+
+html,
+body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+}
+footer {
+  flex-shrink: 0;
+}
+
+.content {
+  marquee {
+    font-family: "Indie Flower", "sans-serif";
+    text-align: center;
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+
+  a:hover {
+    font-size: 28px;
+  }
+}
+
+.images {
+  display: flex;
+  justify-content: space-around;
+
+  & div {
+    width: 300px;
+    height: 300px;
+    background-size: 100% 100%;
+  }
+
+  .itachi {
+    background-image: url("../assets/itachi.jpg");
+  }
+  .zabuza {
+    background-image: url("../assets/zabuza.jpeg");
+  }
+  .hinata {
+    background-image: url("../assets/hinata.png");
+  }
+}
+
+.define-plugin,
+.babel-loader {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px;
+}
