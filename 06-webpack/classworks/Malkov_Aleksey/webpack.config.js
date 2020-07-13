@@ -5,11 +5,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  mode: 'production',
+  mode: isDev ? 'development' : 'production',
   entry: {
     main: './src/index.js'
   },
@@ -20,7 +20,7 @@ module.exports = {
   devServer: {
     port: 9000
   },
-  devtool: 'none',
+  devtool: isDev ? 'source-map' : 'none',
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
@@ -29,8 +29,7 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       STUDENT: JSON.stringify('Aleksei Malkov')
-    }),
-    new BundleAnalyzerPlugin()
+    })
   ],
   optimization: {
     minimize: true,
@@ -47,12 +46,8 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
-      },
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
-      },{
-        test: /\.pcss$/,
+      }, {
+        test: /\.p?css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       }, {
         test: /\.(png|jpg|jpeg|ttf)$/,
