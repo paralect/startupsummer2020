@@ -1,42 +1,63 @@
-const http = require('http');
-const fs = require('fs');
-// const axios = require('axios');
-// const ffmpeg = require('ffmpeg');
-const childProcess = require('child_process');
-// const ffmpegForDuration = require('fluent-ffmpeg');
-// const getVideoDurationInSeconds = require('get-video-duration');
-
-// download image
-function downloadImage() {
-  const file = fs.createWriteStream('image.jpg');
-  http.get('http://i.pinimg.com/564x/95/f1/41/95f141ceb741517de18b585914467e79.jpg', (response) => response.pipe(file));
-}
-
-// download video
-function downloadVideo() {
-  const file = fs.createWriteStream('video.mp4');
-  http.get('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', (response) => response.pipe(file));
-}
+let http = require('http');
+let fs = require('fs');
+let child_process = require('child_process');
 
 function getRandomVideoSeconds(duration = 15) {
-  return Math.round(Math.random() * duration);
-}
-
-// save frame from video using terminal
-function saveFrameTerminal() {
-  childProcess.spawn('ffmpeg.exe', ['-ss', `${getRandomVideoSeconds()}`, '-i', 'video.mp4', '-frames:', '1', 'test.jpg']);
-  // let file = childProcess.spawn('ffmpeg.exe', ['-i', 'video.mp4', '-r', '0.1', 'frame%d.jpg']);
-  // file.stderr.on('data', (buffer) => console.log(buffer.toString('utf8')));
+    return Math.round(Math.random() * duration);
 }
 
 function getVideoDuration() {
-  // let info = childProcess.spawn("mediainfo", ["--Output='General;%Duration%", "video.mp4"]);
-  childProcess.spawn('ffprobe', ['-v', 'quiet', '-print_format', 'compact=print_section=0:nokey=1:escape=csv', '-show_entries', 'format=duration', 'video.mp4']);
+    const process = child_process.spawn('./ffprobe', [
+        '-v',
+        'quiet',
+        '-print_format',
+        'compact=print_section=0:nokey=1:escape=csv',
+        '-show_entries',
+        'format=duration',
+        'video.mp4'
+    ]);
+    return (new Promise(res => {
+        process.stdout.on('data', (buffer) => {
+            res(Number(buffer.toString('utf8')));
+        });
+    }));
 }
 
-downloadImage(); // works
-downloadVideo(); // works
+function downloadVideo() {
+    const ws = fs.createWriteStream("video.mp4");
+    return (new Promise(res => {
+        ws.on('drain', () => { res(); });
+        http.get("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", response => {
+            response.pipe(ws);
+        });
+    }));
+}
 
-saveFrameTerminal(); // works
-// getRandomVideoSeconds(); // works
-getVideoDuration(); // doesn't work
+function unlinkAsync(path) {
+    return (new Promise(res => {
+        fs.unlink(path, () => {
+            res();
+        });
+    }));
+}
+
+async function saveFrame() {
+    const file = child_process.spawn('./ffmpeg', [
+        '-ss',
+        `${getRandomVideoSeconds(await getVideoDuration())}`,
+        '-i',
+        'video.mp4',
+        '-frames:',
+        '1',
+        'test.jpg'
+    ]);
+    file.stderr.on('data', (buffer) => console.log(buffer.toString('utf8')));
+};
+
+
+(async () => {
+    await unlinkAsync('video.mp4');
+    await unlinkAsync('test.jpg');
+    await downloadVideo();
+    await saveFrame();
+})();
