@@ -7,15 +7,13 @@ const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = {
+  mode: 'production',
   entry: {
     main: './src/index.js',
   },
   optimization: {
     minimize: true,
-    minimizer: [new OptimizeCSSAssetsPlugin(), new TerserPlugin()],
-    splitChunks: {
-        chunks: 'all'
-      }
+    minimizer: [new TerserPlugin(), new OptimizeCSSAssetsPlugin()],
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -25,11 +23,11 @@ module.exports = {
     port: 9000
   },
   plugins: [
+    new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       STUDENT: JSON.stringify('Alexander Gavruk')
     })
@@ -37,20 +35,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
-      },
-      {
-        test: /\.pcss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
-      },
-      {
-        test: /\.(ttf|png|jpg|jpeg)$/,
-        use: ['file-loader']
-      },
-      {
-        test: /\.txt$/,
-        use: ['raw-loader']
+        test: /\.(css|pcss)$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.m?js$/,
@@ -61,6 +47,14 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
+      },
+      {
+        test: /\.(ttf|png|jpg|jpeg)$/,
+        use: ['file-loader']
+      },
+      {
+        test: /\.txt$/,
+        use: ['raw-loader']
       }
     ]
   }
