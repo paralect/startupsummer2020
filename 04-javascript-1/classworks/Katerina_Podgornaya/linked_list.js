@@ -27,7 +27,7 @@ class LinkedList {
 
   addNodeIntoPosition(value, position) {
     if (position < 0 || position > this.length) {
-      console.log("Sorry, this list doesn't have this position.");
+      console.log("Sorry, this list doesn't have such position.");
       return;
     }
 
