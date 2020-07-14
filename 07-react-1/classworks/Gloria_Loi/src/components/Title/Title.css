@@ -1,0 +1,11 @@
+
+.title-logo{
+    position: absolute;
+    top: 175px;
+    left: 30%;
+    display: flex;
+}
+.main-title{
+    font-size: 25px;
+    font-weight: 500;
+}

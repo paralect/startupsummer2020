@@ -1,0 +1,7 @@
+.block--orange, .block{
+    width: 100%;
+    height: 85px;
+}
+.block--orange{
+    background-color: #FF8254;
+}

@@ -1,0 +1,26 @@
+.item {
+    width: 900px;
+    height: auto;
+    border: 1px solid #EFEFEF;
+    background-color: #FFFFFF;
+    margin: 20px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.author-name, .title, .content { 
+margin: 15px;
+}
+.author-name{
+    color: #7C787E;
+    font-size: 12px;
+}
+.title{
+    color: #000000;
+    font-weight: 500;
+    font-size: 18px;
+}
+.content{
+    font-size: 14px;
+    line-height: 18px;
+    color: #000000;
+}
