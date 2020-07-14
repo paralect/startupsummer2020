@@ -1,17 +1,15 @@
+import React from "react";
 
-import React from 'react';
+import svg from "../../assets/images/react.svg";
+
 import "./Subreddit.css";
 
-class Subreddit extends React.Component {
-    
-    render() {
-        return (
-            <div className="subreddit">
-                <img className="subreddit-img" height="30px" width="30px" src={this.props.body.data.icon_img}></img>
-                 <div>{this.props.body.data.display_name_prefixed}</div>
-                 <div className="description">{this.props.body.data.public_description}</div>
-            </div>
-          );
-  }}
+const Subreddit = ({ body: { data }, handlePostClick, title }) => (
+  <div className="subreddit" onClick={() => handlePostClick(title)}>
+    <img className="subreddit-img" src={data.icon_img ? data.icon_img : svg} />
+    <div className="post-path">{data.display_name_prefixed}</div>
+    <div className="description">{data.public_description}</div>
+  </div>
+);
 
-  export default Subreddit;
+export default Subreddit;

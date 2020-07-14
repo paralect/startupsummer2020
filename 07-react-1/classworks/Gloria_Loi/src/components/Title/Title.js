@@ -1,21 +1,18 @@
+import React from "react";
 
-import React from 'react';
+import svg from "../../assets/images/react.svg";
+
 import "./Title.css";
 
-class Title extends React.Component {
- 
+const Title = ({ title: { data } }) => (
+  <div className="title-logo">
+    {console.log(data)}
+    <img src={data.icon_img ? data.icon_img : svg} className="logo-img" />
+    <div className="title-container">
+      <div className="main-title">{data.title}</div>
+      <div>{data.display_name_prefixed}</div>
+    </div>
+  </div>
+);
 
-    render() {
-        return (
-            <div className="title-logo">
-                <img height="50px" width="50px" src={this.props.title.data.icon_img} className="logo-img"/>
-                <div>
-                    <div className="main-title">{this.props.title.data.title}</div>
-                    <div>{this.props.title.data.display_name_prefixed}</div>
-                </div>
-            </div>
-          );
-  }}
-
-
-  export default Title;
+export default Title;

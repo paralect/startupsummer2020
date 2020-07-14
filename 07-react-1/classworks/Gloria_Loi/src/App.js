@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import Pages from 'pages';
+import Pages from "pages";
 
-function App() {
+const App = () => {
   return (
     <main>
-        <Pages />
+      <Pages />
     </main>
   );
-}
+};
 
 export default App;

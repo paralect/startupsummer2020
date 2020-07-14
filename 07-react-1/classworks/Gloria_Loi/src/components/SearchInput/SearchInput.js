@@ -1,19 +1,19 @@
+import React from "react";
+import svg from "assets/images/search.svg";
 
-import React from 'react';
 import "./Search.css";
 
-class SearchInput extends React.Component {
-    
-    render() {
-        return (
-            <div className="search-block">
-            <div className="search">
+const SearchInput = (props) => (
+  <div className="search-block">
+    <div className="search">
+      <img src={svg} />
+      <input
+        className="search-input"
+        onChange={props.handleChange}
+        placeholder="Search"
+      ></input>
+    </div>
+  </div>
+);
 
-                <input className="search-input" onChange={this.props.input} placeholder="Search"></input>
-            </div>
-            <button className="search-button" onClick={this.props.click}/>
-            </div>
-          );
-  }}
-  
-  export default SearchInput;
+export default SearchInput;
