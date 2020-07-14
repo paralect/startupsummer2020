@@ -1,0 +1,148 @@
+.loading {
+    margin: 15px;
+    color: #FF8254;
+}
+
+.header_home, .header_search {
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 5px 15px 5px;
+    background-color: white;
+}
+
+
+.no_results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25vh;
+}
+
+.no_results img {
+    margin-bottom: 20px;
+}
+
+.search_title {
+    padding-top: 12px;
+    width: 100%;
+    margin-left: 29%;
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.search_item_field {
+    width: 40%;
+    background-color: white;
+    margin-bottom: 3px;
+    padding: 20px;
+    display: flex;
+}
+
+.search_community_logo {
+    display: flex;
+    width: 30px;
+    height: auto;
+}
+
+.subreddit_icon, .search_subreddit_icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+}
+
+.section {
+    background-color: #F8F8F8;
+}
+
+.post_author {
+    color: #7C787E;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.title_subreddit, .search_title_subreddit {
+    display: flex;
+    flex-direction: column;
+}
+
+.title_subreddit_name {
+    margin: 0 0 3px 9px;
+    font-size: 28px;
+    line-height: 36px;
+}
+
+.search_title_subreddit {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.search_title_subreddit_name {
+    margin: 0 0 3px 9px;
+    font-size: 16px;
+    line-height: 23px;
+}
+
+.search_community_description {
+    padding-left: 240px;
+    text-align: left;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.title_subreddit_subname {
+    margin: 0 0 0 9px;
+}
+
+.search_title_subreddit_subscribers {
+    margin: 0 0 0 9px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    word-wrap: normal;
+}
+
+.subreddit_content, .search_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post_field {
+    width: 50%;
+    background-color: white;
+    border: 1px solid #EFEFEF;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: 15px;
+    padding: 20px;
+    word-wrap: break-word;
+}
+
+.post_title {
+    font-size: 18px;
+    line-height: 23px;
+}
+
+.post_selftext {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.post_num_comments {
+    color: #7C787E;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    font-weight: 500;
+}
+
+.post_num_comments img {
+    margin-right: 7px;
+}
