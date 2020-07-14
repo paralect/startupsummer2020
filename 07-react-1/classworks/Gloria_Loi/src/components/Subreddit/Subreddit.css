@@ -1,0 +1,19 @@
+.subreddit {
+    width: 600px;
+    height: 100px;
+    border: 1px solid #EFEFEF;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+.subreddit-img{
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    margin: 15px;
+}
+.decription{
+    font-size: 10px;
+}
