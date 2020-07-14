@@ -11,3 +11,13 @@
   width: 64px;
   height: 64px;
 }
+
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
+.subheader-title {
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+}

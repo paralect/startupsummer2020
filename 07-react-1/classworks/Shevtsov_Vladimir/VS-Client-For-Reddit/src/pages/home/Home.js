@@ -7,6 +7,7 @@ import SubReddit from 'components/SubReddit/SubReddit';
 import './home.css';
 import logo from '../../assets/reddit_logo.svg';
 import SubHeader from 'components/SubredditTitle/SubHeader';
+import errorImage from '../../assets/search_error.svg';
 
 const addSubRedditInfo = async (fetchReddit, obj) => {
   const { display_name_prefixed: loc } = obj.data;
@@ -19,6 +20,7 @@ class Home extends React.Component {
   state = {
     subreddit: null,
     searchResults: null,
+    searchError: null,
   }
 
   async componentDidMount() {
@@ -26,19 +28,23 @@ class Home extends React.Component {
     const data = await fetchReddit('/r/react/hot?count=10')
       .then(res => res.json());
     const aboutData = await fetchReddit('/r/react/about').then(res => res.json());
-    console.log(aboutData);
     this.setState({ subreddit: { ...data, aboutData: aboutData.data } });
   }
 
   onSearchSubmit = async (searchQuery) => {
     const { fetchReddit } = this.props;
-    const data = await fetchReddit(`/subreddits/search?q=${searchQuery}&count=10`)
-      .then(res => res.json());
+    try {
+      const data = await fetchReddit(`/subreddits/search?q=${searchQuery}&count=10`)
+        .then(res => res.json());
 
-    const resultData = await Promise
-      .all(data?.data?.children?.map((obj) => addSubRedditInfo(fetchReddit, obj)));
-    console.log(resultData);
-    this.setState({ subreddit: null, searchResults: resultData });
+      const resultData = await Promise
+        .all(data?.data?.children?.map((obj) => addSubRedditInfo(fetchReddit, obj)));
+
+      this.setState({ subreddit: null, searchResults: resultData });
+    } catch (err) {
+      console.err(err);
+      this.setState({ searchError: err.message });
+    }
   }
 
   render() {
@@ -57,6 +63,11 @@ class Home extends React.Component {
         <main className="main">
           {subreddit && subreddit.data.children.map(child => <Thread key={child.data.id} data={child.data} />)}
           {searchResults?.map((child) => <SubReddit key={child.data.id} data={child.data} />)}
+          {(searchResults?.length === 0) &&
+            <div>
+              <img src={errorImage} alt="sad face" />
+              <span>SOrry, there were no community results</span>
+            </div>}
         </main>
       </section>
     );
