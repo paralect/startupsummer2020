@@ -1,0 +1,27 @@
+.item {
+  width: 50%;
+  border: 1px solid gray;
+  padding: 2%;
+  background: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  border-radius: 5px;
+  margin: 2% 25%;
+
+}
+.authorContainer, .comments {
+  color: #7C787E;
+}
+.comments {
+  width: 15%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2%;
+}
+
+.headerItem {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.bodyItem {
+  margin-top: 2%;
+}
