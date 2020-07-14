@@ -1,20 +1,17 @@
-
-import React from 'react';
+import React from "react";
 
 import "./ListItem.css";
 
-class ListItem extends React.Component {
+const ListItem = ({
+  body: {
+    data: { author, selftext, url, title },
+  },
+}) => (
+  <div className="item">
+    <div className="author-name">Posted by {author}</div>
+    <div className="title">{title}</div>
+    <div className="content">{selftext ? selftext : url}</div>
+  </div>
+);
 
- 
-    render() {
-        return (
-            <div className="item">
-                <div className="author-name">Posted by {this.props.body.data.author}</div>
-                <div className="title">{this.props.body.data.title}</div>
-                <div className="content">{this.props.body.data.selftext ? this.props.body.data.selftext : this.props.body.data.url}</div>
-            </div>
-            
-          );
-  }}
-  
-  export default ListItem;
+export default ListItem;

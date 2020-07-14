@@ -1,18 +1,12 @@
+import React from "react";
 
-import React from 'react';
-import Title from "../Title";
 import "./Block.css";
 
-class Block extends React.Component {
+const Block = () => (
+  <div>
+    <div className="block--orange" />
+    <div className="block" />
+  </div>
+);
 
-    render() {
-        return (
-        <div>
-            <div className="block--orange"/>
-            <div className="block"/>
-            <Title title={this.props.title}/>
-        </div>
-          );
-  }}
-  
-  export default Block;
+export default Block;

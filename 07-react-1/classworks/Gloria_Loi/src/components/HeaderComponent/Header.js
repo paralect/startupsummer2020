@@ -1,20 +1,15 @@
+import React from "react";
 
-import React from 'react';
 import SearchInput from "../SearchInput";
 import Logo from "../Logo";
 
 import "./Header.css";
 
-class Header extends React.Component {
+const Header = (props) => (
+  <div className="header">
+    <Logo />
+    <SearchInput handleChange={props.handleChange} />
+  </div>
+);
 
- 
-    render() {
-        return (
-            <div className="header">
-            <Logo/>
-            <SearchInput input={this.props.input} click={this.props.click}/>
-            </div>
-          );
-  }}
-  
-  export default Header;
+export default Header;

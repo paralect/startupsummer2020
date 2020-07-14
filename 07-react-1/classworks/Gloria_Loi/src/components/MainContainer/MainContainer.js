@@ -1,16 +1,17 @@
+import React from "react";
 
-import React from 'react';
 import ListItem from "../ListItem";
+import Title from "../Title/Title";
+
 import "./MainContainer.css";
 
-class MainContainer extends React.Component {
-    render() {
-        return (
-            <div className="main">
-            {this.props.data.map(child => (
-            <ListItem key={child.data.id} body={child}/>))}
-            </div>
-        );
-  }}
-  
-  export default MainContainer;
+const MainContainer = (props) => (
+  <div className="main">
+    <Title title={props.title} />
+    {props.data.map((item) => (
+      <ListItem key={item.data.id} body={item} />
+    ))}
+  </div>
+);
+
+export default MainContainer;
