@@ -66,7 +66,8 @@ class Home extends React.Component {
             {
               reactSubreddit.data.children.map(child => (
                 <li key={child.data.id} className="post">
-                  <p>Posted by {child.data.subreddit_name_prefixed} {moment.unix(child.data.created).startOf('day').fromNow()} ago</p>
+                  <p>Posted by {child.data.subreddit_name_prefixed}&#nbsp;
+                   {moment.unix(child.data.created).startOf('day').fromNow()} ago</p>
                   <p className="post_title">{child.data.title}</p>
                   <p>{child.data.selftext}</p>
                   <div>
@@ -90,12 +91,22 @@ class Home extends React.Component {
           <div className="community-list_content">
             <ul>
             {reactSubreddit.data.children.map(child => (
-              <li key={child.data.id} onClick={() => this.getCommunityPosts(child.data.url, child.data.icon_img, child.data.title, child.data.display_name_prefixed)}>
+              <li
+                key={child.data.id}
+                onClick={() => this.getCommunityPosts(
+                  child.data.url,
+                  child.data.icon_img,
+                  child.data.title,
+                  child.data.display_name_prefixed
+                )}
+              >
                 <div className="chiki-bamboni">
                   <img src={child.data.icon_img || fuckImg}></img>
                   <div>
                     <p className="community-name">{child.data.display_name_prefixed}</p>
-                    <p className="community-members">{(child.data.subscribers / 1000).toFixed(1)}k Members</p>
+                    <p className="community-members">
+                      {(child.data.subscribers / 1000).toFixed(1)}k Members
+                      </p>
                   </div>
                 </div>
                 <p className="community-description">{child.data.public_description}</p>
