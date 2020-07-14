@@ -1,20 +1,24 @@
 import React from 'react';
 
-export default class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
+import icon from '../../assets/search_icon.svg';
 
-  handleChange(value) {
-    this.setState({ value });
+export default class SearchBar extends React.Component {
+  state = { value: '' };
+
+  handleChange = (e) => this.setState({ value: e.target.value });
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onSubmit(this.state.value);
   }
 
   render() {
     return (
-      <div>
-        <span>[icon]</span>
-        <input type="text" value={this.state.value} onChange={() => this.handleChange()} />
+      <div className={this.props.className}>
+        <img className="search-icon" src={icon} alt="search icon"/>
+        <form className="search-form" onSubmit={this.handleSubmit}>
+          <input className="search-input" type="text" value={this.state.value} onChange={this.handleChange} />
+        </form>
       </div>
     );
   }
