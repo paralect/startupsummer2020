@@ -7,11 +7,6 @@ class SubredditList extends React.Component {
     super(props);
   }
 
-  getDaysAgo = (created) => {
-    const d = new Date();
-    return Math.round((d - created) / 1000 / 60 / 60 / 24)
-  }
-
   render() {
     return (
       <section className='subreddit-list'>

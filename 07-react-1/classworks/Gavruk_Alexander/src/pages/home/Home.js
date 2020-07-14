@@ -17,7 +17,6 @@ class Home extends React.Component {
     const { fetchReddit } = this.props;
     const url = this.props.searchValue === '' ? `${this.state.communityTitleData.communityUrl}/hot` : `/search?q=${this.props.searchValue}&type=sr,user`;
     const data = await fetchReddit(url).then(res => res.json());
-    console.log(data)
     this.setState({ reactSubreddit: data });
   }
 
@@ -29,7 +28,6 @@ class Home extends React.Component {
       communityUrl: communityUrl
     }
     const data = await fetchReddit(`${url}hot`).then(res => res.json()).catch((err) => console.log(err));
-    console.log(data)
     this.setState({
       reactSubreddit: data,
       communityTitleData: communityTitleData
