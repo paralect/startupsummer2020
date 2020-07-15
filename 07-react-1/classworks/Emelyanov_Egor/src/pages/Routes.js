@@ -14,6 +14,7 @@ function Routes({ inputValue }) {
     return (
       <Switch>
         <Route path="/" exact component={() => <Home inputValue={inputValue} />} />
+        <Route path="/subreddit/:subredditUrl" component={(props) => <Home {...props} />} />
         <Redirect to="/" />
       </Switch>
     );

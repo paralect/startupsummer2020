@@ -1,0 +1,19 @@
+.search-input {
+  display: flex;
+  align-items: center;
+  background: #efefef;
+  border-radius: 5px;
+  width: 600px;
+  height: 40px;
+  padding: 8px 5px;
+}
+
+.search-input input {
+  outline: none;
+  border: none;
+  background: inherit;
+  width: 560px;
+  font-size: 14px;
+  line-height: 18px;
+  margin-left: 5px;
+}

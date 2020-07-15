@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './Reddit-logo.svg';
 import searchElem from './search-elem.svg';
+import styles from './searchInputStyles.module.css'
 
 class Header extends Component {
   render() {
@@ -8,7 +9,7 @@ class Header extends Component {
       <>
         <header>
           <img className="logo" src={logo} />
-          <div className="search-input">
+          <div className={styles['search-input']}>
             <img src={searchElem} />
             <input
               type="text"
