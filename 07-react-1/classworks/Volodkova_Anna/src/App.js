@@ -5,29 +5,32 @@ import List from "./components/list";
 
 class App extends React.Component {
   state = {
-    searchValue: null,
+    searchValue: '',
     isClicked: false,
   }
 
   handleOnChangeInput = (event) => {
-    // console.log('Event', event);
-    // console.log('State', this.state.searchValue)
     this.setState({
-      searchValue: event.target.value,
+      searchValue: event.target.value
     })
   }
 
-  handlebBtnClick = (event) => {
-    this.props.searchValue && this.setState({
-      isClicked: true,
-    })
+  handleBtnClick = (event) => {
+    console.log('Button clicked')
+    if (this.state.searchValue){
+      this.setState({
+        isClicked: true,
+      })
+    }
+
+
   }
 
   render() {
     return (
       <main>
         <header>
-          <Header handleOnChangeInput={this.handleOnChangeInput} handlebBtnClick={this.handlebBtnClick}/>
+          <Header handleOnChangeInput={this.handleOnChangeInput} handleBtnClick={this.handleBtnClick}/>
         </header>
         <section>
           <Pages searchValue={this.state.searchValue} isClicked={this.state.isClicked}/>
