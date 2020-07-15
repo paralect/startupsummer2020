@@ -1,0 +1,33 @@
+.card{
+  padding: 1rem 2rem;
+  margin: 1rem;
+  width: 40%;
+  background: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  box-sizing: border-box;
+  border-radius: 5px;
+  font-family: IBM Plex Sans, sans-serif;
+}
+.title{
+  font-weight: bold;
+  margin: 1rem 0 1rem 0;
+
+
+}
+.text{
+  font-size: 0.9em;
+
+}
+.whoWhen{
+  color: #7C787E;
+  font-size: 0.8em;
+}
+.comments{
+  margin-top: 1rem;
+  color: #7C787E;
+  font-size: 0.8em;
+}
+
+.comments-icon{
+  margin-right: .5rem;
+}
