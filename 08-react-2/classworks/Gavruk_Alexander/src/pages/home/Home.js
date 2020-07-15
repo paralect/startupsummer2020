@@ -5,31 +5,24 @@ import Subreddit from 'components/Subreddit/Subreddit';
 
 function Home(props) {
   const [reactSubreddit, setReactSubreddit] = useState(null);
-  const [communityTitleData, setCommunityTitleData] = useState({
-    img: '',
-    title: 'The React Library',
-    communityUrl: '/r/react'
-  });
 
-  const getPosts = async (url, img, title, communityUrl) => {
-    const { fetchReddit } = props;
-    const communityTitleData = {
+  const getPosts = async (img, title, communityUrl) => {
+    const data = {
       img: img,
       title: title,
       communityUrl: communityUrl
     }
-    const data = await fetchReddit(`${url}hot`).then(res => res.json()).catch((err) => console.log(err));
+    props.updateCommunityTitleData(data);
+  }
+
+  async function fetchData() {
+    const { fetchReddit } = props;
+    const url = (props.searchValue === '' || props.isPostsData) ? `/${props.communityTitleData.communityUrl}/hot` : `/search?q=${props.searchValue}&type=sr,user`;
+    const data = await fetchReddit(url).then(res => res.json());
     setReactSubreddit(data);
-    setCommunityTitleData(communityTitleData);
   }
 
   useEffect(() => {
-    async function fetchData() {
-      const { fetchReddit } = props;
-      const url = (props.searchValue === '') ? `${communityTitleData.communityUrl}/hot` : `/search?q=${props.searchValue}&type=sr,user`;
-      const data = await fetchReddit(url).then(res => res.json());
-      setReactSubreddit(data);
-    }
     fetchData();
   }, []);
 
@@ -39,14 +32,15 @@ function Home(props) {
     );
   }
 
-  if (props.searchValue === '' || props.checkIsPostsData(reactSubreddit)) {
-    return <Subreddit data={reactSubreddit} communityTitleData={communityTitleData} />;
+  if (props.searchValue === '' || props.isPostsData) {
+    return <Subreddit data={reactSubreddit} communityTitleData={props.communityTitleData} />;
   } else {
     return <SearchResults
               data={reactSubreddit}
               searchValue={props.searchValue}
               getPosts={getPosts}
-              changeIsPostsData={props.changeIsPostsData} />;
+              updateIsPostsData={props.updateIsPostsData}
+            />;
   }
 }
 

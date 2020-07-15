@@ -15,7 +15,9 @@ function SearchResults(props) {
             <Communities 
               data={props.data}
               searchValue={props.searchValue}
-              getPosts={props.getPosts} />
+              getPosts={props.getPosts}
+              updateIsPostsData={props.updateIsPostsData}
+            />
           </div>
         ) :
         <NoResults searchValue={props.searchValue} />

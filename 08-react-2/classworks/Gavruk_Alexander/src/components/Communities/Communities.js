@@ -9,7 +9,9 @@ function Communities(props) {
       <CommunitiesList
         data={props.data}
         searchValue={props.searchValue}
-        getPosts={props.getPosts} />
+        getPosts={props.getPosts}
+        updateIsPostsData={props.updateIsPostsData}
+      />
     </div>
   );
 }
