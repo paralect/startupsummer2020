@@ -1,0 +1,12 @@
+.no-results {
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 128px 0;
+    background: #F8F8F8;
+}
+
+.no-results img {
+    margin-bottom: 24px;
+}
