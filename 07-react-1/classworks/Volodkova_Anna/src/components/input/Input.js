@@ -8,7 +8,7 @@ class Input extends React.Component {
       <div className="search">
         <img src={searchicon} className="search-icon"/>
         <input onChange={this.props.handleOnChangeInput} className="input" placeholder="Search"/>
-        <button className="button" onClick={this.props.handlebBtnClick}>Search</button>
+        <button className="button" onClick={this.props.handleBtnClick}>Search</button>
       </div>
     );
 

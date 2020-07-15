@@ -5,6 +5,7 @@
   font-family: IBM Plex Sans, sans-serif;
   background-color:  #FFFFFF;
   border-bottom: 2px solid #F8F8F8;
+  margin: 0 auto;
 
 
 }
@@ -16,6 +17,7 @@
 
 
 }
+
 .img{
   width: 60px;
   height: 60px;
@@ -26,17 +28,26 @@
   flex-direction: column;
   padding: 1rem;
   width: calc(100% - 60% - 60px - 2rem - 1rem);
+  overflow: hidden;
 }
 .name{
-  }
+
+}
+.name:hover{
+  text-decoration: underline;
+
+}
 
 .followers{
   font-size: 0.9em;
+  margin-top: 0.3rem;
 
 }
 .explaining{
   width: 60%;
+  padding: 0.5rem;
   padding-right: 2rem;
   font-size: 0.9em;
-
+  display: flex;
+  align-items: center;
 }
