@@ -10,12 +10,12 @@ import Home from 'pages/home';
 function Routes(props) {
   const [,,isLoggedIn] = useRedditApi();
 
-  if (isLoggedIn) {
+  if (isLoggedIn) { 
     return (
       <Switch>
-        <Route path="/" exact component={() => <Home searchValue={props.searchValue} checkIsPostsData={props.checkIsPostsData} />} />
-        <Route path="/search/:searchValue" component={() => <Home searchValue={props.searchValue} checkIsPostsData={props.checkIsPostsData} />} />
-        <Route path="/subreddit/:subredditUrl" component={() => <Home searchValue={props.searchValue} checkIsPostsData={props.checkIsPostsData} />} />
+        <Route path="/" exact component={() => <Home {...props} />} />
+        <Route path="/search/:searchValue" component={() => <Home {...props} />} />
+        <Route path="/subreddit/:subredditUrl" component={() => <Home {...props} />} />
         <Redirect to="/" />
       </Switch>
     );
