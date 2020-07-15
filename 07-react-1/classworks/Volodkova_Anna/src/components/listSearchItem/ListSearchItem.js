@@ -19,7 +19,7 @@ class ListSearchItem extends React.Component {
             <img src={this.props.li.data.header_img ? this.props.li.data.header_img : logo} className='img'/>
           </div>
           <div className='name-followers'>
-            <div className="name" onClick={this.props.handleClick}>{this.props.li.data.display_name_prefixed}</div>
+            <div className="name" onClick={()=>this.props.handle(this.props.li.data.display_name_prefixed)}>{this.props.li.data.display_name_prefixed}</div>
             <div className='followers'>{this.props.li.data.subscribers} members</div>
           </div>
           <div className="explaining">{this.props.li.data.public_description}</div>

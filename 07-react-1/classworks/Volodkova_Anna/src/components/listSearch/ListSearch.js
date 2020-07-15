@@ -12,7 +12,7 @@ class ListSearch extends React.Component {
         <div className="list">
           {
             this.props.arrData.map(li => {
-              return <ListSearchItem li={li} key={li.data.id} handleClick={this.props.handleClick}/>
+              return <ListSearchItem li={li} key={li.data.id} handleClick={this.props.handleClick} handle={this.props.handle}/>
             })
           }
         </div>
