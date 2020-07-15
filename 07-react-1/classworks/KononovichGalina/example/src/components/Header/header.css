@@ -24,4 +24,7 @@
   border-style: none;
   background: #EFEFEF;
   width: 80%;
+  border: none;
+  outline: none;
+  box-shadow: none;
 }

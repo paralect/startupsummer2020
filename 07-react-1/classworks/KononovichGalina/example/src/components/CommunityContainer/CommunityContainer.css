@@ -26,3 +26,9 @@
   top: 3.5rem;
   left: 6rem;
 }
+
+.errorIcon {
+  display: flex;
+  height: 20%;
+  justify-content: center;
+}

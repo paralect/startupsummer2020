@@ -8,14 +8,8 @@ import './header.css';
 // }  
 
 export default class Header extends React.Component {
-  state = {
-    inputValue: ''
-  };
-
   onSearchChange = (e) => {
-    const inputValue = e.target.value;
-    this.setState({inputValue});
-    this.props.onSearchChange(inputValue);
+    this.props.onSearchChange(e.target.value);
   };
 
 
@@ -26,7 +20,12 @@ export default class Header extends React.Component {
           <img src={logo}/>
             <div className="searchContainer">
               <img src={iconSearch}/>
-              <input placeholder="Search" className="inputSearch"  value={this.state.inputValue} onChange={this.onSearchChange}/>
+              <input 
+                placeholder="Search" 
+                className="inputSearch" 
+                value={this.props.inputValue} 
+                onChange={this.onSearchChange}
+              />
             
             </div>
         </div>

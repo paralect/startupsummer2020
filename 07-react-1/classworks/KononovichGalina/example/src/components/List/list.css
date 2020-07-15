@@ -1,5 +1,10 @@
 .List {
-  /* margin-left: 30%; */
   background: #F8F8F8;
-  border: 1px solid red;
+  border: 1px solid #f8f8f8;
+}
+
+.errorIcon {
+  display: flex;
+  height: 20%;
+  justify-content: center;
 }

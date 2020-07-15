@@ -14,68 +14,60 @@ class Home extends React.Component {
     reactSubreddit: null,
     title: null,
     subreddit: null,
-    inputValue: ''
+    inputValue: '',
+    showPosts: true
+
   }
 
-  // showClick = (event) => {
-  //   console.log(event.target.value);
-  //   this.setState({inputValue:event.target.value});
-  //   console.log(this.state.inputValue);
-  // }  
+  getRedditData = async (subreddit = 'react') => {
+    const { fetchReddit } = this.props;
+    const data = await fetchReddit(`/r/${subreddit}/hot`).then(res => res.json());
+    const titleData = await fetchReddit(`/r/${subreddit}/about`).then(res => res.json());
+    const subredditData = await fetchReddit(`/subreddits/search?q=${subreddit}`).then(res => res.json());
+    this.setState({ reactSubreddit: data , title: titleData, subreddit:subredditData});
+  }
+
+  subredditClickHandler = async () => {
+    await this.getRedditData();
+    this.setState({showPosts: true})
+  }
+
+  componentDidMount() {
+    this.getRedditData();
+  }
 
   onSearchChange = (inputValue) => {
-    this.setState({inputValue});
-  }
-
-  search(subreddit, inputValue) {
-    // console.log(subreddit, inputValue);
-    return subreddit.filter(item => {
-      // console.log(item.data.display_name);
-      if (inputValue.length === 0) {
-        return subreddit;
-      }
-      
-      return item.data.display_name.indexOf(inputValue) > -1;
-    })
-    // console.log(subreddit);
-    // return subreddit;
-  }
-
-
-  async componentDidMount() {
-    const { fetchReddit } = this.props;
-    const data = await fetchReddit('/r/react/hot').then(res => res.json());
-    const titleData = await fetchReddit('/r/react/about').then(res => res.json());
-    const subredditData = await fetchReddit('/subreddits/search?q=react').then(res => res.json());
-    console.log(titleData);
-    this.setState({ reactSubreddit: data , title: titleData, subreddit:subredditData});
+    this.setState({
+      inputValue,
+      showPosts: !inputValue.length
+    });
+    this.getRedditData(inputValue);
   }
 
   render() {
     const {reactSubreddit, title, subreddit, inputValue} = this.state;
-    
-    console.log(subreddit, inputValue);
-
     if (!reactSubreddit || !title || !subreddit) {
       return (
         <p>Loading...</p>
       );
     }
 
-    // if()
-
-    const dataArr = reactSubreddit.data.children;
+    const dataArr = reactSubreddit.data && reactSubreddit.data.children;
     const titleArr = title.data;
-    const subredditArr = subreddit.data.children;
-    const visibleitems = this.search(subredditArr, inputValue);
-    console.log(visibleitems);
-  
+
     return (
       <section>
        {/* <InputSearch/> */}
-       <Header serch={visibleitems} onSearchChange={this.onSearchChange}/>
+       <Header onSearchChange={this.onSearchChange}/>
        <CommunityContainer data={dataArr} titleData = {titleArr}/>
-       <List data={dataArr} searchEl={visibleitems} inputValue={inputValue}/>
+       {!reactSubreddit.data 
+        ? <p>No</p> 
+        : (<List 
+            data={dataArr}
+            searchEl={subreddit.data.children} 
+            inputValue={inputValue} 
+            clickHandler={this.subredditClickHandler}
+          />)}
        {/* <ResultSearch subredditData={subredditArr}/> */}
        
        
