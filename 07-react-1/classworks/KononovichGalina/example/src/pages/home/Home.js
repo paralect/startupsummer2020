@@ -17,11 +17,29 @@ class Home extends React.Component {
     inputValue: ''
   }
 
-  showClick = (event) => {
-    console.log(event.target.value);
-    this.setState({inputValue:event.target.value});
-    console.log(this.state.inputValue);
-  }  
+  // showClick = (event) => {
+  //   console.log(event.target.value);
+  //   this.setState({inputValue:event.target.value});
+  //   console.log(this.state.inputValue);
+  // }  
+
+  onSearchChange = (inputValue) => {
+    this.setState({inputValue});
+  }
+
+  search(subreddit, inputValue) {
+    // console.log(subreddit, inputValue);
+    return subreddit.filter(item => {
+      // console.log(item.data.display_name);
+      if (inputValue.length === 0) {
+        return subreddit;
+      }
+      
+      return item.data.display_name.indexOf(inputValue) > -1;
+    })
+    // console.log(subreddit);
+    // return subreddit;
+  }
 
 
   async componentDidMount() {
@@ -34,7 +52,9 @@ class Home extends React.Component {
   }
 
   render() {
-    const { reactSubreddit, title, subreddit} = this.state;
+    const {reactSubreddit, title, subreddit, inputValue} = this.state;
+    
+    console.log(subreddit, inputValue);
 
     if (!reactSubreddit || !title || !subreddit) {
       return (
@@ -47,14 +67,15 @@ class Home extends React.Component {
     const dataArr = reactSubreddit.data.children;
     const titleArr = title.data;
     const subredditArr = subreddit.data.children;
-    console.log(subredditArr);
+    const visibleitems = this.search(subredditArr, inputValue);
+    console.log(visibleitems);
   
     return (
       <section>
        {/* <InputSearch/> */}
-       <Header show={this.showClick}/>
+       <Header serch={visibleitems} onSearchChange={this.onSearchChange}/>
        <CommunityContainer data={dataArr} titleData = {titleArr}/>
-       <List data={dataArr}/>
+       <List data={dataArr} searchEl={visibleitems} inputValue={inputValue}/>
        {/* <ResultSearch subredditData={subredditArr}/> */}
        
        

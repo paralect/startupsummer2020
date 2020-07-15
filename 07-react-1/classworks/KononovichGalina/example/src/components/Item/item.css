@@ -1,4 +1,4 @@
-.item {
+.item  {
   width: 50%;
   border: 1px solid gray;
   padding: 2%;
@@ -24,4 +24,8 @@
 }
 .bodyItem {
   margin-top: 2%;
+}
+
+.itemSearch {
+  display: flex;
 }
