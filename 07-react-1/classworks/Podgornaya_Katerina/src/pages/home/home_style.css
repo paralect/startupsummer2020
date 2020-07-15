@@ -42,6 +42,10 @@
     display: flex;
 }
 
+.search_item_field:hover {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.19);
+}
+
 .search_community_logo {
     display: flex;
     width: 30px;
@@ -52,6 +56,10 @@
     width: 60px;
     height: 60px;
     border-radius: 40px;
+}
+
+main {
+    overflow: hidden;
 }
 
 .section {
@@ -111,6 +119,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 65vh;
 }
 
 .post_field {

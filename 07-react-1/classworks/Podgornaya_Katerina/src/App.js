@@ -6,35 +6,38 @@ import 'index.css';
 
 class App extends React.Component {
   state = {
-    phrase: null
+    phrase: null,
+    isSearched: false
   }
 
   findSubreddit = (event) => {
     if (event.keyCode == 13) {
       console.log(event.target.value);
-      this.setState({ phrase: event.target.value});
+      this.setState({
+        phrase: event.target.value
+      });
     }
   }
 
-render() {
-  return (
-    <main>
-      <header className='header'>
-        <div className='header_top'>
-          <img src={logo}></img>
-          <div className="searchField">
-            <img className="searchSvg" src={search} />
-            <input className="input" placeholder='Search' onKeyDown={this.findSubreddit} />
+  render() {
+    return (
+      <main>
+        <header className='header'>
+          <div className='header_top'>
+            <img src={logo}></img>
+            <div className="searchField">
+              <img className="searchSvg" src={search} />
+              <input className="input" placeholder='Search' onKeyDown={this.findSubreddit} />
+            </div>
           </div>
-        </div>
-        <div className='header_bot'></div>
-      </header>
-      <section>
-        <Pages phrase={this.state.phrase}/>
-      </section>
-    </main>
-  );
-};
+          <div className='header_bot'></div>
+        </header>
+        <section>
+          <Pages phrase={this.state.phrase} />
+        </section>
+      </main>
+    );
+  };
 }
 
 export default App;
