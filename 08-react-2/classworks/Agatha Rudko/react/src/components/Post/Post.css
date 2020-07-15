@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+.post{
+  background: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  width: 710px;
+  padding: 20px;
+  margin: 20px auto;
+  font-family: IBM Plex Sans;
+  border-radius: 5px;
+}
+.post-name{
+  font-size: 18px;
+}
+.post-text{
+  font-size: 14px;
+}
+.post-info{
+  color: #7C787E;
+  font-size: 12px;
+}

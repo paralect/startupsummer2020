@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+.InfoBar{
+  height: 75px;
+  position: relative;
+}
+.styled-text{
+  position: absolute;
+  top:5%;
+  left:40%;
+  font-size: 24px;
+  text-align: center;
+  font-family: IBM Plex Sans;
+}
+.img{
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  left:35%;
+  top: -20%;
+}
+.subtext{
+  position: absolute;
+  top:45%;
+  left: 40%;
+}
