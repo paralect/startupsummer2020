@@ -12,7 +12,7 @@ function SubredditList() {
 
   return (
     <SC.Section>
-      {data.data.children.map(child => (
+      {data.children.map(child => (
         <SC.ItemDiv key={child.data.id} className='subreddit-list-item'>
           <SC.PostedSpan>Posted by u/{child.data.author} {moment.unix(child.data.created).startOf('day').fromNow()}</SC.PostedSpan>
           <SC.H2>{child.data.title}</SC.H2>

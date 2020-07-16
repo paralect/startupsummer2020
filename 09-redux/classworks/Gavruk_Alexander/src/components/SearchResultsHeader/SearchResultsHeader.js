@@ -1,10 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+import * as subredditSelectors from 'resources/subreddit/subreddit.selectors';
 import './SearchResultsHeader.css';
 
-function SearchResultsHeader(props) {
+function SearchResultsHeader() {
+  const searchValue = useSelector(subredditSelectors.getSearchValue);
+
   return (
     <div className='search-results-header'>
-      <span>Search results for "<b>{props.searchValue}</b>"</span>
+      <span>Search results for "<b>{searchValue}</b>"</span>
     </div>
   );
 }

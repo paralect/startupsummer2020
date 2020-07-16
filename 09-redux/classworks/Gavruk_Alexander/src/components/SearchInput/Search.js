@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Search.css';
+import { useDispatch, useSelector } from 'react-redux';
 
-function Search(props) {
+import './Search.css';
+import * as subredditActions from 'resources/subreddit/subreddit.actions';
+import * as subredditSelectors from 'resources/subreddit/subreddit.selectors';
+
+function Search() {
   const [inputValue, setInputValue] = useState('');
+
+  const dispatch = useDispatch();
+  const data = useSelector(subredditSelectors.getSubredditData);
 
   const onInputChange = (value) => {
     setInputValue(value);
   };
 
   const onButtonClick = () => {
-    props.searchHandler(inputValue);
+    dispatch(subredditActions.updateIsPostsData(data.hasOwnProperty('facets')));
+    dispatch(subredditActions.search(inputValue));
   };
 
   return (

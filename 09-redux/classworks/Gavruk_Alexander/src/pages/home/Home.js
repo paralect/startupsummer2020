@@ -11,38 +11,32 @@ import * as subredditSelectors from 'resources/subreddit/subreddit.selectors';
 function Home(props) {
   const dispatch = useDispatch();
 
-  const getPosts = async (img, title, communityUrl) => {
-    const data = {
-      img: img,
-      title: title,
-      communityUrl: communityUrl
-    }
-    props.updateCommunityTitleData(data);
-  }
+  const isPostsData = useSelector(subredditSelectors.getIsPostsData);
+  const searchValue = useSelector(subredditSelectors.getSearchValue);
+  const communityTitleData = useSelector(subredditSelectors.getCommunityTitleData);
+  const subredditData = useSelector(subredditSelectors.getSubredditData);
 
   async function fetchData() {
     const { fetchReddit } = props;
-    const url = (props.searchValue === '' || props.isPostsData) ? `/${props.communityTitleData.communityUrl}/hot` : `/search?q=${props.searchValue}&type=sr,user`;
+    const url = (searchValue === '' || isPostsData) ? `/${communityTitleData.communityUrl}/hot` : `/search?q=${searchValue}&type=sr,user`;
     const data = await fetchReddit(url).then(res => res.json());
     dispatch(subredditActions.fetchData(data));
-  }
+  } 
 
   useEffect(() => {
     fetchData();
   }, []);
-
-  if (!reactSubreddit) {
+  
+  if (!subredditData) {
     return (
       <p>Loading...</p>
     );
   }
 
-  if (props.searchValue === '' || isPostsData) {
+  if (searchValue === '' || isPostsData) {
     return <Subreddit />;
   } else {
-    return <SearchResults
-              searchValue={props.searchValue}
-            />;
+    return <SearchResults />;
   }
 }
 
