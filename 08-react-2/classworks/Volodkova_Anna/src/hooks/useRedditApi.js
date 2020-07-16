@@ -2,14 +2,12 @@ import React, { createContext, useState, useContext, useCallback, useEffect } fr
 
 const BASE_URL = 'https://oauth.reddit.com';
 
-const RedditApiTokenContext = createContext(null);
-
 export default function useRedditApi() {
-  const [apiToken, setApiToken] = useContext(RedditApiTokenContext);
+  const [apiToken, setApiToken] = useState(localStorage.getItem('redditApiToken'));
 
-  useEffect(() => {
-    const token = localStorage.getItem('redditApiToken');
-    if (token) setApiToken(token);
+  const setRedditApiToken = useCallback((token) => {
+    localStorage.setItem('redditApiToken', token);
+    setApiToken(token);
   }, []);
 
   const fetch = useCallback(async (url, options = {}) => {
@@ -17,27 +15,12 @@ export default function useRedditApi() {
       ...options,
       headers: {
         ...(options.headers || {}),
-        'Authorization': `Bearer ${localStorage.getItem('redditApiToken')}`,
+        'Authorization': `Bearer ${apiToken}`,
       }
     })
   }, [apiToken]);
 
-  return [fetch, setApiToken, !!apiToken];
-}
-
-export function RedditApiTokenProvider({ children }) {
-  const [apiToken, setApiToken] = useState(null);
-
-  const setRedditApiToken = useCallback((token) => {
-    localStorage.setItem('redditApiToken', token);
-    setApiToken(token);
-  }, []);
-
-  return (
-    <RedditApiTokenContext.Provider value={[apiToken, setRedditApiToken]}>
-      {children}
-    </RedditApiTokenContext.Provider>
-  );
+  return [fetch, setRedditApiToken, !!apiToken];
 }
 
 export function withRedditApi(Component) {
