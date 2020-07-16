@@ -1,0 +1,10 @@
+.List {
+  background: #F8F8F8;
+  border: 1px solid #f8f8f8;
+}
+
+.errorIcon {
+  display: flex;
+  height: 20%;
+  justify-content: center;
+}

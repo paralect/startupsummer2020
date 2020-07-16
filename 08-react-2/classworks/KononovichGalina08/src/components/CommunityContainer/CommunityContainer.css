@@ -1,0 +1,34 @@
+.headerSubreddit {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-left: 7%;
+}
+
+.CommunityContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 25%;
+  position: relative;
+  height: 5rem;
+}
+
+.comments {
+  display: flex;
+}
+
+.CommunityContainer img {
+  position: absolute;
+  bottom: 1rem;
+}
+
+.txtSubreddit {
+  position: absolute;
+  top: 3.5rem;
+  left: 6rem;
+}
+
+.errorIcon {
+  display: flex;
+  height: 20%;
+  justify-content: center;
+}
