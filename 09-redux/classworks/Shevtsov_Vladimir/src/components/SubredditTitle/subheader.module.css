@@ -1,0 +1,23 @@
+.subheader {
+  height: 75px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  place-content: center;
+  background-color: #fff;
+}
+
+.subheader-logo {
+  width: 64px;
+  height: 64px;
+}
+
+h2 {
+  padding: 0;
+  margin: 0;
+}
+
+.subheader-title {
+  display: grid;
+  grid-template-rows: 2fr 1fr;
+}
