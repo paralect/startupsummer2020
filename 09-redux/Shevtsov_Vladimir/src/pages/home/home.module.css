@@ -1,0 +1,11 @@
+body {
+  background-color: #f8f8f8;
+}
+
+.main {
+  margin: 0 auto;
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+}
