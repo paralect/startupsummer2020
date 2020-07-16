@@ -6,17 +6,23 @@ import comment from './comment.jpg';
 import moment from "moment";
 import CommunityPosts from './CommunityPosts';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 function Home(props)  {
 
   const [reactSubreddit, setReactSubreddit] = useState(null);
+
+  const getInputValue = store => store.inputValue;
+
+  const inputValue = useSelector(getInputValue);
 
   useEffect(() => {
     async function fetchData() {
       const { fetchReddit } = props;
       let data;
       if (!props.location) {
-        data = await fetchReddit(`/search?q=${props.inputValue}&type=sr,user`)
+        data = await fetchReddit(`/search?q=${inputValue}&type=sr,user`)
           .then(res => res.json())
           .catch((err) => { console.log(err) });
       } else {
@@ -27,7 +33,7 @@ function Home(props)  {
       setReactSubreddit(data);
     }
     fetchData();
-  }, []);
+  }, [inputValue]);
 
   if (!reactSubreddit) {
     return (
@@ -39,7 +45,7 @@ function Home(props)  {
     return (
       <div className="smorc">
         <img src={smorc} />
-        <p>Sorry, there were no community results for “ {props.inputValue} ”</p>
+        <p>Sorry, there were no community results for “ {inputValue} ”</p>
       </div>
     );
   }
@@ -79,7 +85,7 @@ function Home(props)  {
   const communityList = () => {
     return (
       <div className="bg-gray">
-        <p className="search-results-p">Search results for “ <span className="fw-b">{ props.inputValue }</span> ”</p>
+        <p className="search-results-p">Search results for “ <span className="fw-b">{ inputValue }</span> ”</p>
         <p className="community-list_title">Communities and users</p>
         <div className="community-list_content">
           <ul>

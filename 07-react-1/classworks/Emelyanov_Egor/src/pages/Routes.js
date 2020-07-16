@@ -13,7 +13,7 @@ function Routes({ inputValue }) {
   if (isLoggedIn) {
     return (
       <Switch>
-        <Route path="/" exact component={() => <Home inputValue={inputValue} />} />
+        <Route path="/" exact component={() => <Home />} />
         <Route path="/subreddit/:subredditUrl" component={(props) => <Home {...props} />} />
         <Redirect to="/" />
       </Switch>
