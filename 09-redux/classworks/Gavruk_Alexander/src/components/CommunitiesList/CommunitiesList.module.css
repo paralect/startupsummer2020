@@ -1,0 +1,46 @@
+.list {
+    width: 710px;
+    background-color: #fff;
+}
+
+.list-item {
+    height: 90px;
+    border-top: 1px solid #EFEFEF;
+    border-bottom: 1px solid #EFEFEF;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+}
+
+.list-item:hover {
+    cursor: pointer;
+}
+
+.list-item img {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+.title_name {
+    font-weight: 500;
+    font-size: 1.125em;
+}
+
+.title_members {
+    font-size: 0.75em;
+}
+
+.list-item p {
+    width: 377px;
+    font-size: 0.75em;
+    margin-left: auto;
+}
