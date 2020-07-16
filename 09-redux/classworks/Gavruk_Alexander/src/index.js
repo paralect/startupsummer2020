@@ -6,7 +6,7 @@ import { RedditApiTokenProvider } from 'hooks/useRedditApi';
 import App from './App';
 
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./resources/store";
 
 import './index.css';
 

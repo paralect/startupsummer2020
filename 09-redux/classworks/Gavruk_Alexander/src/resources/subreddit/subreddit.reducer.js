@@ -1,15 +1,39 @@
-const initialState = null;
+const initialState = {
+  data: null,
+  communityTitleData: {
+    img: '',
+    title: 'The React Library',
+    communityUrl: 'r/react'
+  },
+  isPostsData: true,
+  searchValue: '',
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'subreddit:setData':
-      return action.payload.data;
+      return {
+        ...state,
+        data: action.payload.data,
+      };
 
     case 'subreddit:setCommunityTitleData':
-      return action.payload.communityTitleData;
+      return {
+        ...state,
+        communityTitleData: action.payload.communityTitleData,
+      };
 
     case 'subreddit:setIsPostsData':
-      return action.payload.isPostsData;
+      return {
+        ...state,
+        isPostsData: action.payload.isPostsData,
+      };
+
+    case 'subreddit:search':
+      return {
+        ...state,
+        searchValue: action.payload.searchValue,
+      };
 
     default:
       return state;

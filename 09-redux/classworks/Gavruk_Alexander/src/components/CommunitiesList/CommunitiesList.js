@@ -8,8 +8,10 @@ import * as subredditSelectors from 'resources/subreddit/subreddit.selectors';
 
 // Using CSS Modules
 
-function CommunitiesList(props) {
+function CommunitiesList() {
   const dispatch = useDispatch();
+
+  const data = useSelector(subredditSelectors.getSubredditData);
 
   const reduceMembersNumber = (membersNumber) => {
     let reducedNumber = '';
@@ -27,14 +29,18 @@ function CommunitiesList(props) {
   }
 
   const handleClick = (img, title, communityUrl) => {
-    const data = useSelector(subredditSelectors.data);
-    dispatch(subredditActions.updateIsPostsData(data));
-    props.getPosts(img, title, communityUrl);
+    dispatch(subredditActions.updateIsPostsData(data.hasOwnProperty('facets')));
+    const communityTitleData = {
+      img,
+      title,
+      communityUrl,
+    }
+    dispatch(subredditActions.updateCommunityTitleData(communityTitleData));
   }
 
   return (
     <div className={styles.list}>
-        {props.data.data.children.map(child => (
+        {data.children.map(child => (
           <div
             key={child.data.id}>
               <Link
