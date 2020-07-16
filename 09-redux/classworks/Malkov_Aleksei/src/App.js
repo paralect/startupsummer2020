@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-
+import { Provider, useSelector } from 'react-redux';
 import Pages from 'pages';
+import store from 'resources/store';
+import * as selectors from 'resources/selector';
 
 function App() {
   const [reactSubreddit, setReactSubreddit] = useState([]);
@@ -10,13 +12,15 @@ function App() {
   const [emptySearch, setEmptySearch] = useState(false);
 
   return (
-    <Pages
-      reactSubreddit={[reactSubreddit, setReactSubreddit]}
-      about={[about, setAbout]}
-      search={[search, setSearch]}
-      searchResults={[searchResults, setSearchResults]}
-      emptySearch={[emptySearch, setEmptySearch]}
-    />
+    <Provider store={store}>
+      <Pages
+        reactSubreddit={[reactSubreddit, setReactSubreddit]}
+        about={[about, setAbout]}
+        search={[search, setSearch]}
+        searchResults={[searchResults, setSearchResults]}
+        emptySearch={[emptySearch, setEmptySearch]}
+      />
+    </Provider>
   );
 }
 

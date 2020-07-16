@@ -8,7 +8,7 @@ function Header(props) {
     <header className={styles.app__header}>
       <div className={styles.header__main_line}>
         <Logo className={styles.logo} />
-        <SearchBar submit={props.submit} isSearchPage={props.isSearchPage} search={props.search} />
+        <SearchBar isSearchPage={props.isSearchPage} search={props.search} />
       </div>
       <div className={styles.header__color_line}>{''}</div>
     </header>

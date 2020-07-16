@@ -8,8 +8,7 @@ function SearchResult(props) {
     const newSrc = src.split('?')[0];
     return newSrc;
   }
-  console.log(parseImage(props.about.community_icon));
-  //<img className={styles.image} src={parseImage(props.about.community_icon)} alt={props.about.display_name_prefixed} />
+
   return (
     <div className={styles.container}>
       <RoundImage src={parseImage(props.about.community_icon)} alt={props.about.display_name_prefixed} />

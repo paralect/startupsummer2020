@@ -15,17 +15,7 @@ function Routes({ submit, reactSubreddit, about, search, searchResults }) {
     return (
       <Switch>
         <Route path="/" exact render={() => <Home fetchReddit={fetchReddit} reactSubreddit={reactSubreddit} about={about} search={search}/>} />
-        <Route
-          path="/search"
-          render={() => 
-            <Search
-              fetchReddit={fetchReddit}
-              submit={submit}
-              search={search}
-              searchResults={searchResults}
-              isSearchPage
-            />}
-        />
+        <Route path="/search" render={() => <Search isSearchPage />} />
         <Route path="/null" exact component={null}/>
         <Redirect to="/" />
       </Switch>
