@@ -2,6 +2,7 @@ import React, {useEffect, useState, useRef} from 'react';
 import Header from 'components/header'
 import Pages from 'pages';
 import {withRedditApi} from './hooks/useRedditApi';
+import {useRouteMatch} from "react-router-dom";
 
 function App(props) {
 
@@ -30,7 +31,6 @@ function App(props) {
     const about = await fetchReddit(`/${name}/about`).then(res => res.json());
     console.log('About', about);
     setReactAbout(about);
-    setReactSubreddits(null);
   };
 
 
@@ -40,12 +40,31 @@ function App(props) {
     }
   }, [props.isToken]);
 
+  const prevSubUrl = useRef();
+
+  let match = useRouteMatch("/subreddit/:subredditUrl");
+  console.log('Match', match);
+
+  useEffect(() => {
+    if (match && match.params.subredditUrl !== prevSubUrl.current) {
+        prevSubUrl.current = match.params.subredditUrl;
+        getSubreddits(match.params.subredditUrl);
+    }
+  }, [match]);
+
 
   const getSubreddits = async (str) => {
-    const {fetchReddit} = props;
-    const data = await fetchReddit('/subreddits/search?q=' + str.toString()).then(res => res.json());
-    setReactSubreddits(data);
-    console.log('reactSubreddits', data);
+    try{
+      const {fetchReddit} = props;
+      const data = await fetchReddit('/subreddits/search?q=' + str.toString()).then(res => res.json());
+      setReactSubreddits(data);
+      console.log('reactSubreddits', data);
+    }
+    catch (e) {
+      console.log('ERROR', e);
+
+    }
+
     //reactSubreddits.data.children[i].data.url
   }
 

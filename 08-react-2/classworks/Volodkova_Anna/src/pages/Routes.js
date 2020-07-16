@@ -9,13 +9,14 @@ import Home from 'pages/home';
 
 function Routes({reactSubreddit, reactAbout, reactSubreddits, handle}) {
   const [, , isLoggedIn] = useRedditApi();
-
+  console.log(isLoggedIn);
   if (isLoggedIn) {
     return (
       <Switch>
         <Route path="/" exact render={() => <Home reactSubreddit={reactSubreddit} reactAbout={reactAbout}
                                                   reactSubreddits={reactSubreddits} handle={handle}/>}/>
-
+        <Route path="/subreddit/:subredditUrl" component={() => <Home reactSubreddit={reactSubreddit} reactAbout={reactAbout}
+                                                                      reactSubreddits={reactSubreddits} handle={handle}/>} />
         <Redirect to="/"/>
       </Switch>
     );

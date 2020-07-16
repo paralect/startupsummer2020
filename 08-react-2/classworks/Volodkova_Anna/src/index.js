@@ -10,9 +10,7 @@ import './index.css';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <RedditApiTokenProvider>
-        <App />
-      </RedditApiTokenProvider>
+      <App />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
