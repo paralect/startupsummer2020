@@ -4,14 +4,12 @@ import Header from 'components/header';
 import Title from 'components/title';
 import PostBlock from 'components/post_block';
 import styles from './home.module.css';
-import { useHistory } from 'react-router-dom';
 import Spinner from 'components/spinner';
 
 function Home(props){
   const { fetchReddit } = props;
   const [reactSubreddit, setReactSubreddit] = props.reactSubreddit;
   const [about, setAbout] = props.about;
-  const history = useHistory();
 
   useEffect(() => {
     const preload = async () => {
@@ -26,14 +24,9 @@ function Home(props){
     // eslint-disable-next-line
   }, []);
 
-  const loadSearch = (newSearch) => {
-    history.push('/search?q=' + newSearch);
-    console.log('hihi');
-  };
-
   return (
     <main>
-      <Header submit={loadSearch} isSearchPage={false} search={props.search} />
+      <Header isSearchPage={false} search={props.search} />
       <section className={styles.container}>
         <Title about={about} />
         {
