@@ -1,6 +1,7 @@
 const http = require('http');
 const path = require('path');
 const os = require('os');
+const fs = require('fs');
 const crypto = require('crypto');
 
 const hashFunction = (password) => crypto
@@ -25,17 +26,24 @@ const server = http.createServer((req, res) => {
         info = `${os.cpus().length}`;
         break;
     }
-    res.write(info);
-    console.log(info);
-    res.end();
+    if (req.url === '/home.html') {
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      fs.createReadStream(path.resolve(__dirname, 'home.html')).pipe(res);
+    } else {
+      res.write(info);
+      console.log(info);
+      res.end();
+    }
   }
   if (req.method === 'POST') {
     let isValid = false;
     let body = '';
     const validPasswordHash = hashFunction('supper-secure-password');
+
     req.on('data', (chunk) => {
       body += chunk.toString();
     });
+    
     req.on('end', () => {
       const data = JSON.parse(body);
       const { password } = data;
