@@ -1,6 +1,7 @@
 const http = require('http');
 const url = require('url');
-const nthPrime = require('./utils.js');
+
+const { Worker, parentPort } = require('worker_threads');
 
 const server = http.createServer((req, res) => {
   if (req.url === '/favicon.ico') {
@@ -8,10 +9,12 @@ const server = http.createServer((req, res) => {
   } else {
     const query = url.parse(req.url, true).query;
     const { n } = query;
-    const primes = nthPrime(parseInt(n, 10));
-    console.log(n);
-    res.write(JSON.stringify(primes));
-    res.end();
+    const worker = new Worker('./worker.js', { workerData: n });
+    worker.on('message', (msg) => {
+      res.write(JSON.stringify(msg));
+      res.end();
+      worker.terminate();
+    });
   }
 });
 
