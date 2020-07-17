@@ -1,0 +1,11 @@
+{
+  "name": "10-node",
+  "version": "0.0.1",
+  "description": "paralect startup summer 2020 day 10 task",
+  "main": "index.js",
+  "scripts": {
+    "test": "node src/client.js"
+  },
+  "author": "",
+  "license": "WTFPL"
+}
