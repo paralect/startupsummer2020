@@ -1,0 +1,18 @@
+{
+  "name": "gloria_loi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "fs": "0.0.1-security",
+    "os": "^0.1.1",
+    "query-string": "^6.13.1",
+    "querystring": "^0.2.0"
+  }
+}
