@@ -1,6 +1,8 @@
 const http = require('http')
 var os = require('os');
+const crypto = require('crypto');
 const port = 8080;
+const hash = '37e753db1079f7d8ff8d145769664df46b12d8c3a3c4930a2e66ab76a8bfb4ca9e0fe69b7bc40355755846342cf19c95c58fa538d964963f04aff409621ec330';
 
 const requestHandler = (request, response) => {
   response.setHeader("Content-Type", "text/html; charset=utf-8;")
