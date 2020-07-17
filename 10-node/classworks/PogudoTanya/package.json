@@ -1,0 +1,19 @@
+{
+  "name": "day10node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cpus": "^1.0.3",
+    "crypto": "^1.0.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security",
+    "query-string": "^6.13.1"
+  }
+}
