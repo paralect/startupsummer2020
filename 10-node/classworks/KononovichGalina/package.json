@@ -1,0 +1,21 @@
+{
+  "name": "kononovichgalina",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Kononovich Galina",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.1-security",
+    "nodemon": "^2.0.4",
+    "query-string": "^6.13.1",
+    "request": "^2.88.2",
+    "require-string": "^0.1.0"
+  }
+}
