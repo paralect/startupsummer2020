@@ -1,7 +1,7 @@
 const http = require('http');
 const url = require('url');
 
-const { Worker, parentPort } = require('worker_threads');
+const { Worker } = require('worker_threads');
 
 const server = http.createServer((req, res) => {
   if (req.url === '/favicon.ico') {
