@@ -13,7 +13,7 @@ function Home (props) {
       );
     }
 
-    return props.reactSubreddits  ?
+    return props.reactSubreddits ?
       <ListSearch arrData={props.reactSubreddits.data.children} handle={props.handle}/> :
       <List arrData={props.reactSubreddit.data.children} arrAbout={props.reactAbout} />
 }
