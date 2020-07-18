@@ -48,7 +48,10 @@ function App(props) {
   useEffect(() => {
     if (match && match.params.subredditUrl !== prevSubUrl.current) {
         prevSubUrl.current = match.params.subredditUrl;
-        getSubreddits(match.params.subredditUrl);
+        //getSubreddits(match.params.subredditUrl);
+      getdata(`r/${match.params.subredditUrl}`);
+      setReactSubreddits(null);
+      console.log("Hello Ann")
     }
   }, [match]);
 
@@ -64,7 +67,6 @@ function App(props) {
       console.log('ERROR', e);
 
     }
-
     //reactSubreddits.data.children[i].data.url
   }
 
