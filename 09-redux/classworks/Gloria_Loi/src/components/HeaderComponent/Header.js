@@ -5,10 +5,10 @@ import Logo from "../Logo";
 
 import "./Header.css";
 
-const Header = (props) => (
+const Header = () => (
   <div className="header">
     <Logo />
-    <SearchInput handleChange={props.handleChange} />
+    <SearchInput />
   </div>
 );
 

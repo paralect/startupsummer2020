@@ -1,11 +1,11 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-import useRedditApi from "hooks/useRedditApi";
+import useRedditApi from 'hooks/useRedditApi';
 
-import Login from "pages/login";
-import Callback from "pages/callback";
-import Home from "pages/home";
+import Login from 'pages/login';
+import Callback from 'pages/callback';
+import Home from 'pages/home';
 
 const Routes = (props) => {
   const [, , isLoggedIn] = useRedditApi();
@@ -13,20 +13,17 @@ const Routes = (props) => {
   if (isLoggedIn) {
     return (
       <Switch>
-        <Route
-          path="/"
-          render={() => <Home inputString={props.inputString} />}
-        />
-        <Redirect to="/" />
+        <Route path='/' render={() => <Home />} />
+        <Redirect to='/' />
       </Switch>
     );
   }
 
   return (
     <Switch>
-      <Route path="/login" exact component={Login} />
-      <Route path="/callback" exact component={Callback} />
-      <Redirect to="/login" />
+      <Route path='/login' exact component={Login} />
+      <Route path='/callback' exact component={Callback} />
+      <Redirect to='/login' />
     </Switch>
   );
 };

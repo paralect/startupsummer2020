@@ -1,63 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { withRedditApi } from "hooks/useRedditApi";
-import { Route, useHistory, Switch } from "react-router-dom";
+import { fetchSubreddits } from '../../resources/actions/fetchSubreddits';
+import { fetchPostsArticles } from '../../resources/actions/fetchPostArticles';
 
-import SubredditsList from "../../components/SubredditList";
-import MainContainer from "components/MainContainer";
-import Loader from "../../components/Loader";
-import Error from "../../components/ErrorComponent";
+import { withRedditApi } from 'hooks/useRedditApi';
+import { Route, useHistory, Switch } from 'react-router-dom';
+
+import SubredditsList from '../../components/SubredditList';
+import MainContainer from 'components/MainContainer';
+import Loader from '../../components/Loader';
+import Error from '../../components/ErrorComponent';
 
 const Home = (props) => {
-  const [reactSubreddit, setReactSubreddit] = useState(null);
-  const [subRedditTitle, setSubRedditTitle] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [searchError, setSearchError] = useState(false);
+  const {
+    reactSubreddit,
+    subRedditTitle,
+    loading,
+    searchError,
+    inputString,
+  } = useSelector((state) => state);
+  const dispatch = useDispatch();
   const history = useHistory();
 
-  const { fetchReddit, inputString } = props;
+  const { fetchReddit } = props;
 
   const isLoading = loading || !reactSubreddit || !subRedditTitle;
 
-  const fetchPostsArticles = async (topic = "react") => {
-    setLoading(true);
-
-    const [data, title] = await Promise.all([
-      fetchReddit(`/r/${topic}/hot?limit=10`).then((res) => res.json()),
-      fetchReddit(`/r/${topic}/about?limit=10`).then((res) => res.json()),
-    ]);
-    setLoading(false);
-    setReactSubreddit(data);
-    setSearchError(false);
-    setSubRedditTitle(title);
-
-    history.push("/");
-  };
-
   useEffect(() => {
-    fetchPostsArticles();
+    fetchPostsArticles(undefined, fetchReddit, history)(dispatch);
   }, []);
 
   useEffect(() => {
-    displaySubreddits();
+    fetchSubreddits(inputString, fetchReddit, history)(dispatch);
   }, [inputString]);
-
-  const displaySubreddits = async () => {
-    if (inputString === "") {
-      fetchPostsArticles();
-      return;
-    }
-    const data = await fetchReddit(
-      `/subreddits/search?limit=10&q=${inputString}`
-    ).then((res) => res.json());
-    setReactSubreddit(data);
-    if ((data.data.children && data.data.children.length === 0) || !data) {
-      setSearchError(true);
-    } else {
-      setSearchError(false);
-      history.push("/search");
-    }
-  };
 
   if (isLoading) return <Loader />;
 
@@ -67,28 +43,10 @@ const Home = (props) => {
         <Error inputString={inputString} />
       ) : (
         <Switch>
-          {inputString !== "" && (
-            <Route
-              path="/search"
-              exact
-              render={() => (
-                <SubredditsList
-                  handlePostClick={fetchPostsArticles}
-                  data={reactSubreddit.data.children}
-                  title={inputString}
-                />
-              )}
-            />
+          {inputString !== '' && (
+            <Route path='/search' exact render={() => <SubredditsList />} />
           )}
-          <Route
-            path="/"
-            render={() => (
-              <MainContainer
-                data={reactSubreddit.data.children}
-                title={subRedditTitle}
-              />
-            )}
-          />
+          <Route path='/' render={() => <MainContainer />} />
         </Switch>
       )}
     </>
