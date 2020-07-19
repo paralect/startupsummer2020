@@ -1,8 +1,8 @@
-.first-title {
+.title {
   font-weight: bold;
 }
 
-.first-title,
+.title,
 .task-info {
   display: flex;
   font-size: 2em;
