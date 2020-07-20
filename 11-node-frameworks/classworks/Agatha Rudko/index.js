@@ -3,11 +3,16 @@ const Koa = require('koa');
 const sessionss = require('koa-generic-session');
 const bodyParser = require('koa-bodyparser');
 const Router = require('@koa/router');
+const joi = require('joi');
 const router = new Router();
 
 const app = new Koa();
 let session = sessionss;
-let formInputs = [];
+let formInputs = {};
+const schem = joi.object({
+  name: joi.string().required(),
+  surname: joi.string().min(3),
+});
 
 function get(ctx) {
   session.count = session.count || 0;
@@ -35,6 +40,12 @@ app.use(async (ctx) => {
       await remove(ctx);
       break;
   }
+});
+
+router.post('/form', async (ctx, next) => {
+  ctx.body = ctx.request.body;
+  formInputs = schem.validate(ctx.request.body);
+  await next();
 });
 
 app.use(serve(__dirname + '/images/'));
