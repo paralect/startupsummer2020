@@ -1,0 +1,24 @@
+{
+  "name": "egor_emelyanov",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "joi": "^17.1.1",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-generic-session": "^2.0.4",
+    "koa-joi-validate": "^0.5.1",
+    "koa-redis": "^4.0.1",
+    "koa-router": "^9.1.0",
+    "koa-static": "^5.0.0"
+  }
+}
