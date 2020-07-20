@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './subreddit.module.css';
 
-const format = (n) => Intl
+const formatCompactNumberSI = (n) => Intl
   .NumberFormat('en-US', { notation: "compact", compactDisplay: "short" })
   .format(n);
 
@@ -14,7 +14,7 @@ export default (props) => {
       <img className={styles['subreddit-small-icon']} src={communityIcon.replace('&amp;', '&')} alt="subreddit icon" />
       <div className={styles['subreddit-url']}>
         <span>{url}</span>
-        <div className={styles['subreddit-total_members']}>{format(subscribers)}</div>
+        <div className={styles['subreddit-total_members']}>{formatCompactNumberSI(subscribers)}</div>
       </div>
       <div className={styles['subreddit-title']}>
         <span>{title}</span>

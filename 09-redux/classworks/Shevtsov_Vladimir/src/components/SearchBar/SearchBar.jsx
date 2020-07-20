@@ -4,7 +4,6 @@ import icon from '../../assets/search_icon.svg';
 import { useHistory } from 'react-router-dom';
 
 import styles from './searchbar.module.css';
-console.log(styles);
 
 export default () => {
   const [value, setValue] = useState('');
