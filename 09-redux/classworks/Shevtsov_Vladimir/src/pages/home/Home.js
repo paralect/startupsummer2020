@@ -8,7 +8,7 @@ import { getToken } from 'resources/auth/auth.selectors';
 
 const Home = () => {
   const apiToken = useSelector(getToken);
-  const { result, loading, error, cancel } = useShowSubreddit({ url: `r/react/hot`, apiToken });
+  const { result, loading, error, cancel } = useShowSubreddit({ url: `/r/react/hot`, apiToken });
 
   useEffect(() => () => cancel(), [cancel]);
 
