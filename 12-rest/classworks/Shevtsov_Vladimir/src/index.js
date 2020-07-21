@@ -71,6 +71,15 @@ router.get('/articles', (ctx, next) => {
   return next();
 });
 
+router.post('/articles/create', (ctx, next) => {
+  if(ctx.state.jwtOriginalError) {
+    ctx.status = 403;
+  } else {
+    // create article
+    return next();
+  }
+});
+
 const getToken = (ctx) => ctx.session.token;
 
 app.keys = ['secretsdaf'];
