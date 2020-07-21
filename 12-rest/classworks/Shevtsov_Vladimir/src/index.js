@@ -2,17 +2,33 @@ const Koa = require('koa');
 const session = require('koa-session');
 const koaJwt = require('koa-jwt');
 const jwt = require('jsonwebtoken');
-const Koax = require('koa2-request-middleware');
 const Router = require('koa-router');
 const bodyParser = require('koa-bodyparser');
 const crypto = require('crypto');
 const fs = require('fs').promises;
-
+const axios = require('axios');
 
 const app = new Koa();
-const koax = new Koax();
 const router = new Router();
 const jwtSecret = process.env.SECRET;
+
+const parfUrl = 'https://models.dobro.ai/gpt2/medium/';
+
+const genArticle = async (prompt) => {
+  const res = await axios.post(parfUrl, {
+    prompt,
+    length: 30,
+    num_samples: 1,
+  },
+    {
+      headers: {
+        'User-Agent': 'insomnia/2020.3.3',
+      },
+      timeout: 10000,
+    });
+
+  return res;
+};
 
 const hashFunction = (password) => crypto
   .pbkdf2Sync(password, 'salt', 100000, 64, 'sha512')
@@ -63,4 +79,5 @@ app.use(bodyParser());
 app.use(koaJwt({ secret: jwtSecret, passthrough: true, getToken }));
 app.use(router.routes());
 app.use(router.allowedMethods());
+
 app.listen(3000);
