@@ -1,55 +1,55 @@
+import {incCounter, schema} from "./functions";
+
 const koa = require('koa');
 const serve = require('koa-static');
 const session = require('koa-generic-session');
 const bodyParser = require('koa-bodyparser');
-const Joi = require('@hapi/joi');
-
-const schema = Joi.object({
-  name: Joi.string().min(3).required(),
-  mark: Joi.number(),
-
-});
+const Router = require('koa-router');
 
 
 const app = new koa();
+
 app.use(bodyParser());
 
-//app.use(serve(`public`));
+app.use(serve(`public`));
+
+app.use(session());
+const inc = incCounter(session);
+
+const router = new Router();
 
 let mySummerObj;
-app.use(async (ctx, next) => {
-  if (ctx.request.method === "POST") {
-    const {error, value} = schema.validate(ctx.request.body);
-    if (!error) {
-      mySummerObj = value;
-      console.log(value);
-    } else {
-      console.log('Not valid');
-    }
+
+router.post('/summer', (ctx) => {
+  inc();
+  const {error, value} = schema.validate(ctx.request.body);
+  if (!error) {
+    mySummerObj = value;
+    console.log(value);
+    ctx.status = 200;
+  } else {
+    ctx.body = "Not valid name or mark";
   }
-  await next();
 })
+
+app
+  .use(router.routes())
+  .use(router.allowedMethods());
 
 app.use(async (ctx, next) => {
   await next();
+
   if (ctx.request.path !== '/favicon.ico')
     console.log("koko");
 });
 
-app.use(session());
-
 app.use((ctx) => {
   if (ctx.request.path !== '/favicon.ico')
-    get(ctx);
-  //ctx.body = 'Hello World';
+  {
+    ctx.body = {
+      "sessionVisits":"Session" + inc()
+    };
+  }
 })
 
-
 app.listen(3001);
-
-const get = (ctx) => {
-  const s = session;
-  s.count = s.count || 0;
-  s.count++;
-  ctx.body = 'Session ' + s.count;
-}
