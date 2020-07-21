@@ -7,6 +7,11 @@ const RedditApiTokenContext = createContext(null);
 export default function useRedditApi() {
   const [apiToken, setApiToken] = useContext(RedditApiTokenContext);
 
+  const setToken = (token) => {
+    setApiToken(token);
+    localStorage.setItem('redditToken', token);
+  }
+
   const fetch = useCallback(async (url, options = {}) => {
     return window.fetch(BASE_URL + url, {
       ...options,
@@ -17,11 +22,11 @@ export default function useRedditApi() {
     })
   }, [apiToken]);
 
-  return [fetch, setApiToken, !!apiToken];
+  return [fetch, setToken, !!apiToken, apiToken];
 }
 
 export function RedditApiTokenProvider({ children }) {
-  const [apiToken, setApiToken] = useState(null);
+  const [apiToken, setApiToken] = useState(localStorage.getItem('redditToken'));
 
   return (
     <RedditApiTokenContext.Provider value={[apiToken, setApiToken]}>
@@ -32,7 +37,7 @@ export function RedditApiTokenProvider({ children }) {
 
 export function withRedditApi(Component) {
   return function (props) {
-    const [fetchReddit] = useRedditApi();
+    const [fetchReddit, , redditToken] = useRedditApi();
 
     return (
       <Component {...props} fetchReddit={fetchReddit} />
