@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { withRedditApi } from 'hooks/useRedditApi';
 import num_comments from './post_num_comments.svg';
 import no_subreddit_icon from './no_subreddit_icon.png';
@@ -7,6 +8,8 @@ import App from 'App';
 import cry from './cry.svg';
 import { Route, useHistory, Switch, useLocation } from "react-router-dom";
 import styles from './home_style.module.css'
+import { fetchPosts as fetchPostsAction } from 'resources/post/post.action';
+import { getPosts } from 'resources/post/post.selectors';
 
 function Home(props) {
   const history = useHistory();
@@ -18,18 +21,20 @@ function Home(props) {
   const [isClickedSubreddit, setIsClickedSubreddit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  console.log(props.posts);
+
   useEffect(() => {
     setIsLoading(true);
     if (props.phrase && !isClickedSubreddit) {
       history.push('/search');
-    }
-    else
+    } else {
       if (props.phrase && isClickedSubreddit) {
         history.push('/subreddit');
       }
       else {
         history.push('/subreddit');
       }
+    }
 
 
     (async () => {
@@ -45,6 +50,8 @@ function Home(props) {
       setSubredditData(data);
       setSubredditAbout(dataAbout);
       setSearchData(searchData);
+
+      props.fetchPosts({ fetchReddit, subreddit: 'gaming' });
 
       setIsLoading(false);
     })();
@@ -71,7 +78,6 @@ function Home(props) {
 
     setIsLoading(false);
   };
-
 
   if (isLoading) {
     return (
@@ -145,4 +151,8 @@ function Home(props) {
   }
 }
 
-export default withRedditApi(Home);
+export default connect(state => ({
+  posts: getPosts(state),
+}), {
+  fetchPosts: fetchPostsAction,
+})(withRedditApi(Home));
