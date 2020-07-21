@@ -9,16 +9,17 @@ const fs = require('fs');
 const crypto = require('crypto');
 const axios = require('axios');
 
-const toHash = (data) => crypto.pbkdf2Sync(data, 'very-very-strong-secret', 100000, 64, 'sha512').toString('hex');
+const toHash = (data) => crypto.pbkdf2Sync(data, 'very-simple-secret', 100000, 64, 'sha512').toString('hex');
 
-const parfUrl = 'https://models.dobro.ai/gpt2/medium/';
+const PARF_URL = 'https://models.dobro.ai/gpt2/medium/';
+const SECRET = fs.readFileSync('./public.key', 'utf8');
 
-const genArticle = async (prompt) => {
+const generateArticle = async (prompt) => {
   try {
-    const res = await axios.post(parfUrl, {
+    const res = await axios.post(PARF_URL, {
       prompt,
       length: 30,
-      num_samples: 1,
+      num_samples: 4,
     },
     {
       headers: {
@@ -26,14 +27,62 @@ const genArticle = async (prompt) => {
       },
       timeout: 10000,
     });
-    console.log(res.data);
     return res;
   } catch(e) {
     console.log(e)
   };
 };
-genArticle('hello');
 
+const getResourcesDataFromDB = () => JSON.parse(fs.readFileSync('./db/resources.json', 'utf8'));
+
+const putUserToDB = (user) => {
+  const usersFromDB = JSON.parse(fs.readFileSync('./db/user.json', 'utf8'));
+  const dataFromDB = getResourcesDataFromDB();
+  let userLogins = [];
+  if (usersFromDB.length) {
+    const userLogins = usersFromDB.array.forEach(user => {
+      userLogins.push(user.login);
+    });
+  }
+  userLogins.push(user.login);
+  dataFromDB.users = [...userLogins];
+  fs.writeFile('./db/resources.json', JSON.stringify(dataFromDB), (err) => {
+    if (err) {
+        throw err;
+    }
+  });
+}
+
+const putArticleToDB = (article) => {
+  const dataFromDB = getResourcesDataFromDB();
+  console.log('Data from db', dataFromDB);
+  dataFromDB.articles.push(article);
+  fs.writeFile('./db/resources.json', JSON.stringify(dataFromDB), (err) => {
+    if (err) {
+        throw err;
+    }
+  });
+}
+
+const putInterviewToDB = (interview) => {
+  const dataFromDB = getResourcesDataFromDB();
+  dataFromDB.interviews.push(interview);
+  fs.writeFile('./db/resources.json', JSON.stringify(dataFromDB), (err) => {
+    if (err) {
+        throw err;
+    }
+  });
+}
+
+const putTaglineToDB = (tagline) => {
+  const dataFromDB = getResourcesDataFromDB();
+  dataFromDB.taglines.push(tagline);
+  fs.writeFile('./db/resources.json', JSON.stringify(dataFromDB), (err) => {
+    if (err) {
+        throw err;
+    }
+  });
+}
 
 const publicRouter = new Router();
 const privateRouter = new Router();
@@ -52,6 +101,20 @@ app.use(bodyParser());
 
 app.use(publicRouter.routes());
 
+publicRouter
+  .get('/resources/user', async (ctx) => {
+    ctx.body = JSON.parse(fs.readFileSync('./db/user.json', 'utf8')).login;
+  })
+  .get('/resources/articles', async (ctx) => {
+    ctx.body = JSON.parse(fs.readFileSync('./db/resources.json', 'utf8')).articles;
+  })
+  .get('/resources/interviews', async (ctx) => {
+    ctx.body = JSON.parse(fs.readFileSync('./db/resources.json', 'utf8')).interviews;
+  })
+  .get('/resources/taglines', async (ctx) => {
+    ctx.body = JSON.parse(fs.readFileSync('./db/resources.json', 'utf8')).taglines;
+  });
+
 publicRouter.post('/signup', async (ctx) => {
   ctx.body = schema.validate(ctx.request.body);
   const user = {
@@ -69,32 +132,43 @@ publicRouter.post('/signup', async (ctx) => {
 publicRouter.post('/signin', async (ctx) => {
   const userFromDB = JSON.parse(fs.readFileSync('./db/user.json', 'utf8'));
   const user = schema.validate(ctx.request.body);
-  console.log(user);
   const hash = toHash(user.value.password);
   if (userFromDB.login === user.value.login && userFromDB.password === hash) {
-    const token = jsonWebToken.sign({ login: user.value.login }, 'brrr');
+    const token = jsonWebToken.sign({ login: user.value.login }, SECRET);
     ctx.body = token;
   } else {
     ctx.status = 401;
     ctx.body = 'Login pls';
   }
-  
 });
 
-publicRouter.get('/resources', async (ctx) => {
-
-});
-
-app.use(koajwt({ secret: 'very-simple-secret' }));
+app.use(koajwt({ secret: SECRET }));
 
 app.use(privateRouter.routes());
 
-privateRouter.post('/write_resources', async (ctx) => {
-  const textPrompt = ctx.request.body;
-  const dataFromDB = JSON.parse(fs.readFileSync('./db/user.json', 'utf8'));
-  const fetchedData = await fetch('https://api.github.com/users/github', {prompt: textPrompt, length: 30, num_samples: 4}).then(res => res.json());
-  console.log(fetchedData);
-});
+privateRouter
+  .post('/write_resources/user', async (ctx) => {
+    putUserToDB(ctx.request.body);
+    ctx.body = JSON.parse(fs.readFileSync('./db/resources.json', 'utf8')).users;
+  })
+  .post('/write_resources/article', async (ctx) => {
+    const textPrompt = ctx.request.body.prompt;
+    const article = await generateArticle(textPrompt).then(res => [res.data.replies[0], res.data.replies[1], res.data.replies[2]].join(''));
+    putArticleToDB(article);
+    ctx.body = getResourcesDataFromDB();
+  })
+  .post('/write_resources/interview', async (ctx) => {
+    const textPrompt = ctx.request.body.prompt;
+    const interview = await generateArticle(textPrompt).then(res => res.data.replies.join(''));
+    putInterviewToDB(interview);
+    ctx.body = getResourcesDataFromDB();
+  })
+  .post('/write_resources/tagline', async (ctx) => {
+    const textPrompt = ctx.request.body.prompt;
+    const tagline = await generateArticle(textPrompt).then(res => res.data.replies[0]);
+    putTaglineToDB(tagline);
+    ctx.body = getResourcesDataFromDB();
+  });
 
 app.listen(3000, () => {
   console.log('Server was started');
