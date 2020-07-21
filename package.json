@@ -17,6 +17,9 @@
     "axios": "^0.19.2",
     "ffmpeg": "0.0.4",
     "ffmpeg-extract-frames": "^2.0.2",
-    "ffmpeg-fork": "0.0.6"
+    "ffmpeg-fork": "0.0.6",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^9.1.0"
   }
 }
