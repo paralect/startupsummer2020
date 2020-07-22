@@ -4,6 +4,7 @@ import { ReactComponent as Search } from '../../assets/search.svg';
 import useRedditApi, { withRedditApi } from 'hooks/useRedditApi';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import getSubreddits from 'components/services/getSubreddits';
 
 
 function useQuery() {
@@ -24,6 +25,7 @@ function SearchBar({ isSearchPage }) {
 
   useEffect(() => {
     dispatch({type: 'search:set', payload: {search: inputSearch} });
+    // eslint-disable-next-line
   }, [inputSearch]);
 
   const submitSearch = (e) => {
@@ -34,23 +36,7 @@ function SearchBar({ isSearchPage }) {
 
   const submit = async (event, value) => {
     if (event) event.preventDefault();
-    const data = await fetchReddit(`/subreddits/search/?q=${value}`, { method: 'GET' }).then(res => res.json());
-    console.log(data.data.children);
-    dispatch({type: 'isSearchEmpty:set', payload: {isSearchEmpty: !data?.data?.children?.length} });
-    let allAbouts = [];
-    const uniqID = [];
-    data.data.children.forEach( async (result) => {
-      const resultUrlPrefix = `/${result.data.display_name_prefixed}/about`;
-      const aboutResult = await fetchReddit(resultUrlPrefix).then(res => res.json());
-      if (aboutResult && aboutResult.data) {
-        const id = aboutResult.data.id;
-        if (!uniqID.includes(id)) {
-          uniqID.push(id);
-          allAbouts = [...allAbouts, aboutResult.data];
-          dispatch({type: 'searchResults:set', payload: {searchResults: allAbouts} });
-        }
-      }
-    });
+    dispatch(getSubreddits(fetchReddit, value));
   }
 
   return (
