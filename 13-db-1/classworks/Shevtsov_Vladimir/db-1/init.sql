@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS house;
 CREATE TABLE flat (
     id INT(11) NOT NULL,
     rooms_amount INT(11),
-    flat_number INT(11),
+    number INT(11),
     PRIMARY KEY(id)
 );
 
@@ -52,4 +52,7 @@ SELECT * FROM person
   LEFT JOIN flat ON person.flat_id = flat.id 
   LEFT JOIN house ON person.house_id = house.id 
   WHERE house.street = 'Плеханова' AND flat.rooms_amount = 2;
+-- all from flat#10
+
+SELECT * FROM person LEFT JOIN flat ON person.flat_id = flat.id WHERE flat.number = 10;
 
