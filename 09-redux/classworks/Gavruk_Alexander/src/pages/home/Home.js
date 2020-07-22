@@ -19,8 +19,7 @@ function Home(props) {
   async function fetchData() {
     const { fetchReddit } = props;
     const url = (searchValue === '' || isPostsData) ? `/${communityTitleData.communityUrl}/hot` : `/search?q=${searchValue}&type=sr,user`;
-    const data = await fetchReddit(url).then(res => res.json());
-    dispatch(subredditActions.fetchData(data));
+    dispatch(subredditActions.fetchData(fetchReddit, url));
   } 
 
   useEffect(() => {
