@@ -7,15 +7,15 @@ import Login from 'pages/login';
 import Callback from 'pages/callback';
 import Home from 'pages/home';
 
-function Routes(props) {
+function Routes() {
   const [,,isLoggedIn] = useRedditApi();
 
   if (isLoggedIn) { 
     return (
       <Switch>
-        <Route path="/" exact component={() => <Home {...props} />} />
-        <Route path="/search/:searchValue" component={() => <Home {...props} />} />
-        <Route path="/subreddit/:subredditUrl" component={() => <Home {...props} />} />
+        <Route path="/" exact component={() => <Home />} />
+        <Route path="/search/:searchValue" component={() => <Home />} />
+        <Route path="/subreddit/:subredditUrl" component={() => <Home />} />
         <Redirect to="/" />
       </Switch>
     );
