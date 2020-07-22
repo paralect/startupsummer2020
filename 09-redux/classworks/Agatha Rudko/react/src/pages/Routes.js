@@ -26,7 +26,7 @@ function Routes() {
     <Switch>
       <Route path="/login" exact component={Login} />
       <Route path="/callback" exact component={Callback} />
-      {/*<Redirect from='*' to="/login" />*/}
+      <Redirect from='*' to="/login" />
     </Switch>
   );
 }
