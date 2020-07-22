@@ -1,6 +1,6 @@
 const Koa = require('koa');
 const app = new Koa();
-const Router = require('@koa/router');
+const Router = require('koa-router');
 const session = require('koa-generic-session');
 const serve = require('koa-static');
 const router = new Router();
@@ -31,11 +31,24 @@ const data = async (ctx, next) => {
 router.get('/', index);
 router.get('/form', form);
 
-const schema = Joi.object({ lastName: Joi.string().required(), descr: Joi.string().min(3).required() });
+const schema = Joi.object({
+  name: Joi.string().required(),
+  lastName: Joi.string().required(),
+  descr: Joi.string().min(3).required(),
+  mark: Joi.number(),
+});
+
+const validator = (ctx, next) => {
+  const { error } = schema.validate(ctx.request.body);
+  if (!error) return next();
+  else {
+    ctx.body = error;
+  }
+};
 
 router.post(
   '/summer',
-  schema.validate(ctx.body),
+  validator,
   async (ctx, next) => {
     const body = ctx.request.body;
     const { name, lastName, descr, mark } = body;
@@ -45,6 +58,19 @@ router.post(
     return data(ctx, next);
   }
 );
+
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    console.log(err);
+    ctx.status = 400;
+    ctx.body = {
+      success: false,
+      message: err.message,
+    };
+  }
+});
 
 app.use(bodyParser());
 
