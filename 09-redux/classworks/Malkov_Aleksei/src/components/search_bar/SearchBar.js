@@ -4,8 +4,7 @@ import { ReactComponent as Search } from '../../assets/search.svg';
 import useRedditApi, { withRedditApi } from 'hooks/useRedditApi';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import * as selectors from '../../resources/selector';
-import { useSelector } from 'react-redux';
+
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);

@@ -8,7 +8,7 @@ import Callback from 'pages/callback';
 import Home from 'pages/home';
 import Search from './search';
 
-function Routes({ submit, reactSubreddit, about, search, searchResults }) {
+function Routes({ reactSubreddit, about, search }) {
   const [fetchReddit,,isLoggedIn] = useRedditApi();
 
   if (isLoggedIn) {
