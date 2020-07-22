@@ -7,7 +7,6 @@ const router = new Router();
 const mount = require('koa-mount');
 const xtpl = require('koa-xtpl');
 const bodyParser = require('koa-bodyparser');
-const validate = require('koa2-validation');
 const Joi = require('joi');
 
 app.keys = ['keys', 'asd'];
@@ -32,17 +31,17 @@ const data = async (ctx, next) => {
 router.get('/', index);
 router.get('/form', form);
 
-const schema = { lastName: Joi.string().required(), descr: Joi.string().min(3).required() };
+const schema = Joi.object({ lastName: Joi.string().required(), descr: Joi.string().min(3).required() });
 
 router.post(
   '/summer',
-  validate(schema),
+  schema.validate(ctx.body),
   async (ctx, next) => {
     const body = ctx.request.body;
     const { name, lastName, descr, mark } = body;
     ctx.session.data = ctx.session.data || [];
     ctx.session.data.push({ name, lastName, descr, mark });
-    console.log(ctx.session.data);
+
     return data(ctx, next);
   }
 );
