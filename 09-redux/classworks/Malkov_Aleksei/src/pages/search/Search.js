@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {withRedditApi} from 'hooks/useRedditApi';
 import Header from 'components/header';
 import Title from 'components/title';
 import styles from './search.module.css';
 import SearchResult from 'components/search_result';
 import { ReactComponent as Face} from 'assets/face.svg';
-import { useLocation } from "react-router-dom";
 import Spinner from 'components/spinner';
 import * as selectors from 'resources/selector';
 import { useSelector } from 'react-redux';
 
 
 function Search(props){
-  const searchResultsGlobal = useSelector(selectors.getSearchResults);
+  const searchResultsGlobal = useSelector(selectors.getSearchResultsWithAbouts);
   const emptySearch = useSelector(selectors.getIsSearchEmpty);
 
   return (
@@ -23,7 +22,7 @@ function Search(props){
           !emptySearch && <Title />
         }
         {
-          (!searchResultsGlobal || searchResultsGlobal.length === 0) && <Spinner />
+          !emptySearch && (!searchResultsGlobal || searchResultsGlobal.length === 0) && <Spinner />
         }
         {!emptySearch && searchResultsGlobal?.length > 0
           && <div className={styles.search__results}>

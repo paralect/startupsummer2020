@@ -10,4 +10,4 @@ function thunker() {
   }
 }
 
-module.exports = thunker;
+export default thunker;
