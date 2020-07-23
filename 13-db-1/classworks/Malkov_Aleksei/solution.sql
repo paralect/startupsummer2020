@@ -18,8 +18,8 @@ SELECT first_name, last_name, age, street, address FROM persons LEFT JOIN houses
 
 SELECT first_name, last_name, age, street, rooms_amount
 FROM persons 
-JOIN houses on houses.id = persons.house_id 
-JOIN flats on flats.id = persons.flat_id
+LEFT JOIN houses on houses.id = persons.house_id 
+LEFT JOIN flats on flats.id = persons.flat_id
 WHERE street = 'Plehanova' AND rooms_amount = 2;
 
 SELECT first_name, last_name, age, street, flat_number
