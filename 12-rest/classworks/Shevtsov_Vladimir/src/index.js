@@ -18,7 +18,7 @@ const genArticle = async (prompt) => {
   const res = await axios.post(parfUrl, {
     prompt,
     length: 30,
-    num_samples: 1,
+    num_samples: 4,
   },
     {
       headers: {
@@ -26,8 +26,7 @@ const genArticle = async (prompt) => {
       },
       timeout: 10000,
     });
-
-  return res;
+  return res.data.replies.join('\r\n');
 };
 
 const hashFunction = (password) => crypto
@@ -64,18 +63,24 @@ router.post('/signup', async (ctx, next) => {
   return next();
 });
 
-router.get('/articles', (ctx, next) => {
-  // get existing articles
-  // return them
-  console.log(ctx.state);
+router.get('/article', async (ctx, next) => {
+  const dbArticles = await fs.readFile('articles.json');
+  const articles = JSON.parse(dbArticles);
+  ctx.body = articles;
   return next();
 });
 
-router.post('/articles/create', (ctx, next) => {
-  if(ctx.state.jwtOriginalError) {
+router.post('/article', async (ctx, next) => {
+  if (ctx.state.jwtOriginalError) {
     ctx.status = 403;
   } else {
-    // create article
+    const { prompt } = ctx.request.body;
+    const article = await genArticle(prompt);
+    const dbArticles = await fs.readFile('articles.json');
+    const articles = JSON.parse(dbArticles);
+    articles[prompt] = article;
+    await fs.writeFile('articles.json', JSON.stringify(articles));
+
     return next();
   }
 });
