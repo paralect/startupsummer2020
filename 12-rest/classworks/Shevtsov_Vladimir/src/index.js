@@ -14,6 +14,21 @@ const jwtSecret = process.env.SECRET;
 
 const parfUrl = 'https://models.dobro.ai/gpt2/medium/';
 
+const genInterview = async (prompt) => {
+  const res = await axios.post(parfUrl, {
+    prompt,
+    length: 30,
+    num_samples: 4,
+  },
+    {
+      headers: {
+        'User-Agent': 'insomnia/2020.3.3',
+      },
+      timeout: 10000,
+    });
+  return res.data.replies.join('\r\n');
+}
+
 const genArticle = async (prompt) => {
   const res = await axios.post(parfUrl, {
     prompt,
@@ -28,6 +43,21 @@ const genArticle = async (prompt) => {
     });
   return res.data.replies.join('\r\n');
 };
+
+const genTagline = async (prompt) => {
+  const res = await axios.post(parfUrl, {
+    prompt,
+    length: 30,
+    num_samples: 1,
+  },
+    {
+      headers: {
+        'User-Agent': 'insomnia/2020.3.3',
+      },
+      timeout: 10000,
+    });
+  return res.data.replies[0];
+}
 
 const hashFunction = (password) => crypto
   .pbkdf2Sync(password, 'salt', 100000, 64, 'sha512')
@@ -63,27 +93,32 @@ router.post('/signup', async (ctx, next) => {
   return next();
 });
 
-router.get('/article', async (ctx, next) => {
-  const dbArticles = await fs.readFile('articles.json');
-  const articles = JSON.parse(dbArticles);
-  ctx.body = articles;
-  return next();
-});
-
-router.post('/article', async (ctx, next) => {
-  if (ctx.state.jwtOriginalError) {
-    ctx.status = 403;
-  } else {
-    const { prompt } = ctx.request.body;
-    const article = await genArticle(prompt);
-    const dbArticles = await fs.readFile('articles.json');
-    const articles = JSON.parse(dbArticles);
-    articles[prompt] = article;
-    await fs.writeFile('articles.json', JSON.stringify(articles));
-
+const addSimpleGetPost = (dbFile, route, generateFunc) => {
+  router.get(route, async (ctx, next) => {
+    const dbData = await fs.readFile(dbFile);
+    const data = JSON.parse(dbData);
+    ctx.body = data;
     return next();
-  }
-});
+  });
+
+  router.post(route, async (ctx, next) => {
+    if (ctx.state.jwtOriginalError) {
+      ctx.status = 403;
+    } else {
+      const { prompt } = ctx.request.body;
+      const dbData = await fs.readFile(dbFile);
+      const data = JSON.parse(dbData);
+      data[prompt] = await generateFunc(prompt);
+      await fs.writeFile(dbFile, JSON.stringify(data));
+      ctx.status = 200;
+      return next();
+    }
+  });
+};
+
+addSimpleGetPost('articles.json', '/article', genArticle);
+addSimpleGetPost('taglines.json', '/tagline', genTagline);
+addSimpleGetPost('interviews.json', '/interview', genInterview);
 
 const getToken = (ctx) => ctx.session.token;
 
