@@ -8,42 +8,43 @@ const Joi = require('@hapi/joi');
 const router = Router();
 
 const schema = Joi.object({
-  firstname: Joi.string().min(3).required(),
-  lastname: Joi.string().min(3).required(),
+  firstName: Joi.string().min(3).required(),
+  lastName: Joi.string().min(3).required(),
   text: Joi.string().min(3).required(),
   mark: Joi.number(),
 });
 
-const users = [];
-let user;
-
-router.get('/get', async (ctx) => {
-  const sess = session;
-  sess.count = sess.count || 0;
-  sess.count += 1;
-  ctx.body = sess.count;
+router.get('/counter', (ctx) => {
+  ctx.response.body = `Counter: ${ctx.session.counter}`;
 });
 
-router.get('/remove', async (ctx) => {
-  ctx.body = 0;
+router.get('/data', (ctx) => {
+  ctx.response.body = ctx.session.data;
 });
 
-router.post('/', async (ctx) => {
+router.post('/form', async (ctx) => {
   const { error, value } = schema.validate(ctx.request.body);
   if (!error) {
-    user = value;
-    users.push(user);
-    ctx.body = users;
+    ctx.session.data = ctx.session.data || [];
+    ctx.session.data.push(value);
+    ctx.response.body = JSON.stringify({ message: 'completed' });
   } else {
-    ctx.body = 'validation is failed';
+    ctx.response.body = JSON.stringify({ error });
   }
 });
 
 const app = new Koa();
 
+app.keys = ['newest secret key', 'older secret key'];
+
 app.use(session());
 app.use(bodyParser());
+app.use((ctx, next) => {
+  ctx.session.counter = ctx.session.counter || 0;
+  ctx.session.counter += 1;
+  return next();
+});
 app.use(serve('static'));
 app.use(router.routes());
 
-app.listen(3000);
+app.listen(3000, console.log('server started http://localhost:3000/'));
