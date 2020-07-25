@@ -1,34 +1,31 @@
 const serve = require('koa-static');
 const Koa = require('koa');
-const sessionss = require('koa-generic-session');
+const session = require('koa-generic-session');
 const bodyParser = require('koa-bodyparser');
 const Router = require('@koa/router');
 const joi = require('joi');
 const router = new Router();
 
 const app = new Koa();
-let session = sessionss;
-let formInputs = {};
+
+
 const schem = joi.object({
   name: joi.string().required(),
   surname: joi.string().min(3),
 });
 
 function get(ctx) {
-  session.count = session.count || 0;
-  session.count++;
+  const { session } = this;
+  this.session.count = this.session.count || 0;
+  this.session.count++;
   ctx.body = session.count;
 }
 
 function remove(ctx) {
-  session.count = 0;
-  ctx.body = session.count;
+  this.session.count = 0;
+  ctx.body = this.session.count;
 }
 
-function form(ctx) {
-  ctx.body = ctx.request.body;
-  formInputs.push(ctx.body);
-}
 
 app.use(bodyParser());
 app.use(async (ctx) => {
@@ -43,8 +40,13 @@ app.use(async (ctx) => {
 });
 
 router.post('/form', async (ctx, next) => {
+  if (schema.validate(ctx.request.body).error) {
+    ctx.body = 'Something is wrong...';
+    ctx.status = 400;
+  } else {
   ctx.body = ctx.request.body;
-  formInputs = schem.validate(ctx.request.body);
+  this.session.input = schem.validate(ctx.request.body);
+  }
   await next();
 });
 
