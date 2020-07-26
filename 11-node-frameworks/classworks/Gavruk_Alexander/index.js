@@ -1,9 +1,12 @@
 const Koa = require('koa');
 const Joi = require('joi')
+const fs = require('fs');
 const bodyParser = require('koa-bodyparser');
 const serve = require('koa-static');
 const session = require('koa-generic-session');
 const Router = require('koa-router');
+
+const counter = require('./middlewares/counter')
 
 const router = new Router();
 
@@ -21,36 +24,28 @@ app.use(session());
 
 app.use(serve('./static/text'));
 app.use(serve('./static/images'));
+app.use(serve('./static/pages'));
 
 app.use(bodyParser());
 
+app.use(counter);
+
 router
-  .post('/summer', async (ctx) => {
+  .post('/', async (ctx) => {
+    console.log('entered')
     const { error, value } = schema.validate(ctx.request.body);
     if (error) {
-      ctx.body = error.details[0].message;
+      ctx.body = JSON.stringify(error);
     } else {
       ctx.body = JSON.stringify(value);
     }
-  })
-
-app.use(async (ctx, next) => {
-  updateCount.call(ctx);
-  await next();
-  console.log(`${ctx.method} ${ctx.url}`);
-});
+  });
 
 router
   .get('/', async (ctx) => {
     const { session } = ctx;
     ctx.body = JSON.stringify({ count: session.count });
-  })
-
-function updateCount() {
-  const { session } = this;
-  session.count = session.count || 0;
-  session.count += 1;
-}
+  });
 
 app.use(router.routes());
 
