@@ -9,8 +9,6 @@ const app = new Koa();
 const _ = router();
 app.keys = ['kek', 'lol'];
 
-const dataBase = [];
-
 const schema = joi.object({
   id: joi.number().required(),
   name: joi.string().required(),
@@ -29,7 +27,7 @@ function increaseCounter(ctx, next) {
 }
 
 app.use((ctx, next) => {
-  ctx.body = 'Hello world!';
+  ctx.body = { message: 'Ky ^_^' };
   next();
 });
 
@@ -40,17 +38,18 @@ _.get('/counter', (ctx) => {
 });
 
 _.post('/set_form_data', (ctx) => {
-  if (schema.validate(ctx.request.body).error || dataBase.some((userInfo) => userInfo.value.id === ctx.request.body.id)) {
-    ctx.body = 'Incorrect form data';
+  if (schema.validate(ctx.request.body).error || ctx.session.dataBase.some((userInfo) => userInfo.value.id === ctx.request.body.id)) {
+    ctx.body = { message: 'Incorrect form data' };
     ctx.status = 400;
   } else {
-    dataBase.push(schema.validate(ctx.request.body));
-    ctx.body = 'Add form data in DB!';
+    ctx.session.dataBase = ctx.session.dataBase || [];
+    ctx.session.dataBase.push(ctx.request.body);
+    ctx.body = { message: 'Add form data in DB!' };
   }
 });
 
 _.get('/get_form_data', (ctx) => {
-  ctx.body = dataBase;
+  ctx.body = ctx.session.dataBase || [];
 });
 
 app.use(_.routes());
