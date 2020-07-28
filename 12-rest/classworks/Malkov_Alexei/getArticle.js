@@ -10,7 +10,7 @@ const getArticle = async (prompt) => {
     },
     {
       headers: {
-        'Host': 'models.dobro.ai',
+        //'Host': 'models.dobro.ai',
         'User-Agent': 'insomnia/2020.3.3',
         'Content-Type': 'text/plain;charset=UTF-8',
         'Accept': '*/*',
