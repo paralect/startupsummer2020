@@ -15,19 +15,23 @@ const schem = joi.object({
 });
 
 function get(ctx) {
-  const { session } = this;
-  this.session.count = this.session.count || 0;
-  this.session.count++;
+  const session = { count: ctx.session.count };
   ctx.body = session.count;
 }
 
 function remove(ctx) {
-  this.session.count = 0;
-  ctx.body = this.session.count;
+  session.count = 0;
+  ctx.body = session.count;
 }
-
+const increment = (ctx, next) => {
+  ctx.session.count = ctx.session.count || 0;
+  ctx.session.count++;
+  next();
+};
 
 app.use(bodyParser());
+app.use(session());
+app.use(increment);
 app.use(async (ctx) => {
   switch (ctx.url) {
     case '/get':
