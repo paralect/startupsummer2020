@@ -9,7 +9,7 @@ const app = new Koa();
 const _ = router();
 app.keys = ['kek', 'lol'];
 
-let dataBase = [];
+const dataBase = [];
 
 const schema = joi.object({
   id: joi.number().required(),
@@ -22,34 +22,24 @@ app.use(serve('assets/alohadance'));
 app.use(session());
 app.use(bodyParser());
 
-function increaseCounter() {
-  const { session } = this;
-  session.count = session.count || 0;
-  session.count += 1;
+function increaseCounter(ctx, next) {
+  ctx.session.count = ctx.session.count || 0;
+  ctx.session.count += 1;
+  next();
 }
 
-function getCounter() {
-  this.body = this.session.count;
-}
-
-app.use(async (ctx, next) => {
+app.use((ctx, next) => {
   ctx.body = 'Hello world!';
-  await next();
+  next();
 });
 
-app.use(async (ctx, next) => {
-  if (ctx.path !== '/favicon.ico' && ctx.method !== 'POST') {
-    increaseCounter.call(ctx);
-  }
-  await next();
+app.use(increaseCounter);
+
+_.get('/counter', (ctx) => {
+  ctx.body = ctx.session.count;
 });
 
-_.get('/counter', async (ctx, next) => {
-  getCounter.call(ctx);
-  await next();
-});
-
-_.post('/set_form_data', async (ctx, next) => {
+_.post('/set_form_data', (ctx) => {
   if (schema.validate(ctx.request.body).error || dataBase.some((userInfo) => userInfo.value.id === ctx.request.body.id)) {
     ctx.body = 'Incorrect form data';
     ctx.status = 400;
@@ -57,12 +47,10 @@ _.post('/set_form_data', async (ctx, next) => {
     dataBase.push(schema.validate(ctx.request.body));
     ctx.body = 'Add form data in DB!';
   }
-  await next();
 });
 
-_.get('/get_form_data', async (ctx, next) => {
+_.get('/get_form_data', (ctx) => {
   ctx.body = dataBase;
-  await next();
 });
 
 app.use(_.routes());
