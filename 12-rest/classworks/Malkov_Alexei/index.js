@@ -1,13 +1,18 @@
 let koa = require('koa');
 let Router = require('koa-router');
 let session = require('koa-generic-session');
+const serve = require('koa-static');
+const send  = require('koa-send');
 const bodyParser = require('koa-bodyparser');
 var jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const signup = require('./signup');
 const signin = require('./signin');
 const bd = require('./base.json');
 const checkUser = require('./checkUser');
 const getArticle = require('./getArticle');
+const addArticle = require('./addArticle');
+
 let app = new koa();
 let router = new Router();
 let token;
@@ -16,37 +21,43 @@ app.use(bodyParser());
 app.keys = ['keys', 'keykeys'];
 app.use(session());
 
+const root = require('path').join(__dirname, 'client');
+app.use(serve(root));
+
 router
-  .get('/', (ctx, next) => {
-    console.log(token);
+  .get('/', async (ctx, next) => {
+    await send(ctx, '/home.html', { root });
+    next();
   })
-  .get('/signup', (ctx, next) => {
-    const actions = 'action="http://localhost:3000/signup" method="post"';
-    const form = `<form ${actions}><input name="name" type="text"><br><input name="password" type="text"><br><input type="submit" value="signup"></form>`;
-    ctx.body = `<html><head></head><body>${form}</body></html>`;
-  }).get('/signin', (ctx, next) => {
-    const actions = 'action="http://localhost:3000/signin" method="post"';
-    const form = `<form ${actions}><input name="name" type="text"><br><input name="password" type="text"><br><input type="submit" value="signin"></form>`;
-    ctx.body = `<html><head></head><body>${form}</body></html>`;
-  }).post('/signup', (ctx, next) => {
+  .get('/signup', async (ctx, next) => {
+    await send(ctx, '/signup.html', { root });
+    next();
+  })
+  .get('/signin', async (ctx, next) => {
+    await send(ctx, '/signin.html', { root });
+    next();
+  })
+  .post('/signup', async (ctx, next) => {
     const formData = ctx.request.body;
-    signin(formData);
-  }).post('/signin', (ctx, next) => {
-    const formData = ctx.request.body;
-    if (checkUser(formData)) {
-      token = jwt.sign({ foo: 'bar' }, 'shhhhh');
-      const session = ctx.session;
-      session.token = token;
-      const link = "http://localhost:3000/posts";
-      ctx.body = `<html><head></head><body><h1>Hello, ${formData.name}</h1><br><p>your token: ${token}</p><a href="${link}">posts</a></body></html>`;
-    }
-  }).get('/posts', async (ctx, next) => {
+    const signNewUser = signup(formData);
+    ctx.body = signNewUser.message;
+  })
+  .post('/signin', async (ctx, next) => {
+    const signed = signin(ctx, jwt);
+    const session = ctx.session;
+    if (signed.ok) session.state = { name: signed.name }
+    next();
+  })
+  .get('/posts', async (ctx, next) => {
     const session = ctx.session;
     if (session.token) {
       const decoded = jwt.verify(session.token, 'shhhhh');
       console.log(decoded);
-      const posts = await getArticle('Hello');
-      if (decoded.foo === 'bar') ctx.body = posts;
+      const posts = await getArticle('Hello people', 'We are aliens');
+      console.log(posts.data);
+      console.log(session.state);
+      const allPosts = addArticle(session.state, posts.data);
+      if (decoded.foo === 'bar') ctx.body = allPosts;
     } else console.log('AAAAAAAAAAAAAAAAA');
   });
 

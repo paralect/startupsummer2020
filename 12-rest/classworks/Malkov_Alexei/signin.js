@@ -1,13 +1,17 @@
-const fs = require('fs');
-const readJSON = require('./readJSON');
-const saveJSON = require('./saveJSON');
+const checkUser = require("./checkUser");
 
-function signin(formData) {
-  const newUser = {...formData};
-  const base = readJSON('base.json');
-  base.users.push(newUser);
-  if (base) saveJSON('base.json', base);
+function signin(ctx, jwt) {
+  const formData = ctx.request.body;
+    console.log('qwer');
+    if (checkUser(formData, true)) {
+      token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+      const session = ctx.session;
+      session.token = token;
+      const link = "http://localhost:3000/posts";
+      ctx.body = `<html><head></head><body><h1>Hello, ${formData.name}</h1><br><p>your token: ${token}</p><a href="${link}">posts</a></body></html>`;
+      return { name: formData.name, ok: true }
+    }
+    return { name: formData.name, ok: false }
 }
-/*const key = crypto.pbkdf2Sync(formData.password, 'salt', 100000, 64, 'sha512');
-    console.log(key);*/
+
 module.exports = signin;
