@@ -6,6 +6,7 @@ const Joi = require('joi')
 
 const Koa = require('koa');
 const Router = require('koa-router');
+const { countReset } = require('console');
 const app = new Koa();
 const router = new Router();
 
@@ -18,31 +19,24 @@ app.use(serve('static'));
 app.use(session());
 app.use(bodyParser());
 
-app.use(async (ctx, next) => {
-  ctx.body = 'Hello World';
-  next();
-});
-
 app.use((ctx, next) => {
-  ctx.body = 'My function'
+  ctx.session.count = ctx.session.count || 0;
+  ctx.session.count++;
   next();
 });
 
+router.get ('/get', async (ctx, next) => {
+  get(ctx);
+  next();
+});
 
-app.use(async (ctx, next) => {
-  if (ctx.path === '/get'){
-    get(ctx);
-  } else if (ctx.path === '/regenerate') {
-    regenerate(ctx);
-  }
-  next()
+router.get ('/regenerate', async (ctx, next) => {
+  regenerate(ctx);
+  next();
 });
 
 const get = (ctx) => {
-  let session = ctx.session;
-  session.count = session.count || 0;
-  session.count++;
-  ctx.body = session.count;
+  ctx.body = ctx.session.count;
 }
 
 const regenerate = async (ctx) => {
