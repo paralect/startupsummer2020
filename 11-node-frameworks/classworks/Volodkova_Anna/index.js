@@ -1,39 +1,39 @@
-const {incCounter, schema} = require('./functions') ;
-const Router = require('koa-router')
+const incCounter = require('./inc-counter.middleware') ;
+const reviewSchema = require('./reviewSchema');
+
+const Router = require('koa-router');
 const koa = require('koa');
 const serve = require('koa-static');
 const session = require('koa-generic-session');
 const bodyParser = require('koa-bodyparser');
 
 const app = new koa();
+app.keys = ['ahahaha'];
 
 app.use(bodyParser());
 
 app.use(serve(`public`));
 
 app.use(session());
-const inc = incCounter(session);
+
+app.use(incCounter);
 
 const router = new Router();
 
 router.post('/summer', (ctx) => {
-  inc();
-  const {error, value} = schema.validate(ctx.request.body);
+  const {error, value} = reviewSchema.validate(ctx.request.body);
   if (!error) {
     ctx.body = JSON.stringify(value);
   } else {
-    ctx.body = "Not valid name or mark";
+    ctx.body = JSON.stringify(error);
   }
 })
 
 router.get('/sessionCount', (ctx) => {
-  if (ctx.request.path !== '/favicon.ico')
-  {
     const sessionsCount = {
-      sessionNumber : inc()
+      sessionNumber : ctx.session.count,
     }
     ctx.body = JSON.stringify(sessionsCount);
-  }
 })
 
 app
@@ -45,6 +45,5 @@ app.use(async (ctx, next) => {
   if (ctx.request.path !== '/favicon.ico')
     console.log("koko");
 });
-
 
 app.listen(3000);
