@@ -16,17 +16,23 @@ const inc = incCounter(session);
 
 const router = new Router();
 
-let mySummerObj;
-
 router.post('/summer', (ctx) => {
   inc();
   const {error, value} = schema.validate(ctx.request.body);
   if (!error) {
-    mySummerObj = value;
-    console.log(value);
-    ctx.status = 200;
+    ctx.body = JSON.stringify(value);
   } else {
     ctx.body = "Not valid name or mark";
+  }
+})
+
+router.get('/sessionCount', (ctx) => {
+  if (ctx.request.path !== '/favicon.ico')
+  {
+    const sessionsCount = {
+      sessionNumber : inc()
+    }
+    ctx.body = JSON.stringify(sessionsCount);
   }
 })
 
@@ -40,13 +46,5 @@ app.use(async (ctx, next) => {
     console.log("koko");
 });
 
-app.use((ctx) => {
-  if (ctx.request.path !== '/favicon.ico')
-  {
-    ctx.body = {
-      "sessionVisits":"Session" + inc()
-    };
-  }
-})
 
 app.listen(3000);
