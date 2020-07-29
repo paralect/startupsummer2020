@@ -1,14 +1,10 @@
-import { SET_INPUT_VALUE } from "../actions";
+import { combineReducers } from "redux";
 
-const initialState = {
-  inputValue: ''
-};
+import inputValue from "./inputValue";
+import subredditData from "./subredditData";
 
-export default function inputInfo(state = initialState, { type, payload }) {
-  switch (type) {
-    case SET_INPUT_VALUE:
-      return { ...state, inputValue: payload };
-    default:
-      return state;
-  }
-}
+export default combineReducers({
+  inputValue,
+  subredditData,
+});
+

@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
+import { setInputValue } from '../../store/actions/inputValue';
 import logo from './Reddit-logo.svg';
 import searchElem from './search-elem.svg';
 import styles from './searchInputStyles.module.css';
-import { useDispatch } from 'react-redux';
-
-import { setInputValueAction } from "../../store/actions/inputValue";
+import { getInputValue } from '../../entity.selectors';
 
 function Header() {
-
   const dispatch = useDispatch();
 
-  const [inputVal, setInputVal] = useState('');
-
-  const inputChangeHandler = (e) => {
-    setInputVal(e.target.value);
-    dispatch(setInputValueAction(e.target.value))
-  }
+  const inputValue = useSelector(getInputValue);
 
   return (
     <>
@@ -25,8 +21,8 @@ function Header() {
           <img src={searchElem} />
           <input
             type="text"
-            value={inputVal}
-            onChange={inputChangeHandler}
+            value={inputValue}
+            onChange={(e) => dispatch(setInputValue(e.target.value))}
           />
         </div>
       </header>
