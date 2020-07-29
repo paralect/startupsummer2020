@@ -1,22 +1,21 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {useRouteMatch} from "react-router-dom";
-import {useSelector, useDispatch} from 'react-redux';
-import Header from 'components/header'
+import React, { useEffect, useState, useRef } from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSearchValue } from './resourses/searchValue.selectors';
+import Header from 'components/header';
 import Pages from 'pages';
-import {withRedditApi} from './hooks/useRedditApi';
-import {setPostsNull, setSearchValue, fetchPosts} from "./resourses/actions";
+import { withRedditApi } from './hooks/useRedditApi';
+import { setPostsNull, setSearchValue, fetchPosts } from "./resourses/actions";
 
 function App(props) {
   const dispatch = useDispatch();
-  const getSearchValue = useSelector((state) => state.value);
-  let getSubreddits = useSelector((state)=>state.posts);
-  console.log('getSubreddits from app.js', getSubreddits);
-
   const [reactSubreddit, setReactSubreddit] = useState(null);
   const [reactAbout, setReactAbout] = useState(null);
+  const searchValue = useSelector(getSearchValue);
 
 
-  const getdata = async (name = 'r/react') => {
+
+  const getData = async (name = 'r/react') => {
     const {fetchReddit} = props;
     const data = await fetchReddit(`/${name}/hot`).then(res => res.json());
     setReactSubreddit(data);
@@ -27,7 +26,7 @@ function App(props) {
 
   useEffect(() => {
     if (props.isToken) {
-      getdata();
+      getData();
       dispatch(setPostsNull());
     }
   }, [props.isToken]);
@@ -39,27 +38,22 @@ function App(props) {
   useEffect(() => {
     if (match && match.params.subredditUrl !== prevSubUrl.current) {
       prevSubUrl.current = match.params.subredditUrl;
-      //getSubreddits(match.params.subredditUrl);
-      getdata(`r/${match.params.subredditUrl}`);
-      //setReactSubreddits(null);
+      getData(`r/${match.params.subredditUrl}`);
       dispatch(setPostsNull());
     }
   }, [match]);
 
 
   const handleOnChangeInput = (event) => {
-    //setSearchValue(event.target.value);
     dispatch(setSearchValue(event.target.value));
   }
 
-  const handleBtnClick = (event) => {
-    console.log('Button clicked')
-    if (getSearchValue) {
-      dispatch(fetchPosts(props, getSearchValue));
+  const handleBtnClick = () => {
+    if (searchValue) {
+      dispatch(fetchPosts(props, searchValue));
     }
   }
 
-  getSubreddits = useSelector((state)=>state.posts);
 
   return (
       <main>
@@ -67,8 +61,9 @@ function App(props) {
           <Header handleOnChangeInput={handleOnChangeInput} handleBtnClick={handleBtnClick}/>
         </header>
         <section>
-          <Pages reactSubreddit={reactSubreddit} reactAbout={reactAbout}
-                 reactSubreddits={getSubreddits} handle={getdata}/>
+          <Pages reactSubreddit={reactSubreddit}
+                 reactAbout={reactAbout}
+                 handle={getData}/>
         </section>
       </main>
   );

@@ -12,7 +12,6 @@ export function setSearchValue(seachValue) {
 }
 
 export function fetchPosts(props, str) {
-  console.log('Action fetch posts, props, str', props, str)
   return async dispatch => {
     const {fetchReddit} = props;
     const data = await fetchReddit('/subreddits/search?q=' + str.toString()).then(res => res.json());
@@ -25,7 +24,6 @@ export function fetchPosts(props, str) {
 
 
 export function setPostsNull() {
-  console.log('SetPostsNull');
   return {
     type: SET_REACT_SUBREDDITS_POSTS_NULL,
   };

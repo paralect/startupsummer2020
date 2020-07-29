@@ -4,7 +4,7 @@ import {searchValueReducer} from './searchValueReducer';
 import {reactSubredditsReducer} from './reactSubredditsReducer'
 
 const rootReducer = combineReducers({
-  value: searchValueReducer,
+  input: searchValueReducer,
   posts: reactSubredditsReducer
   }
 );
