@@ -1,95 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { withRedditApi } from 'hooks/useRedditApi';
-import smorc from './kekw.png';
-import fuckImg from './fuck.jpg';
-import comment from './comment.jpg';
-import moment from "moment";
-import CommunityPosts from './CommunityPosts';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+
+import lukashenkoImg from './lukasenko.jpg';
+import CommunityPosts from './CommunityPosts';
+import { getInputValue, getSubredditData } from '../../entity.selectors';
+import { getSubredditInfo } from './getSubredditInfo';
+
+import NotFound from './NotFound';
+import CommunityPosts from './CommunityPosts';
+import CommunityList from './CommunityList';
 
 
 function Home(props)  {
-
-  const [reactSubreddit, setReactSubreddit] = useState(null);
-
-  const getInputValue = store => store.inputValue;
+  const dispatch = useDispatch();
 
   const inputValue = useSelector(getInputValue);
+  const subredditData = useSelector(getSubredditData);
 
   useEffect(() => {
     async function fetchData() {
       const { fetchReddit } = props;
-      let data;
-      if (!props.location) {
-        data = await fetchReddit(`/search?q=${inputValue}&type=sr,user`)
-          .then(res => res.json())
-          .catch((err) => { console.log(err) });
-      } else {
-        data = await fetchReddit(`${props.location.state.url}hot`)
-          .then(res => res.json())
-          .catch((err) => { console.log(err) });
-      }
-      setReactSubreddit(data);
+      const url = props.location ? `${props.location.state.url}hot` : `/search?q=${inputValue}&type=sr,user`;
+      dispatch(getSubredditInfo(fetchReddit, url));
     }
     fetchData();
-  }, [inputValue]);
+  }, [inputValue, subredditData]);
 
-  if (!reactSubreddit) {
+  if (!subredditData) {
     return (
       <p>Loading...</p>
-    );
-  }
-
-  const notFound = () => {
-    return (
-      <div className="smorc">
-        <img src={smorc} />
-        <p>Sorry, there were no community results for “ {inputValue} ”</p>
-      </div>
-    );
-  }
-
-  const communityPosts = () => {
-    return (
-      <CommunityPosts className="community-posts">
-        <div className="community-info">
-          <img className="community-posts_logo" src={props.location.state.img || fuckImg} />
-          <div>
-            <h3>{props.location.state.title}</h3>
-            <p>{props.location.state.name}</p>
-          </div>
-        </div>
-        <div className="bg-gray">
-        <ul>
-          {
-            reactSubreddit.data.children.map(child => (
-              <li key={child.data.id} className="post">
-                <p>Posted by {child.data.subreddit_name_prefixed}&#nbsp;
-                 {moment.unix(child.data.created).startOf('day').fromNow()} ago</p>
-                <p className="post_title">{child.data.title}</p>
-                <p>{child.data.selftext}</p>
-                <div>
-                  <img src={comment}></img>
-                  <p>{child.data.num_comments} Comments</p>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-        </div>
-      </CommunityPosts>
     );
   }
 
   const communityList = () => {
     return (
       <div className="bg-gray">
-        <p className="search-results-p">Search results for “ <span className="fw-b">{ inputValue }</span> ”</p>
+        <p className="search-results-p">
+          Search results for “
+          <span className="fw-b">{ inputValue }</span>
+          ”
+        </p>
         <p className="community-list_title">Communities and users</p>
         <div className="community-list_content">
           <ul>
-          {reactSubreddit.data.children.map(child => (
+          {subredditData.data.children.map(child => (
             <li key={child.data.id} >
               <Link to={{
                 pathname: `/subreddit/${child.data.id}`,
@@ -100,8 +57,8 @@ function Home(props)  {
                   name: child.data.display_name_prefixed
                 }
               }}>
-            <div className="chiki-bamboni">
-              <img src={child.data.icon_img || fuckImg}></img>
+            <div className="community-info">
+              <img src={child.data.icon_img || lukashenkoImg}></img>
               <div>
                 <p className="community-name">{child.data.display_name_prefixed}</p>
                 <p className="community-members">
@@ -121,14 +78,16 @@ function Home(props)  {
 
   return (
     <section className="community-list">
-      {reactSubreddit.data && Object.keys(reactSubreddit).length !== 0 && reactSubreddit.data.children.length ?
-        !props.location ?
-          communityList()
+      {!subredditData.data && <NotFound />}
+      {subredditData.data &&
+        !props.location
+          ?
+          <CommunityList />
           :
-          communityPosts()
-        :
-        notFound()
-    }
+          <CommunityPosts
+            location={props.location}
+          />
+      }
     </section>
   );
 }

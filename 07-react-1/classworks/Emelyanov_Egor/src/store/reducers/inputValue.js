@@ -1,7 +1,14 @@
-import { combineReducers } from "redux";
+import { SET_INPUT_VALUE } from "../actions";
 
-import inputValue from "./inputValue";
+const initialState = {
+  inputValue: ''
+};
 
-export default combineReducers({
-  inputValue
-});
+export default function inputInfo(state = initialState, { type, payload }) {
+  switch (type) {
+    case SET_INPUT_VALUE:
+      return { ...state, inputValue: payload };
+    default:
+      return state;
+  }
+}
