@@ -4,6 +4,10 @@ const fs = require('fs');
 const qs = require('querystring');
 const crypto = require('crypto');
 const rightHash = '37e753db1079f7d8ff8d145769664df46b12d8c3a3c4930a2e66ab76a8bfb4ca9e0fe69b7bc40355755846342cf19c95c58fa538d964963f04aff409621ec330';
+const pass = {
+  SALT: 'salt',
+  SHA: 'sha512'
+};
 
 http
   .createServer((req, res) => {
@@ -55,7 +59,7 @@ http
       req.on('end', function() {
         if (error) return;
         const formData = qs.parse(requestBody);
-        const key = crypto.pbkdf2Sync(formData.password, 'salt', 100000, 64, 'sha512');
+        const key = crypto.pbkdf2Sync(formData.password, pass.SALT, 100000, 64, pass.SHA);
         res.writeHead(200, {'Content-Type': 'application/javascript'});
         res.write(JSON.stringify({ isValid: key.toString('hex') === rightHash }));
         res.end();
