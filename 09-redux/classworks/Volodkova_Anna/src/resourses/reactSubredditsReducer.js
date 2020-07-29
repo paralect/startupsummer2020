@@ -1,4 +1,4 @@
-import {SET_REACT_SUBREDDITS_POSTS, SET_REACT_SUBREDDITS_POSTS_NULL} from './types';
+import { SET_REACT_SUBREDDITS_POSTS, SET_REACT_SUBREDDITS_POSTS_NULL } from './types';
 
 const initialState = {
   posts: null,

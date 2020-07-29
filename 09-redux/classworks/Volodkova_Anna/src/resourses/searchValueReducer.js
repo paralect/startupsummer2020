@@ -1,4 +1,4 @@
-import {SET_SEARCH_VALUE} from "./types";
+import { SET_SEARCH_VALUE } from "./types";
 
 const initialState = {
   value: ''
@@ -10,6 +10,5 @@ export const searchValueReducer = (state = initialState, action) => {
       return {...state, value: action.payload}
     default:
       return state;
-
   }
 }

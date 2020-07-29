@@ -4,12 +4,6 @@ import './listSearchItem.css'
 import logo from './logo.svg';
 import { Link } from "react-router-dom";
 
-//[i].data.header_img
-//[i].data.display_name_prefixed:
-//subscribers
-//public_description
-
-
 function ListSearchItem (props) {
     return (
       <Link
