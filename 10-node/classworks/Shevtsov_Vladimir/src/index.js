@@ -17,7 +17,7 @@ const server = http.createServer((req, res) => {
         info = path.resolve(__dirname);
         break;
       case '/file_name':
-        info = path.resolve(__dirname, __filename);
+        info = path.resolve(__filename);
         break;
       case '/cpus':
         info = JSON.stringify(os.cpus(), 2);
@@ -37,15 +37,15 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'POST') {
     let isValid = false;
-    let body = '';
+    const chunks = [];
     const validPasswordHash = hashFunction('supper-secure-password');
 
     req.on('data', (chunk) => {
-      body += chunk.toString();
+      chunks.push(chunk);
     });
     
     req.on('end', () => {
-      const data = JSON.parse(body);
+      const data = JSON.parse(chunks.join(''));
       const { password } = data;
       isValid = validPasswordHash === hashFunction(password);
 

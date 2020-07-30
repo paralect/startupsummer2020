@@ -4,6 +4,7 @@
   "description": "paralect startup summer 2020 day 10 task",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "test": "node src/client.js"
   },
   "author": "",
