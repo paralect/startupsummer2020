@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import reducer from './reducer';
+import reducer from './reducers/index';
 
 const store = createStore(
     reducer,
@@ -10,7 +10,7 @@ const store = createStore(
 );
 
 if (module.hot) {
-    module.hot.accept('./reducer', () => {
+    module.hot.accept('./reducers/index', () => {
       store.replaceReducer(reducer);
     });
 }

@@ -1,11 +1,9 @@
-const initialState = {
+export default function seatch(state = { 
   search: '',
   searchResults: [],
   searchResultsWithAbouts: [],
   isSearchEmpty: false,
-};
-
-export default (state = initialState, action) => {
+ }, action) {
   switch (action.type) {
     case 'search:set':
       return {
@@ -31,4 +29,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-};
+}

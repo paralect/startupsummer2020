@@ -1,12 +1,23 @@
-export function getSearchResults({ searchResults }) {
-    return searchResults;
+export function getReactSubreddit({ subreddit }) {
+    return subreddit.reactSubreddit;
 }
-export function getSearchResultsWithAbouts({ searchResultsWithAbouts }) {
-    return searchResultsWithAbouts;
+
+export function getAbout({ subreddit }) {
+    return subreddit.about;
 }
+
+export function getSearchResults({ search }) {
+    return search.searchResults;
+}
+
+export function getSearchResultsWithAbouts({ search }) {
+    return search.searchResultsWithAbouts;
+}
+
 export function getSearch({ search }) {
-    return search;
+    return search.search;
 }
-export function getIsSearchEmpty({ isSearchEmpty }) {
-    return isSearchEmpty;
+
+export function getIsSearchEmpty({ search }) {
+    return search.isSearchEmpty;
 }
