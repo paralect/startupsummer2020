@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styles from './search-bar.module.css';
 import { ReactComponent as Search } from '../../assets/search.svg';
 import useRedditApi, { withRedditApi } from 'hooks/useRedditApi';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import getSubreddits from 'components/services/getSubreddits';
+import * as selectors from 'resources/selector';
+import { useSelector, useDispatch } from 'react-redux';
+import getSubreddits from 'components/services/search/getSubreddits';
 
 
 function useQuery() {
@@ -12,8 +13,8 @@ function useQuery() {
 }
 
 function SearchBar({ isSearchPage }) {
-  const [inputSearch, setInputSearch] = useState('');
-  const [fetchReddit,,] = useRedditApi();
+  const inputSearch = useSelector(selectors.getSearch);
+  const [fetchReddit] = useRedditApi();
   const history = useHistory();
   const query = useQuery();
   const dispatch = useDispatch();
@@ -23,10 +24,14 @@ function SearchBar({ isSearchPage }) {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    dispatch({type: 'search:set', payload: {search: inputSearch} });
-    // eslint-disable-next-line
-  }, [inputSearch]);
+  const setSearch = (value) => {
+    dispatch({type: 'search:set', payload: {search: value} });
+  };
+
+  const submit = async (event, value) => {
+    if (event) event.preventDefault();
+    dispatch(getSubreddits(fetchReddit, value));
+  }
 
   const submitSearch = (e) => {
     e.preventDefault();
@@ -34,10 +39,7 @@ function SearchBar({ isSearchPage }) {
     submit(e, inputSearch);
   };
 
-  const submit = async (event, value) => {
-    if (event) event.preventDefault();
-    dispatch(getSubreddits(fetchReddit, value));
-  }
+  
 
   return (
     <form className={styles.container} onSubmit={(e) => submitSearch(e)}>
@@ -46,7 +48,7 @@ function SearchBar({ isSearchPage }) {
         className={styles.input__search}
         placeholder="Search"
         value={inputSearch}
-        onChange={(e) => setInputSearch(e.target.value)}
+        onChange={(e) => setSearch(e.target.value)}
       />
     </form>
   );

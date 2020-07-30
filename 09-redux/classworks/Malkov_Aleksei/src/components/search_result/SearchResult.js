@@ -1,14 +1,10 @@
 import React from 'react';
 import styles from './search-result.module.css';
 import RoundImage from 'components/round_image';
+import parseImage from 'components/services/parseImage';
 
 
 function SearchResult(props) {
-  function parseImage(src) {
-    const newSrc = src.split('?')[0];
-    return newSrc;
-  }
-
   return (
     <div className={styles.container}>
       <RoundImage src={parseImage(props.about.community_icon)} alt={props.about.display_name_prefixed} />
