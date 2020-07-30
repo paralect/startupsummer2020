@@ -23,6 +23,23 @@ const schema = Joi.object({
   rank: Joi.number().required(),
 });
 
+async function get(ctx) {
+  let session = ctx.session;
+  session.count = session.count || 0;
+  session.count++;
+  return session.count;
+}
+
+function remove(ctx) {
+  ctx.session = null;
+  ctx.body = 0;
+}
+
+app.use(async (ctx, next) => {
+  await get(ctx);
+  await next();
+});
+
 router
   .post('/spent', async (ctx, next) => {
     let bodyData = ctx.request.body;
@@ -33,14 +50,21 @@ router
       session.state = session.state ? [...session.state, bodyData] : [bodyData];
     }
     catch (err) {
-      console.log(err);
+      ctx.body = err;
     }
     await next();
   })
   .get('/spent', (ctx, next) => {
     let session = ctx.session;
     ctx.body = session.state;
+  })
+  .get('/get', async (ctx, next) => {
+    ctx.body = ctx.session.count;
+  })
+  .del('/remove', (ctx, next) => {
+    remove(ctx);
   });
+  
 
 app.use(router.routes());
 
