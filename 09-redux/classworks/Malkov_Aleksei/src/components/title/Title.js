@@ -1,12 +1,9 @@
 import React from 'react';
 import styles from './title.module.css';
+import parseImage from 'components/services/parseImage';
 
 
 function Title({ about, search }) {
-  function parseImage(src) {
-    const newSrc = src.split('?')[0];
-    return newSrc;
-  }
   if (about) {
     return (
       <div className={styles.container}>

@@ -1,13 +1,10 @@
-import fetcher from "./fetcher";
-import updateSearchResults from "./updateSearchResults";
-import fetcherAbout from "./fetcherAbout";
-import updateSearchResultsWithAbouts from "./updateSearchResultsWithAbouts";
-import updateIsEmptySearch from "./updateIsEmptySearch";
+import { updateSearchResults, updateSearchResultsWithAbouts, updateIsEmptySearch } from "./update";
+import { fetchAbout, fetchSearch } from "../request/fetch";
 
 export function getSubreddits(fetchReddit, value) {
   return async function(dispatch) {
-    const searchs = await fetcher(fetchReddit, value);
-    console.log(searchs);
+    const searchs = await fetchSearch(fetchReddit, value);
+
     if (!searchs?.length) {
       dispatch(updateIsEmptySearch(true));
     } else {
@@ -15,7 +12,7 @@ export function getSubreddits(fetchReddit, value) {
       dispatch(updateSearchResults(searchs));
       searchs.forEach(async (searchObject) => {
         const subredditName = searchObject.data.display_name_prefixed;
-        const about = await fetcherAbout(fetchReddit, subredditName);
+        const about = await fetchAbout(fetchReddit, subredditName);
         dispatch(updateSearchResultsWithAbouts(about.data));
       });
     }

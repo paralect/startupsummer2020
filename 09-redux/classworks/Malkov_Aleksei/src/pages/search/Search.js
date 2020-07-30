@@ -12,19 +12,19 @@ import { useSelector } from 'react-redux';
 
 function Search(props){
   const searchResultsGlobal = useSelector(selectors.getSearchResultsWithAbouts);
-  const emptySearch = useSelector(selectors.getIsSearchEmpty);
+  const isEmptySearch = useSelector(selectors.getIsSearchEmpty);
 
   return (
     <main>
       <Header isSearchPage search={props.search} />
       <section className={styles.container}>
         {
-          !emptySearch && <Title />
+          !isEmptySearch && <Title />
         }
         {
-          !emptySearch && (!searchResultsGlobal || searchResultsGlobal.length === 0) && <Spinner />
+          !isEmptySearch && (!searchResultsGlobal || searchResultsGlobal.length === 0) && <Spinner />
         }
-        {!emptySearch && searchResultsGlobal?.length > 0
+        {!isEmptySearch && searchResultsGlobal?.length > 0
           && <div className={styles.search__results}>
             {searchResultsGlobal.map(child => (
             child && <SearchResult
@@ -35,7 +35,7 @@ function Search(props){
           </div>
         }
         {
-          emptySearch
+          isEmptySearch
           && <div className={styles.error__container}>
             <div className={styles.error}>
               <Face />

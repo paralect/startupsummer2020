@@ -8,13 +8,13 @@ import Callback from 'pages/callback';
 import Home from 'pages/home';
 import Search from './search';
 
-function Routes({ reactSubreddit, about, search }) {
-  const [fetchReddit,,isLoggedIn] = useRedditApi();
+function Routes() {
+  const [isLoggedIn] = useRedditApi();
 
   if (isLoggedIn) {
     return (
       <Switch>
-        <Route path="/" exact render={() => <Home fetchReddit={fetchReddit} reactSubreddit={reactSubreddit} about={about} search={search}/>} />
+        <Route path="/" exact render={() => <Home />} />
         <Route path="/search" render={() => <Search isSearchPage />} />
         <Route path="/null" exact component={null}/>
         <Redirect to="/" />

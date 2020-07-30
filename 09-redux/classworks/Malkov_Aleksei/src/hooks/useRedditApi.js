@@ -1,7 +1,5 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
 
-// eslint-disable-next-line 
-const herokuProxy = 'https://supermarche-saucisson-88566.herokuapp.com/';
 const BASE_URL = 'https://oauth.reddit.com';
 
 export const RedditApiTokenContext = createContext(null);
