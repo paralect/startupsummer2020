@@ -1,43 +1,24 @@
 const Router = require('koa-router');
 const app = new Router();
-const schema = require('./schemas')
-const session = require('koa-generic-session');
-
-const state = {
-  formData: [],
-  session: {}
-};
-
-app.use(session());
+const schema = require('./schemas');
 
 app.get('/', async (ctx) => {
-  const session = get(ctx)
-  ctx.body = session;
+  ctx.body = 'works';
 });
 
-app.post('/sendForm', async (ctx) => {
-  const { error, value } = schema.validate(ctx.request.body)
-  const session = get(ctx);
-  state.formData = [...state.formData, value];
-  state.session = {...get(ctx)};
-  console.log('state ', state)
-  ctx.body = `${error || JSON.stringify(value)}\n\n ${JSON.stringify(session)}`;
+app.post('/send-form', async (ctx) => {
+  const { error, value } = schema.validate(ctx.request.body);
+  if (!error) {
+    ctx.session.users.push({...value});
+    console.log(ctx.session.users);
+    ctx.body = ctx.session;
+  } else {
+    ctx.body = error;
+  }
 });
 
-app.get('/getData', async (ctx) => {
-  ctx.body = JSON.stringify(state);
+app.get('/get-data', async (ctx) => {
+  ctx.body = ctx.session;
 });
 
-function get(ctx) {
-  const session = ctx.session;
-  session.count = session.count || 0;
-  session.count++;
-  return { count: session.count, date: new Date() };
-}
-
-function remove(ctx) {
-  ctx.session = null;
-  ctx.body = 0;
-}
-
-module.exports = {routes: app.routes(), session: session()};
+module.exports = app.routes();
