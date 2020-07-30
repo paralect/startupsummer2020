@@ -8,56 +8,68 @@ let session = require('koa-generic-session');
 const app = new Koa();
 const router = new Router();
 app.keys = ['some-secret-key-one', 'some-secret-key-two'];
-const data = [];
 
 const schema = joi.object({
-    lastname: joi.string().required(),
-    description: joi.string().min(3).required(),
+  lastname: joi.string().required(),
+  description: joi.string().min(3).required(),
 });
 
 const get = (context) => {
-    session = context.session;
-    session.count = session.count || 0;
-    session.count += 1;
-    context.body = session.count;
+  session = context.session;
+  session.count = session.count || 0;
+  session.count += 1;
+  context.body = session.count;
 };
 
 const remove = (context) => {
-    context.session = null;
-    context.body = 0;
+  context.session = null;
+  context.body = 0;
 };
 
 const regenerate = async (context) => {
-    get(context);
-    await context.regenerateSession();
-    get(context);
+  get(context);
+  await context.regenerateSession();
+  get(context);
+};
+
+const setCounter = (context) => {
+  get(context);
 };
 
 router
-    .get('/get', (context, next) => {
-        get(context);
-    })
-    .get('/remove', (context, next) => {
-        remove(context);
-    })
-    .get('/regenerate', async (context, next) => {
-        await regenerate(context);
-    })
-    .post('/data', async (context, next) => {
-        data.push(context.request.body);
-        console.log(data);
-        const { value, error } = schema.validate(context.request.body, { allowUnknown: true, abortEarly: false });
-        if (error) {
-            context.body = `Some error happend!\n${error}`;
-        } else context.body = `Your data were got!`;
+  .get('/get', (context, next) => {
+    if (!session.state) session.state = [];
+    // get last received data
+    context.body = `${JSON.stringify(session.count)}\n${JSON.stringify(session.state[session.state.length - 1])}`;
+  })
+  .get('/remove', (context, next) => {
+    remove(context);
+  })
+  .get('/regenerate', async (context, next) => {
+    await regenerate(context);
+  })
+  .post('/data', async (context, next) => {
+    const { value, error } = schema.validate(context.request.body, {
+      allowUnknown: true, abortEarly: false,
     });
+    if (error) {
+      context.body += `\nError happend: ${JSON.stringify(error.message)}.`;
+    } else {
+      if (!session.state) session.state = [];
+      session.state.push(context.request.body);
+      context.body = JSON.stringify(session.state);
+      context.body += JSON.stringify('Your data were got!');
+    }
+  });
 
 app
-    .use(session())
-    .use(bodyParser())
-    .use(serve((`${__dirname}/static`)))
-    .use(router.routes())
-    .use((ctx) => ctx.body = '1')
-//.use(router.allowedMethods())
+  .use(session())
+  .use(bodyParser())
+  .use(serve((`${__dirname}/static`)))
+  .use(async (context, next) => {
+    setCounter(context);
+    await next();
+  })
+  .use(router.routes());
 
-app.listen(3000);
+app.listen(3030);
