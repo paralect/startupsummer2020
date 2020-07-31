@@ -1,8 +1,13 @@
 import React, { useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-
 import fetchMarvel from './fetchMarvel';
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigation from './navigation/root.navigator'
+import { getConfigWithoutViewProps } from 'react-native/Libraries/Utilities/verifyComponentAttributeEquivalence';
+import styles from './App.styles';
+import { SafeAreaView } from 'react-native';
+
 
 function App() {
   const fetchData = useCallback(async () => {
@@ -15,20 +20,12 @@ function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView>
+      <NavigationContainer>
+        <AppNavigation />
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default App;
