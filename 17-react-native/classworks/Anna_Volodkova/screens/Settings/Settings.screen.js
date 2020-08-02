@@ -1,25 +1,19 @@
-import React, { useState } from 'react';
-import { Text, View, Switch, Button } from 'react-native';
+import React from 'react';
+import {Text, View} from 'react-native';
 
 import styles from './Settings.styles';
-import { TextInput } from 'react-native-gesture-handler';
+import {SafeAreaView} from "react-native-safe-area-context";
+import Header from "../../components/header";
+import CharacterList from "../../components/characterList";
 
-function HomeScreen() {
-  const [isTrue, setIsTrue] = useState(false);
+function SettingScreen() {
 
   return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.title}>Setting Screen</Text>
-        <Text style={styles.subtitle}>A lot of config</Text>
-        <View style={styles.content}>
-          <Switch value={isTrue} onValueChange={setIsTrue} />
-          <Button title="Crash this app" />
-          <TextInput />
-        </View>
-      </View>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Header/>
+      <Text style={styles.title}>SETTINGS</Text>
+    </SafeAreaView>
   );
 }
 
-export default HomeScreen;
+export default SettingScreen;

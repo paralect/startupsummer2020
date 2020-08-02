@@ -1,17 +1,20 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    alignItems: 'center',
     flex: 1,
     backgroundColor: '#151515',
+    paddingRight: 26,
+    paddingLeft: 26,
   },
   title: {
     color: '#ffffff',
     fontWeight: 'bold',
     fontSize: 18,
     lineHeight: 21,
-    marginLeft: 30,
+    marginBottom: 20,
   },
-
+  center: {
+    alignItems: 'center',
+  }
 });

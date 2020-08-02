@@ -1,24 +1,35 @@
-import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useCallback, useState} from 'react';
+import {Text, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import styles from './Home.styles';
-import CharacterList from "../../components/characterList";
 import Header from '../../components/header';
-import { SafeAreaView } from 'react-native-safe-area-context'
-
-
-const someItems = ['Paralect', 'Startup Summer', 'Dan Krachkouski', 'Memes', 'Котики'];
+import {SafeAreaView} from 'react-native-safe-area-context'
+import fetchMarvel from '../../fetchMarvel';
+import FL from '../../components/flatList';
 
 function HomeScreen() {
-  const navigation = useNavigation();
+  const [characters, setCharacters] = useState(null);
+
+  const fetchData = useCallback(async () => {
+    const { data } = await fetchMarvel('/characters',  );
+    console.log(data.data.results);
+    setCharacters(data.data.results);
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  },[]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header />
-      <View>
-        <Text style={styles.title}>FEATURED CHARACTERS</Text>
-        <CharacterList />
+      <Header/>
+      <Text style={styles.title}>FEATURED CHARACTERS</Text>
+      <View style={styles.center}>
+        <FL
+          arr={characters}
+          icon
+        />
       </View>
     </SafeAreaView>
   );

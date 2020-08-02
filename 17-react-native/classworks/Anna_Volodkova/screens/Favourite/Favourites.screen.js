@@ -1,31 +1,26 @@
 import React from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import {Text, View, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 import styles from './Favourites.styles';
+import {SafeAreaView} from "react-native-safe-area-context";
+import Header from "../../components/header";
+import CharacterList from "../../components/characterList";
+import FL from "../../components/flatList";
+import fetchMarvel from "../../fetchMarvel";
 
-const someItems = ['Startup Summer', 'Memes'];
 
-function HomeScreen() {
-  const navigation = useNavigation();
+function FavouriteScreen() {
 
   return (
-    <View style={styles.container}>
-      <View>
-        <Text style={styles.title}>Favourites Screen</Text>
-        <Text style={styles.subtitle}>We all love</Text>
-        {someItems.map(item => (
-          <TouchableOpacity
-            key={item}
-            style={styles.button}
-            onPress={() => navigation.navigate('Details', { item })}
-          >
-            <Text>{item}</Text>
-          </TouchableOpacity>
-        ))}
+    <SafeAreaView style={styles.container}>
+      <Header/>
+      <Text style={styles.title}>FAVOURITE CHARACTERS</Text>
+      <View style={styles.center}>
+
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
-export default HomeScreen;
+export default FavouriteScreen;

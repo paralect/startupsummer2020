@@ -6,7 +6,8 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: '#2f2f2f',
     borderRadius: 4,
-    padding: 6
+    padding: 6,
+    marginBottom: 15,
   },
   characterIcon: {
     width: 70,
@@ -19,24 +20,32 @@ export default StyleSheet.create({
   nickAndFull: {
     flexDirection: 'column',
     marginLeft: 20,
-
+    marginTop: 15,
+    maxWidth: 240,
   },
   nickname: {
-    fontFamily: 'Roboto Condensed, serif',
     fontSize: 14,
     lineHeight: 16,
-    color: '#fffffF',
+    color: '#ffffff',
+    marginBottom: 4,
+    fontWeight: 'bold',
+    maxWidth: 240,
   },
   fullName: {
-    fontFamily: 'Roboto Condensed, serif',
     fontSize: 12,
     lineHeight: 12,
     color: '#ffffff',
   },
   heartIcon: {
-    fontSize: 18,
-    color: 'rgba(0, 0, 0, 0.5)',
+    fontSize: 20,
+    marginTop: 15,
+    marginRight: 15,
+    color: '#bbbbbb',
+  },
+  heartIconClicked: {
+    fontSize: 20,
     margin: 15,
+    color: '#e62429',
   },
   first: {
     flexDirection: 'row'
