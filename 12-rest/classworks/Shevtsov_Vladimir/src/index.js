@@ -2,14 +2,15 @@ const Koa = require('koa');
 const session = require('koa-session');
 const koaJwt = require('koa-jwt');
 const jwt = require('jsonwebtoken');
-const Router = require('koa-router');
+const Router = require('@koa/router');
 const bodyParser = require('koa-bodyparser');
 const crypto = require('crypto');
 const fs = require('fs').promises;
 const axios = require('axios');
 
 const app = new Koa();
-const router = new Router();
+const public = new Router();
+const private = new Router();
 const jwtSecret = process.env.SECRET;
 
 const parfUrl = 'https://models.dobro.ai/gpt2/medium/';
@@ -63,7 +64,12 @@ const hashFunction = (password) => crypto
   .pbkdf2Sync(password, 'salt', 100000, 64, 'sha512')
   .toString('hex');
 
-router.post('/signin', async (ctx, next) => {
+public.get('/', async (ctx, next) => {
+  ctx.status = 200;
+  return next();
+});
+
+public.post('/signin', async (ctx, next) => {
   const { name, password } = ctx.request.body;
   const usersDb = await fs.readFile('users.json');
   const users = JSON.parse(usersDb);
@@ -81,7 +87,7 @@ router.post('/signin', async (ctx, next) => {
   return next();
 });
 
-router.post('/signup', async (ctx, next) => {
+public.post('/signup', async (ctx, next) => {
   const { name, password } = ctx.request.body;
   const pwdHash = hashFunction(password);
   const dbUsers = await fs.readFile('users.json');
@@ -94,25 +100,21 @@ router.post('/signup', async (ctx, next) => {
 });
 
 const addSimpleGetPost = (dbFile, route, generateFunc) => {
-  router.get(route, async (ctx, next) => {
+  public.get(route, async (ctx, next) => {
     const dbData = await fs.readFile(dbFile);
     const data = JSON.parse(dbData);
     ctx.body = data;
     return next();
   });
 
-  router.post(route, async (ctx, next) => {
-    if (ctx.state.jwtOriginalError) {
-      ctx.status = 403;
-    } else {
-      const { prompt } = ctx.request.body;
-      const dbData = await fs.readFile(dbFile);
-      const data = JSON.parse(dbData);
-      data[prompt] = await generateFunc(prompt);
-      await fs.writeFile(dbFile, JSON.stringify(data));
-      ctx.status = 200;
-      return next();
-    }
+  private.post(route, async (ctx, next) => {
+    const { prompt } = ctx.request.body;
+    const dbData = await fs.readFile(dbFile);
+    const data = JSON.parse(dbData);
+    data[prompt] = await generateFunc(prompt);
+    await fs.writeFile(dbFile, JSON.stringify(data));
+    ctx.body = { ...data[prompt] };
+    return next();
   });
 };
 
@@ -125,9 +127,11 @@ const getToken = (ctx) => ctx.session.token;
 app.keys = ['secretsdaf'];
 app.use(session(app));
 app.use(bodyParser());
-app.use(koaJwt({ secret: jwtSecret, passthrough: true, getToken }));
-app.use(router.routes());
-app.use(router.allowedMethods());
+app.use(public.routes());
+app.use(public.allowedMethods());
+app.use(private.routes());
+app.use(private.allowedMethods());
+app.use(koaJwt({ secret: jwtSecret, passthrough: false, getToken }));
 
 app.listen(3000);
 console.log('Listening...');
