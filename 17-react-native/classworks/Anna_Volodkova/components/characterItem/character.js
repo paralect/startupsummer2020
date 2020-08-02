@@ -6,7 +6,7 @@ import {AntDesign} from "@expo/vector-icons";
 
 function CharacterItem(props) {
   const imageSource = {
-    uri: props.src,
+    uri: props.item.resourceURI,
   };
 
   return (
@@ -19,17 +19,15 @@ function CharacterItem(props) {
           />
         </View>
         <View style={styles.nickAndFull}>
-          <View style={styles.nickname}><Text>{props.nickname}</Text></View>
-          <View style={styles.fullName}><Text>{props.fullName}</Text></View>
+          <Text style={styles.nickname}>{props.item.name.toUpperCase()}</Text>
+          {props.item.id && <Text style={styles.fullName}>{props.item.id}</Text>}
         </View>
       </View>
-      <View
+      {props.icon &&
+      <AntDesign
         style={styles.heartIcon}
-      >
-        <AntDesign
-          name="hearto"
-        />
-      </View>
+        name="hearto"
+      />}
     </View>
   );
 }

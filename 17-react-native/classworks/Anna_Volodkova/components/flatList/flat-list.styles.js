@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   list: {
-   width: 323,
+    width: 323,
   },
   title: {
     color: '#ffffff',
