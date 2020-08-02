@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 26565,
+  "expoServerNgrokUrl": "https://cy-vqu.gregorovich.task.exp.direct",
+  "packagerNgrokUrl": "https://packager.cy-vqu.gregorovich.task.exp.direct",
+  "ngrokPid": 26608,
+  "webpackServerPort": null
+}

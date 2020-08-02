@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { default } from \"./root.navigator\";","map":{"version":3,"sources":["/home/gregorovich/Repositories/Paralect/startupsummer2020/17-react-native/Podgornaya_Katerina/task/navigation/index.js"],"names":["default"],"mappings":"AAAA,SAASA,OAAT","sourcesContent":["export { default } from './root.navigator';\n"]},"metadata":{},"sourceType":"module"}

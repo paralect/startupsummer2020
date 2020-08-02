@@ -18,8 +18,13 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-extract-frames": "^2.0.2",
     "ffmpeg-fork": "0.0.6",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
-    "koa-router": "^9.1.0"
+    "koa-jwt": "^4.0.0",
+    "koa-router": "^9.1.0",
+    "node-fetch": "^2.6.0"
   }
 }
