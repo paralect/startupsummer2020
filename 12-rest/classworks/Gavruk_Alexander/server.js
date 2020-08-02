@@ -19,6 +19,25 @@ const generateArticle = async (prompt) => {
     const res = await axios.post(PARF_URL, {
       prompt,
       length: 30,
+      num_samples: 3,
+    },
+    {
+      headers: {
+        'User-Agent': 'insomnia/2020.3.3',
+      },
+      timeout: 10000,
+    });
+    return res.data.replies.join('');
+  } catch(e) {
+    console.log(e)
+  };
+};
+
+const generateInterview = async (prompt) => {
+  try {
+    const res = await axios.post(PARF_URL, {
+      prompt,
+      length: 30,
       num_samples: 4,
     },
     {
@@ -27,7 +46,26 @@ const generateArticle = async (prompt) => {
       },
       timeout: 10000,
     });
-    return res;
+    return res.data.replies.join('');
+  } catch(e) {
+    console.log(e)
+  };
+};
+
+const generateTagline = async (prompt) => {
+  try {
+    const res = await axios.post(PARF_URL, {
+      prompt,
+      length: 30,
+      num_samples: 1,
+    },
+    {
+      headers: {
+        'User-Agent': 'insomnia/2020.3.3',
+      },
+      timeout: 10000,
+    });
+    return res.data.replies[0];
   } catch(e) {
     console.log(e)
   };
@@ -53,30 +91,9 @@ const putUserToDB = (user) => {
   });
 }
 
-const putArticleToDB = (article) => {
+const putResourceToDB = (data) => {
   const dataFromDB = getResourcesDataFromDB();
-  console.log('Data from db', dataFromDB);
-  dataFromDB.articles.push(article);
-  fs.writeFile('./db/resources.json', JSON.stringify(dataFromDB), (err) => {
-    if (err) {
-        throw err;
-    }
-  });
-}
-
-const putInterviewToDB = (interview) => {
-  const dataFromDB = getResourcesDataFromDB();
-  dataFromDB.interviews.push(interview);
-  fs.writeFile('./db/resources.json', JSON.stringify(dataFromDB), (err) => {
-    if (err) {
-        throw err;
-    }
-  });
-}
-
-const putTaglineToDB = (tagline) => {
-  const dataFromDB = getResourcesDataFromDB();
-  dataFromDB.taglines.push(tagline);
+  dataFromDB.articles.push(data);
   fs.writeFile('./db/resources.json', JSON.stringify(dataFromDB), (err) => {
     if (err) {
         throw err;
@@ -102,16 +119,16 @@ app.use(bodyParser());
 app.use(publicRouter.routes());
 
 publicRouter
-  .get('/resources/user', async (ctx) => {
+  .get('/user', async (ctx) => {
     ctx.body = JSON.parse(fs.readFileSync('./db/user.json', 'utf8')).login;
   })
-  .get('/resources/articles', async (ctx) => {
+  .get('/articles', async (ctx) => {
     ctx.body = JSON.parse(fs.readFileSync('./db/resources.json', 'utf8')).articles;
   })
-  .get('/resources/interviews', async (ctx) => {
+  .get('/interviews', async (ctx) => {
     ctx.body = JSON.parse(fs.readFileSync('./db/resources.json', 'utf8')).interviews;
   })
-  .get('/resources/taglines', async (ctx) => {
+  .get('/taglines', async (ctx) => {
     ctx.body = JSON.parse(fs.readFileSync('./db/resources.json', 'utf8')).taglines;
   });
 
@@ -147,27 +164,27 @@ app.use(koajwt({ secret: SECRET }));
 app.use(privateRouter.routes());
 
 privateRouter
-  .post('/write_resources/user', async (ctx) => {
+  .post('/user', async (ctx) => {
     putUserToDB(ctx.request.body);
     ctx.body = JSON.parse(fs.readFileSync('./db/resources.json', 'utf8')).users;
   })
-  .post('/write_resources/article', async (ctx) => {
+  .post('/article', async (ctx) => {
     const textPrompt = ctx.request.body.prompt;
-    const article = await generateArticle(textPrompt).then(res => [res.data.replies[0], res.data.replies[1], res.data.replies[2]].join(''));
-    putArticleToDB(article);
-    ctx.body = getResourcesDataFromDB();
+    const article = await generateArticle(textPrompt);
+    putResourceToDB(article);
+    ctx.body = article;
   })
-  .post('/write_resources/interview', async (ctx) => {
+  .post('/interview', async (ctx) => {
     const textPrompt = ctx.request.body.prompt;
-    const interview = await generateArticle(textPrompt).then(res => res.data.replies.join(''));
-    putInterviewToDB(interview);
-    ctx.body = getResourcesDataFromDB();
+    const interview = await generateInterview(textPrompt);
+    putResourceToDB(interview);
+    ctx.body = interview;
   })
-  .post('/write_resources/tagline', async (ctx) => {
+  .post('/tagline', async (ctx) => {
     const textPrompt = ctx.request.body.prompt;
-    const tagline = await generateArticle(textPrompt).then(res => res.data.replies[0]);
-    putTaglineToDB(tagline);
-    ctx.body = getResourcesDataFromDB();
+    const tagline = await generateTagline(textPrompt);
+    putResourceToDB(tagline);
+    ctx.body = tagline;
   });
 
 app.listen(3000, () => {
