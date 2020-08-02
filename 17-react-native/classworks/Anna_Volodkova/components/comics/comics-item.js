@@ -1,12 +1,12 @@
 import React from 'react';
 import {Text, View, Image} from 'react-native';
 
-import styles from './character.styles';
-import {AntDesign} from "@expo/vector-icons";
+import styles from './comics-item.styles';
 
-function CharacterItem(props) {
+
+function ComicsItem(props) {
   const imageSource = {
-    uri: props.item.thumbnail.path + '.' + props.item.thumbnail.extension,
+    uri: props.item.resourceURI,
   };
 
   return (
@@ -20,16 +20,10 @@ function CharacterItem(props) {
         </View>
         <View style={styles.nickAndFull}>
           <Text style={styles.nickname}>{props.item.name.toUpperCase()}</Text>
-          {props.item.id && <Text style={styles.fullName}>{props.item.id}</Text>}
         </View>
       </View>
-      {props.icon &&
-      <AntDesign
-        style={styles.heartIcon}
-        name="hearto"
-      />}
     </View>
   );
 }
 
-export default CharacterItem;
+export default ComicsItem;
