@@ -6,16 +6,17 @@ import styles from './Details.styles';
 import {AntDesign} from "@expo/vector-icons";
 import {SafeAreaView} from "react-native-safe-area-context";
 import Header from '../../components/header';
-import FL from "../../components/flatList";
+import CL from "../../components/comicsList";
 
 function DetailsScreen() {
   const { params } = useRoute();
   const { item } = params;
 
   const imageSource = {
-    uri: item.resourceURI,
+    uri: item.thumbnail.path + '.' + item.thumbnail.extension,
   };
 
+  console.log('DETAIL ITEM', item)
   return (
     <SafeAreaView style={styles.container}>
       <Header />
@@ -37,7 +38,7 @@ function DetailsScreen() {
       </View>
       <Text style={styles.description}>{item.description}</Text>
       <Text style={styles.title}>COMICS</Text>
-      <FL
+      <CL
         arr={item.comics.items}
       />
     </SafeAreaView>
