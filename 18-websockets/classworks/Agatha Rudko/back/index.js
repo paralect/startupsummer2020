@@ -4,21 +4,24 @@ const app = new Koa();
 const server = require('http').createServer(app.callback())
 const io = socketio(server);
 
-const messages = [];
+app.keys =['lol']
 
-io.on("connection", (socket) => {
-  console.log("New client connected");
-});
+const onConnect = (socket) =>{
+  console.log("New client connected: "+socket.id);
+  socket.on("send_message",(message) => {
+    io.sockets.emit("render_message",
+      { name:(socket.name ? socket.name : 'Anon'), message: message})
+  });
+  socket.on('send_name', name => {
+    socket.name = name;
+  });
+  socket.on('typing', name => {
+    socket.broadcast.emit('typing', name ? name : 'Anon');
+  });
+}
 
-io.on("send_message",(socket) => {
-  messages.push({name: 'lol', value: socket.value});
-  socket.broadcast.emit("render_message",
-    messages)
-})
+io.on('connection', onConnect);
 
-io.on("disconnect", () => {
-  console.log("Client disconnected");
-});
 server.listen(3003, () => {
   console.log('listening on: 3003');
 });
