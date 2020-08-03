@@ -13,6 +13,7 @@ function Chat() {
   const [status, setStatus] = useState('Disconnected');
   const [inputValue, setInputValue] = useState('');
   const [username, setUsername] = useState('anon');
+  const [room, setRoom] = useState('general');
   const [messages, setMessages] = useState([]);
   const [typingUsers, setTypingUsers] = useState(new Set());
 
@@ -63,6 +64,11 @@ function Chat() {
     socket.emit('message', { type: 'set_username', payload: username });
   }, [username, socket]);
 
+  const changeRoom = useCallback((event) => {
+    event.preventDefault();
+    socket.emit('message', { type: 'set_room', payload: room });
+  }, [room, socket]);
+
   const handleInputChange = useCallback((event) => {
     setInputValue(event.target.value);
     socket.emit('message', { type: 'typing' });
@@ -83,10 +89,16 @@ function Chat() {
             <button id="send_username" type="submit">Change username</button>
           </form>
         </div>
+        <div className="changeRoom">
+          <form onSubmit={changeRoom}>
+            <input id="username" type="text" onChange={(e) => setRoom(e.target.value)} value={room} />
+            <button id="send_username" type="submit">Change room</button>
+          </form>
+        </div>
       </section>
 
       <section>
-        Typing: 
+        Typing:
         {[...typingUsers].map((u) => <span>{`${u} `}</span>)}
       </section>
 

@@ -23,6 +23,13 @@ div#change_username, section#input_zone {
     border: 5px outset #8258FA;
 }
 
+.changeRoom {
+  border: 5px outset #8258FA;
+  height: 3%;
+  display: inline-block;
+  background-color: #BCA9F5;
+}
+
 div#change_username {
     height: 3%;
     display: inline-block;
