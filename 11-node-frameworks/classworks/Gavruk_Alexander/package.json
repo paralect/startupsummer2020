@@ -1,0 +1,24 @@
+{
+  "name": "gavruk_alexander",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "install": "^0.13.0",
+    "joi": "^17.1.1",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-generic-session": "^2.0.4",
+    "koa-joi-validate": "^0.5.1",
+    "koa-joi-validate-middleware": "^1.1.7",
+    "koa-redis": "^4.0.1",
+    "koa-router": "^9.1.0",
+    "koa-static": "^5.0.0",
+    "npm": "^6.14.6"
+  }
+}

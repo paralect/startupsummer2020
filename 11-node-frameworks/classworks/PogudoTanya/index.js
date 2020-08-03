@@ -8,10 +8,7 @@ const router = require("koa-router");
 const Joi = require("joi");
 const rout = router();
 
-app.use(koaStatic("./public"));
-app.use(bodyParser());
-app.use(session());
-app.use(rout.middleware());
+app.keys = ["secret-key-one", "secret-key-two"];
 
 const schema = Joi.object({
   name: Joi.string(),
@@ -20,26 +17,31 @@ const schema = Joi.object({
   mark: Joi.string(),
 });
 
-rout.post("/", (ctx) => {
+rout.get("/get", (ctx) => {
+  ctx.response.body = ctx.session.count;
+});
+
+rout.post("/rest", (ctx) => {
   const { error, value } = schema.validate(ctx.request.body);
   if (error) {
-    console.log(error);
+    ctx.body = error.details[0].message;
   } else {
-    console.log(value);
-    ctx.body = JSON.stringify(value);
+    ctx.body = JSON.stringify(value, null, 2);
   }
 });
 
-rout.get("/get", async (ctx) => {
-  var amount = session;
-  amount.count = amount.count || 0;
-  amount.count++;
-  ctx.body = amount.count;
+const increaseCount = (ctx) => {
+  ctx.session.count = ctx.session.count || 0;
+  ctx.session.count++;
+};
+
+app.use(session());
+app.use(bodyParser());
+app.use(async (ctx, next) => {
+  await increaseCount(ctx)
+  await next()
 });
 
-app.use(async (ctx, next) => {
-  ctx.body = 'Middleware';
-  next();
-});
+app.use(koaStatic("./public"));
 app.use(rout.routes());
 app.listen(3000);
