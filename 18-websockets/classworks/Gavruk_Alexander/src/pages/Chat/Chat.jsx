@@ -12,8 +12,8 @@ function Chat() {
   const [msgInputValue, setMsgInputValue] = useState('');
   const [username, setUsername] = useState('');
   const [messages, setMessages] = useState([]);
-  const [typing, setTyping] = useState(false);
   const [typingUsers, setTypingUsers] = useState([]);
+  const [timerId, setTimerId] = useState(null);
 
   const onUsernameSubmit = (username) => {
     socket.emit('set_username', username);
@@ -25,6 +25,31 @@ function Chat() {
     setMsgInputValue('');
   }
 
+  const onType = (username) => {
+    const timerId = setTimeout(() => {
+      setTypingUsers((typingUsers) => typingUsers.filter((name) => name !== username))
+    }, 7000);
+    setTimerId(timerId);
+
+    setTypingUsers((prevTypings) => {
+      const currentTypings = prevTypings || typingUsers;
+      if (currentTypings.findIndex((name) => name === username) === -1) {
+        return [...currentTypings, username];
+      } else {
+        return prevTypings;
+      }
+    })
+  }
+
+  const onInputChange = (value) => {
+    setMsgInputValue(value);
+    typing();
+  }
+
+  const typing = () => {
+    socket.emit('set_typing', username);
+  }
+
   useEffect(() => {
     socket.on('username', (data) => {
       setUsername(data.username);
@@ -34,7 +59,14 @@ function Chat() {
       setMessages((prevMessages) => [...prevMessages, msg]);
     });
 
-    return () => socket.disconnect();
+    socket.on('typing', (username) => {
+      onType(username);
+    });
+
+    return () => {
+      socket.disconnect();
+      clearTimeout(timerId);
+    };
   }, []);
 
   return (
@@ -65,6 +97,11 @@ function Chat() {
         {
           messages.map((msg, index) => <Message key={index} username={msg.username} message={msg.value} />)
         }
+        {typingUsers && typingUsers.map((user,index) => {
+          return (
+            <span key={index}>{user} typing...</span>
+          )
+        })}
         <section id="feedback"></section>
       </section>
 
@@ -74,7 +111,7 @@ function Chat() {
           className="vertical-align"
           type="text"
           value={msgInputValue}
-          onChange={(e) => setMsgInputValue(e.target.value)}
+          onChange={(e) => onInputChange(e.target.value)}
         />
         <button
           id="send_message"

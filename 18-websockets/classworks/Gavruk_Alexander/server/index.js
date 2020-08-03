@@ -17,6 +17,10 @@ io.on('connection', (socket) => {
     io.sockets.emit('messages', socket.lastMessage);
   })
 
+  socket.on('set_typing', username => {
+    socket.broadcast.emit('typing', username);
+  });
+
   socket.on('disconnect', () => {
     console.log('Client disconnected');
   });
