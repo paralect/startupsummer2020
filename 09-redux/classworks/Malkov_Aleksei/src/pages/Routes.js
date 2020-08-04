@@ -9,7 +9,7 @@ import Home from 'pages/home';
 import Search from './search';
 
 function Routes() {
-  const [isLoggedIn] = useRedditApi();
+  const [,,isLoggedIn] = useRedditApi();
 
   if (isLoggedIn) {
     return (
