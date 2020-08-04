@@ -12,8 +12,8 @@ function Chat() {
   const [message, setMessage] = useState('');
   const [listOfMessages, setListOfMessages] = useState([]);
   const [username, setUsername] = useState(defaultName);
+  const [typing, setTyping] = useState(null);
   const name = useRef(null);
-
 
   function changeUserName() {
     setUsername(name.current.value);
@@ -26,13 +26,20 @@ function Chat() {
       socket.disconnect();
     }
   }, []);
-  
 
   socket.on('reg as user', (data) => {
     setUsername(data);
   });
+
   socket.on('new message', (data) => {
     setListOfMessages([...listOfMessages, data]);
+  });
+
+  socket.on('typing', (data) => {
+    setTimeout(() => {
+      setTyping(null);
+    }, 1000)
+    setTyping(data);
   });
 
   function type(e) {
@@ -42,10 +49,11 @@ function Chat() {
 
   function sendMessage(e) {
     e.preventDefault();
-    console.log(message);
-    setListOfMessages([...listOfMessages, { username, message}]);
+    setMessage('');
+    setListOfMessages([...listOfMessages, { username, message }]);
     socket.emit("new message", message);
   }
+
 
   return (
     <div className="chat">
@@ -75,7 +83,10 @@ function Chat() {
         <section id="feedback"></section>
       </section>
 
-
+      <section className="typing_zone">
+        {typing && <span>{typing.username} is typing...</span>}
+      </section>
+      
       <section id="input_zone">
         <form className="input_zone" onSubmit={sendMessage}>
           <input id="message" className="vertical-align" type="text" value={message} onChange={type} />
