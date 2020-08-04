@@ -8,7 +8,7 @@ const  fs = require('fs');
 const fetch = require('node-fetch');
 
 const users = JSON.parse(fs.readFileSync('./users.json'));
-const taglines = JSON.parse(fs.readFileSync('./taglines.json'))
+const taglines = JSON.parse(fs.readFileSync('./taglines.json'));
 const SECRETKEY = 'shhhhh';
 
 const app = new koa();
@@ -27,8 +27,8 @@ publicRouter
     }
     users.push(userObj);
     fs.writeFileSync('./users.json', JSON.stringify(users, null, 2));
-    ctx.status = 200;
-    ctx.body = 'Okay!';
+    ctx.status = 204;
+    ctx.body = JSON.stringify({});
   })
   .post('/signIn', (ctx) => {
     console.log('signIn body', ctx.request.body);
@@ -48,26 +48,24 @@ publicRouter
     if (isLogIn) {
       const token = jsonwebtoken.sign({logIn: logIn}, SECRETKEY);
       ctx.status = 200;
-      ctx.body = token;
+      ctx.body = JSON.stringify({token});
     } else {
       ctx.status = 400;
-      ctx.body = 'Incorrect login and password\n';
+      ctx.body = JSON.stringify({ error: 'Incorrect login and password' });
     }
   })
   .get('/users', (ctx) => {
-    ctx.body = users;
+    ctx.body = JSON.parse(fs.readFileSync('./users.json'));
   })
   .get('/taglines', (ctx) => {
-    ctx.body = taglines;
+    ctx.body = JSON.parse(fs.readFileSync('./taglines.json'));
   })
 
 ;
 
 privateRouter
-  .post('/tagline', (ctx, next) => {
-    console.log('tagline', ctx.request.body);
-    ctx.status = 200;
-    ctx.body = 'All data received thank you';
+  .post('/tagline', (ctx) => {
+
     (async () => {
       const body = {
         prompt: ctx.request.body.join(' '),
@@ -89,9 +87,11 @@ privateRouter
 
       taglines.push(tagline);
       fs.writeFileSync('./taglines.json', JSON.stringify(taglines, null, 2));
+
+      ctx.body = JSON.stringify(tagline);
     })();
   })
-  ;
+;
 
 app.use(bodyParser());
 
