@@ -26,43 +26,48 @@ router
     await send(ctx, '/home.html', { root });
     next();
   })
-  .get('/signup', async (ctx, next) => {
+  .get('/public/signup', async (ctx, next) => {
     await send(ctx, '/signup.html', { root });
     next();
   })
-  .get('/signin', async (ctx, next) => {
+  .get('/public/signin', async (ctx, next) => {
     await send(ctx, '/signin.html', { root });
     next();
   })
-  .post('/signup', async (ctx, next) => {
+  .post('/public/signup', async (ctx, next) => {
     const formData = ctx.request.body;
     const signNewUser = signup(formData);
     ctx.body = signNewUser.message;
+    next();
   })
-  .post('/signin', async (ctx, next) => {
+  .post('/public/signin', async (ctx, next) => {
     const signed = signin(ctx, jwt);
     const session = ctx.session;
     if (signed.ok) session.state = { name: signed.name }
     next();
-  });
-
-
-
-router
-  .get('/posts', koajwt, async (ctx, next) => {
-    const session = ctx.session;
-    console.log(decoded);
-    const posts = await getArticle('Hello people', 'We are aliens');
   })
-  .post('/posts', koajwt, async (ctx, next) => {
+  .get('/posts', async (ctx, next) => {
+    const session = ctx.session;
+    console.log('hehheh');
+    const posts = await getArticle('Hello people', 'We are aliens');
+    ctx.body = posts;
+  })
+  .post('/posts', async (ctx, next) => {
     const session = ctx.session;
     const allPosts = addArticle(session.state, posts.data);
     ctx.body = allPosts;
-  });;
+  });
+ 
 
 app
+  .use(koajwt({
+    secret: 'shared-secret',
+    passthrough: false,
+    getToken: (ctx) => ctx.session.token,
+  }).unless({
+    path: [/^\/public/, "/"]
+  }))
   .use(router.routes())
-  .use(router.allowedMethods())
-  .use(koajwt({ secret: 'shared-secret' }));
+  .use(router.allowedMethods());
 
 app.listen(3000);
