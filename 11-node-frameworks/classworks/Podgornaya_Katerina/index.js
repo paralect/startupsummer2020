@@ -14,51 +14,66 @@ const schema = joi.object({
   description: joi.string().min(3).required(),
 });
 
-const get = (context) => {
-  session = context.session;
+const get = (ctx) => {
+  session = ctx.session;
   session.count = session.count || 0;
   session.count += 1;
-  context.body = session.count;
 };
 
-const remove = (context) => {
-  context.session = null;
-  context.body = 0;
+const remove = (ctx) => {
+  ctx.session = null;
 };
 
-const regenerate = async (context) => {
-  get(context);
-  await context.regenerateSession();
-  get(context);
+const regenerate = async (ctx) => {
+  get(ctx);
+  await ctx.regenerateSession();
+  get(ctx);
 };
 
-const setCounter = (context) => {
-  get(context);
+const setCounter = (ctx) => {
+  get(ctx);
 };
 
 router
-  .get('/get', (context, next) => {
+  .get('/get', (ctx) => {
     if (!session.state) session.state = [];
-    // get last received data
-    context.body = `${JSON.stringify(session.count)}\n${JSON.stringify(session.state[session.state.length - 1])}`;
+    ctx.body = {
+      success: true,
+      counter: session.count,
+      data: session.state[session.state.length - 1],
+    };
   })
-  .get('/remove', (context, next) => {
-    remove(context);
+  .get('/remove', (ctx) => {
+    remove(ctx);
+    ctx.body = {
+      success: true,
+      counter: session.count,
+    };
   })
-  .get('/regenerate', async (context, next) => {
-    await regenerate(context);
+  .get('/regenerate', async (ctx) => {
+    await regenerate(ctx);
+    ctx.body = {
+      success: true,
+      counter: session.count,
+    };
   })
-  .post('/data', async (context, next) => {
-    const { value, error } = schema.validate(context.request.body, {
+  .post('/data', async (ctx) => {
+    const { error } = schema.validate(ctx.request.body, {
       allowUnknown: true, abortEarly: false,
     });
     if (error) {
-      context.body += `\nError happend: ${JSON.stringify(error.message)}.`;
+      ctx.body = {
+        success: false,
+        error: error.message,
+      };
     } else {
       if (!session.state) session.state = [];
-      session.state.push(context.request.body);
-      context.body = JSON.stringify(session.state);
-      context.body += JSON.stringify('Your data were got!');
+      session.state.push(ctx.request.body);
+      ctx.body = {
+        success: true,
+        counter: session.count,
+        data: session.state,
+      };
     }
   });
 
@@ -66,8 +81,8 @@ app
   .use(session())
   .use(bodyParser())
   .use(serve((`${__dirname}/static`)))
-  .use(async (context, next) => {
-    setCounter(context);
+  .use(async (ctx, next) => {
+    setCounter(ctx);
     await next();
   })
   .use(router.routes());
