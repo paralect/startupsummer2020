@@ -61,8 +61,8 @@ USE flat_journal;
 
 -- Вывести информацию по всем таблицам
 SELECT * FROM flat_journal.person p
-	JOIN flat_journal.house h on p.house_id = h.id
-    JOIN flat_journal.flat f on p.flat_id = f.id;
+	LEFT JOIN flat_journal.house h on p.house_id = h.id
+    LEFT JOIN flat_journal.flat f on p.flat_id = f.id;
 
 -- Вывести людей у которых возраст больше 50
 SELECT * FROM flat_journal.person WHERE AGE > 50;
@@ -74,12 +74,12 @@ SELECT * FROM flat_journal.house h
         
 -- Вывести всех людей живущих в 2х комнатных квартирах в жилом доме на улице Плеханова
 SELECT * FROM flat_journal.person p
-	JOIN flat_journal.house h on p.house_id = h.id
-    JOIN flat_journal.flat f on p.flat_id = f.id 
+	LEFT JOIN flat_journal.house h on p.house_id = h.id
+    LEFT JOIN flat_journal.flat f on p.flat_id = f.id 
     	WHERE street = "Plehanova" AND rooms_amount = 2;
         
 -- Вывести информацию по всем людям, живущих в 10-х квартирах
 SELECT * FROM flat_journal.person p
-    JOIN flat_journal.flat f on p.flat_id = f.id 
+    LEFT JOIN flat_journal.flat f on p.flat_id = f.id 
     	WHERE flat_number = 10;
       
