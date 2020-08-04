@@ -21,6 +21,7 @@ public.post(
     request: {
       body: { password, login },
     },
+    response
   }) => {
     const pw = crypto
       .pbkdf2Sync(password, 'salt', 100000, 64, 'sha512')
@@ -102,10 +103,11 @@ private
       });
 
       const res = await fetchData.json();
-      const tag = [`AUTHOR NAME: ${user.login}`, ...arr, ...res.replies].join(
-        ' '
-      );
-
+      const tag = {
+        autorName: user.login, 
+        tags: arr, 
+        replies: res.replies
+      };
       tags.push(tag);
       fs.writeFileSync('./database/tags.json', JSON.stringify(tags, null, 2));
       if (res)
@@ -139,11 +141,11 @@ private
 
       const data = await fetchData.json();
 
-      const tagline = [
-        `AUTHOR NAME: ${user.login}`,
+      const tagline = {
+        author: user.login,
         combination,
-        data.replies,
-      ].join(' ');
+        reply: data.replies,
+      };
 
       taglines.push(tagline);
       fs.writeFileSync(
@@ -152,7 +154,7 @@ private
       );
       if (response) {
         response.body = JSON.stringify({
-          message: 'successfully posted',
+         tagline,
         });
       }
     }
@@ -165,11 +167,11 @@ private
       },
       response,
     }) => {
-      const inter = [`AUTHOR NAME: ${user.login}`];
+      const inter = [];
       const inters = JSON.parse(fs.readFileSync('./database/interview.json'));
 
       for await (const question of arr) {
-        const fetch = await fetch('https://models.dobro.ai/gpt2/medium/', {
+        const fetchedData = await fetch('https://models.dobro.ai/gpt2/medium/', {
           method: 'POST',
           body: JSON.stringify({
             prompt: question,
@@ -182,14 +184,15 @@ private
           },
         });
 
-        const json = await fetch.json();
+        const json = await fetchedData.json();
         const [reply] = json.replies;
         inter.push(question);
         inter.push(reply);
       }
-      inters.push(inter);
+      inters.push({ author: user.login, inter});
       response.body = JSON.stringify({
-        message: 'successfully posted',
+        author: user.login, 
+        inter
       });
       fs.writeFileSync(
         './database/interview.json',
