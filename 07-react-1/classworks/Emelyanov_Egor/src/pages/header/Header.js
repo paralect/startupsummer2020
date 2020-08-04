@@ -1,12 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { setInputValue } from '../../store/actions/inputValue';
+import { setInputValue } from '../../resources/input/input.actions';
 import logo from './Reddit-logo.svg';
 import searchElem from './search-elem.svg';
 import styles from './searchInputStyles.module.css';
-import { getInputValue } from '../../entity.selectors';
+import { getInputValue } from '../../resources/input/input.selectors';
 
 function Header() {
   const dispatch = useDispatch();
