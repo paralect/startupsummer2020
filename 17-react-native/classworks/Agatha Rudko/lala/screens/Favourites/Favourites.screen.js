@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import SafeAreaView from 'react-native-safe-area-view';
 
 import styles from './Favourites.styles';
 
@@ -10,7 +11,7 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View>
         <Text style={styles.title}>Favourites Screen</Text>
         <Text style={styles.subtitle}>We all love</Text>
@@ -20,11 +21,11 @@ function HomeScreen() {
             style={styles.button}
             onPress={() => navigation.navigate('Details', { item })}
           >
-            <Text>{item}</Text>
+            <Text style={styles.subtitle}>{item}</Text>
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

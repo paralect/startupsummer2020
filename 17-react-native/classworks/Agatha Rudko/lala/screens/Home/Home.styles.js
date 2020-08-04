@@ -15,12 +15,20 @@ export default StyleSheet.create({
     backgroundColor: '#2F2F2F',
     margin: 10,
     padding: 10,
-    height: 92,
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 10,
     borderColor: 'rgba(0, 0, 0, 0.25)',
+    flexDirection: 'row',
   },
   text: {
     color: 'white',
+    marginLeft: 10,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  img: {
+    height: 80,
+    width: 70,
   }
 });
