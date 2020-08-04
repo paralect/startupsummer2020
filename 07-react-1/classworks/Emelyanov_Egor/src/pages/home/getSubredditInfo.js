@@ -1,8 +1,8 @@
-import { setSubredditData } from '../../store/actions/subredditData';
+import { setSubredditData } from '../../resources/subredditData/subredditData.actions';
 
-export const getSubredditInfo = url => dispatch => {
+export const getSubredditInfo = (fetchReddit, url) => async dispatch => {
   try {
-    const data = await fetchReddit(fetchReddit, url);
+    const data = await fetchReddit(url);
     const json = await data.json();
     dispatch(setSubredditData(json));
   }

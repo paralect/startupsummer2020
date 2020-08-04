@@ -1,22 +1,26 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import moment from "moment";
+import moment from 'moment';
 
 import lukashenkoImg from './lukashenko.jpg';
 import comment from './comment.jpg';
-import { getSubredditData } from '../../entity.selectors';
+import { getSubredditData, getCurrentSubredditData } from '../../resources/subredditData/subredditData.selectors';
 
-function CommunityPosts() {
+function CommunityPosts(props) {
   const subredditData = useSelector(getSubredditData);
 
+  const currentSubredditData = useSelector(getCurrentSubredditData(props.match.params.subredditUrl));
+
+
+  
 
   return (
     <div className="community-posts">
       <div className="community-info">
-        <img className="community-posts_logo" src={props.location.state.img || lukashenkoImg} />
+        <img className="community-posts_logo" src={currentSubredditData.img || lukashenkoImg} />
         <div>
-          <h3>{props.location.state.title}</h3>
-          <p>{props.location.state.name}</p>
+          <h3>{currentSubredditData.title}</h3>
+          <p>{currentSubredditData.name}</p>
         </div>
       </div>
       <div className="bg-gray">

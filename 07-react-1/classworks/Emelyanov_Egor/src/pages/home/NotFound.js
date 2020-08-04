@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import smorc from './smorc.png';
 
-import { getInputValue } from '../../entity.selectors';
+import { getInputValue } from '../../resources/input/input.selectors';
 
 function NotFound() {
   const inputValue = useSelector(getInputValue);

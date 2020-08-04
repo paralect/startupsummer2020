@@ -2,7 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getSubredditData, getInputValue } from '../../entity.selectors';
+import { getInputValue } from '../../resources/input/input.selectors';
+import { getSubredditData } from '../../resources/subredditData/subredditData.selectors';
+import lukashenkoImg from './lukashenko.jpg';
 
 function CommunityList() {
   const subredditData = useSelector(getSubredditData);
@@ -20,26 +22,22 @@ function CommunityList() {
       <div className="community-list_content">
         <ul>
         {subredditData.data.children.map(child => (
-          <li key={child.data.id} >
-            <Link to={{
-              pathname: `/subreddit/${child.data.id}`,
-              state: {
-                url: child.data.url,
-                img: child.data.icon_img,
-                title: child.data.title,
-                name: child.data.display_name_prefixed
-              }
-            }}>
-          <div className="community-info">
-            <img src={child.data.icon_img || lukashenkoImg}></img>
-            <div>
-              <p className="community-name">{child.data.display_name_prefixed}</p>
-              <p className="community-members">
-                {(child.data.subscribers / 1000).toFixed(1)}k Members
-                </p>
+          <li key={child.data.id}>
+            <Link
+              to={{
+                pathname: `/subreddit/${child.data.id}`,
+              }}
+            >
+            <div className="community-info">
+              <img src={child.data.icon_img || lukashenkoImg}></img>
+              <div>
+                <p className="community-name">{child.data.display_name_prefixed}</p>
+                <p className="community-members">
+                  {(child.data.subscribers / 1000).toFixed(1)}k Members
+                  </p>
+              </div>
             </div>
-          </div>
-          <p className="community-description">{child.data.public_description}</p>
+            <p className="community-description">{child.data.public_description}</p>
             </Link>
           </li>
         ))}
