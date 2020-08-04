@@ -4,18 +4,15 @@ let session = require('koa-generic-session');
 const serve = require('koa-static');
 const send  = require('koa-send');
 const bodyParser = require('koa-bodyparser');
-var jwt = require('jsonwebtoken');
-const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
+const koajwt = require('koa-jwt');
 const signup = require('./signup');
 const signin = require('./signin');
-const bd = require('./base.json');
-const checkUser = require('./checkUser');
 const getArticle = require('./getArticle');
 const addArticle = require('./addArticle');
 
 let app = new koa();
 let router = new Router();
-let token;
 
 app.use(bodyParser());
 app.keys = ['keys', 'keykeys'];
@@ -47,23 +44,25 @@ router
     const session = ctx.session;
     if (signed.ok) session.state = { name: signed.name }
     next();
-  })
-  .get('/posts', async (ctx, next) => {
-    const session = ctx.session;
-    if (session.token) {
-      const decoded = jwt.verify(session.token, 'shhhhh');
-      console.log(decoded);
-      const posts = await getArticle('Hello people', 'We are aliens');
-      console.log(posts.data);
-      console.log(session.state);
-      const allPosts = addArticle(session.state, posts.data);
-      if (decoded.foo === 'bar') ctx.body = allPosts;
-    } else console.log('AAAAAAAAAAAAAAAAA');
   });
+
+
+
+router
+  .get('/posts', koajwt, async (ctx, next) => {
+    const session = ctx.session;
+    console.log(decoded);
+    const posts = await getArticle('Hello people', 'We are aliens');
+  })
+  .post('/posts', koajwt, async (ctx, next) => {
+    const session = ctx.session;
+    const allPosts = addArticle(session.state, posts.data);
+    ctx.body = allPosts;
+  });;
 
 app
   .use(router.routes())
-  .use(router.allowedMethods());
-
+  .use(router.allowedMethods())
+  .use(koajwt({ secret: 'shared-secret' }));
 
 app.listen(3000);
