@@ -13,7 +13,6 @@ function HomeScreen() {
 
   const fetchData = useCallback(async () => {
     const { data } = await fetchMarvel('/characters',  );
-    console.log(data.data.results);
     setCharacters(data.data.results);
   }, []);
 

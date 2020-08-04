@@ -10,8 +10,20 @@ import styles from './root.navigator.styles'
 
 const Tab = createBottomTabNavigator();
 
-const tabBarOptions ={
-  style: styles.tabs
+const tabBarOptions = {
+    inactiveBackgroundColor: '#151515',
+    activeBackgroundColor: '#151515',
+    activeTintColor: '#E62429',
+    style: {
+      height: 70,
+      borderTopColor: '#E62429',
+    },
+    tabStyle: {
+      paddingTop: 14,
+    },
+    labelStyle: {
+      paddingBottom: 14,
+    }
 };
 
 function RootNavigator() {

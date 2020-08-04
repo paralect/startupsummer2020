@@ -5,8 +5,11 @@ import styles from './comics-item.styles';
 
 
 function ComicsItem(props) {
+
+  console.log('COMICS ITEM', props.item);
   const imageSource = {
-    uri: props.item.resourceURI,
+    uri: props.item.thumbnail.path + '.' + props.item.thumbnail.extension,
+    // uri: props.item.resourceURI,
   };
 
   return (
@@ -19,7 +22,7 @@ function ComicsItem(props) {
           />
         </View>
         <View style={styles.nickAndFull}>
-          <Text style={styles.nickname}>{props.item.name.toUpperCase()}</Text>
+          <Text style={styles.nickname}>{props.item.title.toUpperCase()}</Text>
         </View>
       </View>
     </View>
