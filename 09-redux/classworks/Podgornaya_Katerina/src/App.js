@@ -11,8 +11,8 @@ function App() {
     if (event.keyCode === 13) {
       console.log(event.target.value);
       setPhrase(event.target.value);
-    };
-  }
+    }
+  };
 
   return (
     <main>
