@@ -32,7 +32,7 @@ function RootNavigator() {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="My Marvel"
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <AntDesign name="appstore-o" size={size} color={color} />,

@@ -1,5 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  ScrollView,
+  Image,
+  Text,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import styles from './Favourite.styles';
@@ -8,8 +14,19 @@ function FavouriteScreen() {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.container}>
+          <Image
+            source={require('../../assets/logo.jpg')}
+            style={styles.logo}
+          />
+          <View style={styles.content}>
+            <Text style={styles.title}>FAVOURITE CHARACTERS</Text>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
