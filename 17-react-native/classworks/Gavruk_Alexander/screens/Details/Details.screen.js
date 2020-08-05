@@ -24,7 +24,6 @@ function DetailsScreen() {
   const fetchData = useCallback(async () => {
     const { data } = await fetchMarvel(`/characters/${id}/comics`);
     setComics(data.data.results);
-    console.log('comics ;alsdkfj;lkjasf', data.data.results);
   }, []);
 
   useEffect(() => {
