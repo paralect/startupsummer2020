@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-import {Text, View, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import styles from './Details.styles';
 import fetchMarvel from "../../fetchMarvel";
+import Header from "../../components";
 
 function DetailsScreen() {
   const { params } = useRoute();
@@ -12,14 +13,18 @@ function DetailsScreen() {
   const [res, setRes] = useState([]);
 
   const fetchData = async () => {
-    const {data} = await fetchMarvel(`/characters/${item.id}`);
-    console.log(data.data.results[0].comics.items);
-    setRes(data.data.results[0].comics.items);
+    const {data} = await fetchMarvel(`/characters/${item.id}/comics`);
+    // console.log(data.data.results);
+    // data.data.results.map((i)=>console.log(i.title));
+    setRes(data.data.results);
   }
-
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <Header />
+      <ScrollView style={styles.content}>
         <Image
           style={styles.img}
           source={{
@@ -28,12 +33,17 @@ function DetailsScreen() {
         <Text style={styles.title}>{item.name}</Text>
         <Text style={styles.itemText}>{item.description}</Text>
         <Text style={styles.title}>Comics</Text>
-        {res.map((i) =>{
-          <View style={styles.button} keys={i}>
-            <Text style={styles.title}>{i.name}</Text>
-          </View>
-        })}
-      </View>
+        {res.map((i) => {return(
+            <TouchableOpacity style={styles.button} keys={i} onPress={()=>{}}>
+              <Image
+                style={styles.comicsImg}
+                source={{
+                  uri: i.thumbnail.path+'.'+i.thumbnail.extension}}
+              />
+              <Text style={styles.itemText}>{i.title}</Text>
+            </TouchableOpacity>
+        ) })}
+      </ScrollView>
     </SafeAreaView>
   );
 }

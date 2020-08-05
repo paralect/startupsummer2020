@@ -19,6 +19,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     borderColor: 'rgba(0, 0, 0, 0.25)',
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   text: {
     color: 'white',

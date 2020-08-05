@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import SafeAreaView from 'react-native-safe-area-view';
 
 import styles from './Favourites.styles';
+import Header from "../../components";
 
 const someItems = ['Startup Summer', 'Memes'];
 
@@ -12,6 +13,7 @@ function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Header />
       <View>
         <Text style={styles.title}>Favourites Screen</Text>
         <Text style={styles.subtitle}>We all love</Text>

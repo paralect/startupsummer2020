@@ -3,15 +3,12 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    backgroundColor: '#151515',
-    paddingTop: 50,
-    paddingLeft: 20,
+    backgroundColor: '#202020',
   },
   title: {
     fontSize: 36,
     marginBottom: 5,
+    marginLeft: 10,
     color: 'white',
   },
   subtitle: {

@@ -3,8 +3,6 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     backgroundColor: '#202020',
   },
   title: {
@@ -31,4 +29,11 @@ export default StyleSheet.create({
     borderColor: 'rgba(0, 0, 0, 0.25)',
     flexDirection: 'row',
   },
+  content: {
+    padding: 10,
+  },
+  comicsImg: {
+    height: 80,
+    width: 70,
+  }
 });
