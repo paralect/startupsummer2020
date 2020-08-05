@@ -17,6 +17,15 @@
     "axios": "^0.19.2",
     "ffmpeg": "0.0.4",
     "ffmpeg-extract-frames": "^2.0.2",
-    "ffmpeg-fork": "0.0.6"
+    "ffmpeg-fork": "0.0.6",
+    "joi": "^17.1.1",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-generic-session": "^2.0.4",
+    "koa-joi-validate": "^0.5.1",
+    "koa-router": "^9.1.0",
+    "koa-static": "^5.0.0",
+    "node": "^14.5.0",
+    "nodejs": "0.0.0"
   }
 }
