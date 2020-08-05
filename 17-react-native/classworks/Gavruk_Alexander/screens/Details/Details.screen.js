@@ -13,11 +13,11 @@ import heart from '../../assets/heart.png';
 import activeHeart from '../../assets/active-heart.png';
 
 import styles from './Details.styles';
+import { FlatList } from 'react-native-gesture-handler';
 
 function DetailsScreen() {
   const { params } = useRoute();
   const { id, name, favouritesCharacters, img, description } = params
-  console.log(id, name, favouritesCharacters, img, description);
 
   const [comics, setComics] = useState([]);
 
@@ -30,6 +30,18 @@ function DetailsScreen() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const renderComicsItem = ({ item }) => (
+    <View key={item.id} style={styles.comicsItem}>
+      <Image
+        style={styles.comicsImg}
+        source={{
+          uri: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+        }}
+      />
+      <Text style={styles.comicsName}>{item.title}</Text>
+    </View>
+  );
 
   return (
     <SafeAreaView>
@@ -53,24 +65,14 @@ function DetailsScreen() {
               </View>
             </View>
             <Text style={styles.description}>
-              {description}
+              {description === '' ? 'This is absolutely secret u know' : description}
             </Text>
             <Text style={styles.title}>COMICS</Text>
-            {
-              comics.map((comicsItem) => {
-                return (
-                  <View key={comicsItem.id} style={styles.comicsItem}>
-                    <Image
-                      style={styles.comicsImg}
-                      source={{
-                        uri: `${comicsItem.thumbnail.path}.${comicsItem.thumbnail.extension}`,
-                      }}
-                    />
-                    <Text style={styles.comicsName}>{comicsItem.title}</Text>
-                  </View>
-                )
-              })
-            }
+            <FlatList
+              data={comics}
+              renderItem={renderComicsItem}
+              keyExtractor={item => item.id}
+            />
           </View>
         </View>
       </ScrollView>

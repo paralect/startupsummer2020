@@ -5,6 +5,7 @@ import { Text,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import fetchMarvel from '../../fetchMarvel';
@@ -27,6 +28,23 @@ function HomeScreen() {
     fetchData();
   }, []);
 
+  const renderCharacter = ({ character }) => (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Details', {
+        id: character.id,
+        favouritesCharacters,
+        name: character.name,
+        description: character.description,
+        img: character.thumbnail,
+      })}
+    >
+      <CharacterItem
+        name={character.name}
+        img={character.thumbnail}
+      />
+    </TouchableOpacity>
+  );
+
   return (
     <SafeAreaView>
       <ScrollView>
@@ -38,28 +56,11 @@ function HomeScreen() {
           <View style={styles.content}>
             <Text style={styles.title}>FEATURED CHARACTERS</Text>
           </View>
-          {
-            characters.map((character) => {
-              return (
-                <TouchableOpacity
-                  key={character.id}
-                  onPress={() => navigation.navigate('Details', {
-                    id: character.id,
-                    favouritesCharacters,
-                    name: character.name,
-                    description: character.description,
-                    img: character.thumbnail,
-                  })}
-                >
-                  <CharacterItem
-                    name={character.name}
-                    img={character.thumbnail}
-                    isFavourite={false}
-                />
-                </TouchableOpacity>
-              )
-            })
-          }
+          <FlatList
+            data={characters}
+            renderItem={renderCharacter}
+            keyExtractor={item => item.id}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
