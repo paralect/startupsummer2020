@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -6,7 +6,6 @@ import MyMarvelNavigator from './my-marvel.navigation';
 import FavouritesNavigator from './favorites.navigation';
 
 import SettingsScreen from '../screens/Settings';
-import { useLinkProps } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
