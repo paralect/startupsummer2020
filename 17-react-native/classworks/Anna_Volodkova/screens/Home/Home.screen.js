@@ -1,23 +1,21 @@
-import React, { useEffect, useCallback, useState} from 'react';
-import {Text, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { Text, View } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { SafeAreaView } from 'react-native-safe-area-context'
+
+import Header from '../../components/header';
+import CharactersList from '../../components/charactersList';
+import * as charactersActions from '../../resources/characters/characters.actions';
+import * as charactersSelectors from '../../resources/characters/characters.selectors';
 
 import styles from './Home.styles';
-import Header from '../../components/header';
-import {SafeAreaView} from 'react-native-safe-area-context'
-import fetchMarvel from '../../fetchMarvel';
-import FL from '../../components/flatList';
 
 function HomeScreen() {
-  const [characters, setCharacters] = useState(null);
-
-  const fetchData = useCallback(async () => {
-    const { data } = await fetchMarvel('/characters',  );
-    setCharacters(data.data.results);
-  }, []);
+  const dispatch = useDispatch();
+  const characters = useSelector(charactersSelectors.getCharacters)
 
   useEffect(() => {
-    fetchData();
+    dispatch(charactersActions.fetchCharacters());
   },[]);
 
   return (
@@ -25,7 +23,7 @@ function HomeScreen() {
       <Header/>
       <Text style={styles.title}>FEATURED CHARACTERS</Text>
       <View style={styles.center}>
-        <FL
+        <CharactersList
           arr={characters}
           icon
         />

@@ -44,7 +44,8 @@ export default StyleSheet.create({
   },
   heartIconClicked: {
     fontSize: 20,
-    margin: 15,
+    marginTop: 15,
+    marginRight: 15,
     color: '#e62429',
   },
   first: {

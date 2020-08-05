@@ -1,13 +1,9 @@
 import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {Text, View } from 'react-native';
 
 import styles from './Favourites.styles';
 import {SafeAreaView} from "react-native-safe-area-context";
 import Header from "../../components/header";
-import CharacterList from "../../components/characterList";
-import FL from "../../components/flatList";
-import fetchMarvel from "../../fetchMarvel";
 
 
 function FavouriteScreen() {

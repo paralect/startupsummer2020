@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import {TouchableOpacity, View, Text, FlatList} from 'react-native';
 
 import CharacterItem from "../characterItem";
-import styles from './flat-list.styles';
+import styles from './characters-list.styles';
 import {useNavigation} from "@react-navigation/native";
 
-function FL(props) {
+function CharactersList(props) {
   const navigation = useNavigation();
 
   if (!props.arr) return (<Text style={styles.title}>Loading</Text>);
 
 
-  const renderItem = ({item}) => (
+  const renderItem = ({item}) => console.log(item) || (
     <TouchableOpacity
-      key={item}
+      key={item.id}
       style={styles.button}
-      onPress={() => navigation.navigate('Details', {item})}
+      onPress={() => navigation.navigate('Details', { item })}
     >
       <CharacterItem
         item={item}
@@ -33,4 +33,4 @@ function FL(props) {
   );
 }
 
-export default FL;
+export default CharactersList;
