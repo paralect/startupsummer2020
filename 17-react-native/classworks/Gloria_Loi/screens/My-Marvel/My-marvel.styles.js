@@ -31,6 +31,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     margin: 12,
+    width: 175,
   },
   header: {
     height: 40,
@@ -38,4 +39,7 @@ export default StyleSheet.create({
     marginTop: 21,
     marginBottom: 20,
   },
+  icon: {
+    margin: 15,
+  }
 });

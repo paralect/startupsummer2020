@@ -7,6 +7,35 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
+  img: {
+    margin: 5,
+    height: 170,
+    width: 150,
+  },
+  description: {
+    width: 300,
+    color: '#fff',
+  },
+  header: {
+    height: 40,
+    width: 105,
+    marginTop: 21,
+    marginBottom: 20,
+  },
+  mainBlock: {
+    flexDirection: 'row',
+    marginBottom: 10,
+    width: 300,
+  },
+  name: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: '#fff',
+    margin: 18,
+  },
+  icon: {
+    marginLeft: 18,
+  },
   title: {
     color: '#fff',
     fontWeight: 'bold',
@@ -22,7 +51,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#2f2f2f',
   },
-  img: {
+  imgCom: {
     margin: 5,
     height: 80,
     width: 70,
@@ -31,11 +60,5 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     margin: 12,
-  },
-  header: {
-    height: 40,
-    width: 105,
-    marginTop: 21,
-    marginBottom: 20,
   },
 });

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, ScrollView } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import fetchMarvel from '../../fetchMarvel';
@@ -9,12 +10,13 @@ import styles from './Details.styles';
 
 const DetailsScreen = () => {
   const { params } = useRoute();
-  const { id } = params;
-  const [details, setDetails] = useState();
+  const { id, description, name, thumbnail } = params;
+  const [comics, setComics] = useState();
 
   const fetchData = useCallback(async () => {
-    const { data } = await fetchMarvel(`/characters/${id}`);
-    setDetails(data.data.results[0]);
+console.log(id)
+    const { data } =  await fetchMarvel(`/characters/${id}/comics`);
+    setComics(data.data.results);
   }, []);
 
   useEffect(() => {
@@ -24,14 +26,46 @@ const DetailsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Image style={styles.header} source={require('../../assets/logo.png')} />
-      <Text>{details?.name}</Text>
-      <Text>{details?.description}</Text>
-      <Image
-        style={styles.img}
-        source={{
-          uri: details?.thumbnail.path + '.' + details?.thumbnail.extension,
-        }}
-      />
+      <View style={styles.mainBlock}>
+        <Image
+          style={styles.img}
+          source={{
+            uri: thumbnail?.path + '.' + thumbnail?.extension,
+          }}
+        />
+        <View>
+          <Text style={styles.name}>{name}</Text>
+          <AntDesign
+            name="hearto"
+            size={15}
+            color="white"
+            style={styles.icon}
+          />
+        </View>
+      </View>
+      <ScrollView>
+        <Text style={styles.description}>{description}</Text>
+        <Text style={styles.name}>
+          COMICS
+        </Text>
+        {comics && comics.map((comic)=>(
+          <View
+            key={comic.id}
+            style={styles.button}
+          >
+            <Image
+              style={styles.imgCom}
+              source={{
+                uri: comic.thumbnail.path + '.' + comic.thumbnail.extension,
+              }}
+            />
+            <ScrollView>
+              <Text style={styles.text}>{comic.title}</Text>
+              <Text style={styles.text}>{comic.format}</Text>
+            </ScrollView>
+          </View>
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 };
