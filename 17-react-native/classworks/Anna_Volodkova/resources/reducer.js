@@ -1,10 +1,9 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
-import {favouriteReducer} from './favourites.reducer';
-
+import characters from './characters/characters.reducer';
 
 const rootReducer = combineReducers({
-    favouriteCharacters: favouriteReducer,
+    characters,
   }
 );
 
