@@ -12,33 +12,28 @@ const DEFAULT_ROOM = 'general';
 io.on('connection', (socket) => {
   console.log(`New connection from: ${socket.id}`);
 
-  users.set(socket.id, 'anon');
+  users.set(socket.id, { id: socket.id, username: 'anon', typing: false });
   socket.join(DEFAULT_ROOM);
   socket.currentRoom = DEFAULT_ROOM;
 
   socket.on('message', (data) => {
-    console.log(`Rcvd: message ${JSON.stringify(data)}`);
-    switch (data.type) {
-      case 'message':
-        io.to(socket.currentRoom).emit('message', { type: 'message', username: users.get(socket.id), message: data.payload });
-        break;
-      case 'set_username':
-        users.set(socket.id, data.payload);
-        console.log(`${socket.id} - new user name: ${data.payload}`);
-        break;
-      case 'typing':
-        socket.to(socket.currentRoom).broadcast.emit('message', { type: 'typing', username: users.get(socket.id) });
-        break;
-      case 'set_room':
-        socket.leave(socket.currentRoom);
-        socket.join(data.room);
-        socket.currentRoom = data.room;
-        break;
-      default:
-        break;
-    }
+    io.to(socket.currentRoom).emit('message', { user: users.get(socket.id), message: data.payload });
   });
 
+  socket.on('set_username', (data) => {
+    users.set(socket.id, { ...users.get(socket.id), username: data.payload });
+    console.log(`${socket.id} - new user name: ${data.payload}`);
+  });
+
+  socket.on('typing', () => {
+    socket.to(socket.currentRoom).broadcast.emit('typing', users.get(socket.id));
+  });
+
+  socket.on('set_room', (data) => {
+    socket.leave(socket.currentRoom);
+    socket.join(data.room);
+    socket.currentRoom = data.room;
+  });
 
   socket.on('disconnect', (reason) => {
     console.log(`Disconnected reason: ${reason}`);
@@ -46,4 +41,4 @@ io.on('connection', (socket) => {
 })
 
 
-server.listen(3002);
+server.listen(2003);

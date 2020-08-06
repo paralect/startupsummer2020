@@ -1,12 +1,15 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 import io from 'socket.io-client';
+import { debounce } from 'lodash';
 
 import Message from './components/Message';
 
 import './Chat.css';
 
-const socketUrl = 'http://localhost:3002';
+const socketUrl = 'http://localhost:2003';
 const client = io(socketUrl);
+
+const TYPING_MAX_RATE = 2000;
 
 function Chat() {
   const socket = useRef(client).current;
@@ -15,64 +18,51 @@ function Chat() {
   const [username, setUsername] = useState('anon');
   const [room, setRoom] = useState('general');
   const [messages, setMessages] = useState([]);
-  const [typingUsers, setTypingUsers] = useState(new Set());
+  const [typing, setTyping] = useState([]);
 
   const addMessage = useCallback((msg) => {
     setMessages([...messages, msg]);
   }, [messages, setMessages]);
 
-  const addTyping = useCallback((data) => {
-    setTypingUsers((typing) => new Set([...typing, data.username]));
-  }, [setTypingUsers]);
-
-  const removeTyping = useCallback((data) => {
-    setTypingUsers((typing) => {
-      typing.delete(data.username);
-      return typing;
-    });
-  }, []);
-
-
   useEffect(() => {
     if (socket) {
       socket.on('message', (msg) => {
-        switch (msg.type) {
-          case 'message':
-            addMessage(msg);
-            removeTyping(msg);
-            break;
-          case 'typing':
-            addTyping(msg);
-            break;
-          default:
-            break;
-        }
+        addMessage(msg);
+      });
+
+      socket.on('typing', (data) => {
+        setTyping((prev) => [...prev, data]);
       });
 
       setStatus(socket.status);
     }
-  }, [addMessage, setStatus, addTyping, socket, removeTyping]);
+  }, [addMessage, setTyping, setStatus, socket]);
 
   const sendMessage = useCallback((event) => {
     event.preventDefault();
     setInputValue('');
-    socket.emit('message', { type: 'message', payload: inputValue });
+    socket.emit('message', { payload: inputValue });
   }, [inputValue, setInputValue, socket]);
 
   const changeUsername = useCallback((event) => {
     event.preventDefault();
-    socket.emit('message', { type: 'set_username', payload: username });
+    socket.emit('set_username', { payload: username });
   }, [username, socket]);
 
   const changeRoom = useCallback((event) => {
     event.preventDefault();
-    socket.emit('message', { type: 'set_room', payload: room });
+    socket.emit('set_room', { payload: room });
   }, [room, socket]);
+
+  const sendTyping = useCallback(
+    debounce(() => socket.emit('typing'), TYPING_MAX_RATE, { leading: true }),
+    [socket],
+  );
 
   const handleInputChange = useCallback((event) => {
     setInputValue(event.target.value);
-    socket.emit('message', { type: 'typing' });
-  }, [setInputValue, socket]);
+    sendTyping();
+  }, [setInputValue, sendTyping]);
 
 
   return (
@@ -99,11 +89,11 @@ function Chat() {
 
       <section>
         Typing:
-        {[...typingUsers].map((u) => <span>{`${u} `}</span>)}
+        {typing.map((u) => <span key={u.username}>{`${u.username} `}</span>)}
       </section>
 
       <section id="chatroom">
-        {messages.map((msg) => <Message username={msg.username} message={msg.message} />)}
+        {messages.map((msg) => <Message username={msg.user.username} message={msg.message} />)}
         <section id="feedback"></section>
       </section>
 
