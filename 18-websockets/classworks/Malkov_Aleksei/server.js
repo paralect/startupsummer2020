@@ -3,14 +3,9 @@ const app = new Koa();
 const cors = require('@koa/cors');
 app.use(cors());
 const server = require('http').createServer(app);
-const Router = require('koa-router');
-const router = new Router();
 const options = {origins:'*:*'};
 const io = require('socket.io')(server, {options});
 
-app.use(async (ctx, next) => {
-  await next();
-});
 let numUsers = 0;
 const users = new Map();
 
@@ -38,7 +33,6 @@ io.on('connection', (socket) => {
     socket.emit('login', {
       numUsers: numUsers
     });
-    // echo globally (all clients) that a person has connected
     socket.broadcast.emit('user joined', {
       username: users.get(username),
       numUsers: numUsers
@@ -53,7 +47,6 @@ io.on('connection', (socket) => {
   });
 
   socket.on('new message', (data) => {
-    // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
       username: users.get(name),
       message: data
@@ -79,12 +72,5 @@ io.on('connection', (socket) => {
   });
 });
 
-router
-  .get('/', async (ctx, next) => {
-    console.log('hihi');
-  });
-  
-
-app.use(router.routes());
 server.listen(3001);
 

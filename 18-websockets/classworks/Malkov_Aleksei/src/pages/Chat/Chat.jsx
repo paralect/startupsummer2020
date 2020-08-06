@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './Chat.css';
 import Message from './components/Message';
 import io from 'socket.io-client';
+import debounce from './debounce';
 
 const ENDPOINT = "http://localhost:3001";
 const socket = io(ENDPOINT, {transports: ['websocket']});
@@ -12,7 +13,7 @@ function Chat() {
   const [message, setMessage] = useState('');
   const [listOfMessages, setListOfMessages] = useState([]);
   const [username, setUsername] = useState(defaultName);
-  const [typing, setTyping] = useState(null);
+  const [typing, setTyping] = useState([]);
   const name = useRef(null);
 
   function changeUserName() {
@@ -36,15 +37,20 @@ function Chat() {
   });
 
   socket.on('typing', (data) => {
-    setTimeout(() => {
-      setTyping(null);
-    }, 1000)
-    setTyping(data);
+    if (!typing.includes(data.username)) {
+      setTimeout(() => {
+        setTyping([...typing].filter((typer) => typer !== data.username));
+      }, 2000)
+      setTyping([...typing, data.username]);
+    }
   });
 
   function type(e) {
     setMessage(e.target.value);
-    socket.emit("typing", username);
+    const emitter = debounce(function() {
+      socket.emit("typing", username);
+    }, 2000, true);
+    emitter();
   }
 
   function sendMessage(e) {
@@ -84,7 +90,7 @@ function Chat() {
       </section>
 
       <section className="typing_zone">
-        {typing && <span>{typing.username} is typing...</span>}
+        {typing.length !== 0 && <span>{typing.join(', ')} is typing...</span>}
       </section>
       
       <section id="input_zone">
