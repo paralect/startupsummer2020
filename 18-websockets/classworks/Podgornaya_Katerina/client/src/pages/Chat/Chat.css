@@ -15,6 +15,7 @@
 header {
     color: white;
     text-align: center;
+    padding: 10px 0 10px 0;
 }
 
 h1 {
@@ -39,7 +40,7 @@ div#change_username {
 
 section#chatroom {
     border: 2px inset #0088cc;
-    height: 85%;
+    height: 84%;
     overflow: auto;
 }
 
@@ -79,4 +80,9 @@ button#send_message {
     display: inline-block;
     height: 73%;
     width: 10%;
+}
+
+.isTyping {
+    color: white;
+    padding: 5px;
 }

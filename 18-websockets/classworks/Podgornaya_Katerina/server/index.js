@@ -21,6 +21,13 @@ server.on('connection', (socket) => {
     console.log(`${FgYellow}Client (id = ${socket.id.slice(0, 3)}) send some message${FgWhite}: ${message.message}`);
     socket.broadcast.emit('get-message', message);
   });
+  socket.on('typing-message', (username) => {
+    console.log(`${FgMagenta}${username}) is typing a message...`);
+    socket.broadcast.emit('get-typing-username', username);
+  });
+  socket.on('no-typing', () => {
+    socket.broadcast.emit('get-no-typing');
+  });
 
   socket.on('disconnect', () => {
     console.log(`${FgRed}Client gone id = ${socket.id.slice(0, 3)}${FgWhite}`);
