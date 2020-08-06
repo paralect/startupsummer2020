@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "username": "admin",
+      "passwordHash": "d8da308ccd0cf4c331521fc8f8771507e65e9981de1959e0c76e035291024b1e6b18b9623f751acb470e2b38506066e216a5259f530817674f19f24501ca1034"
+    },
+    {
+      "username": "student",
+      "passwordHash": "c9fec0f567c0884c78ffa00b1ff7da1c7ac53b64f6e1f5b75fccb0438bf536e9fe1a1efaf0e8c8f74c31933c03ee81e3c2cac7fb6216a9a38efe09f44b3f4e18"
+    }
+  ]
+}
