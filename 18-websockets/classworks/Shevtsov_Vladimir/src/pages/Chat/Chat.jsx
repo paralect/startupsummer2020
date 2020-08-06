@@ -13,7 +13,6 @@ const TYPING_MAX_RATE = 2000;
 
 function Chat() {
   const socket = useRef(client).current;
-  const [status, setStatus] = useState('Disconnected');
   const [inputValue, setInputValue] = useState('');
   const [username, setUsername] = useState('anon');
   const [room, setRoom] = useState('general');
@@ -31,12 +30,19 @@ function Chat() {
       });
 
       socket.on('typing', (data) => {
-        setTyping((prev) => [...prev, data]);
+        const prevUser = typing.find((u) => data.id === u.id);
+        const timeout = setTimeout(() => {
+          setTyping((prev) => [...prev.filter((u) => u.id !== data.id)])
+        }, TYPING_MAX_RATE + 1000);
+        if (prevUser) {
+          clearTimeout(prevUser.timeout);
+        } else {
+          setTyping((prev) => [...prev.filter((u) => u.id !== data.id), { ...data, timeout }]);
+        }
       });
 
-      setStatus(socket.status);
     }
-  }, [addMessage, setTyping, setStatus, socket]);
+  }, [addMessage, typing, setTyping, socket]);
 
   const sendMessage = useCallback((event) => {
     event.preventDefault();
@@ -55,7 +61,7 @@ function Chat() {
   }, [room, socket]);
 
   const sendTyping = useCallback(
-    debounce(() => socket.emit('typing'), TYPING_MAX_RATE, { leading: true }),
+    debounce(() => socket.emit('typing'), TYPING_MAX_RATE, { leading: true, trailing: false }),
     [socket],
   );
 
@@ -70,7 +76,6 @@ function Chat() {
       <header>
         <h1>Super Chat</h1>
       </header>
-      <span>Status: {`${status}`}</span>
 
       <section>
         <div id="change_username">
@@ -89,7 +94,7 @@ function Chat() {
 
       <section>
         Typing:
-        {typing.map((u) => <span key={u.username}>{`${u.username} `}</span>)}
+        {typing.map((u) => <span key={u.username}>{u.username}</span>)}
       </section>
 
       <section id="chatroom">
