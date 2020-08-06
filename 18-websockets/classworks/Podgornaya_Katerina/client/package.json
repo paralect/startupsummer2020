@@ -12,7 +12,7 @@
     "socket.io": "^2.3.0"
   },
   "scripts": {
-    "start setver": "npx nodemon ./server/index.js",
+    "start server": "npx nodemon ./server/index.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
