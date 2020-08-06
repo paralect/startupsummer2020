@@ -1,5 +1,6 @@
 import { FETCH_CHARACTERS, SWITCH_FAVOURITE } from './characters.types';
 import fetchMarvel from '../../fetchMarvel';
+import {FETCH_CHARACTER_COMICS} from './characters.types';
 
 export function fetchCharacters() {
   return async (dispatch) => {
@@ -27,6 +28,21 @@ export function switchFavourite(id) {
       payload: {
         id,
       }
+    });
+  }
+}
+
+export function fetchComics(id) {
+  return async (dispatch) => {
+
+    const { data } = await fetchMarvel(`/characters/${id}/comics`,  );
+
+    dispatch({
+      type: FETCH_CHARACTER_COMICS,
+      payload: {
+        id,
+        comicsArray: data.data.results,
+      },
     });
   }
 }

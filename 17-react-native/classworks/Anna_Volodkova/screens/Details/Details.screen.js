@@ -1,39 +1,35 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {Image, Text, View} from 'react-native';
+import React, {useCallback, useEffect, useState } from 'react';
+import {Image, Text, TouchableOpacity, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { useDispatch, useSelector } from "react-redux";
 
 import styles from './Details.styles';
-import {AntDesign} from "@expo/vector-icons";
-import {SafeAreaView} from "react-native-safe-area-context";
+import { AntDesign } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Header from '../../components/header';
-import CL from "../../components/comicsList";
-import fetchMarvel from "../../fetchMarvel";
+import CharactersList from '../../components/comicsList';
+import * as charactersActions from '../../resources/characters/characters.actions';
+import * as charactersSelectors from "../../resources/characters/characters.selectors";
 
 function DetailsScreen() {
   const { params } = useRoute();
   const { item } = params;
+  const dispatch = useDispatch();
 
+  const character = useSelector((state) => charactersSelectors.getCharacter(state, item.id));
+  console.log("CHARACTER", typeof character.description, character.description);
 
-  const [comics, setComics] = useState(null);
-  const [comicses, setComicses] = useState(null);
-
-  const fetchData = useCallback(async () => {
-    const { data } = await fetchMarvel(`/characters/${item.id}/comics`,  );
-    console.log("Fetched detail comics desc HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", data.data.results[0].description);
-    setComics(data.data.results[0]);
-    setComicses(data.data.results)
-  }, []);
+  if(!character) return (<Text style={styles.title}>Loading</Text>);
 
   useEffect(() => {
-    fetchData();
+    if(!character.comicsArray){
+      dispatch(charactersActions.fetchComics(item.id));
+    }
   },[]);
 
   const imageSource = {
-    uri: item.thumbnail.path + '.' + item.thumbnail.extension,
+    uri: character.thumbnail.path + '.' + character.thumbnail.extension,
   };
-
-  if (!comics) return (<Text style={styles.title}>Loading</Text>);
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,19 +42,27 @@ function DetailsScreen() {
           />
         </View>
         <View style={styles.nickAndFull}>
-          <Text style={styles.nickname}>{item.name.toUpperCase()}</Text>
-          {item.id && <Text style={styles.fullName}>{item.id}</Text>}
-          <AntDesign
-            style={styles.heartIcon}
-            name="hearto"
-          />
+          <Text style={styles.nickname}>{character.name.toUpperCase()}</Text>
+          <Text style={styles.fullName}>{character.id}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              dispatch(charactersActions.switchFavourite(character.id));
+            }}
+          >
+            <AntDesign
+              style={character.isFav ? styles.heartIconClicked : styles.heartIcon}
+              name="heart"
+            />
+          </TouchableOpacity>
         </View>
       </View>
-      {comics.description && <Text style={styles.description}>{comics?.description}</Text>}
+      <Text style={styles.description}>{character.description}</Text>
       <Text style={styles.title}>COMICS</Text>
-      <CL
-        arr={comicses}
-      />
+      {character.comicsArray &&
+        <CharactersList
+          arr={character.comicsArray}
+        />
+      }
     </SafeAreaView>
   );
 }

@@ -19,7 +19,6 @@ function CharactersList(props) {
     >
       <CharacterItem
         item={item}
-        icon={props.icon}
       />
     </TouchableOpacity>
   );
