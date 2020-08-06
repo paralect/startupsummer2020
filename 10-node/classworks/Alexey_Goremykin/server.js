@@ -1,48 +1,68 @@
 const http = require('http');
 const os = require('os');
 const fs = require('fs');
-const crypto = require('crypto')
+const crypto = require('crypto');
+
+const { routes, titles } = require('./routes');
+
+const salt = 'salt';
+const iterations = 100000;
+const keyLength = 64;
+const digest = 'sha512';
+const securePassword = 'supper-secure-password';
+
+const handleHashRequest = (request, response) => {
+  let body = '';
+  request.on('data', chunk => {
+      body += chunk.toString();
+  });
+  request.on('end', () => {
+      const { password } = JSON.parse(body);
+
+      const hash = crypto.pbkdf2Sync(password, salt, iterations, keyLength, digest);
+      const securePasswordHash = crypto.pbkdf2Sync(securePassword, salt, iterations, keyLength, digest);
+
+      if (hash.equals(securePasswordHash)) {
+        console.log('isValid: true');
+      } else {
+        console.log('isValid: false');
+      }
+
+      response.end('ok');
+  });
+};
 
 const server = http.createServer((request, response) => {
+  response.setHeader('Access-Control-Allow-Origin', '*');
+	response.setHeader('Access-Control-Request-Method', '*');
+	response.setHeader('Access-Control-Allow-Headers', '*');
+  response.setHeader('Access-Control-Allow-Methods', 'GET, GET');
 
-response.setHeader("Content-Type", "text/html; charset=utf-8;");
-  let body = '';
-  request.on('data', (chunk) => {
-    body += chunk;
-  }).on('end', () => {
-    let value = JSON.parse(body);
-    let result = value.password
-    crypto.DEFAULT_ENCODING = 'hex';
-    const key = crypto.pbkdf2Sync('supper-secure-password', 'salt', 100000, 64, 'sha512');
-    if(crypto.pbkdf2Sync(result, 'salt', 100000, 64, 'sha512') === key){
-      console.log({isValid: true})
-    }else{
-      console.log({isValid: false})
-    }
-  })
-  if(request.url === "/dir_name"){
-    response.write("<h2>Dir name</h2>");
-    response.write(__dirname);
-  }
-  else if(request.url == "/file_name"){
-    response.write("<h2>File name</h2>");
-    response.write(__filename);
-  }
-  else if(request.url == "/cpus"){
-    response.write("<h2>Cpus</h2>");
-    console.log(os.cpus());
-  }
-  else if(request.url == "/number_of_cores"){
-    response.write("<h2>Number of cores</h2>");
-    console.log(os.cpus().length);
-  }
-  else if(request.url == "/home.html"){
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    response.end(fs.readFileSync('home.html'));
-  }
-  else{
-    response.write("<h2>Not found</h2>");
+  const title = titles[request.url];
+  response.write(`<h2>${title === undefined ? 'Not found' : title}</h2>`);
+
+  switch (request.url) {
+    case routes.directoryName:
+      response.write(__dirname);
+      break;
+    case routes.fileName:
+      response.write(__filename);
+      break;
+    case routes.cpus:
+      console.log(os.cpus());
+      break;
+    case routes.coresNumber:
+      console.log(os.cpus().length);
+      break;
+    case routes.home:
+      response.end(fs.readFileSync('home.html'));
+      break;
+    case routes.hash:
+      handleHashRequest(request, response);
+      break;
   }
 
   response.end();
-}).listen(3000);
+});
+
+server.listen(3000);
