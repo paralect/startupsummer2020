@@ -1,73 +1,79 @@
 const serve = require('koa-static');
 const session = require('koa-generic-session');
 const bodyParser = require('koa-bodyparser');
-const fs = require('fs');
-const Joi = require('joi')
 
 const Koa = require('koa');
 const Router = require('koa-router');
-const { countReset } = require('console');
+
+const { schema } = require('./schema');
+
 const app = new Koa();
 const router = new Router();
 
-let db = {};
-
 app.keys = ['keys', 'keykeys'];
-
 
 app.use(serve('static'));
 app.use(session());
 app.use(bodyParser());
 
 app.use((ctx, next) => {
+  ctx.session.lastVisit = ctx.session.currentVisit;
+  ctx.session.currentVisit = { url: ctx.url, date: new Date() };
+
   ctx.session.count = ctx.session.count || 0;
   ctx.session.count++;
+
   next();
 });
 
-router.get ('/get', async (ctx, next) => {
-  get(ctx);
+router.get('/', async (ctx, next) => {
+  ctx.redirect('/index.html');
   next();
 });
 
-router.get ('/regenerate', async (ctx, next) => {
-  regenerate(ctx);
+router.get('/last-visit', async (ctx, next) => {
+  const { session } = ctx;
+  ctx.body = session.lastVisit || session.currentVisit;
+
   next();
 });
 
-const get = (ctx) => {
-  ctx.body = ctx.session.count;
-}
+router.get('/number-of-visits', async (ctx, next) => {
+  const { session } = ctx;
+  ctx.body = session.count;
 
-const regenerate = async (ctx) => {
-  get(ctx);
+  next();
+});
+
+router.get('/reset', async (ctx, next) => {
   await ctx.regenerateSession();
-  get(ctx);
-}
+  ctx.body = session.count;
 
-router.post('/form.html', async (ctx, next) => {
+  next();
+});
 
-  let schema = Joi.object({
-    fullname: Joi.string()
-      .min(3)
-      .required(),
-    summerHistory: Joi.string()
-      .min(3)
-      .required(),
-    mark: Joi.number()
-  })
+router.get('/marks', async (ctx, next) => {
+  ctx.body = ctx.session.marks || [];
+  next();
+});
 
-  let { value, err } = schema.validate(ctx.request.body);
+router.post('/marks', async (ctx, next) => {
+  const mark = ctx.request.body;
+  let { error } = schema.validate(mark);
 
-  if(!err) {
-    db.user = ctx.request.body;
-    fs.writeFileSync('db.json', JSON.stringify(ctx.request.body));
+  if (!error) {
+    ctx.session.marks = (ctx.session.marks || []);
+    ctx.session.marks.push(mark);
+    ctx.body = mark;
+    console.log(ctx.session.marks);
+  } else {
+    ctx.body = { errors: error };
   }
-  console.log(db);
+
+  next();
 })
 
 app.use(router.routes());
 app.use(router.allowedMethods());
-
 
 app.listen(3000);
