@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
-import {TouchableOpacity, View, Text, FlatList} from 'react-native';
+import React from 'react';
+import { Text, FlatList } from 'react-native';
 
-import CharacterItem from "../characterItem";
 import styles from './comicsList.styles';
-import {useNavigation} from "@react-navigation/native";
-import ComicsItem from "../comics";
+import ComicsItem from '../comicsItem';
 
-function CL(props) {
-  const navigation = useNavigation();
+function ComicsList(props) {
 
   if (!props.arr) return (<Text style={styles.title}>Loading</Text>);
 
-
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }) => (
       <ComicsItem
         item={item}
       />
@@ -27,4 +23,4 @@ function CL(props) {
   );
 }
 
-export default CL;
+export default ComicsList;

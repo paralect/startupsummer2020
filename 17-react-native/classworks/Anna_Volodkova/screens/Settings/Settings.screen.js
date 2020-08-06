@@ -2,10 +2,10 @@ import React from 'react';
 import {Text, View} from 'react-native';
 
 import styles from './Settings.styles';
-import {SafeAreaView} from "react-native-safe-area-context";
-import Header from "../../components/header";
+import {SafeAreaView} from 'react-native-safe-area-context';
+import Header from '../../components/header';
 
-function SettingScreen() {
+function Settings() {
 
   return (
     <SafeAreaView style={styles.container}>
@@ -15,4 +15,4 @@ function SettingScreen() {
   );
 }
 
-export default SettingScreen;
+export default Settings;
