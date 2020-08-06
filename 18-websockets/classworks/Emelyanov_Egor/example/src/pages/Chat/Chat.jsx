@@ -14,22 +14,20 @@ function Chat() {
   const [messagesArr, setMessagesArr] = useState([]);
   const [typingArr, setTypingArr] = useState([]);
 
+  const setUserTypingTimeout = (username) => {
+    return setTimeout(() => {
+      setTypingArr((typingArr) => typingArr.filter((el) => el !== username))
+    }, 3000);
+  };
+
   const onTyping = useCallback((username) => {
-    if (typingArr.findIndex((el) => el.username === username) === -1) {
-      const id = setTimeout(() => {
-        setTypingArr(typingArr.filter((el) => el !== username))
-      }, 3000);
-      setTypingArr([...typingArr, { username, id }]);
-    } else {
-      const index = typingArr.findIndex((el) => el.username === username);
-      const oldId = typingArr[index].id;
-      clearTimeout(oldId);
-      typingArr.splice(index, 1);
-      const id = setTimeout(() => {
-        setTypingArr(typingArr.filter((el) => el !== username))
-      }, 3000);
-      setTypingArr([...typingArr, { username, id }]);
+    const user = typingArr.find((el) => el.username === username);
+    const id = setUserTypingTimeout(username);
+    if (user) {
+      clearTimeout(user.id);
+      setTypingArr(typingArr.filter((el) => el !== user));
     }
+    setTypingArr([...typingArr, { username, id }]);
   }, [typingArr]);
 
   const onNewMessage = useCallback((messageData) => {
@@ -51,7 +49,6 @@ function Chat() {
 
   const sendUsername = useCallback(() => {
     socket.emit('change_username', usernameValue);
-    // setCurrentUser(usernameValue);
   }, [usernameValue]);
 
   const typing = useCallback(() => {
