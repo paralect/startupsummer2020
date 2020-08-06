@@ -6,7 +6,6 @@ import HomeNavigator from './home.navigator';
 
 import FavouritesScreen from '~/screens/Favourite';
 import SettingsScreen from '~/screens/Settings';
-import styles from './root.navigator.styles'
 
 const Tab = createBottomTabNavigator();
 

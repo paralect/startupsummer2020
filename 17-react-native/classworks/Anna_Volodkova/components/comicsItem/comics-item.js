@@ -1,15 +1,12 @@
 import React from 'react';
-import {Text, View, Image} from 'react-native';
+import { Text, View, Image } from 'react-native';
 
 import styles from './comics-item.styles';
 
 
 function ComicsItem(props) {
-
-  console.log('COMICS ITEM', props.item);
   const imageSource = {
-    uri: props.item.thumbnail.path + '.' + props.item.thumbnail.extension,
-    // uri: props.item.resourceURI,
+    uri: `${props.item.thumbnail.path}.${props.item.thumbnail.extension}`,
   };
 
   return (

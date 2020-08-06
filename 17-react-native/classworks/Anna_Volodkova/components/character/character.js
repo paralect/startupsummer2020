@@ -24,7 +24,7 @@ function CharacterItem(props) {
         </View>
         <View style={styles.nickAndFull}>
           <Text style={styles.nickname}>{props.item.name.toUpperCase()}</Text>
-          {props.item.id && <Text style={styles.fullName}>{props.item.id}</Text>}
+          <Text style={styles.fullName}>{props.item.id}</Text>
         </View>
       </View>
       <TouchableOpacity

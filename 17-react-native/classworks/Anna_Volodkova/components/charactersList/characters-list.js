@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import {TouchableOpacity, View, Text, FlatList} from 'react-native';
+import { TouchableOpacity, View, Text, FlatList } from 'react-native';
 
-import CharacterItem from "../characterItem";
+import CharacterItem from '../character';
 import styles from './characters-list.styles';
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from '@react-navigation/native';
 
 function CharactersList(props) {
   const navigation = useNavigation();
@@ -11,7 +11,7 @@ function CharactersList(props) {
   if (!props.arr) return (<Text style={styles.title}>Loading</Text>);
 
 
-  const renderItem = ({item}) => console.log(item) || (
+  const renderItem = ({ item }) => console.log(item) || (
     <TouchableOpacity
       key={item.id}
       style={styles.button}
