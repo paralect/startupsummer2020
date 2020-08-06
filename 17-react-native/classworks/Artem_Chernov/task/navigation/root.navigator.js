@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome, Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeNavigator from './home.navigator';
+import Image from 'react-native';
 // import FavouritesNavigator from './favourites.navigator';
 //
 // import SettingsScreen from '~/screens/Settings';
@@ -11,28 +12,43 @@ const Tab = createBottomTabNavigator();
 
 function RootNavigator() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      tabBarOptions={{
+        activeTintColor: 'red',
+        inactiveTintColor: '#A9A9A9',
+        style: {
+          backgroundColor: '#151515',
+          borderTopWidth: 0.5,
+          borderTopColor: '#E62429',
+        }
+      }}
+
+
+    >
       <Tab.Screen
-        name="Home"
+        name="My Marvel"
         component={HomeNavigator}
+        screenOptions={{
+          headerShown: false
+        }}
         options={{
-          tabBarIcon: ({ color, size }) => <AntDesign name="home" size={size} color={color} />,
+          tabBarIcon: ({ color, size }) => <Feather name="grid" size={size} color={color} />,
         }}
       />
-      {/*<Tab.Screen*/}
-      {/*  name="Favourites"*/}
-      {/*  component={FavouritesNavigator}*/}
-      {/*  options={{*/}
-      {/*    tabBarIcon: ({ color, size }) => <AntDesign name="hearto" size={size} color={color} />,*/}
-      {/*  }}*/}
-      {/*/>*/}
-      {/*<Tab.Screen*/}
-      {/*  name="Settings"*/}
-      {/*  component={SettingsScreen}*/}
-      {/*  options={{*/}
-      {/*    tabBarIcon: ({ color, size }) => <AntDesign name="setting" size={size} color={color} />,*/}
-      {/*  }}*/}
-      {/*/>*/}
+      <Tab.Screen
+        name="Favourite"
+        component={HomeNavigator}
+        options={{
+          tabBarIcon: ({ color, size }) => <FontAwesome name="heart-o" size={size} color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={HomeNavigator}
+        options={{
+          tabBarIcon: ({ color, size }) => <Feather name="settings" size={size} color={color} />,
+        }}
+      />
     </Tab.Navigator>
   );
 }

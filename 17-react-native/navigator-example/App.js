@@ -5,9 +5,9 @@ import AppNavigation from './navigation';
 
 function App() {
   return (
+
     <NavigationContainer>
       <AppNavigation />
-      awdaw
     </NavigationContainer>
   );
 }
