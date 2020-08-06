@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import socketIOClient from "socket.io-client";
+import { debounce } from 'lodash';
 
 import './Chat.css';
 import Message from './components/Message';
+import { useCallback } from "react";
 
 const ENDPOINT = "http://localhost:3001/";
 const socket = socketIOClient(ENDPOINT);
@@ -10,35 +12,34 @@ const socket = socketIOClient(ENDPOINT);
 function Chat() {
   const [usernameInputValue, setUsernameInputValue] = useState('');
   const [msgInputValue, setMsgInputValue] = useState('');
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('Anonymous');
   const [messages, setMessages] = useState([]);
   const [typingUsers, setTypingUsers] = useState([]);
-  const [timerId, setTimerId] = useState(null);
 
   const onUsernameSubmit = (username) => {
-    socket.emit('set_username', username);
+    socket.emit('setUsername', username);
+    setUsername(username);
     setUsernameInputValue('');
   }
 
   const onSendMessage = (msg) => {
-    socket.emit('new_message', { username, value: msg });
+    socket.emit('newMessage', { username, value: msg });
     setMsgInputValue('');
   }
 
   const onType = (username) => {
     const timerId = setTimeout(() => {
-      setTypingUsers((typingUsers) => typingUsers.filter((name) => name !== username))
+      setTypingUsers(typingUsers.filter((u) => u.username !== username));
     }, 7000);
-    setTimerId(timerId);
 
-    setTypingUsers((prevTypings) => {
-      const currentTypings = prevTypings || typingUsers;
-      if (currentTypings.findIndex((name) => name === username) === -1) {
-        return [...currentTypings, username];
-      } else {
-        return prevTypings;
-      }
-    })
+    const index = typingUsers.findIndex((u) => u.username === username);
+    if (index === -1) {
+      setTypingUsers([...typingUsers, { username, timerId }]);
+    } else {
+      clearTimeout(typingUsers[index].timerId);
+      setTypingUsers([...typingUsers.filter((u) => u.username !== username), { username, timerId }]);
+    }
+    
   }
 
   const onInputChange = (value) => {
@@ -46,27 +47,16 @@ function Chat() {
     typing();
   }
 
-  const typing = () => {
-    socket.emit('set_typing', username);
-  }
+  const typing = useCallback(debounce(() => socket.emit('setTyping', username), 2000, { leading: true }));
 
   useEffect(() => {
-    socket.on('username', (data) => {
-      setUsername(data.username);
-    });
-
     socket.on('messages', (msg) => {
       setMessages((prevMessages) => [...prevMessages, msg]);
     });
 
-    socket.on('typing', (username) => {
-      onType(username);
-    });
+    socket.on('typing', onType);
 
-    return () => {
-      socket.disconnect();
-      clearTimeout(timerId);
-    };
+    return () => socket.disconnect();
   }, []);
 
   return (
@@ -97,9 +87,9 @@ function Chat() {
         {
           messages.map((msg, index) => <Message key={index} username={msg.username} message={msg.value} />)
         }
-        {typingUsers && typingUsers.map((user,index) => {
+        {typingUsers && typingUsers.map((user, index) => {
           return (
-            <span key={index}>{user} typing...</span>
+            <span key={index}>{user.username} typing...</span>
           )
         })}
         <section id="feedback"></section>

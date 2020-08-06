@@ -7,17 +7,16 @@ io.on('connection', (socket) => {
 
   socket.emit('username', { username: 'Anonymous' });
 
-  socket.on('set_username', (username) => {
+  socket.on('setUsername', (username) => { 
     socket.username = username;
-    socket.emit('username', { username: socket.username });
   });
 
-  socket.on('new_message', (msg) => {
+  socket.on('newMessage', (msg) => {
     socket.lastMessage = msg;
     io.sockets.emit('messages', socket.lastMessage);
   })
 
-  socket.on('set_typing', username => {
+  socket.on('setTyping', username => {
     socket.broadcast.emit('typing', username);
   });
 
