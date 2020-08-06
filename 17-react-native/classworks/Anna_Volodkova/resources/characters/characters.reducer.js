@@ -1,4 +1,4 @@
-import { FETCH_CHARACTERS, SWITCH_FAVOURITE } from './characters.types';
+import { FETCH_CHARACTERS, SWITCH_FAVOURITE, FETCH_CHARACTER_COMICS } from './characters.types';
 
 const initialState = {
   list: [],
@@ -18,6 +18,15 @@ export default (state = initialState, action) => {
         list: state.list.map(item => item.id !== action.payload.id
           ? item
           : { ...item, isFav: !item.isFav }
+        ),
+      }
+    }
+    case FETCH_CHARACTER_COMICS: {
+      return {
+        ...state,
+        list: state.list.map(item => item.id !== action.payload.id
+          ? item
+          : { ...item, ...action.payload }
         ),
       }
     }

@@ -6,7 +6,7 @@ import fetchMarvel from './fetchMarvel';
 
 function App() {
   const fetchData = useCallback(async () => {
-    const { data } = await fetchMarvel('/characters/1009664/comics');
+    const { data } = await fetchMarvel('/characters/1009664/character');
     console.log(data.data.results);
   }, []);
 

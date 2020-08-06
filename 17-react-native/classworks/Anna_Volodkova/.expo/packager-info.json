@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 26521,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://d2-wne.anonymous.anna-volodkova.exp.direct",
   "packagerNgrokUrl": "https://packager.d2-wne.anonymous.anna-volodkova.exp.direct",
-  "ngrokPid": 26600
+  "ngrokPid": 5902
 }
