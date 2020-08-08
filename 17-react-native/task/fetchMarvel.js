@@ -2,8 +2,8 @@ import axios from 'axios';
 import md5 from 'md5';
 
 const apiUrl = 'http://gateway.marvel.com/v1/public';
-const privateKey = '3458fa6e2e9197ed27bab5e34e17976a1796017c';
-const publicKey = '021ba9f9fef048d72b30998d5e0b2b80';
+const privateKey = 'a2d0927ae7143a3ab8c7b7b6b6993b3b27250fe4';
+const publicKey = 'b3880a065a6984f95c2e51cdbdc9cc5a';
 
 const fetchMarvel = (url, params) => {
   const date = new Date();
