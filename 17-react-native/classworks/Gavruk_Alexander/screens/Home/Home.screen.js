@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text,
   View,
@@ -21,9 +21,6 @@ function HomeScreen() {
   const dispatch = useDispatch();
 
   const characters = useSelector(characterSelectors.getCharacters);
-  const favouritesCharacters = useSelector(characterSelectors.getFavouriteCharacters);
-  console.log(characters);
-  console.log(favouritesCharacters);
 
   const fetchData = useCallback(async () => {
     dispatch(characterActions.fetchData(fetchMarvel, '/characters'));
@@ -33,26 +30,10 @@ function HomeScreen() {
     fetchData();
   }, []);
 
-  const isFavourite = (id) => {
-    return favouritesCharacters.findIndex((character) => character.id === id) !== -1;
-  }
-
-  const onFavouriteClick = (id) => {
-    if (!isFavourite(id)) {
-      const index = characters.findIndex((character) => character.id === id);
-      if (index >= 0) {
-        dispatch(characterActions.favouritesCharacters([...favouritesCharacters, characters[index]]));
-      }
-    }
-    const index = favouritesCharacters.findIndex((character) => character.id === id);
-    dispatch(characterActions.favouritesCharacters(favouritesCharacters.splice(index, 1)));
-  }
-
   const renderCharacter = ({ item }) => (
     <TouchableOpacity
       onPress={() => navigation.navigate('Details', {
         id: item.id,
-        favouritesCharacters,
         name: item.name,
         description: item.description,
         img: item.thumbnail,
@@ -61,6 +42,7 @@ function HomeScreen() {
       <CharacterItem
         name={item.name}
         img={item.thumbnail}
+        id={item.id}
       />
     </TouchableOpacity>
   );
