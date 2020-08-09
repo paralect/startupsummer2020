@@ -1,4 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   View,
   SafeAreaView,
@@ -7,23 +8,24 @@ import {
   Text,
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
+import { FlatList } from 'react-native-gesture-handler';
 
 import fetchMarvel from '../../fetchMarvel';
-import heart from '../../assets/heart.png';
-import activeHeart from '../../assets/active-heart.png';
+import { Heart } from '../../components/Heart';
 
+import * as characterActions from '../../resources/characters/characters.actions';
+import * as characterSelectors from '../../resources/characters/characters.selectors';
 import styles from './Details.styles';
-import { FlatList } from 'react-native-gesture-handler';
 
 function DetailsScreen() {
   const { params } = useRoute();
-  const { id, name, favouritesCharacters, img, description } = params
+  const { id, name, img, description } = params
+  const dispatch = useDispatch();
 
-  const [comics, setComics] = useState([]);
+  const comics = useSelector(characterSelectors.getComics);
 
   const fetchData = useCallback(async () => {
-    const { data } = await fetchMarvel(`/characters/${id}/comics`);
-    setComics(data.data.results);
+    dispatch(characterActions.fetchComics(fetchMarvel, `/characters/${id}/comics`));
   }, []);
 
   useEffect(() => {
@@ -60,7 +62,7 @@ function DetailsScreen() {
               />
               <View style={styles.nameContainer}>
                 <Text style={styles.characterName}>{name}</Text>
-                <Image source={heart} />
+                <Heart id={id} />
               </View>
             </View>
             <Text style={styles.description}>

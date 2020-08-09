@@ -1,6 +1,7 @@
 const initialState = {
   characters: [],
-  favouriteCharacters: [],
+  favouriteCharacterIds: [],
+  comics: [],
 };
 
 export default (state = initialState, action) => {
@@ -14,7 +15,13 @@ export default (state = initialState, action) => {
     case 'characters:setFavourites':
       return {
         ...state,
-        favouriteCharacters: action.payload.favouriteCharacters,
+        favouriteCharacterIds: action.payload.favouriteCharacterIds,
+      };
+
+    case 'characters:setComics':
+      return {
+        ...state,
+        comics: action.payload.comics,
       };
 
     default:

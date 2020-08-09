@@ -1,7 +1,11 @@
-export function getCharacters({ characters }) {
-  return characters;
+export function getCharacters({ marvel }) {
+  return marvel.characters;
 }
 
-export function getFavouriteCharacters({ favouriteCharacters }) {
-  return favouriteCharacters;
+export function getComics({ marvel }) {
+  return marvel.comics;
+}
+
+export function getFavouriteCharacterIds({ marvel }) {
+  return marvel.favouriteCharacterIds;
 }
