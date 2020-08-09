@@ -13,19 +13,19 @@ const Tab = createBottomTabNavigator();
 function RootNavigator() {
   return (
     <Tab.Navigator
-      activeTintColor='#E62429'
-      style={{ backgroundColor: '#151515' }}
+      tabBarOptions={{
+        style: {
+          backgroundColor: '#151515',
+        },
+        activeTintColor: '#e62429',
+        inactiveTintColor: '#a9a9a9',
+      }}
     >
       <Tab.Screen
         name="My Marvel"
         component={HomeNavigator}
         options={{
-          tabBarIcon: () => <Svg width={18} height={18} viewBox="0 0 18 18" fill="none">
-          <Path
-            d="M6 0H2a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2V2a2 2 0 00-2-2zM2 6V2h4v4H2zm14-6h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2V2a2 2 0 00-2-2zm-4 6V2h4v4h-4zm-6 4H2a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2zm-4 6v-4h4v4H2zm14-6h-4a2 2 0 00-2 2v4a2 2 0 002 2h4a2 2 0 002-2v-4a2 2 0 00-2-2zm-4 6v-4h4v4h-4z"
-            fill="#A9A9A9"
-          />
-        </Svg>,
+          tabBarIcon: ({ color, size }) => <AntDesign name="appstore-o" size={size} color={color} />,
         }}
       />
       <Tab.Screen

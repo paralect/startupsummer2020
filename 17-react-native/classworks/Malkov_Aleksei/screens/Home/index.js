@@ -1,1 +1,1 @@
-export { default } from './Home.screen';
+export { default } from './MyMarvel.screen';

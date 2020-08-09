@@ -8,6 +8,7 @@ export default StyleSheet.create({
     paddingTop: 21,
   },
   title: {
+    minWidth: 325,
     fontFamily: 'RobotoCondensed_700Bold',
     fontWeight: 'bold',
     fontSize: 18,
@@ -25,7 +26,7 @@ export default StyleSheet.create({
     alignSelf: 'stretch',
     marginVertical: 5,
     padding: 10,
-    background: '#2F2F2F',
+    backgroundColor: '#2F2F2F',
   },
   photo: {
     maxWidth: 70,
@@ -52,7 +53,6 @@ export default StyleSheet.create({
     alignSelf: 'stretch',
     marginVertical: 5,
     padding: 10,
-
     borderWidth: StyleSheet.hairlineWidth,
     borderRadius: 10,
     borderColor: 'rgba(0, 0, 0, 0.25)',

@@ -4,9 +4,11 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#202020',
+    paddingTop: 21,
   },
   title: {
+    minWidth: 325,
     fontFamily: 'RobotoCondensed_700Bold',
     fontWeight: 'bold',
     fontSize: 18,
@@ -19,17 +21,4 @@ export default StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  subtitle: {
-    fontSize: 18,
-    color: 'rgba(0, 0, 0, 0.5)',
-  },
-  content: {
-    alignSelf: 'stretch',
-    marginVertical: 5,
-    padding: 10,
-
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 10,
-    borderColor: 'rgba(0, 0, 0, 0.25)',
-  }
 });
