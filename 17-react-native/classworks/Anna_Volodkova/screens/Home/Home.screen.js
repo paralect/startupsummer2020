@@ -12,7 +12,7 @@ import styles from './Home.styles';
 
 function HomeScreen() {
   const dispatch = useDispatch();
-  const characters = useSelector(charactersSelectors.getCharacters)
+  const characters = useSelector(charactersSelectors.getSortedCharacters)
 
   useEffect(() => {
     dispatch(charactersActions.fetchCharacters());

@@ -16,7 +16,7 @@ function ComicsList(props) {
 
   return (
     <FlatList
-      data={props.arr}
+      data={props.comics}
       renderItem={renderItem}
       keyExtractor={item => item.id}
     />
