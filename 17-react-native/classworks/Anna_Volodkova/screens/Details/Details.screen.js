@@ -1,15 +1,16 @@
-import React, {useCallback, useEffect, useState } from 'react';
-import {Image, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './Details.styles';
-import { AntDesign } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { AntDesign } from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../../components/header';
 import CharactersList from '../../components/comicsList';
 import * as charactersActions from '../../resources/characters/characters.actions';
-import * as charactersSelectors from "../../resources/characters/characters.selectors";
+import * as charactersSelectors from '../../resources/characters/characters.selectors';
+import ComicsList from "../../components/comicsList";
 
 function DetailsScreen() {
   const { params } = useRoute();
@@ -17,7 +18,6 @@ function DetailsScreen() {
   const dispatch = useDispatch();
 
   const character = useSelector((state) => charactersSelectors.getCharacter(state, item.id));
-  console.log("CHARACTER", typeof character.description, character.description);
 
   if(!character) return (<Text style={styles.title}>Loading</Text>);
 
@@ -28,7 +28,7 @@ function DetailsScreen() {
   },[]);
 
   const imageSource = {
-    uri: character.thumbnail.path + '.' + character.thumbnail.extension,
+    uri: `${character.thumbnail.path}.${character.thumbnail.extension}`,
   };
 
   return (
@@ -59,8 +59,8 @@ function DetailsScreen() {
       <Text style={styles.description}>{character.description}</Text>
       <Text style={styles.title}>COMICS</Text>
       {character.comicsArray &&
-        <CharactersList
-          arr={character.comicsArray}
+        <ComicsList
+          comics={character.comicsArray}
         />
       }
     </SafeAreaView>

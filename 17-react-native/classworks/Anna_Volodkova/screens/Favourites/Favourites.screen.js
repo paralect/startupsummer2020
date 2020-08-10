@@ -1,16 +1,14 @@
 import React from 'react';
-import {Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import styles from './Favourites.styles';
-import {SafeAreaView} from "react-native-safe-area-context";
-import Header from "../../components/header";
-import * as charactersActions from '../../resources/characters/characters.actions';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../../components/header';
 import * as charactersSelectors from '../../resources/characters/characters.selectors';
-import CharactersList from "../../components/charactersList";
+import CharactersList from '../../components/charactersList';
 
-function FavouriteScreen() {
-  const dispatch = useDispatch();
+function Favourites() {
   const favourites = useSelector(charactersSelectors.getFavouriteCharacters)
 
   return (
@@ -26,4 +24,4 @@ function FavouriteScreen() {
   );
 }
 
-export default FavouriteScreen;
+export default Favourites;
