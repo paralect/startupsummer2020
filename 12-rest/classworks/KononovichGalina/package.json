@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
     "crypto": "^1.0.1",
     "fetch": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
@@ -16,6 +17,7 @@
     "koa-body": "^4.2.0",
     "koa-bodyparser": "^4.3.0",
     "koa-jwt": "^4.0.0",
-    "koa-router": "^9.1.0"
+    "koa-router": "^9.1.0",
+    "node-fetch": "^2.6.0"
   }
 }
