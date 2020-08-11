@@ -7,6 +7,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import AppNavigation from './navigation/root.navigator';
 import { ContextApp, initState, marvelReducer } from './reducers/marvelReducer';
 import { View, Image, SafeAreaView, StatusBar } from 'react-native';
+import store from './resourses/store'
+import { Provider } from "react-redux";
 import Marvel from './assets/marvel.png';
 
 // import { getConfigWithoutViewProps } from 'react-native/Libraries/Utilities/verifyComponentAttributeEquivalence';
@@ -18,12 +20,14 @@ function App() {
   const [state, dispatch] = React.useReducer(marvelReducer, initState);
 
   return (
+    <Provider store={store}>
       <ContextApp.Provider value={{ dispatch, state }}>
         <StatusBar backgroundColor={'#202020'} barStyle={'light-content'}/>
         <NavigationContainer>
           <AppNavigation/>
         </NavigationContainer>
       </ContextApp.Provider>
+    </Provider>
   );
 }
 

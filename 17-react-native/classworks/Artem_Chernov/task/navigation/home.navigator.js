@@ -28,19 +28,6 @@ function HomeNavigator() {
           headerStyle: {
             backgroundColor: '#202020',
           },
-          // style: {
-          //   backgroundColor: '#fff',
-          //   shadowColor: 'transparent',
-          //   shadowRadius: 0,
-          //   shadowOffset: {
-          //     height: 0,
-          //   }
-          // },
-          // headerTitleStyle: {
-          //   fontWeight: 'bold',
-          //   color: '#fffff',
-          // },
-          // headerTintColor: '#fffff',
           headerTitle: (props) => <LogoTitle {...props}/>,
         }}
       />

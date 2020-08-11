@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeNavigator from './home.navigator';
 import Image from 'react-native';
+import { SettingsNavigator } from './settings.navigator';
+import Settings from '../screens/Settings/Settings.screen';
 // import FavouritesNavigator from './favourites.navigator';
 //
 // import SettingsScreen from '~/screens/Settings';
@@ -22,8 +24,6 @@ function RootNavigator() {
           borderTopColor: '#E62429',
         }
       }}
-
-
     >
       <Tab.Screen
         name="My Marvel"
@@ -44,7 +44,7 @@ function RootNavigator() {
       />
       <Tab.Screen
         name="Settings"
-        component={HomeNavigator}
+        component={Settings}
         options={{
           tabBarIcon: ({ color, size }) => <Feather name="settings" size={size} color={color} />,
         }}

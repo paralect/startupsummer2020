@@ -58,6 +58,30 @@ export default StyleSheet.create({
     lineHeight: 21,
     color: '#FFFFFF',
     marginBottom: 20,
-  }
+  },
+  story: {
+    flex: 1,
+    backgroundColor: '#2F2F2F',
+    borderRadius: 4,
+    padding: 6,
+    marginBottom: 13,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center'
+  },
+  story__img: {
 
+    height: 80,
+    width: 52,
+  },
+  story__description: {
+    flex: 10,
+    fontStyle: 'normal',
+    fontWeight: 'bold',
+    fontSize: 14,
+    lineHeight: 16,
+    color: '#FFFFFF',
+    marginRight: 12,
+    marginLeft: 12,
+  }
 });

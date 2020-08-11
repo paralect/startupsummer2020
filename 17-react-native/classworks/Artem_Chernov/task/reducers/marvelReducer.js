@@ -10,8 +10,8 @@ export const ContextApp = React.createContext();
 
 export const initState = {
   comics: null,
-  isFetching: false,
   stories: null,
+  isFetching: false,
 }
 
 export const marvelReducer = (state, action) => {

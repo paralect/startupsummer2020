@@ -6,23 +6,28 @@ import { getComics } from '../../reducers/api';
 import Character from '../Character/Character';
 
 import styles from './Home.styles';
+import { useDispatch, useSelector } from 'react-redux';
+import * as marvelActions from '../../resourses/marvel/marvel.actions';
+import * as marvelSelectors from '../../resourses/marvel/marvel.selectors';
 
 function HomeScreen() {
   const navigation = useNavigation();
-  const { state, dispatch } = React.useContext(ContextApp);
+  const dispatch = useDispatch();
+  const characters = useSelector(marvelSelectors.getCharacters)
+  const isFetching = useSelector(marvelSelectors.getStatus)
+  console.log("characterscharacterscharacterscharacterscharacterscharacterscharacterscharacterscharacterscharac\n", characters);
+  // const user = useSelector(userSelectors.getUser);
+  // const { state, dispatch } = React.useContext(ContextApp);
   React.useEffect(() => {
-    getComics(dispatch).then(res => console.log(res));
-    if (state.comics?.length > 0) {
-      console.log('state.comics  ', state.comics[0]);
-    }
+    dispatch(marvelActions.getCharacters())
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      {!state.isFetching &&
+      {!isFetching &&
       <ScrollView style={styles.scrollView}>
         <Text style={styles.header}>Featured characters</Text>
-        {state.comics?.length > 0 && state.comics.map((item, i) => (
+        {characters.comics?.length > 0 && characters.comics.map((item, i) => (
           <View key={i + 'key'}>
             <TouchableOpacity
               key={item}
@@ -35,10 +40,9 @@ function HomeScreen() {
         ))}
       </ScrollView>
       }
-      {state.isFetching &&
+      {isFetching &&
       <ActivityIndicator justifyContent={'center'} alignSelf={'center'} size="large" color="#E62429"/>}
     </SafeAreaView>
-
 
 
     // state.comics.map(item)

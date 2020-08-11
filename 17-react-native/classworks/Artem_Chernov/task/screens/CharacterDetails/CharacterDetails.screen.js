@@ -4,7 +4,6 @@ import { useRoute } from '@react-navigation/native';
 
 import styles from './CharacterDetails.styles';
 import { ScrollView } from 'react-native';
-import Story from '../Story/Story';
 import { getStories } from '../../reducers/api';
 import { ContextApp } from '../../reducers/marvelReducer';
 
@@ -14,9 +13,7 @@ function CharacterDetailsScreen() {
   const { state, dispatch } = React.useContext(ContextApp);
 
   React.useEffect(() => {
-    console.log("itemitemitemitemitemitemitemitemitemitem ", item.id);
-    getStories(dispatch, item.id).then(res => console.log(res));
-    console.log('state.stories ', state.stories);
+    getStories(dispatch, item.id).then(res => {});
   }, []);
 
   return (
@@ -44,14 +41,19 @@ function CharacterDetailsScreen() {
           <Text style={styles.comics__header}>
             Comics
           </Text>
-          {item.stories.items.map((story,i) => (
-            <View key={i+'key'}>
-              <Story story={story}/>
+          {state.stories?.map((item, i) => (
+            <View key={i+'key'} style={styles.story}>
+              <Image
+                style={styles.story__img}
+                source={{
+                  uri: item.thumbnail.path + '.' + item.thumbnail.extension,
+                }}
+              />
+              <Text style={styles.story__description}>{item.title}</Text>
             </View>
           ))}
         </View>
       </View>
-
     </ScrollView>
   );
 }

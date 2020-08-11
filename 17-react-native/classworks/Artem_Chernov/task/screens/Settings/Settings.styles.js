@@ -2,25 +2,18 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
+    backgroundColor: '#202020',
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  titleWrapper: {
+    marginRight: 32,
+    marginTop: 20,
   },
   title: {
-    fontSize: 36,
-    marginBottom: 5,
-  },
-  subtitle: {
+    fontStyle: 'normal',
+    fontWeight: 'bold',
     fontSize: 18,
-    color: 'rgba(0, 0, 0, 0.5)',
-  },
-  content: {
-    alignSelf: 'stretch',
-    marginVertical: 5,
-    padding: 10,
-
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 10,
-    borderColor: 'rgba(0, 0, 0, 0.25)',
+    lineHeight: 21,
+    color: '#FFFFFF',
   }
 });
