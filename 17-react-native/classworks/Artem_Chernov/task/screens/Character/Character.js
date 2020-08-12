@@ -1,12 +1,7 @@
-import React, { useEffect, useCallback } from 'react';
+import React from 'react';
 import { Text, View, Image } from 'react-native';
-import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
-import { ContextApp } from '../../reducers/marvelReducer';
-import { getComics } from '../../reducers/api';
-
 import styles from './Character.styles';
 import { Feather, FontAwesome } from '@expo/vector-icons';
-
 
 function Character({ item }) {
   return (

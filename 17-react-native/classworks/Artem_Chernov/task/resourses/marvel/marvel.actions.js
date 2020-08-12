@@ -10,12 +10,21 @@ import * as api from './marvel.api'
 
 ///characters/1009664/characters
 
-export const getCharacters = (data) => async (dispatch) => {
+export const getCharacters = () => async (dispatch) => {
   dispatch({ type: SET_STATUS, payload: true })
   const { data } = await api.getCharacters();
   dispatch({ type: GET_CHARACTERS, payload: [...data.data.results]  });
   dispatch({ type: SET_STATUS, payload: false })
 };
+
+export const getStories = (id) => async (dispatch) => {
+  dispatch({ type: SET_STATUS, payload: true })
+  const { data } = await api.getStories(id);
+  console.log("datadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadatadata ", data);
+  // dispatch({ type: GET_CHARACTERS, payload: [...data.data.results]  });
+  // dispatch({ type: SET_STATUS, payload: false })
+};
+
 
 // export const getComics = async (dispatch, req) => {
 //   dispatch({

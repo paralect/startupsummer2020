@@ -5,8 +5,8 @@ export const getCharacters = () => {
   return fetchMarvel('/characters');
 };
 
-export const getStories = async (dispatch, req) => {
-  return fetchMarvel(`/characters/${req}/comics`);
+export const getStories = async (id) => {
+  return fetchMarvel(`/characters/${id}/comics`);
 };
 
 // export const getCurrentSubreddit = async (dispatch, fetchReddit, req = 'react') => {

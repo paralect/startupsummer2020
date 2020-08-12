@@ -1,8 +1,7 @@
-import React, { useEffect, useCallback } from 'react';
+import React from 'react';
 import { Text, View, ActivityIndicator, SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { ContextApp } from '../../reducers/marvelReducer';
-import { getComics } from '../../reducers/api';
+import { useNavigation } from '@react-navigation/native';
+
 import Character from '../Character/Character';
 
 import styles from './Home.styles';
@@ -16,8 +15,7 @@ function HomeScreen() {
   const characters = useSelector(marvelSelectors.getCharacters)
   const isFetching = useSelector(marvelSelectors.getStatus)
   console.log("characterscharacterscharacterscharacterscharacterscharacterscharacterscharacterscharacterscharac\n", characters);
-  // const user = useSelector(userSelectors.getUser);
-  // const { state, dispatch } = React.useContext(ContextApp);
+
   React.useEffect(() => {
     dispatch(marvelActions.getCharacters())
   }, []);
@@ -27,7 +25,7 @@ function HomeScreen() {
       {!isFetching &&
       <ScrollView style={styles.scrollView}>
         <Text style={styles.header}>Featured characters</Text>
-        {characters.comics?.length > 0 && characters.comics.map((item, i) => (
+        {characters.length > 0 && characters.map((item, i) => (
           <View key={i + 'key'}>
             <TouchableOpacity
               key={item}

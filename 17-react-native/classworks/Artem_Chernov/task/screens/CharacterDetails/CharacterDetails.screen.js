@@ -4,16 +4,21 @@ import { useRoute } from '@react-navigation/native';
 
 import styles from './CharacterDetails.styles';
 import { ScrollView } from 'react-native';
-import { getStories } from '../../reducers/api';
-import { ContextApp } from '../../reducers/marvelReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import * as marvelSelectors from '../../resourses/marvel/marvel.selectors';
 
 function CharacterDetailsScreen() {
   const { params } = useRoute();
   const { item } = params;
-  const { state, dispatch } = React.useContext(ContextApp);
+  // const { state, dispatch } = React.useContext(ContextApp);
+
+  const dispatch = useDispatch();
+  const stories = useSelector(marvelSelectors.getStories(item.id))
+  const isFetching = useSelector(marvelSelectors.getStatus)
+
 
   React.useEffect(() => {
-    getStories(dispatch, item.id).then(res => {});
+    // getStories(dispatch, item.id).then(res => {});
   }, []);
 
   return (

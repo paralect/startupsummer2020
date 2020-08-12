@@ -17,7 +17,10 @@ export default (state = initialState, action) => {
       };
 
     case GET_STORIES:
-      return null;
+      return {
+        ...state,
+        stories: [...action.payload]
+      };
 
     case SET_STATUS:
       return {

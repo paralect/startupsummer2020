@@ -2,7 +2,10 @@ export function getCharacters({ marvel }) {
   return marvel.characters;
 }
 
-export function getStatus(isFetching) {
-  return isFetching;
+export function getStatus({ marvel }) {
+  return marvel.isFetching;
 }
 
+export function getStories({ marvel }) {
+
+}
