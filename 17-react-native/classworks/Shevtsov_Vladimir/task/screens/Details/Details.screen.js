@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFavorites, getFetching } from '../../resources/comics.selector';
@@ -18,6 +18,7 @@ function DetailsScreen() {
   const dispatch = useDispatch();
   const isFavorite = favorites.find((char) => char.id === character.id);
   const img = isFavorite ? fav_filled : fav;
+
 
   const renderComics = (data) => {
     return (
