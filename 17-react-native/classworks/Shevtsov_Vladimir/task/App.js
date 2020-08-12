@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
-import { fetchComics } from './resources/comics.action';
+import { fetchCharacters } from './resources/comics.action';
 
 import AppNavigation from './navigation';
 import store from './resources/store';
@@ -10,7 +10,7 @@ const  App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchComics('/characters'));
+    dispatch(fetchCharacters());
   }, []);
 
   return (

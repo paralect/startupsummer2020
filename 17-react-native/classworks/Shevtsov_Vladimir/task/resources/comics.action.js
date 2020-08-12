@@ -13,9 +13,9 @@ const fetchComicsStart = () => ({ type: FETCH_COMICS_START });
 const fetchComicsSuccess = (data) => ({ type: FETCH_COMICS_SUCCESS, payload: data });
 const fetchComicsError = (err) => ({ type: FETCH_COMICS_ERROR, payload: err });
 
-export const fetchComics = (url, params) => (dispatch) => {
+export const fetchComics = (characterId, params) => (dispatch) => {
   dispatch(fetchComicsStart());
-  fetchMarvel(url, params)
+  fetchMarvel(`/character/${characterId}/comics`, params)
     .then((res) => dispatch(fetchComicsSuccess(res)))
     .catch((err) => dispatch(fetchComicsError(err)));
 };

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import md5 from 'md5';
+import { uniqBy } from 'lodash';
 
 const apiUrl = 'http://gateway.marvel.com/v1/public';
 const privateKey = '6814d7f268efcadd7d2965b0955aaf4cc50e3e75';
@@ -18,7 +19,18 @@ const fetchMarvel = async (url, params) => {
     },
   });
 
-  return data;
-}
+  const results = data?.data?.data?.results ?? [];
+
+  const chars = uniqBy(results, "id").map((obj) => (
+    {
+      id: obj.id,
+      name: obj.name,
+      thumbnail: `${obj.thumbnail.path}.${obj.thumbnail.extension}`,
+      description: obj.description,
+      comics: obj.comics,
+    }
+  ));
+  return chars;
+};
 
 export default fetchMarvel;
