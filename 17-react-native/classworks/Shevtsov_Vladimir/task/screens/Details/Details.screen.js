@@ -10,6 +10,7 @@ import fav from '../../assets/fav.png';
 import fav_filled from '../../assets/fav_filled.png';
 
 import styles from './Details.styles';
+import { fetchComics } from '../../resources/comics.action';
 
 function DetailsScreen() {
   const { params } = useRoute();
@@ -19,6 +20,9 @@ function DetailsScreen() {
   const isFavorite = favorites.find((char) => char.id === character.id);
   const img = isFavorite ? fav_filled : fav;
 
+  useEffect(() => {
+    dispatch(fetchComics(char.id))
+  });
 
   const renderComics = (data) => {
     return (
