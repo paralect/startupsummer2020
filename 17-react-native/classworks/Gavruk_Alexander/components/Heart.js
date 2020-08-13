@@ -11,29 +11,16 @@ export function Heart(props) {
   const { id, style } = props;
 
   const dispatch = useDispatch();
-
-  const favouriteCharacterIds = useSelector(characterSelectors.getFavouriteCharacterIds);
-  const characters = useSelector(characterSelectors.getCharacters);
-
-  const isFavourite = (id) => {
-    return favouriteCharacterIds.findIndex((characterId) => characterId === id) !== -1;
-  }
+  const isFavourite = useSelector(characterSelectors.getIsFavourite(id));
 
   const onFavouriteClick = (id) => {
-    if (isFavourite(id)) {
-      dispatch(characterActions.favouriteCharacterIds(favouriteCharacterIds.filter((characterId) => characterId !== id)));
-    } else {
-      const index = characters.findIndex((character) => character.id === id);
-      if (index >= 0) {
-        dispatch(characterActions.favouriteCharacterIds([...favouriteCharacterIds, characters[index].id]));
-      }
-    }
+    dispatch(characterActions.changeIsFavourite(id));
   }
 
   return (
     <TouchableOpacity onPress={() => onFavouriteClick(id)} style={style}>
       <Image
-        source={isFavourite(id) ? activeHeart : heart}
+        source={isFavourite ? activeHeart : heart}
       />
     </TouchableOpacity>
   );

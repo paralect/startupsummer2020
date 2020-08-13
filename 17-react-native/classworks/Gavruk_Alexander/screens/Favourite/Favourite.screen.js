@@ -16,8 +16,7 @@ function HomeScreen() {
   const navigation = useNavigation();
 
   const characters = useSelector(characterSelectors.getCharacters);
-  const favouriteCharacterIds = useSelector(characterSelectors.getFavouriteCharacterIds);
-  const favouriteCharacters = characters.filter((character) => favouriteCharacterIds.includes(character.id));
+  const favouriteCharacters = characters.filter((character) => character.isFavourite);
 
   const renderCharacter = ({ item }) => (
     <TouchableOpacity
