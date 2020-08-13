@@ -10,6 +10,6 @@
   "author": "Volodkova_Anna <kvetka99@mail.ru>",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "2.0.4"
   }
 }
