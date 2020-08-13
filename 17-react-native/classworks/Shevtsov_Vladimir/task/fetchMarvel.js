@@ -1,6 +1,5 @@
 import axios from 'axios';
 import md5 from 'md5';
-import { uniqBy } from 'lodash';
 
 const apiUrl = 'http://gateway.marvel.com/v1/public';
 const privateKey = '6814d7f268efcadd7d2965b0955aaf4cc50e3e75';

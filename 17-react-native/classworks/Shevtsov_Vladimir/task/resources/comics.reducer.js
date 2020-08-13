@@ -20,8 +20,19 @@ export const comics = (state = initState, action) => {
   switch (action.type) {
     case FETCH_COMICS_START:
       return { ...state, fetching: true };
-    case FETCH_COMICS_SUCCESS:
-      return { ...state, data: action.payload, fetching: false };
+    case FETCH_COMICS_ERROR:
+      return { ...state, error: action.payload };
+    case FETCH_COMICS_SUCCESS: {
+      const char = state.characters.find((c) => c.id === payload.characterId);
+      char.comics = payload.data;
+      console.log(payload.data);
+      const chars = [...state.characters.filter((c) => c.id !== payload.characterId), char];
+      return {
+        ...state,
+        characters: chars,
+        fetching: false
+      };
+    }
     case FETCH_COMICS_ERROR:
       return { ...state, error: action.payload, fetching: false };
     case ADD_CHARACTER_TO_FAVORITES:

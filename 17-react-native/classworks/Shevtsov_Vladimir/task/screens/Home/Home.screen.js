@@ -16,12 +16,10 @@ function HomeScreen() {
   const err = useSelector(getError);
   const fetching = useSelector(getFetching);
 
-  console.log(chars);
-
   const createItem = (data) => {
     return (
       <View style={styles.listItem}>
-        <TouchableHighlight onPress={() => navigation.navigate('Details', { character: data.item })} >
+        <TouchableHighlight onPress={() => navigation.navigate('Details', { characterId: data.item.id })} >
           <Image source={{ uri: data.item.thumbnail }} style={styles.poster} />
         </TouchableHighlight>
         <Text style={{ color: '#fff' }}>{data.item.name}</Text>
