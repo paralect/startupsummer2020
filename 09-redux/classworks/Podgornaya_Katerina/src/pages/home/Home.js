@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { withRedditApi } from 'hooks/useRedditApi';
-import num_comments from './post_num_comments.svg';
-import no_subreddit_icon from './no_subreddit_icon.png';
 import moment from 'moment';
 import App from 'App';
+import {
+  Route, useHistory, Switch, useLocation,
+} from 'react-router-dom';
+import { withRedditApi } from '../../hooks/useRedditApi';
+import { fetchPosts as fetchPostsAction } from '../../resources/post/post.action';
+import num_comments from './post_num_comments.svg';
+import no_subreddit_icon from './no_subreddit_icon.png';
 import cry from './cry.svg';
-import { Route, useHistory, Switch, useLocation } from "react-router-dom";
-import styles from './home_style.module.css'
-import { fetchPosts as fetchPostsAction } from 'resources/post/post.action';
-import { getPosts } from 'resources/post/post.selectors';
+import styles from './home_style.module.css';
+import getPosts from '../../resources/post/post.selectors';
 
 function Home(props) {
   const history = useHistory();
@@ -27,24 +29,20 @@ function Home(props) {
     setIsLoading(true);
     if (props.phrase && !isClickedSubreddit) {
       history.push('/search');
+    } else if (props.phrase && isClickedSubreddit) {
+      history.push('/subreddit');
     } else {
-      if (props.phrase && isClickedSubreddit) {
-        history.push('/subreddit');
-      }
-      else {
-        history.push('/subreddit');
-      }
+      history.push('/subreddit');
     }
-
 
     (async () => {
       setIsLoading(true);
 
       const { fetchReddit } = props;
       const [data, dataAbout, searchData] = await Promise.all([
-        fetchReddit('/r/gaming/hot').then(res => res.json()),
-        fetchReddit('/r/gaming/about').then(res => res.json()),
-        fetchReddit(`/subreddits/search?q=${props.phrase}`).then(res => res.json()),
+        fetchReddit('/r/gaming/hot').then((res) => res.json()),
+        fetchReddit('/r/gaming/about').then((res) => res.json()),
+        fetchReddit(`/subreddits/search?q=${props.phrase}`).then((res) => res.json()),
       ]);
 
       setSubredditData(data);
@@ -62,15 +60,14 @@ function Home(props) {
     setIsClickedSubreddit(false);
   }, [props.phrase]);
 
-
-  let onSearchItemClick = async (name) => {
+  const onSearchItemClick = async (name) => {
     setIsLoading(true);
     history.push('/subreddit');
 
     const { fetchReddit } = props;
 
-    const data = await fetchReddit(`/r/${name}/hot`).then(res => res.json());
-    const dataAbout = await fetchReddit(`/r/${name}/about`).then(res => res.json());
+    const data = await fetchReddit(`/r/${name}/hot`).then((res) => res.json());
+    const dataAbout = await fetchReddit(`/r/${name}/about`).then((res) => res.json());
 
     setSubredditData(data);
     setSubredditAbout(dataAbout);
@@ -94,7 +91,7 @@ function Home(props) {
             Sorry, there were no community results for "<b>{props.phrase}</b>"
               </div>
         </section>
-      )
+      );
     }
 
     if (location.pathname === '/search') {
@@ -105,7 +102,7 @@ function Home(props) {
           </header>
           <h1 className={styles.search_title}>Communities and users</h1>
           <content className={styles.search_content}>
-            {searchData.data.children.map(child => (
+            {searchData.data.children.map((child) => (
               <div key={child.data.id} className={styles.search_item_field} onClick={() => onSearchItemClick(child.data.display_name)}>
                 <div className={styles.search_community_logo}>
                   <img src={child.data.icon_img || no_subreddit_icon || child.data.community_icon} className={styles.search_subreddit_icon} />
@@ -134,7 +131,7 @@ function Home(props) {
           </div>
         </header>
         <content className={styles.subreddit_content}>
-          {subredditData.data.children.map(child => (
+          {subredditData.data.children.map((child) => (
             <div key={child.data.id} className={styles.post_field}>
               <div className={styles.post_author}>Posted by {child.data.author} {moment.unix(child.data.created).fromNow()}</div>
               <h2 className={styles.post_title}>{child.data.title}</h2>
@@ -151,7 +148,7 @@ function Home(props) {
   }
 }
 
-export default connect(state => ({
+export default connect((state) => ({
   posts: getPosts(state),
 }), {
   fetchPosts: fetchPostsAction,
