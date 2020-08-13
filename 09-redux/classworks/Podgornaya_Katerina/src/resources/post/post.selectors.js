@@ -1,1 +1,3 @@
-export const getPosts = ({ post }) => post.list;
+const getPosts = ({ post }) => post.list;
+
+export default getPosts;

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { Provider } from 'react-redux';
 import Pages from './pages';
 import logo from './images/reddit_logo.svg';
 import search from './images/search_icon.svg';
 import styles from './index.module.css';
-import { Provider } from 'react-redux';
-import store from 'resources/store';
+import store from './resources/store';
 
-//const dispatch = useDispatch();
+// const dispatch = useDispatch();
 
 // const initialState = {
 //   phrase: '',
