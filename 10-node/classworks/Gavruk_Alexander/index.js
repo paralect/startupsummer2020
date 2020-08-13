@@ -5,28 +5,36 @@ const crypto = require('crypto');
 
 crypto.DEFAULT_ENCODING = 'hex';
 
-const server = http.createServer((req, res) => {
-  if (req.url === '/home') {
-      fs.readFile(`${__dirname}/home.html`, (err, content) => {
-          if(!err) {
-            res.setHeader('Content-Type', 'text/html');
-            res.write(content);
-          } else {
-            res.statusCode = 500;
-            res.write('An error has ocurred');
-          }
+const getRequest = {
+  '/home': function(res) {
+    fs.readFile(`${__dirname}/home.html`, (err, content) => {
+      if(!err) {
+        res.setHeader('Content-Type', 'text/html');
+        res.write(content);
+      } else {
+        res.statusCode = 500;
+        res.write('An error has ocurred');
+      }
 
-          res.end();
-      })
-  } else if (req.url === '/dir_name' && req.method === 'GET') {
+      res.end();
+    });
+  },
+  '/dir_name': function() {
     console.log('Your project directory:', __dirname);
-  } else if (req.url === '/file_name' && req.method === 'GET') {
+  },
+  '/file_name': function() {
     console.log('Current performing file:', __filename);
-  } else if (req.url === '/cpus' && req.method === 'GET') {
+  },
+  '/cpus': function() {
     console.log('CPUs:', os.cpus());
-  } else if (req.url === '/number_of_cores' && req.method === 'GET') {
+  },
+  '/number_of_cores': function() {
     console.log('Number of cores:', os.cpus().length);
-  } else if (req.method === 'POST') {
+  }
+}
+
+const server = http.createServer((req, res) => {
+  if (req.method === 'POST') {
     let requestData = '';
     let isValid = false;
     req.on('error', (err) => {
@@ -44,6 +52,8 @@ const server = http.createServer((req, res) => {
       res.write(JSON.stringify({ isValid }));
       res.end();
     })
+  } else if (req.method === 'GET' && req.url !== '/favicon.ico') {
+    getRequest[req.url](res);
   }
 })
 
