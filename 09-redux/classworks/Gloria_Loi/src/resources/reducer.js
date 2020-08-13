@@ -32,7 +32,7 @@ export const reducer = (state = initialState, action) => {
     case SET_SUBREDDITS:
       return {
         ...state,
-        reactSubreddit: action.data,
+        reactSubreddit: action.subreddits,
       };
     case SET_SEARCH_ERROR: {
       return {

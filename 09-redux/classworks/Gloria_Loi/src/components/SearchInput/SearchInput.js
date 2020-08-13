@@ -1,16 +1,14 @@
-import React from "react";
+import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { useDispatch } from "react-redux";
+import { handleChange } from 'resources/actions/searchInput.actions';
 
-import svg from "assets/images/search.svg";
+import svg from 'assets/images/search.svg';
 
-import "./Search.css";
+import './Search.css';
 
 const SearchInput = () => {
   const dispatch = useDispatch();
-
-  const handleChange = (event) =>
-    dispatch({ type: "CHANGE_INPUT_STRING", inputString: event.target.value });
 
   return (
     <div className="search-block">
@@ -18,7 +16,7 @@ const SearchInput = () => {
         <img src={svg} />
         <input
           className="search-input"
-          onChange={handleChange}
+          onChange={(event) => dispatch(handleChange(event.target.value))}
           placeholder="Search"
         ></input>
       </div>

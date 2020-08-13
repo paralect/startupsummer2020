@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import { Provider } from "react-redux";
+import React, { useState } from 'react';
+import { Provider } from 'react-redux';
 
-import Header from "components/HeaderComponent";
-import Block from "components/Block";
-import store from "./store";
+import Header from 'components/HeaderComponent';
+import Block from 'components/Block';
+import store from './resources/store';
 
-import Pages from "pages";
+import Pages from 'pages';
 
 const App = () => {
   return (
