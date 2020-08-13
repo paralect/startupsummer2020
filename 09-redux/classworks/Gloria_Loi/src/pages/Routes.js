@@ -7,23 +7,23 @@ import Login from 'pages/login';
 import Callback from 'pages/callback';
 import Home from 'pages/home';
 
-const Routes = (props) => {
+const Routes = () => {
   const [, , isLoggedIn] = useRedditApi();
 
   if (isLoggedIn) {
     return (
       <Switch>
-        <Route path='/' render={() => <Home />} />
-        <Redirect to='/' />
+        <Route path="/" component={Home} />
+        <Redirect to="/" />
       </Switch>
     );
   }
 
   return (
     <Switch>
-      <Route path='/login' exact component={Login} />
-      <Route path='/callback' exact component={Callback} />
-      <Redirect to='/login' />
+      <Route path="/login" exact component={Login} />
+      <Route path="/callback" exact component={Callback} />
+      <Redirect to="/login" />
     </Switch>
   );
 };

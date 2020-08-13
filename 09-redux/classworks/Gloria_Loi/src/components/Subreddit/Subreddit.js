@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import useRedditApi from '../../hooks/useRedditApi';
 
-import { fetchPostsArticles } from '../../resources/actions/fetchPostArticles';
+import { fetchPostsArticles } from '../../resources/actions/fetchPostArticles.action';
 
 import svg from '../../assets/images/react.svg';
 
@@ -18,17 +18,17 @@ const Subreddit = ({ body: { data } }) => {
 
   return (
     <div
-      className='subreddit'
+      className="subreddit"
       onClick={() =>
         fetchPostsArticles(inputString, fetchReddit, history)(dispatch)
       }
     >
       <img
-        className='subreddit-img'
+        className="subreddit-img"
         src={data.icon_img ? data.icon_img : svg}
       />
-      <div className='post-path'>{data.display_name_prefixed}</div>
-      <div className='description'>{data.public_description}</div>
+      <div className="post-path">{data.display_name_prefixed}</div>
+      <div className="description">{data.public_description}</div>
     </div>
   );
 };

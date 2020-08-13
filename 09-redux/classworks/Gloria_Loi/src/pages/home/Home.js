@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { fetchSubreddits } from '../../resources/actions/fetchSubreddits';
-import { fetchPostsArticles } from '../../resources/actions/fetchPostArticles';
+import { fetchSubreddits } from '../../resources/actions/fetchSubreddits.action';
+import { fetchPostsArticles } from '../../resources/actions/fetchPostArticles.action';
 
 import { withRedditApi } from 'hooks/useRedditApi';
 import { Route, useHistory, Switch } from 'react-router-dom';
@@ -28,11 +28,11 @@ const Home = (props) => {
   const isLoading = loading || !reactSubreddit || !subRedditTitle;
 
   useEffect(() => {
-    fetchPostsArticles(undefined, fetchReddit, history)(dispatch);
+    dispatch(fetchPostsArticles(undefined, fetchReddit, history));
   }, []);
 
   useEffect(() => {
-    fetchSubreddits(inputString, fetchReddit, history)(dispatch);
+    dispatch(fetchSubreddits(inputString, fetchReddit, history));
   }, [inputString]);
 
   if (isLoading) return <Loader />;
@@ -44,9 +44,9 @@ const Home = (props) => {
       ) : (
         <Switch>
           {inputString !== '' && (
-            <Route path='/search' exact render={() => <SubredditsList />} />
+            <Route path="/search" exact render={() => <SubredditsList />} />
           )}
-          <Route path='/' render={() => <MainContainer />} />
+          <Route path="/" render={() => <MainContainer />} />
         </Switch>
       )}
     </>

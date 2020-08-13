@@ -1,13 +1,15 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import ListItem from "../ListItem";
-import Title from "../Title/Title";
+import * as subredditSelector from '../../resources/selectors/subreddit.selector';
 
-import "./MainContainer.css";
+import ListItem from '../ListItem';
+import Title from '../Title/Title';
 
-const MainContainer = (props) => {
-  const { reactSubreddit } = useSelector((state) => state);
+import './MainContainer.css';
+
+const MainContainer = () => {
+  const reactSubreddit = useSelector(subredditSelector.getSubbredits);
 
   return (
     <div className="main">
