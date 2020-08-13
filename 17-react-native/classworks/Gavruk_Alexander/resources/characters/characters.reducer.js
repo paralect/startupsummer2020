@@ -1,6 +1,5 @@
 const initialState = {
   characters: [],
-  favouriteCharacterIds: [],
   comics: [],
 };
 
@@ -12,16 +11,27 @@ export default (state = initialState, action) => {
         characters: action.payload.characters,
       };
 
-    case 'characters:setFavourites':
-      return {
-        ...state,
-        favouriteCharacterIds: action.payload.favouriteCharacterIds,
-      };
-
     case 'characters:setComics':
       return {
         ...state,
         comics: action.payload.comics,
+      };
+
+    case 'characters:changeIsFavourite':
+      console.log(action.payload.id);
+      console.log(state.characters);
+      return {
+        ...state,
+        characters: state.characters.map((character) => {
+          const result = character.id === action.payload.id
+            ? {
+              ...character,
+              isFavourite: !character.isFavourite
+            }
+            : character
+          console.log('is favourite in reducer: ', result.isFavourite);
+          return result;
+        }),
       };
 
     default:

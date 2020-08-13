@@ -1,10 +1,15 @@
-export const favouriteCharacterIds = (favouriteCharacterIds) => (dispatch) => {
-  dispatch({ type: 'characters:setFavourites', payload: { favouriteCharacterIds } });
+export const fetchData = (fetchMarvel, url) => async (dispatch) => {
+  const { data } = await fetchMarvel(url);
+  const characters = data.data.results.map((characters) => ({
+    ...characters,
+    isFavourite: false,
+  }));
+
+  dispatch({ type: 'characters:setData', payload: { characters } });
 }
 
-export const fetchData = (fetchMarvel, url) => async (dispatch) => {
-  const characters = await fetchMarvel(url).then(res => res.data.data.results);
-  dispatch({ type: 'characters:setData', payload: { characters } });
+export const changeIsFavourite = (id) => (dispatch) => {
+  dispatch({ type: 'characters:changeIsFavourite', payload: { id } });
 }
 
 export const fetchComics = (fetchMarvel, url) => async (dispatch) => {
