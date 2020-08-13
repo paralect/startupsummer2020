@@ -10,13 +10,13 @@ export const FETCH_CHARACTERS_SUCCESS = 'FETCH_CHARACTERS_SUCCESS';
 export const FETCH_CHARACTERS_ERROR = 'FETCH_CHARACTERS_ERROR';
 
 const fetchComicsStart = () => ({ type: FETCH_COMICS_START });
-const fetchComicsSuccess = (data) => ({ type: FETCH_COMICS_SUCCESS, payload: data });
+const fetchComicsSuccess = (characterId, data) => ({ type: FETCH_COMICS_SUCCESS, payload: { characterId, data } });
 const fetchComicsError = (err) => ({ type: FETCH_COMICS_ERROR, payload: err });
 
 export const fetchComics = (characterId, params) => (dispatch) => {
   dispatch(fetchComicsStart());
   fetchMarvel(`/character/${characterId}/comics`, params)
-    .then((res) => dispatch(fetchComicsSuccess(res)))
+    .then((res) => dispatch(fetchComicsSuccess(characterId, res)))
     .catch((err) => dispatch(fetchComicsError(err)));
 };
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Text, View, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFavorites, getFetching } from '../../resources/comics.selector';
+import { getFavorites } from '../../resources/comics.selector';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native';
 import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
@@ -11,18 +11,20 @@ import fav_filled from '../../assets/fav_filled.png';
 
 import styles from './Details.styles';
 import { fetchComics } from '../../resources/comics.action';
+import { getCharacter } from '../../resources/comics.selector';
 
 function DetailsScreen() {
   const { params } = useRoute();
-  const { character } = params;
+  const { characterId } = params;
   const favorites = useSelector(getFavorites);
   const dispatch = useDispatch();
+  const character = useSelector(getCharacter(characterId));
   const isFavorite = favorites.find((char) => char.id === character.id);
   const img = isFavorite ? fav_filled : fav;
 
   useEffect(() => {
-    dispatch(fetchComics(char.id))
-  });
+    dispatch(fetchComics(characterId))
+  }, []);
 
   const renderComics = (data) => {
     return (
