@@ -1,4 +1,4 @@
-.input{
+.input {
   width: calc(100% - 20px);
   justify-self: center;
   background: inherit;
@@ -7,22 +7,22 @@
   border: none;
   padding: .5rem;
 }
-.search{
+
+.search {
   width: 40%;
   display: flex;
   background: #efefef;
   border-radius: 5px;
   margin-left: 20%;
-
 }
-.search-icon{
+
+.search-icon {
   padding: .5rem 0 .5rem .5rem;
 }
 
-.button{
+.button {
   padding: 0.5rem;
   background: inherit;
   border: 1px solid #FFFFFF;
   outline: none;
-
 }

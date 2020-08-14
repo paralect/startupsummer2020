@@ -1,11 +1,11 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
-import {searchValueReducer} from './searchValueReducer';
-import {reactSubredditsReducer} from './reactSubredditsReducer'
+import { searchValueReducer } from './searchValueReducer';
+import { reactSubredditsReducer } from './reactSubredditsReducer'
 
 const rootReducer = combineReducers({
-  input: searchValueReducer,
-  posts: reactSubredditsReducer
+    input: searchValueReducer,
+    posts: reactSubredditsReducer
   }
 );
 

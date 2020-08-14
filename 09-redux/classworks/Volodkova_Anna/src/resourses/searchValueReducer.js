@@ -1,4 +1,4 @@
-import { SET_SEARCH_VALUE } from "./types";
+import { SET_SEARCH_VALUE } from './types';
 
 const initialState = {
   value: ''

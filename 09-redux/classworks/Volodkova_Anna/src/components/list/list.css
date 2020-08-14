@@ -1,4 +1,4 @@
-.list-container{
+.list-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,23 +7,21 @@
   margin: 0 auto;
 }
 
-.about{
+.about {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 75px;
 }
 
-.header_img{
+.header_img {
   width: 100px;
   height: 100px;
   margin: 1rem;
   border-radius: 50%;
-
-
 }
-.icon{
+
+.icon {
   width: 100px;
   height: 100px;
-
 }
