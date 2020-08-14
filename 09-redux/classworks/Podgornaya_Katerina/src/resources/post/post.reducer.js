@@ -4,16 +4,16 @@ const initialState = {
   list: [],
 };
 
-export default (state = initialState, action) => {
+export default (posts = initialState, action) => {
   switch (action.type) {
     case FETCH_POSTS: {
       return {
-        ...state,
+        ...posts,
         list: action.payload.data.children,
       };
     }
     default: {
-      return state;
+      return posts;
     }
   }
 };
