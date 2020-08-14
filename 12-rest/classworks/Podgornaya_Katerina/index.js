@@ -34,52 +34,43 @@ if (!fs.existsSync('./database/articlesCollection.json')) {
   fs.writeFileSync('./database/articlesCollection.json', JSON.stringify({ articles: [] }, null, 2));
 }
 
-const
-  usersCollection = JSON.parse(fs.readFileSync('./database/usersCollection.json'));
+const usersCollection = JSON.parse(fs.readFileSync('./database/usersCollection.json'));
 const slogansCollection = JSON.parse(fs.readFileSync('./database/slogansCollection.json'));
 const interviewsCollection = JSON.parse(fs.readFileSync('./database/interviewsCollection.json'));
 const articlesCollection = JSON.parse(fs.readFileSync('./database/articlesCollection.json'));
 
 const getHash = (string) => crypto.pbkdf2Sync(string, 'salt', 100000, 64, 'sha512').toString('hex');
+const secretKey = 'akunaQWEmatataRTYbananaUIOPblabla';
 
-const
-  app = new Koa();
+const app = new Koa();
 const publicRouter = new Router();
 const privateRouter = new Router();
 
 publicRouter
   .post('/signin', async (ctx) => {
     const { password, username } = ctx.request.body;
-    const user = usersCollection.users.filter((user) => user.username === username);
-    const isExists = Boolean(usersCollection.users.find((user) => user.username === username));
-    if (isExists) {
-      if (getHash(password) === user[0].passwordHash) {
-        const token = createJwt({ test: user[0].username }, 'secret');
+    const user = usersCollection.users.find((user) => user.username === username);
+    console.log(user);
+    const isUserExists = user;
+    if (isUserExists) {
+      if (getHash(password) === user.passwordHash) {
+        const token = createJwt({ name: user.username }, secretKey);
         console.log(token);
         ctx.body = {
-          success: true,
           message: 'you are logged in',
-          token,
-        };
-      } else {
-        ctx.body = {
-          success: false,
-          message: 'invalid password',
         };
       }
     } else {
       ctx.body = {
-        success: false,
-        message: 'invalid username',
+        message: 'invalid data',
       };
     }
   })
   .post('/signup', async (ctx) => {
     const { password, username } = ctx.request.body;
-    const isExists = Boolean(usersCollection.users.find((user) => user.username === username));
-    if (isExists) {
+    const isUserExists = Boolean(usersCollection.users.find((user) => user.username === username));
+    if (isUserExists) {
       ctx.body = {
-        success: false,
         message: 'this username is already exists',
       };
       return;
@@ -88,26 +79,22 @@ publicRouter
     usersCollection.users.push({ username, passwordHash });
     await writeFile('./database/usersCollection.json', JSON.stringify(usersCollection, null, 2));
     ctx.body = {
-      success: true,
       message: 'you are registered',
       username,
     };
   })
   .get('/slogan', async (ctx) => {
     ctx.body = {
-      success: true,
       data: slogansCollection,
     };
   })
   .get('/interview', async (ctx) => {
     ctx.body = {
-      success: true,
       data: interviewsCollection,
     };
   })
   .get('/article', async (ctx) => {
     ctx.body = {
-      success: true,
       data: articlesCollection,
     };
   });
@@ -131,7 +118,6 @@ privateRouter
     await writeFile('./database/slogansCollection.json', JSON.stringify(slogansCollection, null, 2));
 
     ctx.body = {
-      success: true,
       slogans: {
         phrase,
         replies: generatedSlogan.data.replies,
@@ -157,7 +143,6 @@ privateRouter
     await writeFile('./database/interviewsCollection.json', JSON.stringify(interviewsCollection, null, 2));
 
     ctx.body = {
-      success: true,
       interview: interviewsCollection.interviews[interviewsCollection.interviews.length - 1],
     };
   })
@@ -180,7 +165,6 @@ privateRouter
     await writeFile('./database/articlesCollection.json', JSON.stringify(articlesCollection, null, 2));
 
     ctx.body = {
-      success: true,
       interview: articlesCollection.articles[articlesCollection.articles.length - 1],
     };
   });
@@ -188,7 +172,7 @@ privateRouter
 app
   .use(bodyParser())
   .use(publicRouter.routes())
-  .use(jwt({ secret: 'secret' }))
+  .use(jwt({ secret: secretKey }))
   .use(privateRouter.routes());
 
 app.listen(3000);
