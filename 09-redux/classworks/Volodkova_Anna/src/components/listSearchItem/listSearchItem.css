@@ -1,49 +1,43 @@
-.container{
+.container {
   display: flex;
   padding: 0.5rem;
   width: 40%;
   font-family: IBM Plex Sans, sans-serif;
-  background-color:  #FFFFFF;
+  background-color: #FFFFFF;
   border-bottom: 2px solid #F8F8F8;
   margin: 0 auto;
-
-
 }
-.community-icon{
+
+.community-icon {
   width: 60px;
   height: 60px;
   margin: 1rem;
   border-radius: 50%;
-
-
 }
 
-.img{
+.img {
   width: 60px;
   height: 60px;
 }
 
-.name-followers{
+.name-followers {
   display: flex;
   flex-direction: column;
   padding: 1rem;
   width: calc(100% - 60% - 60px - 2rem - 1rem);
   overflow: hidden;
 }
-.name{
 
-}
-.name:hover{
+.name:hover {
   text-decoration: underline;
-
 }
 
-.followers{
+.followers {
   font-size: 0.9em;
   margin-top: 0.3rem;
-
 }
-.explaining{
+
+.explaining {
   width: 60%;
   padding: 0.5rem;
   padding-right: 2rem;

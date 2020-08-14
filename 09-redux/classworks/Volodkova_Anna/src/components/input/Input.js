@@ -1,15 +1,44 @@
 import React from 'react';
-import './input.css';
-import searchicon from './search-icon.svg';
+import { useDispatch, useSelector } from 'react-redux';
 
-function Input (props) {
-    return (
-      <div className="search">
-        <img src={searchicon} className="search-icon"/>
-        <input onChange={props.handleOnChangeInput} className="input" placeholder="Search"/>
-        <button className="button" onClick={props.handleBtnClick}>Search</button>
-      </div>
-    );
+import './input.css';
+import searchIcon from './search-icon.svg';
+import { fetchPosts, setSearchValue } from '../../resourses/actions';
+import { getSearchValue } from '../../resourses/searchValue.selectors';
+import { withRedditApi } from '../../hooks/useRedditApi';
+
+function Input(props) {
+  const dispatch = useDispatch();
+  const searchValue = useSelector(getSearchValue);
+
+
+  const handleBtnClick = () => {
+    if (searchValue) {
+      dispatch(fetchPosts(props, searchValue));
+    }
+  }
+
+  return (
+    <div className="search">
+      <img
+        src={searchIcon}
+        className="search-icon"
+      />
+      <input
+        onChange={(event) => {
+          dispatch(setSearchValue(event.target.value));
+        }}
+        className="input"
+        placeholder="Search"
+      />
+      <button
+        className="button"
+        onClick={handleBtnClick}
+      >
+        Search
+      </button>
+    </div>
+  );
 }
 
-export default Input;
+export default withRedditApi(Input);

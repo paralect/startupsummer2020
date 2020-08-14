@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useCallback, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 
 const BASE_URL = 'https://oauth.reddit.com';
 
