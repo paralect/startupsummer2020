@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import moment from 'moment';
 import App from 'App';
 import {
@@ -12,6 +12,7 @@ import no_subreddit_icon from './no_subreddit_icon.png';
 import cry from './cry.svg';
 import styles from './home_style.module.css';
 import getPosts from '../../resources/post/post.selectors';
+import getPhrase from '../../resources/phrase/phrase.selector';
 
 function Home(props) {
   const history = useHistory();
@@ -23,13 +24,15 @@ function Home(props) {
   const [isClickedSubreddit, setIsClickedSubreddit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const phrase = useSelector(getPhrase);
+
   console.log(props.posts);
 
   useEffect(() => {
     setIsLoading(true);
-    if (props.phrase && !isClickedSubreddit) {
+    if (phrase && !isClickedSubreddit) {
       history.push('/search');
-    } else if (props.phrase && isClickedSubreddit) {
+    } else if (phrase && isClickedSubreddit) {
       history.push('/subreddit');
     } else {
       history.push('/subreddit');
@@ -42,7 +45,7 @@ function Home(props) {
       const [data, dataAbout, searchData] = await Promise.all([
         fetchReddit('/r/gaming/hot').then((res) => res.json()),
         fetchReddit('/r/gaming/about').then((res) => res.json()),
-        fetchReddit(`/subreddits/search?q=${props.phrase}`).then((res) => res.json()),
+        fetchReddit(`/subreddits/search?q=${phrase}`).then((res) => res.json()),
       ]);
 
       setSubredditData(data);
@@ -58,7 +61,7 @@ function Home(props) {
     setSubredditAbout(null);
     setSearchData(null);
     setIsClickedSubreddit(false);
-  }, [props.phrase]);
+  }, [phrase]);
 
   const onSearchItemClick = async (name) => {
     setIsLoading(true);
@@ -88,7 +91,7 @@ function Home(props) {
         <section className={styles.no_results}>
           <img src={cry} />
           <div>
-            Sorry, there were no community results for "<b>{props.phrase}</b>"
+            Sorry, there were no community results for "<b>{phrase}</b>"
               </div>
         </section>
       );
@@ -98,7 +101,7 @@ function Home(props) {
       return (
         <section className={styles.section}>
           <header className={styles.header_search}>
-            Search results for "<b>{props.phrase}</b>"
+            Search results for "<b>{phrase}</b>"
           </header>
           <h1 className={styles.search_title}>Communities and users</h1>
           <content className={styles.search_content}>

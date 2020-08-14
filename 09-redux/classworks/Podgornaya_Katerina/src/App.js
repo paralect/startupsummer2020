@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import Pages from './pages';
 import logo from './images/reddit_logo.svg';
 import search from './images/search_icon.svg';
 import styles from './index.module.css';
 import store from './resources/store';
-
-// const dispatch = useDispatch();
+import getPhrase from './resources/phrase/phrase.selector';
+import phraseAction from './resources/phrase/phrase.action';
 
 // const initialState = {
 //   phrase: '',
@@ -30,12 +30,14 @@ import store from './resources/store';
 // const store = createStore(phraseReducer);
 
 function App() {
+  const dispatch = useDispatch();
+
   const [phrase, setPhrase] = useState(null);
 
   const onClickEnter = (event) => {
     if (event.keyCode === 13) {
       console.log(event.target.value);
-      setPhrase(event.target.value);
+      dispatch(phraseAction(event.target.value));
     }
   };
 
@@ -53,7 +55,7 @@ function App() {
         <div className={styles.header_bot}></div>
       </header>
       <section>
-        <Pages phrase={phrase} />
+        <Pages />
       </section>
     </main>
     </Provider>

@@ -7,13 +7,13 @@ import Login from 'pages/login';
 import Callback from 'pages/callback';
 import Home from 'pages/home';
 
-function Routes(props) {
+function Routes() {
   const [,,isLoggedIn] = useRedditApi();
 
   if (isLoggedIn) {
     return (
       <Switch>
-        <Route path="/" render={() => <Home phrase={props.phrase} />} />
+        <Route path="/" render={() => <Home />} />
         <Redirect to="/" />
       </Switch>
     );
