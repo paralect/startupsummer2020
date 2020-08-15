@@ -1,32 +1,37 @@
 import React, { useState, useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import App from 'App';
 import {
   Route, useHistory, Switch, useLocation,
 } from 'react-router-dom';
 import { withRedditApi } from '../../hooks/useRedditApi';
-import { fetchPosts as fetchPostsAction } from '../../resources/post/post.action';
+import { fetchPosts } from '../../resources/post/post.action';
+import { fetchSubreddit } from '../../resources/subreddit/subreddit.action';
 import num_comments from './post_num_comments.svg';
 import no_subreddit_icon from './no_subreddit_icon.png';
 import cry from './cry.svg';
 import styles from './home_style.module.css';
-import getPosts from '../../resources/post/post.selectors';
+import getPosts from '../../resources/post/post.selector';
 import getPhrase from '../../resources/phrase/phrase.selector';
+import getSubreddit from '../../resources/subreddit/subreddit.selector';
 
 function Home(props) {
   const history = useHistory();
   const location = useLocation();
 
-  const [subredditData, setSubredditData] = useState(null);
   const [subredditAbout, setSubredditAbout] = useState(null);
   const [searchData, setSearchData] = useState(null);
   const [isClickedSubreddit, setIsClickedSubreddit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const phrase = useSelector(getPhrase);
+  const posts = useSelector(getPosts);
+  const subreddit = useSelector(getSubreddit);
 
-  console.log(props.posts);
+  const { fetchReddit } = props;
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setIsLoading(true);
@@ -41,23 +46,20 @@ function Home(props) {
     (async () => {
       setIsLoading(true);
 
-      const { fetchReddit } = props;
-      const [data, dataAbout, searchData] = await Promise.all([
-        fetchReddit('/r/gaming/hot').then((res) => res.json()),
+      const [dataAbout, searchData] = await Promise.all([
         fetchReddit('/r/gaming/about').then((res) => res.json()),
         fetchReddit(`/subreddits/search?q=${phrase}`).then((res) => res.json()),
       ]);
 
-      setSubredditData(data);
       setSubredditAbout(dataAbout);
       setSearchData(searchData);
 
-      props.fetchPosts({ fetchReddit, subreddit: 'gaming' });
+      dispatch(fetchPosts({ fetchReddit, subreddit: 'gaming' }));
+      dispatch(fetchSubreddit({ fetchReddit, subreddit: 'gaming' }));
 
       setIsLoading(false);
     })();
 
-    setSubredditData(null);
     setSubredditAbout(null);
     setSearchData(null);
     setIsClickedSubreddit(false);
@@ -69,10 +71,8 @@ function Home(props) {
 
     const { fetchReddit } = props;
 
-    const data = await fetchReddit(`/r/${name}/hot`).then((res) => res.json());
     const dataAbout = await fetchReddit(`/r/${name}/about`).then((res) => res.json());
 
-    setSubredditData(data);
     setSubredditAbout(dataAbout);
     setIsClickedSubreddit(false);
 
@@ -134,14 +134,14 @@ function Home(props) {
           </div>
         </header>
         <content className={styles.subreddit_content}>
-          {subredditData.data.children.map((child) => (
-            <div key={child.data.id} className={styles.post_field}>
-              <div className={styles.post_author}>Posted by {child.data.author} {moment.unix(child.data.created).fromNow()}</div>
-              <h2 className={styles.post_title}>{child.data.title}</h2>
-              <p className={styles.post_selftext}>{child.data.selftext || child.data.url}</p>
+          {posts.map((post) => (
+            <div key={post.data.id} className={styles.post_field}>
+              <div className={styles.post_author}>Posted by {post.data.author} {moment.unix(post.data.created).fromNow()}</div>
+              <h2 className={styles.post_title}>{post.data.title}</h2>
+              <p className={styles.post_selftext}>{post.data.selftext || post.data.url}</p>
               <div className={styles.post_num_comments}>
                 <img src={num_comments}></img>
-                {child.data.num_comments} comments
+                {post.data.num_comments} comments
             </div>
             </div>
           ))}
@@ -151,8 +151,4 @@ function Home(props) {
   }
 }
 
-export default connect((state) => ({
-  posts: getPosts(state),
-}), {
-  fetchPosts: fetchPostsAction,
-})(withRedditApi(Home));
+export default withRedditApi(Home);
