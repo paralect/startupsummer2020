@@ -4,7 +4,7 @@ import Pages from './pages';
 import logo from './images/reddit_logo.svg';
 import search from './images/search_icon.svg';
 import styles from './index.module.css';
-import phraseAction from './resources/phrase/phrase.action';
+import { phraseAction } from './resources/phrase/phrase.action';
 
 function App() {
   const dispatch = useDispatch();
