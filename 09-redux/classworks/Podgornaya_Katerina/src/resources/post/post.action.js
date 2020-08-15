@@ -1,6 +1,6 @@
-export const FETCH_POSTS = 'fetchPosts';
+const FETCH_POSTS = 'fetchPosts';
 
-export const fetchPosts = ({
+const fetchPosts = ({
   fetchReddit,
   subreddit,
 }) => async (dispatch) => {
@@ -10,4 +10,9 @@ export const fetchPosts = ({
     payload: data,
   });
   return data;
+};
+
+export {
+  FETCH_POSTS,
+  fetchPosts,
 };

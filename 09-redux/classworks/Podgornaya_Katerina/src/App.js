@@ -32,8 +32,6 @@ import phraseAction from './resources/phrase/phrase.action';
 function App() {
   const dispatch = useDispatch();
 
-  const [phrase, setPhrase] = useState(null);
-
   const onClickEnter = (event) => {
     if (event.keyCode === 13) {
       console.log(event.target.value);
