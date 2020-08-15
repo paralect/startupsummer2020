@@ -1,7 +1,7 @@
 import { FETCH_SEARCH } from './search.action';
 
 const initialState = {
-  subreddits: [],
+  search: { children: [] },
 };
 
 export default (state = initialState, action) => {
@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
     case FETCH_SEARCH: {
       return {
         ...state,
-        subreddits: action.payload.data,
+        search: action.payload.data,
       };
     }
     default: {

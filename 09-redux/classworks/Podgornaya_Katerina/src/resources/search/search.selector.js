@@ -1,3 +1,3 @@
-const getSearch = ({ search }) => search.subreddits;
+const getSearch = ({ search }) => search.search;
 
 export default getSearch;
