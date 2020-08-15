@@ -1,8 +1,13 @@
+const PHRASE = 'PHRASE';
+
 const phraseAction = (phrase) => (dispatch) => {
   dispatch({
-    type: 'phrase:set',
+    type: PHRASE,
     payload: phrase,
   });
 };
 
-export default phraseAction;
+export {
+  PHRASE,
+  phraseAction,
+};

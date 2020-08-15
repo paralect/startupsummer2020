@@ -1,10 +1,12 @@
+import { PHRASE } from './phrase.action';
+
 const initialState = {
   phrase: '',
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'phrase:set': {
+    case PHRASE: {
       return {
         ...state,
         phrase: action.payload,
