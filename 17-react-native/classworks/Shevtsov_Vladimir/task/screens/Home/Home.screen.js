@@ -4,33 +4,31 @@ import { useNavigation } from '@react-navigation/native';
 import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from 'react-redux';
-import { getError, getFetching, getChars } from '../../resources/comics.selector';
+import { getCharacters } from '../../resources/marvel.selector';
+import { toggleFavourite } from '../../resources/marvel.action';
 
 import styles from './Home.styles';
-import { addToFavorites } from '../../resources/comics.action';
 
 function HomeScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const chars = useSelector(getChars);
-  const err = useSelector(getError);
-  const fetching = useSelector(getFetching);
+  const chars = useSelector(getCharacters);
 
   const createItem = (data) => {
     return (
       <View style={styles.listItem}>
         <TouchableHighlight onPress={() => navigation.navigate('Details', { characterId: data.item.id })} >
-          <Image source={{ uri: data.item.thumbnail }} style={styles.poster} />
+          <Image source={{ uri: `${data.item.thumbnail.path}.${data.item.thumbnail.extension}` }} style={styles.poster} />
         </TouchableHighlight>
         <Text style={{ color: '#fff' }}>{data.item.name}</Text>
-        <TouchableHighlight onPress={() => dispatch(addToFavorites(data.item))}>
+        <TouchableHighlight onPress={() => dispatch(toggleFavourite(data.item.id))}>
           <Image
             source={require('../../assets/fav.png')}
             style={{ width: 15, height: 15 }}
           />
         </TouchableHighlight>
       </View>
-    )
+    );
   };
 
   return (
@@ -40,9 +38,7 @@ function HomeScreen() {
         <Text style={styles.title}>featured characters</Text>
       </View>
       <View>
-        {!fetching &&
-          <FlatList data={chars} renderItem={createItem} keyExtractor={(item) => item.id} />
-        }
+        <FlatList data={chars} renderItem={createItem} keyExtractor={(item) => item.id} />
       </View>
     </SafeAreaView>
   );

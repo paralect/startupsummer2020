@@ -1,26 +1,24 @@
 import React, { useEffect } from 'react';
 import { Text, View, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFavorites } from '../../resources/comics.selector';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native';
 import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 
+import { fetchComics } from '../../resources/marvel.action';
+import { getCharacter } from '../../resources/marvel.selector';
+
 import fav from '../../assets/fav.png';
 import fav_filled from '../../assets/fav_filled.png';
-
 import styles from './Details.styles';
-import { fetchComics } from '../../resources/comics.action';
-import { getCharacter } from '../../resources/comics.selector';
 
 function DetailsScreen() {
   const { params } = useRoute();
   const { characterId } = params;
-  const favorites = useSelector(getFavorites);
   const dispatch = useDispatch();
   const character = useSelector(getCharacter(characterId));
-  const isFavorite = favorites.find((char) => char.id === character.id);
-  const img = isFavorite ? fav_filled : fav;
+  const img = character.favourite ? fav_filled : fav;
+  console.log(222222,character.comicsDetails);
 
   useEffect(() => {
     dispatch(fetchComics(characterId))
@@ -29,8 +27,8 @@ function DetailsScreen() {
   const renderComics = (data) => {
     return (
       <View style={styles.listItem}>
-        <Image source={{ uri: data.item.thumbnail }} style={styles.poster} />
-        <Text style={{ color: '#fff' }}>{data.item.name}</Text>
+        <Image source={{ uri: `${data.item.thumbnail.path}.${data.item.thumbnail.extension}` }} style={styles.poster} />
+        <Text style={{ color: '#fff' }}>{data.item.title}</Text>
       </View>
     );
   }
@@ -39,7 +37,7 @@ function DetailsScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.logoContainer}>
-        <Image source={{ uri: character.thumbnail }} style={styles.thumbnail} />
+        <Image source={{ uri: `${character.thumbnail.path}.${character.thumbnail.extension}` }} style={styles.thumbnail} />
         <View style={styles.logoDetails}>
           <Text style={styles.name}>{character.name}</Text>
           <TouchableHighlight onPress={() => dispatch()}>
@@ -51,7 +49,7 @@ function DetailsScreen() {
       <Text style={styles.title}>Comics</Text>
       <View>
         <FlatList
-          data={character.comics.items}
+          data={character.comicsDetails}
           keyExtractor={(item) => item.resourceURI}
           renderItem={renderComics}
         />
