@@ -17,5 +17,5 @@ ReactDOM.render(
       </RedditApiTokenProvider>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

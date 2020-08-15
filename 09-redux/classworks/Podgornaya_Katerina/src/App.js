@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import Pages from './pages';
 import logo from './images/reddit_logo.svg';
@@ -11,7 +11,6 @@ function App() {
 
   const onClickEnter = (event) => {
     if (event.keyCode === 13) {
-      console.log(event.target.value);
       dispatch(phraseAction(event.target.value));
     }
   };

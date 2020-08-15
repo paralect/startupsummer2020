@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import useRedditApi from 'hooks/useRedditApi';
 
 function Callback({ location }) {
-  const [,setRedditApiToken] = useRedditApi();
+  const [, setRedditApiToken] = useRedditApi();
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.hash.replace('#', '?'));

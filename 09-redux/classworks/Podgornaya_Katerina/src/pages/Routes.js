@@ -8,7 +8,7 @@ import Callback from 'pages/callback';
 import Home from 'pages/home';
 
 function Routes() {
-  const [,,isLoggedIn] = useRedditApi();
+  const [,, isLoggedIn] = useRedditApi();
 
   if (isLoggedIn) {
     return (
