@@ -1,19 +1,19 @@
 import { FETCH_POSTS } from './post.action';
 
 const initialState = {
-  list: [],
+  posts: [],
 };
 
-export default (posts = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_POSTS: {
       return {
-        ...posts,
-        list: action.payload.data.children,
+        ...state,
+        posts: action.payload.data.children,
       };
     }
     default: {
-      return posts;
+      return state;
     }
   }
 };
