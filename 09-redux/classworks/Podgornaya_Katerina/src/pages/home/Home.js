@@ -47,11 +47,14 @@ function Home(props) {
     (async () => {
       setIsLoading(true);
 
-      dispatch(fetchPosts({ fetchReddit, subreddit: phrase || 'gaming' }));
-      dispatch(fetchSubreddit({ fetchReddit, subreddit: phrase || 'gaming' }));
-      if (phrase) {
+      if (!phrase) {
+        dispatch(fetchPosts({ fetchReddit, subreddit: 'gaming' }));
+        dispatch(fetchSubreddit({ fetchReddit, subreddit: 'gaming' }));
+      } else {
         dispatch(fetchSearch({  fetchReddit, phrase: phrase }));
       }
+
+      console.log(search);
 
       setIsLoading(false);
     })();
@@ -78,6 +81,8 @@ function Home(props) {
       <p className={styles.loading}>Loading...</p>
     );
   }
+
+  console.log(search);
 
   if (location.pathname === '/search') {
     if (search.dist === 0) {
