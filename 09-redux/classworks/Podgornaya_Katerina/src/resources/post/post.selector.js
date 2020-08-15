@@ -1,3 +1,3 @@
-const getPosts = ({ post }) => post.list;
+const getPosts = ({ post }) => post.posts;
 
 export default getPosts;

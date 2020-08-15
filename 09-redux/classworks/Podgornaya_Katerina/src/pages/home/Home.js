@@ -1,33 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import App from 'App';
-import {
-  Route, useHistory, Switch, useLocation,
-} from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { withRedditApi } from '../../hooks/useRedditApi';
+
 import { fetchPosts } from '../../resources/post/post.action';
 import { fetchSubreddit } from '../../resources/subreddit/subreddit.action';
+import { fetchSearch } from '../../resources/search/search.action';
+
+import getPosts from '../../resources/post/post.selector';
+import getPhrase from '../../resources/phrase/phrase.selector';
+import getSubreddit from '../../resources/subreddit/subreddit.selector';
+import getSearch from '../../resources/search/search.selector';
+
 import num_comments from './post_num_comments.svg';
 import no_subreddit_icon from './no_subreddit_icon.png';
 import cry from './cry.svg';
 import styles from './home_style.module.css';
-import getPosts from '../../resources/post/post.selector';
-import getPhrase from '../../resources/phrase/phrase.selector';
-import getSubreddit from '../../resources/subreddit/subreddit.selector';
 
 function Home(props) {
   const history = useHistory();
   const location = useLocation();
 
-  const [subredditAbout, setSubredditAbout] = useState(null);
-  const [searchData, setSearchData] = useState(null);
   const [isClickedSubreddit, setIsClickedSubreddit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const phrase = useSelector(getPhrase);
   const posts = useSelector(getPosts);
   const subreddit = useSelector(getSubreddit);
+  const search = useSelector(getSearch);
 
   const { fetchReddit } = props;
 
@@ -46,36 +47,29 @@ function Home(props) {
     (async () => {
       setIsLoading(true);
 
-      const [dataAbout, searchData] = await Promise.all([
-        fetchReddit('/r/gaming/about').then((res) => res.json()),
-        fetchReddit(`/subreddits/search?q=${phrase}`).then((res) => res.json()),
-      ]);
-
-      setSubredditAbout(dataAbout);
-      setSearchData(searchData);
-
-      dispatch(fetchPosts({ fetchReddit, subreddit: 'gaming' }));
-      dispatch(fetchSubreddit({ fetchReddit, subreddit: 'gaming' }));
+      dispatch(fetchPosts({ fetchReddit, subreddit: phrase || 'gaming' }));
+      dispatch(fetchSubreddit({ fetchReddit, subreddit: phrase || 'gaming' }));
+      if (phrase) {
+        dispatch(fetchSearch({  fetchReddit, phrase: phrase }));
+      }
 
       setIsLoading(false);
     })();
 
-    setSubredditAbout(null);
-    setSearchData(null);
     setIsClickedSubreddit(false);
   }, [phrase]);
 
-  const onSearchItemClick = async (name) => {
+  const onSearchItemClick = async (choosedSubreddit) => {
     setIsLoading(true);
+    setIsClickedSubreddit(true);
     history.push('/subreddit');
 
     const { fetchReddit } = props;
 
-    const dataAbout = await fetchReddit(`/r/${name}/about`).then((res) => res.json());
+    dispatch(fetchPosts({ fetchReddit, subreddit: choosedSubreddit }));
+    dispatch(fetchSubreddit({ fetchReddit, subreddit: choosedSubreddit }));
 
-    setSubredditAbout(dataAbout);
     setIsClickedSubreddit(false);
-
     setIsLoading(false);
   };
 
@@ -86,7 +80,7 @@ function Home(props) {
   }
 
   if (location.pathname === '/search') {
-    if (searchData.data.dist === 0) {
+    if (search.dist === 0) {
       return (
         <section className={styles.no_results}>
           <img src={cry} />
@@ -105,7 +99,7 @@ function Home(props) {
           </header>
           <h1 className={styles.search_title}>Communities and users</h1>
           <content className={styles.search_content}>
-            {searchData.data.children.map((child) => (
+            {search.children.map((child) => (
               <div key={child.data.id} className={styles.search_item_field} onClick={() => onSearchItemClick(child.data.display_name)}>
                 <div className={styles.search_community_logo}>
                   <img src={child.data.icon_img || no_subreddit_icon || child.data.community_icon} className={styles.search_subreddit_icon} />
@@ -127,10 +121,10 @@ function Home(props) {
     return (
       <section className={styles.section}>
         <header className={styles.header_home}>
-          <img src={subredditAbout.data.icon_img || no_subreddit_icon || subredditAbout.data.community_icon} className={styles.subreddit_icon}></img>
+          <img src={subreddit.icon_img || no_subreddit_icon || subreddit.community_icon} className={styles.subreddit_icon}></img>
           <div className={styles.title_subreddit}>
-            <h1 className={styles.title_subreddit_name}>{subredditAbout.data.title}</h1>
-            <h5 className={styles.title_subreddit_subname}>{subredditAbout.data.display_name_prefixed}</h5>
+            <h1 className={styles.title_subreddit_name}>{subreddit.title}</h1>
+            <h5 className={styles.title_subreddit_subname}>{subreddit.display_name_prefixed}</h5>
           </div>
         </header>
         <content className={styles.subreddit_content}>

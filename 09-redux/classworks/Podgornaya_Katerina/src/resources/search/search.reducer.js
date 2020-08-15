@@ -1,13 +1,15 @@
+import { FETCH_SEARCH } from './search.action';
+
 const initialState = {
-  phrase: '',
+  subreddits: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'phrase:set': {
+    case FETCH_SEARCH: {
       return {
         ...state,
-        phrase: action.payload,
+        subreddits: action.payload.data,
       };
     }
     default: {

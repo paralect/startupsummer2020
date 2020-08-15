@@ -1,3 +1,3 @@
-const getSubreddit = ({ subreddit }) => subreddit.now;
+const getSubreddit = ({ subreddit }) => subreddit.subreddit;
 
 export default getSubreddit;
