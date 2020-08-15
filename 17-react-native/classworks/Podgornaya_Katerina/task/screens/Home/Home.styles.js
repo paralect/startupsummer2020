@@ -1,22 +1,25 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  marvelLogo: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginLeft: 10,
+    marginTop: 10,
   },
   title: {
     fontSize: 36,
     marginBottom: 5,
   },
-  button: {
-    alignSelf: 'stretch',
-    marginVertical: 5,
-    padding: 10,
-
-    borderWidth: StyleSheet.hairlineWidth,
-    borderRadius: 10,
-    borderColor: 'rgba(0, 0, 0, 0.25)',
-  }
+  character: {
+    width: 323,
+    height: 92,
+    backgroundColor: '#2F2F2F',
+    borderRadius: 4, 
+    marginBottom: 15,
+  },
 });

@@ -4,8 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeNavigator from './home.navigator';
 import FavouritesNavigator from './favourites.navigator';
-
-import SettingsScreen from '~/screens/Settings';
+import SettingsNavigator from './settings.navigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,14 +12,14 @@ function RootNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Home"
+        name="My marvel"
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <AntDesign name="home" size={size} color={color} />,
         }}
       />
       <Tab.Screen
-        name="Favourites"
+        name="Favourite"
         component={FavouritesNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <AntDesign name="hearto" size={size} color={color} />,
@@ -28,7 +27,7 @@ function RootNavigator() {
       />
       <Tab.Screen
         name="Settings"
-        component={SettingsScreen}
+        component={SettingsNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <AntDesign name="setting" size={size} color={color} />,
         }}

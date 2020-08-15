@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 function FavouritesNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Favourites" component={FavouritesScreen} />
+      <Stack.Screen name="MarvelLogo" component={FavouritesScreen} />
       <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
   );

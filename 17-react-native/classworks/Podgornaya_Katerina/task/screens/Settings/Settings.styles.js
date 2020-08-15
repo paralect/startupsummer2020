@@ -5,6 +5,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#202020',
   },
   title: {
     fontSize: 36,
