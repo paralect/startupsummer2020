@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFavourites } from '../../resources/marvel.selector';
-import { removeFromFavorites } from '../../resources/marvel.action';
+import { getFavourites } from '../../resources/marvel.selectors';
+import { removeFromFavorites } from '../../resources/marvel.actions';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 
