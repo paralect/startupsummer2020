@@ -51,10 +51,8 @@ function Home(props) {
         dispatch(fetchPosts({ fetchReddit, subreddit: 'gaming' }));
         dispatch(fetchSubreddit({ fetchReddit, subreddit: 'gaming' }));
       } else {
-        dispatch(fetchSearch({  fetchReddit, phrase: phrase }));
-      }
-
-      console.log(search);
+        dispatch(fetchSearch({ fetchReddit, phrase }));
+      };
 
       setIsLoading(false);
     })();
@@ -81,8 +79,6 @@ function Home(props) {
       <p className={styles.loading}>Loading...</p>
     );
   }
-
-  console.log(search);
 
   if (location.pathname === '/search') {
     if (search.dist === 0) {
