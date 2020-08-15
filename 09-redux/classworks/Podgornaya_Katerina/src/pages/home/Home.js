@@ -52,7 +52,7 @@ function Home(props) {
         dispatch(fetchSubreddit({ fetchReddit, subreddit: 'gaming' }));
       } else {
         dispatch(fetchSearch({ fetchReddit, phrase }));
-      };
+      }
 
       setIsLoading(false);
     })();
@@ -64,8 +64,6 @@ function Home(props) {
     setIsLoading(true);
     setIsClickedSubreddit(true);
     history.push('/subreddit');
-
-    const { fetchReddit } = props;
 
     dispatch(fetchPosts({ fetchReddit, subreddit: choosedSubreddit }));
     dispatch(fetchSubreddit({ fetchReddit, subreddit: choosedSubreddit }));
