@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
-import { fetchCharacters } from './resources/comics.action';
+import { fetchCharacters } from './resources/marvel.action';
 
 import AppNavigation from './navigation';
 import store from './resources/store';

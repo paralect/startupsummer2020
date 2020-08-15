@@ -1,22 +1,21 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFavorites, getFetching } from '../../resources/comics.selector';
+import { getFavourites } from '../../resources/marvel.selector';
+import { removeFromFavorites } from '../../resources/marvel.action';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 
 import styles from './Favourite.styles';
-import { removeFromFavorites } from '../../resources/comics.action';
 
 function FavouriteScreen() {
-  const chars = useSelector(getFavorites);
-  const fetching = useSelector(getFetching);
+  const chars = useSelector(getFavourites);
   const dispatch = useDispatch();
 
   const createItem = (data) => {
     return (
       <View style={styles.listItem}>
-        <Image source={{ uri: data.item.thumbnail }} style={styles.poster} />
+        <Image source={{ uri: `${data.item.thumbnail.path}.${data.item.thumbnail.extension}` }} style={styles.poster} />
         <Text style={{ color: '#fff' }}>{data.item.name}</Text>
         <TouchableHighlight onPress={() => dispatch(removeFromFavorites(data.item.id))}>
           <Image
@@ -35,7 +34,7 @@ function FavouriteScreen() {
         <Text style={styles.title}>Favorite characters</Text>
       </View>
       <View>
-        {!fetching && <FlatList data={chars} renderItem={createItem} keyExtractor={(item) => item.id} />}
+        <FlatList data={chars} renderItem={createItem} keyExtractor={(item) => item.id} />
       </View>
     </SafeAreaView>
   );

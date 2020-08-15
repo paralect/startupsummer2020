@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { comics } from './comics.reducer';
+import { marvel } from './marvel.reducer';
 
 const reducers = {
-  comics,
+  marvel,
 };
 
 const combinedReducer = combineReducers({
