@@ -18,7 +18,6 @@ function DetailsScreen() {
   const dispatch = useDispatch();
   const character = useSelector(getCharacter(characterId));
   const img = character.favourite ? fav_filled : fav;
-  console.log(222222,character.comicsDetails);
 
   useEffect(() => {
     dispatch(fetchComics(characterId))
