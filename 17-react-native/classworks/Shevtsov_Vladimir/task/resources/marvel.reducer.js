@@ -2,7 +2,7 @@ import {
   FETCH_CHARACTER_COMICS_SUCCESS,
   FETCH_CHARACTERS_SUCCESS,
   TOGGLE_CHARACTER_FAVOURITE
-} from './marvel.action';
+} from './marvel.actions';
 
 const initState = {
   characters: [],

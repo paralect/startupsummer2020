@@ -4,8 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCharacters } from '../../resources/marvel.selector';
-import { toggleFavourite } from '../../resources/marvel.action';
+import { getCharacters } from '../../resources/marvel.selectors';
+import { toggleFavourite } from '../../resources/marvel.actions';
 
 import styles from './Home.styles';
 

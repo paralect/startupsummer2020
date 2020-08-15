@@ -5,8 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native';
 import { FlatList, TouchableHighlight } from 'react-native-gesture-handler';
 
-import { fetchComics } from '../../resources/marvel.action';
-import { getCharacter } from '../../resources/marvel.selector';
+import { fetchComics } from '../../resources/marvel.actions';
+import { getCharacter } from '../../resources/marvel.selectors';
 
 import fav from '../../assets/fav.png';
 import fav_filled from '../../assets/fav_filled.png';
