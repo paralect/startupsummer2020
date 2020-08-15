@@ -48,10 +48,12 @@ function Home(props) {
       setIsLoading(true);
 
       if (!phrase) {
-        dispatch(fetchPosts({ fetchReddit, subreddit: 'gaming' }));
-        dispatch(fetchSubreddit({ fetchReddit, subreddit: 'gaming' }));
+        await Promise.all([
+          dispatch(fetchPosts({ fetchReddit, subreddit: 'gaming' })),
+          dispatch(fetchSubreddit({ fetchReddit, subreddit: 'gaming' })),
+        ]);
       } else {
-        dispatch(fetchSearch({ fetchReddit, phrase }));
+        await dispatch(fetchSearch({ fetchReddit, phrase }));
       }
 
       setIsLoading(false);
@@ -65,8 +67,10 @@ function Home(props) {
     setIsClickedSubreddit(true);
     history.push('/subreddit');
 
-    dispatch(fetchPosts({ fetchReddit, subreddit: choosedSubreddit }));
-    dispatch(fetchSubreddit({ fetchReddit, subreddit: choosedSubreddit }));
+    await Promise.all([
+      dispatch(fetchPosts({ fetchReddit, subreddit: choosedSubreddit })),
+      dispatch(fetchSubreddit({ fetchReddit, subreddit: choosedSubreddit })),
+    ]);
 
     setIsClickedSubreddit(false);
     setIsLoading(false);
