@@ -7,14 +7,21 @@ export default StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     backgroundColor: '#202020',
-    paddingTop: 21,
+    paddingTop: 2,
   },
   header: {
     flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
   },
   photo: {
     marginRight: 18,
     marginBottom: 10,
+    width: 150,
+    height: 170,
+  },
+  info: {
+    flex: 1,
   },
   name: {
     fontSize: 18,
@@ -59,7 +66,9 @@ export default StyleSheet.create({
     padding: 6,
   },
   comicPoster: {
-    maxWidth: 53,
+    width: 70,
+    height: 115,
+    marginRight: 10,
   },
   comicTitle: {
     fontSize: 14,

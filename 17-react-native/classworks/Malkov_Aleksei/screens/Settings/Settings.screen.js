@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
-import { Text, View, Switch, Button } from 'react-native';
+import { Text, View, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import logo from '../../assets/1024px-MarvelLogo.png';
 import styles from './Settings.styles';
-import { TextInput } from 'react-native-gesture-handler';
 
 function HomeScreen() {
   const [isTrue, setIsTrue] = useState(false);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View>
-        <View style={styles.logo}><img src={logo} /></View>
+        <Image
+          source={require('../../assets/logo.png')}
+          style={styles.logo}
+        />
         <Text style={styles.title}>SETTINGS</Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

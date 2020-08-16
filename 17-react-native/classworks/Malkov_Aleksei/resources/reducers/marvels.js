@@ -10,6 +10,11 @@ export default function marvels(state = { all: [], favourites: [], currMarvelId:
           ...state,
           favourites: [...state.favourites, action.payload.marvel],
         };
+      case 'favourites:delete':
+        return {
+          ...state,
+          favourites: [...state.favourites].filter((m) => m.id !== action.payload.id),
+        };
       case 'currMarvelId:set':
         return {
           ...state,

@@ -17,8 +17,10 @@ export default StyleSheet.create({
   },
   logo: {
     height: 40,
-    flex: 1,
+    width: 105,
     alignItems: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     marginBottom: 20,
   },
 });

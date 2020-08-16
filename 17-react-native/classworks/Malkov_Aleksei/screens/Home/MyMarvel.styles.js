@@ -5,7 +5,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#202020',
-    paddingTop: 21,
+    paddingTop: 2,
   },
   title: {
     minWidth: 325,
@@ -17,8 +17,10 @@ export default StyleSheet.create({
   },
   logo: {
     height: 40,
-    flex: 1,
+    width: 105,
     alignItems: 'center',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     marginBottom: 20,
   },
   char: {
@@ -29,8 +31,9 @@ export default StyleSheet.create({
     backgroundColor: '#2F2F2F',
   },
   photo: {
-    maxWidth: 70,
-    marginRight: 20,
+    marginRight: 18,
+    width: 70,
+    height: 90,
   },
   nickname: {
     fontFamily: 'RobotoCondensed_700Bold',

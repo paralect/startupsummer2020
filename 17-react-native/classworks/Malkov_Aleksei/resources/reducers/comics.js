@@ -3,7 +3,12 @@ export default function comics(state = { list: [] }, action) {
       case 'marvelComics:add':
         return {
           ...state,
-          list: action.payload.marvelComics,
+          list: [
+            {
+              _id: action.payload.marvelComics._id,
+              list: action.payload.marvelComics.comics,
+            }
+          ],
         };
       default:
         return state;
