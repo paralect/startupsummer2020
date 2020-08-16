@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Svg, { Path } from "react-native-svg"
 import { AntDesign } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 

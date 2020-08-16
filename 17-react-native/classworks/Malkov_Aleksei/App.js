@@ -20,7 +20,6 @@ function App() {
   });
 
   if (!fontsLoaded) {
-    // <AppLoading />
     return <AppLoading />;
   } else {
     return (
@@ -29,10 +28,6 @@ function App() {
           <AppNavigation />
         </NavigationContainer>
       </Provider>
-      // <View style={styles.container}>
-      //   <Text>Open up App.js to start working on your app!</Text>
-      //   <StatusBar style="auto" />
-      // </View>
     );
   }
 }

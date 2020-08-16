@@ -1,10 +1,5 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import {
-  useFonts,
-  RobotoCondensed_400Regular,
-  RobotoCondensed_700Bold,
-} from '@expo-google-fonts/roboto-condensed';
 import MyMarvelScreen from '../screens/Home';
 import DetailsScreen from '../screens/Details';
 
