@@ -1,6 +1,6 @@
 const PHRASE = 'PHRASE';
 
-const phraseAction = (phrase) => (dispatch) => {
+const setPhrase = (phrase) => (dispatch) => {
   dispatch({
     type: PHRASE,
     payload: phrase,
@@ -9,5 +9,5 @@ const phraseAction = (phrase) => (dispatch) => {
 
 export {
   PHRASE,
-  phraseAction,
+  setPhrase,
 };

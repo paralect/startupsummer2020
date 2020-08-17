@@ -1,4 +1,4 @@
-import { FETCH_SEARCH } from './search.action';
+import { FETCH_SEARCH } from './search.actions';
 
 const initialState = {
   search: { children: [] },

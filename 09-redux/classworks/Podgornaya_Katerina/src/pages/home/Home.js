@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
 import { useHistory, useLocation } from 'react-router-dom';
+
 import { withRedditApi } from '../../hooks/useRedditApi';
+import * as postActions from '../../resources/post/post.actions';
+import * as subredditActions from '../../resources/subreddit/subreddit.actions';
+import * as searchActions from '../../resources/search/search.actions';
 
-import { fetchPosts } from '../../resources/post/post.action';
-import { fetchSubreddit } from '../../resources/subreddit/subreddit.action';
-import { fetchSearch } from '../../resources/search/search.action';
+import * as phraseSelectors from '../../resources/phrase/phrase.selectors';
+import * as searchSelectors from '../../resources/search/search.selectors';
 
-import getPosts from '../../resources/post/post.selector';
-import getPhrase from '../../resources/phrase/phrase.selector';
-import getSubreddit from '../../resources/subreddit/subreddit.selector';
-import getSearch from '../../resources/search/search.selector';
-
-import num_comments from './post_num_comments.svg';
-import no_subreddit_icon from './no_subreddit_icon.png';
-import cry from './cry.svg';
-import styles from './home_style.module.css';
+import LoadingPage from 'pages/loading';
+import NoSearchPage from 'pages/no-search';
+import SearchPage from 'pages/search';
+import SubredditPage from 'pages/subreddit';
 
 function Home(props) {
   const history = useHistory();
@@ -25,126 +22,60 @@ function Home(props) {
   const [isClickedSubreddit, setIsClickedSubreddit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const phrase = useSelector(getPhrase);
-  const posts = useSelector(getPosts);
-  const subreddit = useSelector(getSubreddit);
-  const search = useSelector(getSearch);
+  const phrase = useSelector(phraseSelectors.getPhrase);
+  const search = useSelector(searchSelectors.getSearch);
 
   const { fetchReddit } = props;
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const loadMainContent = async () => {
     setIsLoading(true);
-    if (phrase && !isClickedSubreddit) {
-      history.push('/search');
-    } else if (phrase && isClickedSubreddit) {
-      history.push('/subreddit');
-    } else {
-      history.push('/subreddit');
-    }
-
-    (async () => {
-      setIsLoading(true);
-
       if (!phrase) {
         await Promise.all([
-          dispatch(fetchPosts({ fetchReddit, subreddit: 'gaming' })),
-          dispatch(fetchSubreddit({ fetchReddit, subreddit: 'gaming' })),
+          dispatch(postActions.fetchPosts({ fetchReddit, subreddit: 'gaming' })),
+          dispatch(subredditActions.fetchSubreddit({ fetchReddit, subreddit: 'gaming' })),
         ]);
       } else {
-        await dispatch(fetchSearch({ fetchReddit, phrase }));
+        await dispatch(searchActions.fetchSearch({ fetchReddit, phrase }));
       }
+    setIsLoading(false);
+  };
 
-      setIsLoading(false);
-    })();
-
+  useEffect(() => {
+    if (phrase && !isClickedSubreddit) {
+      history.push('/search');
+    }  else {
+      history.push('/subreddit');
+    }
+    loadMainContent();
     setIsClickedSubreddit(false);
   }, [phrase]);
 
-  const onSearchItemClick = async (choosedSubreddit) => {
+  const onSearchItemClick = async (chosenSubreddit) => {
     setIsLoading(true);
     setIsClickedSubreddit(true);
     history.push('/subreddit');
 
     await Promise.all([
-      dispatch(fetchPosts({ fetchReddit, subreddit: choosedSubreddit })),
-      dispatch(fetchSubreddit({ fetchReddit, subreddit: choosedSubreddit })),
+      dispatch(postActions.fetchPosts({ fetchReddit, subreddit: chosenSubreddit })),
+      dispatch(subredditActions.fetchSubreddit({ fetchReddit, subreddit: chosenSubreddit })),
     ]);
 
     setIsClickedSubreddit(false);
     setIsLoading(false);
   };
 
-  if (isLoading) {
-    return (
-      <p className={styles.loading}>Loading...</p>
-    );
-  }
+  if (isLoading) return (<LoadingPage />);
 
-  if (location.pathname === '/search') {
-    if (search.dist === 0) {
-      return (
-        <section className={styles.no_results}>
-          <img src={cry} />
-          <div>
-            Sorry, there were no community results for "<b>{phrase}</b>"
-              </div>
-        </section>
-      );
-    }
-
-    if (location.pathname === '/search') {
-      return (
-        <section className={styles.section}>
-          <header className={styles.header_search}>
-            Search results for "<b>{phrase}</b>"
-          </header>
-          <h1 className={styles.search_title}>Communities and users</h1>
-          <content className={styles.search_content}>
-            {search.children.map((child) => (
-              <div key={child.data.id} className={styles.search_item_field} onClick={() => onSearchItemClick(child.data.display_name)}>
-                <div className={styles.search_community_logo}>
-                  <img src={child.data.icon_img || no_subreddit_icon || child.data.community_icon} className={styles.search_subreddit_icon} />
-                  <div className={styles.search_title_subreddit}>
-                    <h1 className={styles.search_title_subreddit_name}>{child.data.display_name_prefixed}</h1>
-                    <h5 className={styles.search_title_subreddit_subscribers}>{child.data.subscribers} Members</h5>
-                  </div>
-                </div>
-                <div className={styles.search_community_description}>{child.data.public_description}</div>
-              </div>
-            ))}
-          </content>
-        </section>
-      );
-    }
-  }
-
-  if (location.pathname === '/subreddit') {
-    return (
-      <section className={styles.section}>
-        <header className={styles.header_home}>
-          <img src={subreddit.icon_img || no_subreddit_icon || subreddit.community_icon} className={styles.subreddit_icon}></img>
-          <div className={styles.title_subreddit}>
-            <h1 className={styles.title_subreddit_name}>{subreddit.title}</h1>
-            <h5 className={styles.title_subreddit_subname}>{subreddit.display_name_prefixed}</h5>
-          </div>
-        </header>
-        <content className={styles.subreddit_content}>
-          {posts.map((post) => (
-            <div key={post.data.id} className={styles.post_field}>
-              <div className={styles.post_author}>Posted by {post.data.author} {moment.unix(post.data.created).fromNow()}</div>
-              <h2 className={styles.post_title}>{post.data.title}</h2>
-              <p className={styles.post_selftext}>{post.data.selftext || post.data.url}</p>
-              <div className={styles.post_num_comments}>
-                <img src={num_comments}></img>
-                {post.data.num_comments} comments
-            </div>
-            </div>
-          ))}
-        </content>
-      </section>
-    );
+  switch (location.pathname) {
+    case '/subreddit': 
+      return (<SubredditPage />);
+    case '/search':
+      if (search.dist === 0) return (<NoSearchPage />);
+      return (<SearchPage onClick={onSearchItemClick}/>);
+    default: 
+      break;
   }
 }
 
