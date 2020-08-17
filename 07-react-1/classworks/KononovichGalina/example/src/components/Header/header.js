@@ -8,12 +8,9 @@ import './header.css';
 // }  
 
 export default class Header extends React.Component {
-  onSearchChange = (e) => {
-    this.props.onSearchChange(e.target.value);
-  };
-
 
   render() {
+    const {setInputValue} = this.props;
     return (
       <div className="header">
         <div className="headerContainer">
@@ -23,8 +20,8 @@ export default class Header extends React.Component {
               <input 
                 placeholder="Search" 
                 className="inputSearch" 
-                value={this.props.inputValue} 
-                onChange={this.onSearchChange}
+                // value={inputValue} 
+                onChange={(e) => setInputValue(e.target.value)}
               />
             
             </div>

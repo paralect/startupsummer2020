@@ -1,78 +1,65 @@
 import React from 'react';
 import { withRedditApi } from 'hooks/useRedditApi';
-// import InputSearch from 'components/inputSearch';
 import Header from 'components/Header';
-import CommunityContainer from 'components/CommunityContainer';
+import Community from 'components/Community';
 import List from 'components/List';
 import Item from 'components/Item';
-import ResultSearch from 'components/resultSearch';
-
 
 
 class Home extends React.Component {
   state = {
-    reactSubreddit: null,
+    renderData: null,
     title: null,
-    subreddit: null,
     inputValue: '',
-    showPosts: true
-
+    name_prefixed: null,
+    community_icon: null,
+    fetchReddit: null,
   }
 
-  getRedditData = async (subreddit = 'react') => {
+  getRedditData = async (subreddit = '/r/react') => {
+    console.log(subreddit);
     const { fetchReddit } = this.props;
-    const data = await fetchReddit(`/r/${subreddit}/hot`).then(res => res.json());
-    const titleData = await fetchReddit(`/r/${subreddit}/about`).then(res => res.json());
-    const subredditData = await fetchReddit(`/subreddits/search?q=${subreddit}`).then(res => res.json());
-    this.setState({ reactSubreddit: data , title: titleData, subreddit:subredditData});
+    const dataPosts = await fetchReddit(`${subreddit}/hot?limit=10`).then(res => res.json());
+    const fetchTitle = await fetchReddit(`${subreddit}/about`).then(res => res.json());
+    this.setState({ renderData: dataPosts.data.children, title: fetchTitle.data.title, name_prefixed:fetchTitle.data.display_name_prefixed, community_icon: fetchTitle.data.icon_img, fetchReddit: fetchReddit});
   }
 
-  subredditClickHandler = async () => {
-    await this.getRedditData();
-    this.setState({showPosts: true})
+  setInputValue = (inputValue) => {
+    this.setState({ inputValue: inputValue });
   }
 
   componentDidMount() {
     this.getRedditData();
   }
 
-  onSearchChange = (inputValue) => {
-    this.setState({
-      inputValue,
-      showPosts: !inputValue.length
-    });
-    this.getRedditData(inputValue);
+  componentDidUpdate(_, prevState) {
+    if (prevState.inputValue !== this.state.inputValue) {
+      this.getDataSubreddits(this.state.inputValue);
+    }
+  }
+
+  getDataSubreddits = async (subreddit) => {
+    const { fetchReddit } = this.props;
+    const dataSubreddits = await fetchReddit(`/subreddits/search?q=${subreddit}/limit=10`).then(res => res.json());
+    this.setState({ renderData: dataSubreddits.data.children });
   }
 
   render() {
-    const {reactSubreddit, title, subreddit, inputValue} = this.state;
-    if (!reactSubreddit || !title || !subreddit) {
+    const {renderData, inputValue, title, name_prefixed, community_icon, fetchReddit } = this.state;
+    if (!renderData) {
       return (
         <p>Loading...</p>
       );
     }
-
-    const dataArr = reactSubreddit.data && reactSubreddit.data.children;
-    const titleArr = title.data;
-
-    return (
-      <section>
-       {/* <InputSearch/> */}
-       <Header onSearchChange={this.onSearchChange}/>
-       <CommunityContainer data={dataArr} titleData = {titleArr}/>
-       {!reactSubreddit.data 
-        ? <p>No</p> 
-        : (<List 
-            data={dataArr}
-            searchEl={subreddit.data.children} 
-            inputValue={inputValue} 
-            clickHandler={this.subredditClickHandler}
-          />)}
-       {/* <ResultSearch subredditData={subredditArr}/> */}
-       
-       
-      </section>
-    );
+    else {
+      return (
+        <section>
+          <Header setInputValue={this.setInputValue} />
+          <Community inputValue={inputValue} title={title} name_prefixed={name_prefixed} community_icon={community_icon}/>
+          <List renderData={renderData} inputValue={inputValue} getRedditData={this.getRedditData} fetchReddit={fetchReddit}/>
+        </section>
+      );
+    }
   }
 }
 

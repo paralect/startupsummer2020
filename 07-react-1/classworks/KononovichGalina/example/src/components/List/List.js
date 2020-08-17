@@ -1,34 +1,51 @@
 import React from 'react';
 import './list.css';
 import Item from 'components/Item';
+import Subreddits from 'components/Subreddits';
+import Comments from 'components/Comments';
 import iconError from './error.svg';
 
-const List = (props) => {
-  if(!props.searchEl.length) {
-    return (
-      <div className="errorIcon">
-        <img src={iconError}/>
-      </div>    
-    )
+export default class List extends React.Component {
+
+  state = {
+    dataComments: null,
   }
-  if(props.inputValue.length) {
+
+  setdataComments = (dataCommentsArr) => {
+    this.setState({ dataComments: dataCommentsArr});
+  }
+
+  render() {
+    const {renderData, inputValue, getRedditData, fetchReddit} = this.props;
+
+    if(this.state.dataComments) {
+      return (
+        <div className="list">
+          <button onClick={getRedditData()}>Go Home</button>
+          {this.state.dataComments.map(item => (
+            <Comments item={item.data}/>
+          ))
+          }
+        </div>
+      )
+    }
+  
+    if(renderData.length === 0) {
+      return (
+        <>
+        <img src={iconError}/>
+        <p>Sorry, there were no community results for {inputValue}</p>
+        </>
+      )
+    }
+
     return (
-      <div className="List">
-        {props.searchEl.map(item => (
-            <Item inputValue={props.inputValue} clickHandler={props.clickHandler} item={item}/>
-          )
-        )}
-      </div>
-    )
-  } else {
-    return (
-      <div className="List">
-        {props.data.map(item => (
-            <Item item={item}/>
-          )
-        )}
+      <div className="list">
+        {renderData.map(item => (
+          item.data.display_name_prefixed? <Subreddits item={item.data} /> : <Item item={item.data}  fetchReddit={fetchReddit} setdataComments={this.setdataComments}/>
+        ))
+        }
       </div>
     )
   }
 }
-export default List;
