@@ -10,11 +10,10 @@ import {
 import { useRoute } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
 
-import fetchMarvel from '../../fetchMarvel';
 import { Heart } from '../../components/Heart';
 
-import * as characterActions from '../../resources/characters/characters.actions';
-import * as characterSelectors from '../../resources/characters/characters.selectors';
+import * as comicsActions from '../../resources/comics/comics.actions';
+import * as comicsSelectors from '../../resources/comics/comics.selectors';
 import styles from './Details.styles';
 
 function DetailsScreen() {
@@ -22,10 +21,10 @@ function DetailsScreen() {
   const { id, name, img, description } = params
   const dispatch = useDispatch();
 
-  const comics = useSelector(characterSelectors.getComics);
+  const comics = useSelector(comicsSelectors.getComics);
 
   const fetchData = useCallback(async () => {
-    dispatch(characterActions.fetchComics(fetchMarvel, `/characters/${id}/comics`));
+    dispatch(comicsActions.fetchComics(`/characters/${id}/comics`));
   }, []);
 
   useEffect(() => {

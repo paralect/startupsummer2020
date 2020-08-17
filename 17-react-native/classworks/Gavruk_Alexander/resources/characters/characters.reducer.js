@@ -1,6 +1,5 @@
 const initialState = {
   characters: [],
-  comics: [],
 };
 
 export default (state = initialState, action) => {
@@ -18,8 +17,6 @@ export default (state = initialState, action) => {
       };
 
     case 'characters:changeIsFavourite':
-      console.log(action.payload.id);
-      console.log(state.characters);
       return {
         ...state,
         characters: state.characters.map((character) => {
