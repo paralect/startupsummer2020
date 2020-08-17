@@ -1,18 +1,20 @@
 import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeScreen from '~/screens/Home';
+import MyMarvelScreen from '~/screens/MyMarvel';
 import DetailsScreen from '~/screens/Details';
 
 const Stack = createStackNavigator();
 
-function HomeNavigator() {
+function MyMarvelNavigator () {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="MarvelLogo" component={HomeScreen} />
+    <Stack.Navigator
+      screenOptions={{headerShown: false }}
+    >
+      <Stack.Screen name="MarvelLogo" component={MyMarvelScreen} />
       <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>
   );
 }
 
-export default HomeNavigator;
+export default MyMarvelNavigator;

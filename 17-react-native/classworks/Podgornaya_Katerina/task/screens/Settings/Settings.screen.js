@@ -4,7 +4,7 @@ import { Text, View, Switch, Button } from 'react-native';
 import styles from './Settings.styles';
 import { TextInput } from 'react-native-gesture-handler';
 
-function HomeScreen() {
+function MyMarvelScreen () {
   const [isTrue, setIsTrue] = useState(false);
 
   return (
@@ -22,4 +22,4 @@ function HomeScreen() {
   );
 }
 
-export default HomeScreen;
+export default MyMarvelScreen;

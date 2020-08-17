@@ -6,7 +6,7 @@ import styles from './Favourites.styles';
 
 const someItems = ['Startup Summer', 'Memes'];
 
-function HomeScreen() {
+function MyMarvelScreen () {
   const navigation = useNavigation();
 
   return (
@@ -28,4 +28,4 @@ function HomeScreen() {
   );
 }
 
-export default HomeScreen;
+export default MyMarvelScreen;

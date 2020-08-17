@@ -8,7 +8,9 @@ const Stack = createStackNavigator();
 
 function FavouritesNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{headerShown: false }}
+    >
       <Stack.Screen name="MarvelLogo" component={FavouritesScreen} />
       <Stack.Screen name="Details" component={DetailsScreen} />
     </Stack.Navigator>

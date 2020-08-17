@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import post from './post/post.reducer';
+import character from './character/character.reducer';
 
 const reducers = {
-  post,
+  character,
 };
 
 export default combineReducers(reducers);
