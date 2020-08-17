@@ -29,7 +29,6 @@ function HomeScreen() {
     dispatch(marvelActions.getCharacters())
   }, []);
 
-
   return (
     <SafeAreaView style={styles.container}>
       {!isFetching &&

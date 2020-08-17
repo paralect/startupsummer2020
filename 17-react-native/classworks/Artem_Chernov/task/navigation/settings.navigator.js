@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { FontAwesome, Feather } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import HomeNavigator from './home.navigator';
 import { Settings } from '../screens/Settings/Settings.screen';
 
 const Tab = createBottomTabNavigator();

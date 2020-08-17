@@ -2,7 +2,7 @@ import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigation from './navigation/root.navigator';
-import { View, Image, SafeAreaView, StatusBar } from 'react-native';
+import { StatusBar } from 'react-native';
 import store from './resourses/store'
 import { Provider } from "react-redux";
 

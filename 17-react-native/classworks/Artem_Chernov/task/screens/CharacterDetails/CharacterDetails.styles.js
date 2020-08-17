@@ -1,12 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { block } from 'react-native-reanimated';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#202020',
     flexGrow: 1,
-
   },
   header: {
     flex: 1,

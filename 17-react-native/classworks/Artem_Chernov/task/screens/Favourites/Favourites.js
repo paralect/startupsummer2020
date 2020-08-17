@@ -6,8 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import * as marvelSelectors from '../../resourses/marvel/marvel.selectors';
 
-
-function Favourites({ item }) {
+function Favourites(props) {
   const navigation = useNavigation();
   const favourites = useSelector(marvelSelectors.getFavourites);
 

@@ -3,13 +3,10 @@ import { FontAwesome, Feather } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeNavigator from './home.navigator';
-import Image from 'react-native';
+
 import { SettingsNavigator } from './settings.navigator';
 import Settings from '../screens/Settings/Settings.screen';
 import FavouritesNavigator from './favourites.navigator';
-// import FavouritesNavigator from './favourites.navigator';
-//
-// import SettingsScreen from '~/screens/Settings';
 
 const Tab = createBottomTabNavigator();
 
