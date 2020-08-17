@@ -10,7 +10,6 @@ import { Text,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import fetchMarvel from '../../fetchMarvel';
 import * as characterActions from '../../resources/characters/characters.actions';
 import * as characterSelectors from '../../resources/characters/characters.selectors';
 import styles from './Home.styles';
@@ -23,7 +22,7 @@ function HomeScreen() {
   const characters = useSelector(characterSelectors.getCharacters);
 
   const fetchData = useCallback(async () => {
-    dispatch(characterActions.fetchData(fetchMarvel, '/characters'));
+    dispatch(characterActions.fetchData('/characters'));
   }, []);
 
   useEffect(() => {

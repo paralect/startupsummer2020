@@ -15,8 +15,7 @@ import CharacterItem from '../../components/CharacterItem';
 function HomeScreen() {
   const navigation = useNavigation();
 
-  const characters = useSelector(characterSelectors.getCharacters);
-  const favouriteCharacters = characters.filter((character) => character.isFavourite);
+  const favouriteCharacters = useSelector(characterSelectors.getFavouriteCharacters);
 
   const renderCharacter = ({ item }) => (
     <TouchableOpacity
