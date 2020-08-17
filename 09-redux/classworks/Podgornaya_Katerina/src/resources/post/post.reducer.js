@@ -1,4 +1,4 @@
-import { FETCH_POSTS } from './post.action';
+import { FETCH_POSTS } from './post.actions';
 
 const initialState = {
   posts: [],

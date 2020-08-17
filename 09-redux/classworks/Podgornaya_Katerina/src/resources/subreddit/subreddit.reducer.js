@@ -1,4 +1,4 @@
-import { FETCH_SUBREDDIT } from './subreddit.action';
+import { FETCH_SUBREDDIT } from './subreddit.actions';
 
 const initialState = {
   subreddit: {},

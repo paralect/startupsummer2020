@@ -1,4 +1,4 @@
-import { PHRASE } from './phrase.action';
+import { PHRASE } from './phrase.actions';
 
 const initialState = {
   phrase: '',

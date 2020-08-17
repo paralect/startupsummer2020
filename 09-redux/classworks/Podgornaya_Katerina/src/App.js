@@ -4,14 +4,14 @@ import Pages from './pages';
 import logo from './images/reddit_logo.svg';
 import search from './images/search_icon.svg';
 import styles from './index.module.css';
-import { phraseAction } from './resources/phrase/phrase.action';
+import * as phraseActions from './resources/phrase/phrase.actions';
 
 function App() {
   const dispatch = useDispatch();
 
   const onClickEnter = (event) => {
     if (event.keyCode === 13) {
-      dispatch(phraseAction(event.target.value));
+      dispatch(phraseActions.setPhrase(event.target.value));
     }
   };
 
