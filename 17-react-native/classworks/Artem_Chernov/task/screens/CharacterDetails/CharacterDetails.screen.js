@@ -1,24 +1,23 @@
 import React from 'react';
-import { Image, Text, View } from 'react-native';
+import { ActivityIndicator, Image, Text, View } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import styles from './CharacterDetails.styles';
 import { ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as marvelSelectors from '../../resourses/marvel/marvel.selectors';
+import * as marvelActions from '../../resourses/marvel/marvel.actions';
 
 function CharacterDetailsScreen() {
   const { params } = useRoute();
   const { item } = params;
-  // const { state, dispatch } = React.useContext(ContextApp);
 
   const dispatch = useDispatch();
-  const stories = useSelector(marvelSelectors.getStories(item.id))
-  const isFetching = useSelector(marvelSelectors.getStatus)
-
+  const stories = useSelector(marvelSelectors.getStories);
+  const isFetching = useSelector(marvelSelectors.getStatus);
 
   React.useEffect(() => {
-    // getStories(dispatch, item.id).then(res => {});
+    dispatch(marvelActions.getStories(item.id));
   }, []);
 
   return (
@@ -46,17 +45,21 @@ function CharacterDetailsScreen() {
           <Text style={styles.comics__header}>
             Comics
           </Text>
-          {state.stories?.map((item, i) => (
-            <View key={i+'key'} style={styles.story}>
+          {isFetching &&
+          <ActivityIndicator justifyContent={'center'} alignSelf={'center'} size="large" color="#E62429"/>}
+          {!isFetching &&
+          stories.map((story, i) => (
+            <View key={i + 'key'} style={styles.story}>
               <Image
                 style={styles.story__img}
                 source={{
-                  uri: item.thumbnail.path + '.' + item.thumbnail.extension,
+                  uri: story.thumbnail.path + '.' + story.thumbnail.extension,
                 }}
               />
-              <Text style={styles.story__description}>{item.title}</Text>
+              <Text style={styles.story__description}>{story.title}</Text>
             </View>
-          ))}
+          ))
+          }
         </View>
       </View>
     </ScrollView>

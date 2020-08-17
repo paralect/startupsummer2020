@@ -6,6 +6,7 @@ import HomeNavigator from './home.navigator';
 import Image from 'react-native';
 import { SettingsNavigator } from './settings.navigator';
 import Settings from '../screens/Settings/Settings.screen';
+import FavouritesNavigator from './favourites.navigator';
 // import FavouritesNavigator from './favourites.navigator';
 //
 // import SettingsScreen from '~/screens/Settings';
@@ -37,7 +38,7 @@ function RootNavigator() {
       />
       <Tab.Screen
         name="Favourite"
-        component={HomeNavigator}
+        component={FavouritesNavigator}
         options={{
           tabBarIcon: ({ color, size }) => <FontAwesome name="heart-o" size={size} color={color} />,
         }}

@@ -17,7 +17,6 @@ function LogoTitle() {
   );
 }
 
-
 function HomeNavigator() {
   return (
     <Stack.Navigator>
