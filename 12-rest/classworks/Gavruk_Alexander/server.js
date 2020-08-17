@@ -28,9 +28,9 @@ const generateArticle = async (prompt) => {
       timeout: 10000,
     });
     return res.data.replies.join('');
-  } catch(e) {
-    console.log(e)
-  };
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const generateInterview = async (prompt) => {
@@ -47,8 +47,8 @@ const generateInterview = async (prompt) => {
       timeout: 10000,
     });
     return res.data.replies.join('');
-  } catch(e) {
-    console.log(e)
+  } catch (e) {
+    console.log(e);
   };
 };
 
@@ -66,9 +66,9 @@ const generateTagline = async (prompt) => {
       timeout: 10000,
     });
     return res.data.replies[0];
-  } catch(e) {
-    console.log(e)
-  };
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const getResourcesDataFromDB = () => JSON.parse(fs.readFileSync('./db/resources.json', 'utf8'));
@@ -86,20 +86,21 @@ const putUserToDB = (user) => {
   dataFromDB.users = [...userLogins];
   fs.writeFile('./db/resources.json', JSON.stringify(dataFromDB), (err) => {
     if (err) {
-        throw err;
+      throw err;
     }
   });
-}
+  return user;
+};
 
 const putResourceToDB = (data) => {
   const dataFromDB = getResourcesDataFromDB();
   dataFromDB.articles.push(data);
   fs.writeFile('./db/resources.json', JSON.stringify(dataFromDB), (err) => {
     if (err) {
-        throw err;
+      throw err;
     }
   });
-}
+};
 
 const publicRouter = new Router();
 const privateRouter = new Router();
@@ -140,9 +141,9 @@ publicRouter.post('/signup', async (ctx) => {
   };
   fs.writeFile('./db/user.json', JSON.stringify(user), (err) => {
     if (err) {
-        throw err;
+      throw err;
     }
-    console.log("JSON data is saved.");
+    console.log('JSON data is saved');
   });
 });
 
@@ -165,8 +166,7 @@ app.use(privateRouter.routes());
 
 privateRouter
   .post('/user', async (ctx) => {
-    putUserToDB(ctx.request.body);
-    ctx.body = JSON.parse(fs.readFileSync('./db/resources.json', 'utf8')).users;
+    ctx.body = putUserToDB(ctx.request.body);
   })
   .post('/article', async (ctx) => {
     const textPrompt = ctx.request.body.prompt;
