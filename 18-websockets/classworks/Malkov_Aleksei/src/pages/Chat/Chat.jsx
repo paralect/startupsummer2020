@@ -14,6 +14,7 @@ function Chat() {
   const [listOfMessages, setListOfMessages] = useState([]);
   const [username, setUsername] = useState(defaultName);
   const [typing, setTyping] = useState([]);
+  const [timer, setTimer] = useState(null);
   const name = useRef(null);
 
   function changeUserName() {
@@ -45,10 +46,15 @@ function Chat() {
   useEffect(() => {
     socket.on('typing', (data) => {
       //
+      if (timer) {
+        clearTimeout(timer);
+        setTimer(null);
+      }
       if (!typing.includes(data.username)) {
-        setTimeout(() => {
+        const currentTimer = setTimeout(() => {
           setTyping([...typing.filter((typer) => typer !== data.username)]);
         }, 2000)
+        setTimer(currentTimer);
         setTyping([...typing, data.username]);
       }
     });
