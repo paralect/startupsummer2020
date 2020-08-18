@@ -10,18 +10,17 @@ function Chat() {
   const [username, setUsername] = useState('Anonymous');
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const [isTypingName, setIsTypingName] = useState('');
+  const [typingNames, setTypingNames] = useState([]);
 
   let name = 'Anonymous';
 
-  if (inputMessage) {
-    ioClient.emit('typing-message', username);
-  } else {
-    ioClient.emit('no-typing');
-  }
+  if (inputMessage) { 
+    ioClient.emit('typing-message', username); 
+    setTimeout(() => ioClient.emit('no-typing'), 3000);
+  } 
 
   const sendMessage = () => {
+    ioClient.emit('no-typing');
     const msg = {
       message: inputMessage,
       username
@@ -37,11 +36,10 @@ function Chat() {
     }
   );
     ioClient.on('get-typing-username', (username) => {
-      setIsTyping(true);
-      setIsTypingName(username);
+      setTypingNames(username);
     });
     ioClient.on('get-no-typing', () => {
-      setIsTyping(false);
+      setTypingNames('');
     });
   }, []);
 
@@ -63,7 +61,7 @@ function Chat() {
           <button 
             id="send_username" 
             type="button"
-            onClick={() => setUsername(name)}
+            onClick={() => { name ? setUsername(name) : setUsername('Anonymous')}}
            >
             Change username
           </button>
@@ -78,9 +76,9 @@ function Chat() {
         }
         <section id="feedback">
         {
-          isTyping && (
+          typingNames.length && (
             <div className='isTyping'>
-              {isTypingName} is typing a message...
+              {typingNames} is typing a message...
             </div>
           )
         }
