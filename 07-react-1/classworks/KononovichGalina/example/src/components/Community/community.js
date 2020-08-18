@@ -4,7 +4,7 @@ import LogoReact from './logoReact.svg';
 
 class Community extends React.Component {
     render() {
-      const {title, name_prefixed, community_icon, inputValue, renderDataOnList} = this.props;
+      const {title, name_prefixed, community_icon, inputValue} = this.props;
 
       if(inputValue != '') {
         return (

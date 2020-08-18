@@ -3,10 +3,6 @@ import logo from './header.svg';
 import iconSearch from './iconSearch.svg';
 import './header.css';
 
-// const showClick = (event) => {
-//   console.log(event.target.value);
-// }  
-
 export default class Header extends React.Component {
 
   render() {
@@ -20,13 +16,12 @@ export default class Header extends React.Component {
               <input 
                 placeholder="Search" 
                 className="inputSearch" 
-                // value={inputValue} 
                 onChange={(e) => setInputValue(e.target.value)}
               />
             
             </div>
         </div>
-    
+
         <div className="headerRow"></div>
       </div>
     )

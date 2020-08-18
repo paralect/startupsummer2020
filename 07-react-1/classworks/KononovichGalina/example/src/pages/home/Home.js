@@ -5,7 +5,6 @@ import Community from 'components/Community';
 import List from 'components/List';
 import Item from 'components/Item';
 
-
 class Home extends React.Component {
   state = {
     renderData: null,
@@ -25,6 +24,9 @@ class Home extends React.Component {
   }
 
   setInputValue = (inputValue) => {
+    if(inputValue.length === 0) {
+      this.getRedditData();
+    }
     this.setState({ inputValue: inputValue });
   }
 
@@ -46,6 +48,7 @@ class Home extends React.Component {
 
   render() {
     const {renderData, inputValue, title, name_prefixed, community_icon, fetchReddit } = this.state;
+
     if (!renderData) {
       return (
         <p>Loading...</p>
@@ -55,7 +58,7 @@ class Home extends React.Component {
       return (
         <section>
           <Header setInputValue={this.setInputValue} />
-          <Community inputValue={inputValue} title={title} name_prefixed={name_prefixed} community_icon={community_icon}/>
+          <Community inputValue={inputValue} title={title} name_prefixed={name_prefixed} community_icon={community_icon} />
           <List renderData={renderData} inputValue={inputValue} getRedditData={this.getRedditData} fetchReddit={fetchReddit}/>
         </section>
       );
