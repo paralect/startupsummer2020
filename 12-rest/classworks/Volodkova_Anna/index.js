@@ -32,18 +32,17 @@ publicRouter
   .post('/signIn', (ctx) => {
     const logIn = ctx.request.body.logIn;
     const password = ctx.request.body.password;
-    const passwordHash = myCripto(password);
+    const passwordHash = getHash(password);
 
     const userObj = {
       logIn: logIn,
       password: passwordHash,
     }
     const user = users.find((u) => {
-      return userObj.logIn === u.logIn;
+      return userObj.logIn === u.logIn && user.password === passwordHash ;
     });
 
-    const isLogIn = user.password === passwordHash;
-    if (isLogIn) {
+    if (user) {
       const token = jsonwebtoken.sign({logIn: logIn}, SECRETKEY);
       ctx.status = 200;
       ctx.body = JSON.stringify({token});
@@ -57,14 +56,10 @@ publicRouter
   })
   .get('/taglines', (ctx) => {
     ctx.body = JSON.parse(fs.readFileSync('./taglines.json'));
-  })
-
-;
+  });
 
 privateRouter
-  .post('/tagline', (ctx) => {
-
-    (async () => {
+  .post('/tagline', async (ctx) => {
       const body = {
         prompt: ctx.request.body.join(' '),
         length: 30,
@@ -87,9 +82,7 @@ privateRouter
       fs.writeFileSync('./taglines.json', JSON.stringify(taglines, null, 2));
 
       ctx.body = JSON.stringify(tagline);
-    })();
-  })
-;
+  });
 
 app.use(bodyParser());
 
@@ -104,7 +97,6 @@ app
   .use(privateRouter.allowedMethods());
 
 app.listen(3000);
-
 
 function getHash(password, salt='salt', iterations = 10000, keylen=64, digest='sha512') {
   return crypto.pbkdf2Sync(password, salt, iterations, keylen, digest).toString('hex');
