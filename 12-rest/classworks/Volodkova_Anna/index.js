@@ -4,7 +4,7 @@ const Router = require('koa-router');
 const crypto = require('crypto');
 const jsonwebtoken = require('jsonwebtoken');
 const jwt = require('koa-jwt');
-const  fs = require('fs');
+const fs = require('fs');
 const fetch = require('node-fetch');
 
 const users = JSON.parse(fs.readFileSync('./users.json'));
@@ -17,10 +17,9 @@ const privateRouter = new Router();
 
 publicRouter
   .post('/signUp', async (ctx) => {
-    console.log('signUp body', ctx.request.body);
     const logIn = ctx.request.body.logIn;
     const password = ctx.request.body.password;
-    const passwordHash = myCripto(password);
+    const passwordHash = getHash(password);
     const userObj = {
       logIn: logIn,
       password: passwordHash,
@@ -31,7 +30,6 @@ publicRouter
     ctx.body = JSON.stringify({});
   })
   .post('/signIn', (ctx) => {
-    console.log('signIn body', ctx.request.body);
     const logIn = ctx.request.body.logIn;
     const password = ctx.request.body.password;
     const passwordHash = myCripto(password);
@@ -108,7 +106,6 @@ app
 app.listen(3000);
 
 
-function myCripto(password, salt='salt', iterations = 10000, keylen=64, digest='sha512') {
+function getHash(password, salt='salt', iterations = 10000, keylen=64, digest='sha512') {
   return crypto.pbkdf2Sync(password, salt, iterations, keylen, digest).toString('hex');
-
 }
