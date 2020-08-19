@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Form</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <h1>Авторизуйтесь</h1>
+    <form class="form" action="/signin" method="POST">
+      <input class="margin" type="text" placeholder="Имя" name="firstname" />
+      <input class="margin" type="text" placeholder="Фамилия" name="lastname" />
+      <textarea
+        class="margin"
+        name="description"
+        placeholder="Описание"
+      ></textarea>
+      <select class="margin" size="1" name="select">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+      </select>
+      <input class="margin" type="submit" value="Отправить" />
+    </form>
+  </body>
+</html>

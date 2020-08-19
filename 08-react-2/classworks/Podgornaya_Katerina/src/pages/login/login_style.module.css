@@ -1,0 +1,9 @@
+.login {
+    display: flex;
+    margin: 2vh;
+    text-decoration: none;
+    color: #FF8254;
+    width: max-content;
+    padding: 15px;
+    background-color: #EFEFEF;
+}

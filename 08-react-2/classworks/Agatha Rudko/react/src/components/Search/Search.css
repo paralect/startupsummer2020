@@ -1,0 +1,18 @@
+.search{
+  border: none;
+  background: none;
+  width: 90%;
+  outline: none;
+  color: #7C787E;
+}
+
+.search-container{
+  width: 600px;
+  height: 40px;
+  background: #EFEFEF;
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}

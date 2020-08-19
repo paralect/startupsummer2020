@@ -1,0 +1,88 @@
+.main-block {
+  overflow: hidden;
+  position: relative;
+  border-radius: 50px 0 0 50px;
+}
+
+.first-title {
+  display: flex;
+  font-size: 1.5em;
+  color: #333;
+  margin: 50px 70px;
+  margin-bottom: 10px;
+}
+
+.svg-back {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 10px 70px;
+}
+
+.material-input,
+.material-input-multi {
+  outline: none;
+  border: hidden;
+  border-bottom: 1px solid #b9b9b9;
+  margin: 10px 0;
+  background-color: inherit;
+  height: 30px;
+  width: 100%;
+  z-index: 20;
+}
+
+.material-input-multi {
+  height: 100px;
+}
+
+.material-input:focus,
+.material-input-multi:focus {
+  border-bottom: 2px solid #ff3c5a;
+}
+
+.send-btn-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.send-but {
+  outline: none;
+  border: none;
+  background-color: #ff3c5a;
+  width: 90px;
+  height: 30px;
+  color: white;
+  margin-top: 20px;
+  border-radius: 3px;
+}
+
+.form-item {
+  position: relative;
+}
+
+.input-placeholder {
+  position: absolute;
+  left: 0;
+  top: 16px;
+  transition: top 0.5s;
+  z-index: 10;
+}
+
+.material-input:placeholder-shown + label,
+.material-input-multi:placeholder-shown + label {
+  visibility: hidden;
+}
+
+.material-input:not(:placeholder-shown) + label,
+.material-input-multi:not(:placeholder-shown) + label {
+  top: -2px;
+  opacity: 0.7;
+  font-size: 0.7rem;
+}

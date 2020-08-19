@@ -1,0 +1,120 @@
+body {
+  width: 100vw;
+  height: 200vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+main {
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+}
+
+nav {
+  position: fixed;
+  width: 367px;
+  height: 100%;
+}
+
+section {
+  width: calc(100% / 1.6);
+  background-color: #ededed;
+  margin: 10px;
+  border-radius: 50px;
+  padding-left: 93px;
+  margin-left: 400px;
+}
+
+.square {
+  width: 202px;
+  height: 202px;
+  background: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+.flex {
+  width: 1000px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 202px 202px 202px 202px;
+  grid-gap: 64px;
+  margin: auto;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.floatsWrapper {
+  margin: auto;
+  padding-left: 64px;
+}
+
+.float {
+  float: left;
+  margin: auto;
+  margin-right: 64px;
+}
+
+.mainHeader {
+  text-align: center;
+  margin-left: -200px;
+}
+
+.logo {
+  position: relative;
+  top: 90px;
+  left: 40%;
+}
+
+.logoPar {
+  position: absolute;
+  z-index: -2;
+  top: -40px;
+  left: -10px;
+}
+
+.navMenu {
+  padding-left: 40%;
+  padding-top: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.navMenu a {
+  color: #b9b9b9;
+}
+
+.iconWrapper {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  text-decoration: none;
+}
+
+.iconWrapper:hover {
+  color: #ff3c5a;
+}
+
+.icon {
+  flex: none;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.propertyName {
+  color: #ff3c5a;
+}
+
+.navMenu .active {
+  color: #ff3c5a;
+}

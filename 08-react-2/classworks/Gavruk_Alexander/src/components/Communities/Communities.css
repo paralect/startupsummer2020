@@ -1,0 +1,16 @@
+.communities {
+    background: #F8F8F8;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px;
+}
+
+.communities h1 {
+    width: 710px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.125em;
+    margin-bottom: 25px;
+}

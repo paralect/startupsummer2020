@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  width: 710px;
+  background-color: #FFFFFF;
+  margin: 0 auto;
+  padding: 20px;
+}
+.image {
+  width: 80px;
+  height: 80px;
+  margin: 0 20px;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 auto;
+}
+.titles {
+  font-size: 18px;
+  flex: 0 1 10%;
+  margin: 0 10px 0 0;
+}
+.result__members {
+  font-size: 12px;
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+}
+.text {
+  justify-self: flex-end;
+  font-size: 12px;
+  flex: 1 0 100%;
+  max-width: 380px;
+}
+.text__span {
+
+}

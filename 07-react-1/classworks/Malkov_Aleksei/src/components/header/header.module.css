@@ -1,0 +1,25 @@
+.app__header {
+  width: 100%;
+  max-height: 162px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.header__main_line {
+  height: 86px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  margin: 15px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.header__color_line {
+  width: 100%;
+  height: 75px;
+  background-color: #FF8254;
+}

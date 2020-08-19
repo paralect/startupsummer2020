@@ -1,0 +1,21 @@
+.title-logo {
+  position: absolute;
+  top: 145px;
+  left: 20%;
+  display: flex;
+}
+.main-title {
+  margin-top: auto;
+  font-size: 25px;
+  font-weight: 500;
+}
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
+.logo-img {
+  height: 100px;
+  width: 100px;
+  margin: 0px 10px;
+  border-radius: 25px;
+}
