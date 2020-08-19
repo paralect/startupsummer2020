@@ -1,0 +1,22 @@
+.form {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+select {
+  width: 30px;
+}
+
+option {
+  color: red;
+}
+
+textarea {
+  resize: none;
+}
+
+.data-list {
+  display:flex;
+  flex-direction: column;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "malkov_aleksei",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "koa": "^2.13.0",
+    "koa-body": "^4.2.0",
+    "koa-bodyparser": "^4.3.0",
+    "koa-generic-session": "^2.0.4",
+    "koa-mount": "^4.0.0",
+    "koa-redis": "^4.0.1",
+    "koa-router": "^9.1.0",
+    "koa-static": "^5.0.0",
+    "koa2-formidable": "^1.0.2"
+  }
+}

@@ -1,0 +1,47 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 87px;
+}
+
+.searchPanel{
+    width: 600px;
+    height: 40px;
+    margin-left: 365px;
+    margin-top: 23px;
+    display: flex;
+    flex-direction: row;
+    background: #efefef;
+    border-radius: 5px;
+}
+
+.searchInput{
+    width: 100%;
+    background: none;
+    border: none;
+}
+
+.orangeTitlePanel{
+    width: 100vw;
+    height: 75px;
+    background-color: #FF8254;
+}
+
+.title{
+    height: 75px;
+    margin-left: 465px;
+    display: flex;
+    align-items: center;
+}
+
+.subredditLogo{
+    width: 80px;
+    border-radius: 50%;
+}
+
+.displayNamePrefix{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px; 
+}

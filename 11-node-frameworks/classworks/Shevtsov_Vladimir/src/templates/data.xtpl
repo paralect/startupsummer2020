@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./static/style.css">
+</head>
+
+<body>
+  <div class="data-list">
+    {{#each(data)}}
+    <span>Name: {{this.name}}</span>
+    <span>Last Name: {{this.lastName}}</span>
+    <span>Description: {{this.descr}}</span>
+    <span>Mark: {{this.mark}}</span>
+    {{/each}}
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  grid-template-rows: repeat(auto-fill, 175px);
+  grid-gap: 20px;
+  width: calc(100% - 40px);
+  justify-items: center;
+}
+
+.rect {
+  width: 175px;
+  height: 175px;
+  background-color: #fff;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 50px 50px 50px;
+}
+
+main .rect svg path {
+  transition: fill 0.4s ease-out;
+}
+
+main .rect svg path:hover {
+  fill: #ff3c5a;
+  opacity: 1;
+}
+
+main .rect img svg path:hover {
+  fill: #ff3c5a;
+  opacity: 1;
+}
+
+.courses {
+  align-self: center;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.explain-card {
+  padding-left: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+    z-index: -1;
+  }
+
+  main {
+    width: calc(100% - 40px);
+    background: #ededed;
+    border-radius: 50px;
+    margin: 20px 20px 20px 20px;
+    position: static;
+  }
+}

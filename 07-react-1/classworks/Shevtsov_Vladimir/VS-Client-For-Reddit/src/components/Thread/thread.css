@@ -1,0 +1,14 @@
+.thread {
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #fff;
+}
+
+.topic-starter,
+.thread-comments-link {
+  color: #7c787e;
+}
+
+.comments-link {
+  margin-left: 5px;
+}

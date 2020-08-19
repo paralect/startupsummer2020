@@ -1,0 +1,48 @@
+.section__header_caption {
+  font-family: Source Sans Pro, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 3vw;
+}
+
+.section_rectangles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  grid-row-gap: 1.4vw;
+}
+
+.section_rectangles-grid_rectangle {
+  width: 175px;
+  height: 175px;
+  background-color: white;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+.section_rectangles-grid_rectangle_link {
+  color: #333;
+  text-decoration: none;
+}
+
+.section_rectangles-grid_rectangle_icon {
+  fill: #b9b9b9;
+  width: 175px;
+  height: 175px;
+}
+
+.section_rectangles-grid_rectangle_name {
+  position: relative;
+  bottom: 3rem;
+  left: 1.2rem;
+  font-family: Source Sans Pro, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.section_rectangles-grid_rectangle:hover {
+  box-shadow: 0 9px 18px rgba(0, 0, 0, 0.25);
+}
+
+.section_rectangles-grid_rectangle:hover .section_rectangles-grid_rectangle_icon {
+  fill: #ff3c5a;
+  transition: 0.5s;
+}

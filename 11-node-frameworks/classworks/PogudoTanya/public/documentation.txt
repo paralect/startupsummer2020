@@ -1,0 +1,1 @@
+Koa static file serving middleware, wrapper for koa-send.
