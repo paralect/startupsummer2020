@@ -1,65 +1,76 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './Chat.css';
 import Message from './components/Message';
 import io from 'socket.io-client';
-const socket = io('http://localhost:3001/', {transports: ['websocket']});
 
-socket.on('connection', () => {
-  console.log(socket.connected);
-});
+const socket = io('http://localhost:3001/');
 
 function Chat() {
-
   const [message, setMessage] = useState('');
   const [userName, setUserName] = useState('');
   const [messages, setMessages] = useState([]);
-  const [typingMessage, setTypingMessage] = useState('')
+  const [typingMessage, setTypingMessage] = useState([]);
 
-  const sendMessage = () => {
-    socket.emit('send-message', {userName, message});
-    socket.on('new-message', ([...newMessages]) => {
-      setMessages(newMessages);
-    })
-  }
+  const setTypingTimeout = () => setTimeout(() => { setTypingMessage([]) }, 2000);
 
-  const messageValue = (e) => {
-    setMessage(e.target.value)
-    socket.emit('typing-message', userName);
-    socket.on('typing-messasge-name', (message) => {
-      setTypingMessage(message);
-    })
-  }
+  const onTyping = useCallback(userName => {
+    const id = setTypingTimeout();
+    setTypingMessage([...typingMessage, { userName, id }]);
+  }, [typingMessage]);
 
-  const renameUser = () => {
-      setUserName(userName);
-  }
+  const onMessage = useCallback(message => setMessages(messages => [...messages, message]), [messages]);
 
-  const userNameValue = (e) => {
-    setUserName(e.target.value)
+  useEffect(() => {
+    socket.on('send-message', onMessage);
+    socket.on('typing-message', onTyping);
+    return () => {
+      socket.removeListener('typing-message', onTyping);
+      socket.removeListener('send-message', onMessage);
+    };
+  }, [onTyping, onMessage]);
+
+  const sendMessage = useCallback(() => socket.emit('send-message', message), [message]);
+
+  const sendUserName = useCallback(() => socket.emit('change-userName', userName), [userName]);
+
+  const typing = useCallback(() => socket.emit('typing-message'), []);
+
+  const inputHandler = value => {
+    setMessage(value);
+    typing();
   }
 
   return (
+
     <div className="chat">
       <header>
         <h1>Super Chat</h1>
       </header>
-
       <section>
         <div id="change_username">
-          <input onChange={(e) => {userNameValue(e)}} id="username" type="text"/>
-          <button onClick={renameUser} id="send_username"  type="button">Change username</button>
+          <input
+            id="username"
+            type="text"
+            onChange={e => setUserName(e.target.value)}
+            value={userName}
+          />
+          <button onClick={() => sendUserName()} id="send_username" type="button">Change username</button>
         </div>
       </section>
-
       <section id="chatroom">
-        {messages.map(message => <Message username={message.userName || 'Anonimus'} message={message.message} />)}
+        {messages.map(({ userName, message }) => <Message username={userName} message={message} /> )}
+        {typingMessage.map(({ userName }) => <p> {`${userName} typing...`} </p> )}
         <section id="feedback"></section>
-        <p>{typingMessage}</p>
       </section>
-
       <section id="input_zone">
-        <input onChange={(e) => messageValue(e)} id="message" className="vertical-align" type="text"/>
-        <button onClick={sendMessage} id="send_message" className="vertical-align" type="button">Send</button>
+        <input
+          id="message"
+          className="vertical-align"
+          type="text"
+          onChange={e => inputHandler(e.target.value)}
+          value={message}
+        />
+        <button onClick={() => sendMessage()} id="send_message" className="vertical-align" type="button">Send</button>
       </section>
     </div>
   );
