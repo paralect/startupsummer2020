@@ -1,0 +1,67 @@
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: Source Sans Pro, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  text-align: center;
+  color: #333;
+}
+
+.section-caption-hello {
+  font-size: 3vw;
+  font-weight: bold;
+}
+
+.section-caption-task {
+  font-size: 1.6vw;
+}
+
+.section-rows {
+  flex-grow: 1;
+  flex-direction: column;
+  display: flex;
+}
+
+.section-row-caption {
+  font-family: Source Sans Pro, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  margin: 1vw 0 1vw 0;
+}
+
+.section-row-caption-bold-pink {
+  font-weight: bold;
+  color: #ff3c5a;
+}
+
+.section-row-rectangle {
+  width: 13vw;
+  height: 13vw;
+  background-color: white;
+  margin: 0.3vw;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+.section-row-float {
+  word-spacing: normal;
+}
+
+.section-row-rectangle-float {
+  float: left;
+}
+
+.section-row-flexbox {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.section-row-gridLayout {
+  display: grid;
+  grid-template-columns: repeat(4, 13vw);
+  grid-column-gap: 0.6vw;
+}
