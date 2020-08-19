@@ -1,0 +1,69 @@
+@media (min-width: 300px) {
+  .section__header_caption {
+    font-size: 5vw;
+  }
+
+  .section_rectangles-grid_rectangle,
+  .section_rectangles-grid_rectangle_icon {
+    width: 10vh;
+    height: 10vh;
+  }
+
+  .section_rectangles-grid {
+    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+  }
+
+  .section_rectangles-grid_rectangle_name {
+    bottom: 2rem;
+    left: 0.2rem;
+    font-size: 8px;
+  }
+}
+
+@media (min-width: 400px) {
+  .section_rectangles-grid_rectangle,
+  .section_rectangles-grid_rectangle_icon {
+    width: 13vh;
+    height: 13vh;
+  }
+
+  .section_rectangles-grid {
+    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+  }
+
+  .section_rectangles-grid_rectangle_name {
+    bottom: 2rem;
+    left: 0.2rem;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 600px) {
+  .section__header_caption {
+    font-size: 4vw;
+  }
+
+  .section_rectangles-grid {
+    grid-template-columns: repeat(auto-fill, minmax(15vw, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .section__header_caption {
+    font-size: 2.5vw;
+  }
+
+  .section_rectangles-grid_rectangle,
+  .section_rectangles-grid_rectangle_icon {
+    width: 175px;
+    height: 175px;
+  }
+
+  .section_rectangles-grid {
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  }
+
+  .section_rectangles-grid_rectangle_name {
+    font-size: 20px;
+  }
+}

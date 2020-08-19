@@ -1,0 +1,51 @@
+@media (min-width: 300px) {
+  .nav-logo-icon {
+    width: 12vw;
+  }
+
+  .nav-logo-caption {
+    font-size: 3vw;
+  }
+
+  .nav-menu {
+    font-size: 2vw;
+  }
+}
+
+@media (min-width: 400px) {
+  .nav-logo-icon {
+    width: 13vw;
+  }
+
+  .nav-logo-caption {
+    font-size: 2.2vw;
+  }
+
+  .nav-menu {
+    font-size: 3vw;
+  }
+}
+
+@media (min-width: 600px) {
+  .nav-logo-icon {
+    width: 16vw;
+  }
+
+  .nav-logo-caption {
+    font-size: 2.5vw;
+  }
+}
+
+@media (min-width: 900px) {
+  .nav-logo-icon {
+    width: 11vw;
+  }
+
+  .nav-logo-caption {
+    font-size: 2vw;
+  }
+
+  .nav-menu {
+    font-size: 1.6vw;
+  }
+}
