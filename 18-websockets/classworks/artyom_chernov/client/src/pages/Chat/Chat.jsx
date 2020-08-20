@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Message from './components/Message';
 import './Chat.css';
+import _ from 'lodash';
 
 import socket from '../../socket.connection';
 
@@ -14,7 +15,7 @@ function Chat() {
     let id;
 
     socket.on("new-message-received", data => {
-      setMessages([...data])
+      setMessages((messages) => [...messages, data])
     })
 
     socket.on("new-message-typing-stop", data => {
@@ -29,12 +30,17 @@ function Chat() {
   }, []);
 
   const sendMessage = () => {
-    setMessageValue('')
+    setMessages([...messages, {
+      userName,
+      messageValue
+    }])
     socket.emit('new-message', { userName, messageValue })
+    setMessageValue('')
   }
 
   const onMessageChange = (e) => {
-    socket.emit('new-message-typing', { userName });
+    _.debounce(() => socket.emit('new-message-typing', {userName}),
+      3000, { leading: true, trailing: true})()
     setMessageValue(e.target.value)
   }
 
