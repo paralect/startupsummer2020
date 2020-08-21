@@ -10,7 +10,7 @@ function Header(props) {
     props.fetchSubreddits();
   }, []);
   
-  const inputValue = (event) => {
+  const searchSubreddits = (event) => {
     props.fetchSubreddits(event.currentTarget.value);
   }
   
@@ -20,7 +20,7 @@ function Header(props) {
         <img className={styles.logo} src={Logo} alt="logo" />
           <div className = {styles.searchPanel}>
             <img className={styles.searchImage} src={SearchImage} alt="search" />
-            <input className = {styles.searchInput} type="string" placeholder="Search" onKeyDown={(value) => {inputValue(value)}}></input>
+            <input className = {styles.searchInput} type="string" placeholder="Search" onKeyDown={(value) => {searchSubreddits(value)}}></input>
           </div>
       </div>
     </div>

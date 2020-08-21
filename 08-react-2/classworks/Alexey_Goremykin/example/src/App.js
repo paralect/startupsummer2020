@@ -6,9 +6,9 @@ import Title from 'components/Title/title';
 
 function App(props) {
 
-  const[reactSubreddit, setReactSubreddit] = useState(null);
-  const[inputValue, setInputValue] = useState(null);
-  const[posts, setPosts] = useState(null);
+  const [reactSubreddit, setReactSubreddit] = useState(null);
+  const [inputValue, setInputValue] = useState(null);
+  const [posts, setPosts] = useState(null);
 
 
   const fetchSubreddits = async (src = 'react') => {
