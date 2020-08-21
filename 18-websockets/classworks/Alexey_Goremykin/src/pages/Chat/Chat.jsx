@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import './Chat.css';
 import Message from './components/Message';
 import io from 'socket.io-client';
+import debounce from 'debounce';
 
 const socket = io('http://localhost:3001/');
 
@@ -11,12 +12,19 @@ function Chat() {
   const [messages, setMessages] = useState([]);
   const [typingMessage, setTypingMessage] = useState([]);
 
-  const setTypingTimeout = () => setTimeout(() => { setTypingMessage([]) }, 2000);
+  const onTyping = (userName) => {
+    const id = setTimeout(() => {
+      setTypingMessage(typingMessage.filter((user) => user.userName !== userName));
+    }, 5000);
 
-  const onTyping = useCallback(userName => {
-    const id = setTypingTimeout();
-    setTypingMessage([...typingMessage, { userName, id }]);
-  }, [typingMessage]);
+    const index = typingMessage.findIndex((user) => user.userName === userName);
+    if (index === -1) {
+      setTypingMessage([...typingMessage, { userName, id }]);
+    } else {
+      clearTimeout(typingMessage[index].id);
+      setTypingMessage([...typingMessage.filter((user) => user.userName !== userName), { userName, id }]);
+    }
+  }
 
   const onMessage = useCallback(message => setMessages(messages => [...messages, message]), [messages]);
 
@@ -33,7 +41,7 @@ function Chat() {
 
   const sendUserName = useCallback(() => socket.emit('change-userName', userName), [userName]);
 
-  const typing = useCallback(() => socket.emit('typing-message'), []);
+  const typing = useCallback(debounce(() => socket.emit('typing-message'), []));
 
   const inputHandler = value => {
     setMessage(value);
