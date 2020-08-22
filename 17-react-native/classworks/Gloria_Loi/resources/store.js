@@ -3,10 +3,8 @@ import thunk from 'redux-thunk';
 
 import reducer from './reducer';
 
-let composeEnhancers = compose;
-
 export default () => {
-  const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
+  const store = createStore(reducer, compose(applyMiddleware(thunk)));
   return {
     store,
   };

@@ -58,6 +58,7 @@ export default StyleSheet.create({
   },
   text: {
     fontWeight: 'bold',
+    fontSize: 6,
     color: '#fff',
     margin: 12,
   },

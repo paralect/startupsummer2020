@@ -31,11 +31,15 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     margin: 12,
+    width: 175,
   },
   header: {
     height: 40,
     width: 105,
     marginTop: 21,
     marginBottom: 20,
+  },
+  icon: {
+    margin: 15,
   },
 });
