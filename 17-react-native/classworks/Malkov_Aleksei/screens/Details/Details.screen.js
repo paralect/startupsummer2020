@@ -14,32 +14,21 @@ function DetailsScreen() {
   const dispatch = useDispatch();
   const { params } = useRoute();
   const { item } = params;
-  const comics = useSelector(selectors.getMarvelComics);
+  const comics = useSelector((state) => selectors.getMarvelComics(state, item.id));
   const favourites = useSelector(selectors.getFavMarvels);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    if (favourites.find((favM) => favM.id === item.id)) setIsFavorite(true);
-    else setIsFavorite(false);
-    return () => setIsFavorite(false);
-  }, [favourites]);
 
   useEffect(() => {
     dispatch({ type: 'currMarvelId:set', payload: { currMarvelId: item.id } });
     dispatch(actions.getComicsForMarvel(item.id));
   }, []);
 
-  function unfavourate(id) {
-    dispatch(actions.unfavourite(id));
-  }
-
-  function makeFavourated(marvel) {
+  function makeFavourite(marvel) {
     dispatch(actions.makeFavourite(marvel));
   }
 
   function toggle(marvel) {
-    if (isFavorite) unfavourate(marvel.id);
-    else makeFavourated(marvel);
+    if (favourites.find((favM) => favM.id === item.id)) makeFavourite(marvel.id);
+    else makeFavourite(marvel);
   }
 
   const comicView = (data) => {
@@ -67,9 +56,9 @@ function DetailsScreen() {
           </Text>
           <TouchableHighlight onPress={() => toggle(item)} style={styles.likebtn}>
             <AntDesign
-              name={isFavorite ? 'heart' : 'hearto'}
+              name={favourites.find((favM) => favM.id === item.id) ? 'heart' : 'hearto'}
               size={18}
-              color={isFavorite ? '#ff0000' : '#BBBBBB'}
+              color={favourites.find((favM) => favM.id === item.id) ? '#ff0000' : '#BBBBBB'}
             />
           </TouchableHighlight>
         </View>

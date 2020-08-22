@@ -9,14 +9,13 @@ import styles from './Favourites.styles';
 import * as selectors from '../../resources/selector';
 import * as actions from '../../resources/actions';
 
-
 function HomeScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const favourites = useSelector(selectors.getFavMarvels);
 
   function unfavourate(id) {
-    dispatch(actions.unfavourite(id));
+    dispatch(actions.makeFavourite(id));
   }
 
   const marvelView = (data) => {

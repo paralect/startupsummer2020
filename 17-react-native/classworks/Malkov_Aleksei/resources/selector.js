@@ -6,6 +6,7 @@ export function getFavMarvels({ marvels }) {
   return marvels.favourites;
 }
 
-export function getMarvelComics({ comics, marvels }) {
-  if (comics.list && comics.list.length) return comics.list.find((marv) => marv._id === marvels.currMarvelId);
+export function getMarvelComics({ comics }, id) {
+  console.log(id);
+  if (comics.list && comics.list.length) return comics.list.find((marv) => marv._id === id);
 }

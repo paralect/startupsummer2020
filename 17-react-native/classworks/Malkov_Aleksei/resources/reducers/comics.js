@@ -4,6 +4,7 @@ export default function comics(state = { list: [] }, action) {
         return {
           ...state,
           list: [
+            ...state.list,
             {
               _id: action.payload.marvelComics._id,
               list: action.payload.marvelComics.comics,

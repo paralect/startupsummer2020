@@ -17,7 +17,16 @@ export const getComicsForMarvel = (marvelId) => async (dispatch) => {
 };
 
 export const makeFavourite = (marvel) => async (dispatch) => {
-  dispatch({ type: 'favourites:add', payload: { marvel } });
+  switch (typeof marvel) {
+    case 'object':
+      dispatch({ type: 'favourites:add', payload: { marvel } });
+      break;
+    case 'number':
+      dispatch({ type: 'favourites:delete', payload: { id: marvel } });
+      break;
+    default:
+      break;
+  }
 };
 
 export const unfavourite = (id) => async (dispatch) => {
