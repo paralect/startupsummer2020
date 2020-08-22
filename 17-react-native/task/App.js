@@ -17,8 +17,8 @@ function App() {
     RobotoCondensed_700Bold,
   });
   const fetchData = useCallback(async () => {
-    // const { data } = await fetchMarvel('/characters/1009664/comics');
-    // console.log(data.data.results);
+    const { data } = await fetchMarvel('/characters/1009664/character');
+    console.log(data.data.results);
   }, []);
 
   useEffect(() => {

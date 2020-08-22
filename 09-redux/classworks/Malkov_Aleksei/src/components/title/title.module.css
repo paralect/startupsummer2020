@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  position: relative;
+  height: 75px;
+  background-color: #FFFFFF;
+}
+.title__container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  height: 100%;
+  width: 710px;
+  margin: 0 auto;
+}
+.title__logo {
+  position: relative;
+  top: -10px;
+}
+.title__image {
+  position: relative;
+  max-width: 78px;
+  max-height: 78px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  font-weight: medium;
+  border: 2px solid #FFFFFF;
+}
+
+.title__main {
+  margin: 0 0 0 15px;
+}
+.title__head {
+  font-size: 28px;
+  color: #000000;
+  margin: 5px 0;
+}
+.title__tag {
+  font-size: 16px;
+  font-weight: normal;
+}
+.title__low_head {
+  font-size: 18px;
+  font-weight: normal;
+}

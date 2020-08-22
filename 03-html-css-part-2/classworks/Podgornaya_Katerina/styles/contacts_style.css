@@ -1,0 +1,70 @@
+.section {
+  background-image: url(../images/contacts_background.svg);
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: 50% 100%;
+  border-radius: 50px 0 0 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-caption {
+  font-family: Source Sans Pro, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 3vw;
+  color: #333;
+}
+
+.section-form {
+  flex-grow: 1;
+  flex-direction: column;
+  display: flex;
+}
+
+.section-form-input {
+  border: none;
+  border-bottom: 1px solid #b9b9b9;
+  font-family: Roboto, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  font-weight: normal;
+  background-color: inherit;
+  text-decoration: none;
+  outline: none;
+  margin: 2vw 35vw 2vw 0;
+}
+
+.section-form-input:focus,
+.section-form-textarea:focus {
+  border-bottom: 2px solid #ff3c5a;
+  transition: 1s ease-out;
+}
+
+.section-form-textarea .section-form-textarea:focus {
+  border: none;
+  border-bottom: 1px solid #b9b9b9;
+  font-family: Roboto, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  font-weight: normal;
+  background-color: inherit;
+  text-decoration: none;
+  outline: none;
+  height: 50px;
+  resize: none;
+  margin: 0 35vw 0 0;
+}
+
+.section-form-button {
+  border: none;
+  background-color: #ff3c5a;
+  height: 40px;
+  width: 90px;
+  color: white;
+  font-family: Roboto, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  position: relative;
+  outline: none;
+  margin: 3vw 0 0 13vw;
+}
+
+.section-form-button:hover {
+  opacity: 1;
+  background-color: #bd3247;
+  transition: 1s;
+}

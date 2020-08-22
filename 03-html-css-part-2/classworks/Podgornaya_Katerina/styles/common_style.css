@@ -1,0 +1,94 @@
+@font-face {
+  font-family: Source Sans Pro;
+  font-weight: normal;
+  src: url(../fonts/SourceSansPro-Light.ttf);
+}
+
+@font-face {
+  font-family: Roboto;
+  font-weight: normal;
+  src: url(../fonts/Roboto-Light.ttf);
+}
+
+@font-face {
+  font-family: Source Sans Pro;
+  font-weight: bold;
+  src: url(../fonts/SourceSansPro-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: Roboto;
+  font-weight: bold;
+  src: url(../fonts/Roboto-Bold.ttf);
+}
+
+.body {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+.main {
+  background-color: white;
+  overflow: hidden;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+.nav {
+  margin: 0 0 0 0;
+  height: 100%;
+  width: 29%;
+  overflow: hidden;
+}
+
+.nav-logo {
+  margin: 3vw 10vw 0 6vw;
+}
+
+.nav-logo-icon {
+  width: 180px;
+  height: auto;
+}
+
+.nav-logo-caption {
+  white-space: nowrap;
+  font-size: 25px;
+  font-family: Roboto, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  font-weight: bold;
+}
+
+.nav-menu {
+  margin: 12vw 0 0 8vw;
+  font-size: 25px;
+}
+
+.nav-menu-item {
+  display: flex;
+  align-items: center;
+  font-family: Source Sans Pro, Helvetica, Arial, Verdana, Tahoma, sans-serif;
+  font-weight: bold;
+  color: #b9b9b9;
+  text-decoration: none;
+  margin: 2vw 0 2vw 0;
+}
+
+#nav-menu-item-active,
+#nav-menu-item-icon-active {
+  color: #ff3c5a;
+  stroke: #ff3c5a;
+}
+
+.nav-menu-item-icon-passive {
+  stroke: #b9b9b9;
+}
+
+.section {
+  padding: 5vw 3vw 5vw 5vw;
+  background-color: #ededed;
+  border-radius: 50px;
+  margin: 3vw 3vw 3vw 3vw;
+  flex-grow: 1;
+  overflow: auto;
+  height: calc(100% - 3vh);
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Startup Summer</title>
+</head>
+
+<body>
+  <div class="sidebar">
+    <div class="logo">
+      <img class="logo__icon" width="75px" height="77px" src="assets/icons/logo.svg">
+      <h1 class="logo__header">Paralect</h1>
+      <h4 class="logo__subheader">Startup Summer</h4>
+    </div>
+    <nav class="nav">
+      <a class="nav__link" href="#home"><img class="nav__icon" src="assets/icons/home.svg" alt="home icon">home</a>
+      <a class="nav__link" href="#courses"><img class="nav__icon" src="assets/icons/book-open.svg" alt="open book icon">courses</a>
+      <a class="nav__link" href="#contacts"><img class="nav__icon" src="assets/icons/help-circle.svg" alt="help circle icon">contacts</a>
+    </nav>
+  </div>
+  <div class="content">
+    <div class="home" id="home">
+      <header class="home__header">
+        <h1>Hello Startup Summer!</h1>
+        <h3 class="home__subheader">This is your task.</h3>
+        <h3 class="home__subheader">Please transform this template into HTML and CSS</h4=>
+      </header>
+      <div class="float-row clearfix">
+        <h6 class="row-header">Horizontal row using <strong>float</strong></h6>
+        <div class="float-row__content"></div>
+        <div class="float-row__content"></div>
+        <div class="float-row__content"></div>
+        <div class="float-row__content"></div>
+      </div>
+      <h6 class="row-header">Horizontal row using <strong>Flexbox</strong></h6>
+      <div class="flex-row">
+        <div class="flex-row__content"></div>
+        <div class="flex-row__content"></div>
+        <div class="flex-row__content"></div>
+        <div class="flex-row__content"></div>
+      </div>
+      <h6 class="row-header">Horizontal row using <strong>Grid layout</strong></h6>
+      <div class="grid-row">
+        <div class="grid-row__content"></div>
+        <div class="grid-row__content"></div>
+        <div class="grid-row__content"></div>
+        <div class="grid-row__content"></div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="courses" id="courses">
+      <h4 class="courses__title">courses</h4>
+      <div class="courses__cards">
+        <div class="courses__card">
+          <span class="courses__card-text">Git</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">HTML/CSS <small class="courses__card-text--small">part1</small></span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">HTML/CSS <small class="courses__card-text--small">part 2</small></span>
+          </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Javascript <small class="courses__card-text--small">part 1</small></span>
+          </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Javascript <small class="courses__card-text--small">part 2</small></span>
+          </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Bundling</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">React <small class="courses__card-text--small">part 1</small></span>
+          </div>
+        <div class="courses__card">
+          <span class="courses__card-text">React <small class="courses__card-text--small">part 2</small></span>
+          </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Redux</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Node.js</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Node frameworks</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">RESTful API</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Databases <small class="courses__card-text--small">part 1</small></span>
+          </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Databases <small class="courses__card-text--small">part 2</small></span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Docker</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">SHIP</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">React Native</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Websockets</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Testing</span>
+        </div>
+        <div class="courses__card">
+          <span class="courses__card-text">Kubernetes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="contacts" id="contacts">
+      <h4>Contacts</h4>
+      <form class="contacts__form" action="#">
+        <div class="contacts__input">
+          <label class="contacts__label" for="input-name">Full name</label>
+          <input class="contacts__text-input" id="input-name" type="text">
+          <span class="bottom-effect"></span>
+        </div>
+        <div class="contacts__input">
+          <label class="contacts__label" for="input-email">Email</label>
+          <input class="contacts__text-input" id="input-email" type="email">
+          <span class="bottom-effect"></span>
+        </div>
+        <div class="contacts__input">
+          <label class="contacts__label" for="input-message">Message</label>
+          <textarea class="contacts__text-input" name="message" id="input-message" maxlength="250" cols="30"
+            rows="3"></textarea>
+          <span class="bottom-effect"></span>
+        </div>
+        <button class="button-primary" type="submit">send</button>
+      </form>
+      <img class="contacts__logo" src="assets/icons/logo-large.svg" alt="large-logo">
+    </div>
+  </div>
+
+</body>
+
+</html>
