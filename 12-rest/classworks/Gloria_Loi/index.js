@@ -13,7 +13,23 @@ const private = Router();
 const mySecret = 'super-mega-ochen-secret';
 
 const users = JSON.parse(fs.readFileSync('./database/file.json'));
-let user;
+
+const hashPassword = (password) =>
+  crypto.pbkdf2Sync(password, 'salt', 100000, 64, 'sha512').toString('hex');
+
+const fetchData = async (requestBody) => {
+  const result = await fetch('https://models.dobro.ai/gpt2/medium/', {
+    method: 'POST',
+    body: JSON.stringify(requestBody),
+    headers: {
+      'User-Agent': 'insomnia/2020.3.3',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  let json = await result.json();
+  return json.replies;
+};
 
 public.post(
   '/signup',
@@ -21,20 +37,24 @@ public.post(
     request: {
       body: { password, login },
     },
-    response
+    response,
   }) => {
-    const pw = crypto
-      .pbkdf2Sync(password, 'salt', 100000, 64, 'sha512')
-      .toString('hex');
-    const user = {
-      login,
-      password: pw,
-    };
-    users.push(user);
-    fs.writeFileSync('./database/file.json', JSON.stringify(users, null, 2));
-    response.body = JSON.stringify({
-      message: 'completed',
-    });
+    const same = users.filter((user) => user.login === login);
+    if (same.length === 0) {
+      const user = {
+        login,
+        password: hashPassword(password),
+      };
+      users.push(user);
+      fs.writeFileSync('./database/file.json', JSON.stringify(users, null, 2));
+      response.body = JSON.stringify({
+        message: 'completed',
+      });
+    } else {
+      response.body = JSON.stringify({
+        message: 'user with same login alredy exist',
+      });
+    }
   }
 );
 
@@ -47,12 +67,10 @@ public
       },
       response,
     }) => {
-      const pw = crypto
-        .pbkdf2Sync(password, 'salt', 100000, 64, 'sha512')
-        .toString('hex');
-      [user] = users.filter((el) => el.login === login);
+      const passwordHash = hashPassword(password);
+      const [user] = users.filter((el) => el.login === login);
       if (user) {
-        if (pw === user.password) {
+        if (passwordHash === user.password) {
           const token = jwt.sign(user.login, mySecret);
           response.body = JSON.stringify({
             message: 'you are autorized!',
@@ -83,7 +101,7 @@ private
     '/tags',
     async ({
       request: {
-        body: { arr },
+        body: { arr, author },
       },
       response,
     }) => {
@@ -93,26 +111,17 @@ private
         length: 10,
         num_samples: 3,
       };
-      const fetchData = await fetch('https://models.dobro.ai/gpt2/medium/', {
-        method: 'POST',
-        body: JSON.stringify(requestBody),
-        headers: {
-          'User-Agent': 'insomnia/2020.3.3',
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const res = await fetchData.json();
+      const fetchedData = await fetchData(requestBody);
       const tag = {
-        autorName: user.login, 
-        tags: arr, 
-        replies: res.replies
+        author,
+        tags: arr,
+        replies: fetchedData,
       };
       tags.push(tag);
       fs.writeFileSync('./database/tags.json', JSON.stringify(tags, null, 2));
-      if (res)
+      if (fetchedData)
         response.body = JSON.stringify({
-          message: 'successfully posted',
+          tag,
         });
     }
   )
@@ -120,7 +129,7 @@ private
     '/taglines',
     async ({
       request: {
-        body: { combination },
+        body: { combination, author },
       },
       response,
     }) => {
@@ -130,21 +139,11 @@ private
         length: 10,
         num_samples: 1,
       };
-      const fetchData = await fetch('https://models.dobro.ai/gpt2/medium/', {
-        method: 'POST',
-        body: JSON.stringify(requestBody),
-        headers: {
-          'Content-Type': 'application/json',
-          'User-Agent': 'insomnia/2020.3.3',
-        },
-      });
-
-      const data = await fetchData.json();
-
+      const fetchedData = await fetchData(requestBody);
       const tagline = {
-        author: user.login,
+        author,
         combination,
-        reply: data.replies,
+        reply: fetchedData,
       };
 
       taglines.push(tagline);
@@ -154,7 +153,7 @@ private
       );
       if (response) {
         response.body = JSON.stringify({
-         tagline,
+          tagline,
         });
       }
     }
@@ -163,7 +162,7 @@ private
     '/interview',
     async ({
       request: {
-        body: { arr },
+        body: { arr, author },
       },
       response,
     }) => {
@@ -171,28 +170,16 @@ private
       const inters = JSON.parse(fs.readFileSync('./database/interview.json'));
 
       for await (const question of arr) {
-        const fetchedData = await fetch('https://models.dobro.ai/gpt2/medium/', {
-          method: 'POST',
-          body: JSON.stringify({
-            prompt: question,
-            length: 10,
-            num_samples: 1,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-            'User-Agent': 'insomnia/2020.3.3',
-          },
-        });
+        const requestBody = { prompt: question, length: 10, num_samples: 1 };
+        const [reply] = await fetchData(requestBody);
 
-        const json = await fetchedData.json();
-        const [reply] = json.replies;
         inter.push(question);
         inter.push(reply);
       }
-      inters.push({ author: user.login, inter});
+      inters.push({ author, inter });
       response.body = JSON.stringify({
-        author: user.login, 
-        inter
+        author,
+        inter,
       });
       fs.writeFileSync(
         './database/interview.json',
