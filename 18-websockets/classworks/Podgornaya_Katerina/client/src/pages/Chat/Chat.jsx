@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './Chat.css';
 import Message from './components/Message';
+import _ from 'lodash';
 
 const io = require("socket.io-client");
 const ioClient = io.connect("http://localhost:3031");
+
 
 function Chat() {
   const [username, setUsername] = useState('Anonymous');
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
   const [typingNames, setTypingNames] = useState([]);
+  const [typingTimeouts, setTypingTimeouts] = useState({});
 
   let name = 'Anonymous';
 
   if (inputMessage) { 
     ioClient.emit('typing-message', username); 
-    setTimeout(() => ioClient.emit('no-typing'), 3000);
-  } 
+  }
 
   const sendMessage = () => {
-    ioClient.emit('no-typing');
     const msg = {
       message: inputMessage,
       username
@@ -30,18 +31,36 @@ function Chat() {
     setInputMessage('');
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    ioClient.removeAllListeners();
+
     ioClient.on('get-message', (msg) => {
       setMessages((messages) => [...messages, msg]);
-    }
-  );
+      }
+    );
+
     ioClient.on('get-typing-username', (username) => {
-      setTypingNames(username);
+      setTypingNames(typingNames.includes(username) ? typingNames : [...typingNames, username]);
+      console.log(typingNames);
+
+      if (typingTimeouts[username]) {
+        clearTimeout(typingTimeouts[username]);
+      }
+
+      const timeoutId = setTimeout(() => {
+        setTypingTimeouts({
+          ...typingTimeouts,
+          [username]: null,
+        })
+        setTypingNames(typingNames.filter((item) => item !== username));
+      }, 3000);
+
+      setTypingTimeouts({
+        ...typingTimeouts,
+        [username]: timeoutId,
+      })
     });
-    ioClient.on('get-no-typing', () => {
-      setTypingNames('');
-    });
-  }, []);
+  }, [typingNames]);
 
   return (
     <div className="chat">

@@ -14,9 +14,6 @@ server.on('connection', (socket) => {
     console.log(`${color.FgMagenta}${username} is typing a message...`);
     socket.broadcast.emit('get-typing-username', username);
   });
-  socket.on('no-typing', () => {
-    socket.broadcast.emit('get-no-typing');
-  });
 
   socket.on('disconnect', () => {
     console.log(`${color.FgRed}Client gone id = ${socket.id.slice(0, 3)}${color.FgWhite}`);
