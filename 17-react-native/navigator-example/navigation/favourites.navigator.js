@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import FavouritesScreen from '~/screens/Favourites';
-import DetailsScreen from '~/screens/Details';
+import DetailsScreen from '~/screens/CharacterDetails';
 
 const Stack = createStackNavigator();
 
