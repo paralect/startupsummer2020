@@ -29,10 +29,7 @@ const Chat = () => {
 
   const onMessage = useCallback(
     (message) => {
-      console.log(message);
-      console.log(messages);
       setMessages([...messages, message]);
-      console.log(messages);
     },
     [messages]
   );
@@ -40,16 +37,18 @@ const Chat = () => {
   const onTyping = useCallback(
     debounce(
       (user) => {
-        clearTimeout(user.interval);
-        if (!typingUsers.includes(user.userName)) {
-          setTypingUsers([...typingUsers, user.userName]);
-        }
-        user.interval = setTimeout(() => {
+        const timer = setTimeout(() => {
           setTypingUsers(
-            typingUsers.filter((typingUser) => typingUser !== user.userName)
+            typingUsers.filter((typingUser) => typingUser.userName !== user.userName)
           );
         }, 3000);
-        console.log(typingUsers);
+        const index = typingUsers.findIndex((typingUser) => typingUser.userName === user.userName);
+        if (index === -1) {
+          setTypingUsers([...typingUsers, { userName, timer }]);
+        } else {
+          clearTimeout(typingUsers[index].timer );
+          setTypingUsers([...typingUsers.filter((typingUser) => typingUser.userName !== user.userName), { userName, timer }]);
+        }
       },
       [typingUsers],
       2000,
@@ -97,7 +96,7 @@ const Chat = () => {
         ))}
         <section id="feedback">
           {typingUsers.map((user) => (
-            <div>{user + ' is typing'}</div>
+            <div>{user.userName + ' is typing'}</div>
           ))}
         </section>
       </section>
