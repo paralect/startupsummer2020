@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  width: 710px;
+  background-color: #FFFFFF;
+  margin: 0 auto;
+  padding: 20px;
+}
+.titles {
+  font-size: 18px;
+  flex: 0 1 10%;
+  margin: 0 10px 0 0;
+  justify-self: start;
+  display: flex;
+  justify-content: flex-start;
+}
+.result__members {
+  font-size: 12px;
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+}
+.text {
+  justify-self: flex-end;
+  font-size: 12px;
+  flex: 1 0 100%;
+  max-width: 380px;
+}

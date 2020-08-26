@@ -1,0 +1,13 @@
+.list {
+  background: #F8F8F8;
+  border: 1px solid #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errorIcon {
+  display: flex;
+  height: 20%;
+  justify-content: center;
+}

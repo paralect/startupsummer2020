@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  position: relative;
+}
+.icon {
+  position: absolute;
+  left: 6px;
+}
+.input__search {
+  border: none;
+  padding: 0 35px;
+  color: #7C787E;
+  height: 40px;
+  background-color: #EFEFEF;
+  border-radius: 5px;
+  width: 600px;
+}
+
+.input__search::placeholder {
+
+}
