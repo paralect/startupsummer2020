@@ -1,0 +1,89 @@
+body {
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  color: #222;
+  font-family: Source Sans Pro, sans-serif;
+}
+
+.sidebar {
+  height: 100%;
+  width: 367px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+}
+
+.logo {
+  margin: 20px 0 50px 0;
+  position: relative;
+  top: 50px;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 50%;
+}
+
+.aside-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  margin-top: 30px;
+}
+
+.aside-nav ul li {
+  margin: 10px 0;
+}
+
+.aside-nav ul li a {
+  text-decoration: none;
+  color: #b9b9b9;
+}
+
+.aside-nav ul li a.pink {
+  color: #ff3c5a;
+}
+
+.pink {
+  color: #ff3c5a;
+}
+
+.aside-nav ul li a,
+.aside-nav ul li img {
+  vertical-align: middle;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  position: absolute;
+  width: calc(100% - 367px - 40px);
+  left: 367px;
+  top: 20px;
+  background: #ededed;
+  border-radius: 50px;
+  margin: 20px 20px 20px 20px;
+}
+
+.logo div {
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.icon-svg {
+  width: 20px;
+  height: 20px;
+  color: #b9b9b9;
+  margin-right: 5px;
+}

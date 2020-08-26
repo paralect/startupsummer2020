@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic');
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic");
+
+nav li {
+  list-style-type: none;
+}
+
+.navbar {
+  position: absolute;
+}
+
+.flex_inline {
+  display: inline-flex;
+}
+
+.flex {
+  display: flex;
+}
+
+.fix_navbar {
+  position: fixed;
+}
+
+.courses_href,
+.home_href,
+.contacts_href {
+  text-decoration: none;
+  color: #ff3c5a;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 3em;
+  margin: 1em;
+}
+
+.courses_href {
+  color: #ff3c5a;
+}
+
+.home_href,
+.contacts_href {
+  color: #b9b9b9;
+}
+
+.width_nav {
+  width: 34em;
+}
+
+li a:hover {
+  text-decoration: underline;
+}
+
+.grid_first,
+.grid_second,
+.grid_third,
+.grid_fourth,
+.grid_five {
+  background: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0.5em;
+}
+
+.body_wrapper {
+  left: 20em;
+  top: 1em;
+  padding: 3em 4em;
+  background: #ededed;
+  border-radius: 3em;
+  width: 950px;
+  justify-content: center;
+}
+
+.body_wrapper_botton {
+  left: 20em;
+  top: 1em;
+  padding-top: 7px;
+  display: grid;
+  grid-template-columns: repeat(5, 175px);
+  grid-template-rows: repeat(4, 175px);
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
+  padding-bottom: -22em;
+  background: #ededed;
+  border-radius: 3em;
+  width: 100%;
+}
+
+.body_wrapper_top {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  color: #333;
+  margin-left: 2em;
+  padding-top: 2em;
+}
+
+.text_block {
+  padding-left: 2em;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 30px;
+  color: #333;
+}
+
+.text_div {
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.position_text {
+  padding-top: 10em;
+}
+
+a.rollover {
+  background: url(svg/black_lale.svg);
+  display: block;
+  width: 175px;
+  height: 133px;
+}
+
+a.rollover:hover {
+  background: url(svg/red_lake.svg);
+}

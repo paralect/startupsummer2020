@@ -1,0 +1,26 @@
+.subredditsItem {
+  display:flex;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 30px;
+  box-sizing: border-box;
+  width: 35%;
+  background: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  border-radius: 5px;
+}
+
+.subredditsItem img {
+  border-radius: 50%;
+  width: 10%;
+  height: 10%;
+}
+
+.headerSub {
+  width: 30%;
+  margin: 0 5%;
+}
+
+.description {
+  width: 60%;
+}

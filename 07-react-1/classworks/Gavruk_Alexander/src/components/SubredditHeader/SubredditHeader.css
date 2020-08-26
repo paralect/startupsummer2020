@@ -1,0 +1,31 @@
+.subreddit-header {
+    width: 710px;
+    height: 75px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.subreddit-header_title {
+    display: flex;
+    flex-direction: column;
+}
+
+.subreddit-header img {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    margin-right: 20px;
+    position: relative;
+    bottom: 7px;
+}
+
+.subreddit-header_title h1 {
+    font-size: 1.75em;
+}
+
+.subreddit-header_title span {
+    font-size: 1em;
+    position: relative;
+    bottom: 20px;
+}

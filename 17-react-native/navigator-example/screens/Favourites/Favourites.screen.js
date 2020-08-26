@@ -18,7 +18,7 @@ function HomeScreen() {
           <TouchableOpacity
             key={item}
             style={styles.button}
-            onPress={() => navigation.navigate('Details', { item })}
+            onPress={() => navigation.navigate('CharacterDetails', { item })}
           >
             <Text>{item}</Text>
           </TouchableOpacity>

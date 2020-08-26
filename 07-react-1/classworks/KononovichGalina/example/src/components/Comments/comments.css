@@ -1,0 +1,13 @@
+.comment  {
+  width: 50%;
+  border: 1px solid gray;
+  padding: 2%;
+  background: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  border-radius: 5px;
+  margin: 2% 25%;
+}
+
+.author {
+  font-weight: bold;
+}

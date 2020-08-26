@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contacts</title>
+  <link rel="stylesheet" href="../shared.css">
+  <link rel="stylesheet" href="contacts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400&display=swap">
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-content">
+    <img src="logo.svg" class="logo">
+    <div class="aside-nav">
+      <ul>
+        <li><img src="home.svg" class="icon-svg"><a href="../Home/home.html">Home</a></li>
+        <li><img src="book-open.svg" class="icon-svg"><a href="../Courses/courses.html">Courses</a></li>
+        <li><img src="help-circle.svg" class="icon-svg"><a href="." style="color: #FF3C5A">Contacts</a></li>
+      </ul>
+    </div>
+  </div>
+</aside>
+<main class="main-container">
+  <div style="float: right; width: 50%">
+    <svg width="638" height="931" viewBox="0 0 638 931" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M336.428 -121.103C644.637 -104.644 860.083 28.5212 1002.22 179.641C1144.35 330.761 1169.79 517.791 949.852 785.617C867.564 872.399 756.848 1031 566.836 1031C495.021 1031 420.213 990.602 369.344 926.263C299.025 834.993 249.651 718.286 198.782 604.572C147.913 490.858 64.1279 341.235 23.7317 251.461C-36.1145 116.799 -0.206778 -139.057 336.428 -121.103Z"
+            fill="#FF3C5A"/>
+    </svg>
+  </div>
+  <div class="form-container">
+    <form action="">
+      <label for="fname">Full name</label><br>
+      <input type="text" id="fname" name="fname" placeholder="Enter full name"><br>
+      <label for="email">Email</label><br>
+      <input type="text" id="email" name="lname" placeholder="Enter email"><br><br>
+      <label for="message">Message</label><br>
+      <textarea type="text" id="message" name="lname" placeholder="" rows="5"></textarea><br><br>
+      <input type="submit" value="Send">
+    </form>
+  </div>
+</main>
+</body>
+</html>

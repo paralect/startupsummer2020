@@ -1,0 +1,23 @@
+.orangeTitlePanel{
+    width: 100vw;
+    height: 75px;
+    background-color: #FF8254;
+}
+
+.title{
+    height: 75px;
+    margin-left: 465px;
+    display: flex;
+    align-items: center;
+}
+
+.subredditLogo{
+    width: 80px;
+    border-radius: 50%;
+}
+
+.displayNamePrefix{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px; 
+}
