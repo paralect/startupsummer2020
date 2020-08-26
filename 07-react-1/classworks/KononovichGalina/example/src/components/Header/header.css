@@ -1,0 +1,30 @@
+.headerContainer {
+  display: flex;
+  margin: 1%;
+}
+
+.searchContainer {
+  width: 35%;
+  height: 5%;
+  margin: 1% 25%;
+  /* border: 1px solid gray; */
+  display: flex;
+  align-items: center;
+  background: #EFEFEF;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.headerRow {
+  height: 3rem;
+  background-color: #FF8254;
+}
+
+.searchContainer input {
+  border-style: none;
+  background: #EFEFEF;
+  width: 80%;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
