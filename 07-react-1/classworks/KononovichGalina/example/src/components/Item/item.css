@@ -1,0 +1,53 @@
+.item  {
+  width: 50%;
+  border: 1px solid gray;
+  padding: 2%;
+  background: #FFFFFF;
+  border: 1px solid #EFEFEF;
+  border-radius: 5px;
+  margin: 2% 25%;
+}
+
+.item img {
+  border-radius: 50%;
+  width: 10%;
+  height: 10%;
+}
+
+.authorContainer, .comments {
+  color: #7C787E;
+}
+
+.comments {
+  width: 15%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2%;
+}
+
+.headerItem {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.bodyItem {
+  margin-top: 2%;
+}
+
+.itemSearch {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.infoAbout, .description {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 20%
+}
+.description {
+  width: 60%;
+}
+
+.headerCommunity {
+  font-weight: 600;
+}

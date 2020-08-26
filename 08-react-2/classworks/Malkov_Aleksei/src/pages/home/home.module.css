@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #F8F8F8;
+}
+
+.search__results {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 15px auto;
+}
+
+.error__container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.error {
+  display: flex;
+  flex-direction: column;
+  max-width: 710px;
+  margin: 10px auto;
+}
+.error svg {
+  margin: 30px auto;
+}

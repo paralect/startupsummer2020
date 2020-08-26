@@ -1,0 +1,53 @@
+.mainContent{
+    background-color: #F8F8F8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contentItem{
+    width: 710px;
+    background-color: #fff;
+    border: 1px solid #EFEFEF;
+    box-sizing: border-box; 
+    border-radius: 5px;
+    margin: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.subredditsLogo{
+    margin-right: 10px;
+    width: 60px;
+}
+
+.authorName{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;  
+    color: #7C787E;
+}
+
+.comments{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #7C787E;
+}
+
+.notFound{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.contentItemInfoTitle:hover{
+    transform: scale(1.1);
+    opacity: 0.6;
+}
