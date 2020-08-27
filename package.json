@@ -21,6 +21,7 @@
     "ffmpeg": "0.0.4",
     "ffmpeg-extract-frames": "^2.0.2",
     "ffmpeg-fork": "0.0.6",
+    "io": "^1.0.2",
     "joi": "^17.1.1",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
@@ -30,6 +31,8 @@
     "koa-static": "^5.0.0",
     "node": "^14.5.0",
     "nodejs": "0.0.0",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "koa-jwt": "^4.0.0"
   }
 }

@@ -1,0 +1,88 @@
+@mixin vertical-align {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.chat {
+    
+    background-color: #333333;
+    height: 100%;
+}
+
+header {
+    color: white;
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+h1 {
+    font-family: 'Comfortaa', sans-serif;
+    margin: 0px;
+}
+
+div#change_username, section#input_zone {
+    background-color: #61bed9;
+    border: 2px outset#0088cc;
+}
+
+div#change_username {
+    height: 3%;
+    display: inline-block;
+}
+
+#send_username {
+    color: white;
+    background-color: #0088cc;
+}
+
+section#chatroom {
+    border: 2px inset #0088cc;
+    height: 84%;
+    overflow: auto;
+}
+
+section#input_zone {
+    height: 7%;
+    text-align: center;
+    background-color: gray;
+}
+
+.vertical-align {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+input#username {
+    color: white;
+    background-color: #333333;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+input#message {
+    color: white;
+    background-color: #333333;
+    display: inline-block;
+    width: 88%;
+    height: 70%;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 2vh;
+}
+
+button#send_message {
+    color: white;
+    background-color: #0088cc;
+    display: inline-block;
+    height: 73%;
+    width: 10%;
+}
+
+.isTyping {
+    color: white;
+    padding: 5px;
+}
