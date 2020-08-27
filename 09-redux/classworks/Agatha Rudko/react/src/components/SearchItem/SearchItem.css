@@ -1,0 +1,20 @@
+.search-item{
+  width: 710px;
+  min-height: 90px;
+  background-color: #FFFFFF;
+  margin: auto;
+  border: 1px solid #EFEFEF;
+  display: flex;
+  justify-content: space-around;
+  cursor: pointer;
+}
+.subreddit-img{
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-top: 15px;
+}
+.aboutItem{
+  margin-top: 5px;
+  width: 60%;
+}
