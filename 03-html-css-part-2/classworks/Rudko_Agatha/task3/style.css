@@ -1,0 +1,144 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.main {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 15px;
+}
+
+.logo {
+  margin-top: 30px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.content {
+  background: #e5e5e5;
+  width: calc(100% / 1.6);
+  min-width: 220px;
+  padding-bottom: 20px;
+  border-radius: 50px;
+  text-align: center;
+  position: relative;
+  top: 70px;
+  margin-left: 250px;
+}
+
+.sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 500px;
+  position: fixed;
+  left: 0;
+}
+
+.menu-item__link {
+  color: #b9b9b9;
+  font-size: 23px;
+  margin: 8px;
+  display: inline;
+  text-decoration: none;
+}
+
+.menu-item__link--active {
+  color: #ff3c5a;
+}
+
+.menu__item {
+  display: flex;
+}
+
+.content__courses {
+  font-size: 1.7em;
+  text-align: start;
+  margin: 50px 90px;
+  font-weight: lighter;
+  color: #333;
+}
+
+.content__course-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  width: 85%;
+  margin: auto;
+}
+
+.content__course-card {
+  min-height: 175px;
+  min-width: 175px;
+  background: white;
+  border-radius: 6px;
+  margin: 10px;
+  box-shadow: -1px 3px 5px 0 rgba(122, 122, 122, 1);
+  position: relative;
+}
+
+.course-card__course-name {
+  color: #333;
+  position: absolute;
+  left: 20px;
+  bottom: 0;
+}
+
+.course-card__part {
+  font-weight: lighter;
+  font-style: italic;
+}
+
+.course-card__figure {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-bottom: 20px;
+}
+
+.course-card__figure:hover path {
+  fill: #ff3c5a;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .main {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 15px;
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 220px;
+    position: relative;
+    top: 0;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+  }
+
+  .content {
+    background: #e5e5e5;
+    width: calc(100% / 1.6);
+    min-width: 220px;
+    padding-bottom: 20px;
+    border-radius: 50px;
+    text-align: center;
+    position: relative;
+    top: 70px;
+    margin: auto;
+  }
+}
