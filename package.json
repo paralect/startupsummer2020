@@ -18,6 +18,7 @@
     "@expo/vector-icons": "^10.2.0",
     "@react-navigation/native": "^5.7.2",
     "axios": "^0.19.2",
+    "expo": "^38.0.9",
     "ffmpeg": "0.0.4",
     "ffmpeg-extract-frames": "^2.0.2",
     "ffmpeg-fork": "0.0.6",
