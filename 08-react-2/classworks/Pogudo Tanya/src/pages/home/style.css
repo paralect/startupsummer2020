@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap");
+
+.title {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+}
+
+.url {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 26px;
+  color: #000000;
+}
+
+.title_sub {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  color: #000000;
+  text-decoration: none;
+}
+
+.style_empty_page {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 31px;
+  text-align: center;
+  color: #000000;
+}
+
+.empty {
+  width: 100%;
+}
+
+.figcaption_location {
+  text-align: center;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 31px;
+
+  color: #000000;
+}
+
+.img_height {
+  height: 25em;
+}
+
+.create_info {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #7c787e;
+}
+
+.block {
+  width: 1089px;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: #ffffff;
+  border: 1px solid #efefef;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin: 2% 25% 2% 25%;
+  padding: 1em 2em;
+}
+
+.block_list {
+  width: 38%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  border: 1px solid #efefef;
+  background: #ffffff;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin: 0% 25% 0% 28%;
+  display: flex;
+}
+
+.data {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #000000;
+}
+
+.contextHeadHeight {
+  height: 9em;
+}
+
+.head_subreddit {
+  width: 100%;
+  height: 58px;
+  left: 0px;
+  top: 87px;
+  background: white;
+  padding-left: 42em;
+}
+
+.head {
+  width: 100%;
+  height: 86px;/*52*/
+  left: 0px;
+  top: 87px;
+  background: white;
+  padding-left: 42em;
+}
+
+.search_res {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  color: #000000;
+}
+
+.headButtomTop {
+  width: 100%;
+  height: 73px;
+  left: 0px;
+  top: 174px;
+  background: white;
+  display: inline-flex;
+}
+
+.headButtom {
+  width: 100%;
+  height: 73px;
+  left: 0px;
+  top: 174px;
+  background: #ff8254;
+  display: inline-flex;
+}
+
+.react {
+  position: absolute;
+  top: 8em;
+  left: 36em;
+  width: 150px;
+  height: 100px;
+}
+
+.Score_Comment {
+  display: flex;
+}
+
+.score {
+  padding-left: 1em;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #7c787e;
+}
+
+.title_item {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 17px;
+  color: #000000;
+  position: absolute;
+  top: 5em;
+  left: 29em;
+}
+
+.title_item_1 {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 21px;
+  color: #000000;
+}
+
+.body_color {
+  background-color: #f8f8f8;
+  padding-top: 2.5em;
+}
+
+.search {
+  width: 800px;
+  height: 40px;
+  left: 365px;
+  top: 23px;
+  margin: 1em 1em 1em 1em;
+  background: #efefef;
+  border-radius: 5px;
+}
+
+.button_click_title {
+  width: 15em;
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  color: #000000;
+  padding-right: 4em;
+  border: none;
+  background: none;
+  text-align: left;
+  text-decoration: none;
+}
+
+.members_style {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+  padding-left: 0.9em;
+}
+.img_size {
+  height: 100px;
+  width: 121px;
+}
+
+.ImgMargin {
+  margin-right: 25em;
+  height: 70px;
+}
+
+.button_size{
+    padding-top: 1.6em;
+}
+
+.inputMargin {
+  margin: 0.85em 0em 0em 2em;
+  background: #fd9068;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.24), 0px 0px 2px rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  padding: 12px 24px;
+  text-decoration: none;
+  color:black;
+}
+
+input.search {
+  background: url(./img/icon.svg) no-repeat center left;
+  padding-left: 30px;
+}
+
+.button_div {
+  padding-right: 3em;
+  padding-top: 2em;
+}
+
+.description_style {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+}
